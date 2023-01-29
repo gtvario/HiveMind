@@ -11,23 +11,81 @@ class Scoring extends StatefulWidget {
 class _ScoringState extends State<Scoring> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: const <Widget>[
-          Align(
-            alignment: Alignment.center,
-            child: Text("Scoring"),
-          ),
-          Text("High"),
-          Text("Mid"),
-          Text("Low"),
-          CounterBox(),
-          CounterBox(),
-          CounterBox(),
-          CounterBox(),
-          CounterBox(),
-        ],
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black),
+      ),
+      child: Transform.scale(
+        scale: 1,
+        child: Column(
+          children: <Widget>[
+            const Text("Score"),
+            Table(
+              border: const TableBorder(
+                horizontalInside: BorderSide(
+                  width: 1,
+                  color: Colors.black,
+                  style: BorderStyle.solid,
+                ),
+                verticalInside: BorderSide(
+                  width: 1,
+                  color: Colors.black,
+                  style: BorderStyle.solid,
+                ),
+                top: BorderSide(
+                  width: 1,
+                  color: Colors.black,
+                  style: BorderStyle.solid,
+                ),
+              ),
+              columnWidths: const <int, TableColumnWidth>{
+                0: IntrinsicColumnWidth(),
+                1: IntrinsicColumnWidth(),
+                2: IntrinsicColumnWidth(),
+              },
+              children: <TableRow>[
+                TableRow(
+                  children: <Widget>[
+                    Container(
+                      height: 50,
+                    ),
+                    Image.asset(
+                      "assets/images/cone.jpg",
+                      height: 100,
+                      width: 100,
+                    ),
+                    Image.asset(
+                      "assets/images/cube.jpg",
+                      height: 100,
+                      width: 100,
+                    ),
+                  ],
+                ),
+                const TableRow(
+                  children: <Widget>[
+                    Text("High"),
+                    CounterBox(),
+                    CounterBox(),
+                  ],
+                ),
+                const TableRow(
+                  children: <Widget>[
+                    Text("Mid"),
+                    CounterBox(),
+                    CounterBox(),
+                  ],
+                ),
+                const TableRow(
+                  children: <Widget>[
+                    Text("Low"),
+                    CounterBox(),
+                    CounterBox(),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
