@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hivemind/models/tba.dart';
+import 'package:hivemind/widgets/charge_station_widget.dart';
 
 class EventsPage extends StatefulWidget {
   const EventsPage({super.key});
@@ -18,12 +19,13 @@ class _EventsPageState extends State<EventsPage> {
       body: Column(
         children: <Widget>[
           ElevatedButton(
-              onPressed: () {
-                fetchEvents().then((beeEvents) => {
-                      for (var event in beeEvents) {print(event.toString())}
-                    });
-              },
-              child: const Text("Get Events")),
+            onPressed: () {
+              fetchEvents().then((beeEvents) => {
+                    for (var event in beeEvents) {print(event.toString())}
+                  });
+            },
+            child: const Text("Get Events"),
+          ),
         ],
       ),
     );

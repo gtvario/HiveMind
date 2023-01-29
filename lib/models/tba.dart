@@ -1,7 +1,4 @@
 import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import 'events_model.dart';
@@ -9,6 +6,7 @@ import 'events_model.dart';
 const apiKey =
     'T3lcH7N2Om2stFrcLJtj8RfQQhSOIbRJj9XDSNDxJoJewHPEBjPKh7wZ7eTOVlxu';
 const server = 'https://www.thebluealliance.com/api/v3';
+
 Future<List<Event>> fetchEvents() async {
   String url = '$server/team/frc33/events/2023';
   Map<String, String> header = {"X-TBA-Auth-Key": apiKey};
