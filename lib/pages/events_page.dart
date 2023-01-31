@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hivemind/models/tba.dart';
+import 'package:hivemind/pages/auton_page.dart';
 import 'package:hivemind/widgets/charge_station_widget.dart';
 
 import '../widgets/scoring_widget.dart';
@@ -28,8 +29,7 @@ class _EventsPageState extends State<EventsPage> {
             },
             child: const Text("Get Events"),
           ),
-          const Scoring(),
-          const ChargeStation(),
+          const AutonPage(),
         ],
       ),
     );
