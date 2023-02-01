@@ -49,7 +49,7 @@ class _ScoringState extends State<Scoring> {
                         height: 50,
                       ),
                       Image.asset(
-                        "assets/images/cone.jpg",
+                        "assets/images/cone.png",
                         height: 100,
                         width: 100,
                       ),

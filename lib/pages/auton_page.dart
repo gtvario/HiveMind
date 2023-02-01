@@ -54,10 +54,10 @@ class _PreloadWidgetState extends State<PreloadWidget> {
                       onTapDown: (details) {
                         setState(() {
                           if (!coneSelected && !cubeSelected) {
-                            coneImgPath = 'assets/images/cone_selected.jpg';
+                            coneImgPath = 'assets/images/cone_selected.png';
                             coneSelected = true;
                           } else {
-                            coneImgPath = 'assets/images/cone.jpg';
+                            coneImgPath = 'assets/images/cone.png';
                             coneSelected = false;
                           }
                         });
