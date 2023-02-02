@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:hivemind/widgets/scoring_widget.dart';
 
 class AutonPage extends StatelessWidget {
@@ -9,7 +7,7 @@ class AutonPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Table(
-      children: <TableRow>[
+      children: const <TableRow>[
         TableRow(children: <Widget>[
           PreloadWidget(),
           Scoring(),
@@ -27,7 +25,7 @@ class PreloadWidget extends StatefulWidget {
 }
 
 class _PreloadWidgetState extends State<PreloadWidget> {
-  String coneImgPath = 'assets/images/cone.jpg';
+  String coneImgPath = 'assets/images/cone.png';
   String cubeImgPath = 'assets/images/cube.jpg';
   bool coneSelected = false;
   bool cubeSelected = false;
@@ -36,57 +34,67 @@ class _PreloadWidgetState extends State<PreloadWidget> {
   Widget build(BuildContext context) {
     return Transform.scale(
       scale: 0.5,
-      child: Container(
-        child: Column(
-          children: [
-            const Text(
-              "Preload?",
-              style: TextStyle(
-                fontSize: 100,
-                fontFamily: 'Schyler',
-              ),
+      child: Column(
+        children: [
+          const Text(
+            "Preload?",
+            style: TextStyle(
+              fontSize: 100,
+              fontFamily: 'Schyler',
             ),
-            Container(
-              child: Row(
-                children: [
-                  Flexible(
-                    child: InkWell(
-                      onTapDown: (details) {
-                        setState(() {
-                          if (!coneSelected && !cubeSelected) {
-                            coneImgPath = 'assets/images/cone_selected.png';
-                            coneSelected = true;
-                          } else {
-                            coneImgPath = 'assets/images/cone.png';
-                            coneSelected = false;
-                          }
-                        });
-                      },
-                      child: Image.asset(coneImgPath),
-                    ),
-                  ),
-                  Flexible(
-                    child: InkWell(
-                      onTapDown: (details) {
-                        setState(() {
-                          if (!coneSelected && !cubeSelected) {
-                            cubeImgPath = 'assets/images/cube_selected.jpg';
-                            cubeSelected = true;
-                          } else {
-                            cubeImgPath = 'assets/images/cube.jpg';
-                            cubeSelected = false;
-                          }
-                        });
-                      },
-                      child: Image.asset(cubeImgPath),
-                    ),
-                  ),
-                ],
+          ),
+          Row(
+            children: [
+              Flexible(
+                child: InkWell(
+                  onTapDown: (details) {
+                    setState(() {
+                      if (!coneSelected && !cubeSelected) {
+                        coneImgPath = 'assets/images/cone_selected.png';
+                        coneSelected = true;
+                      } else {
+                        coneImgPath = 'assets/images/cone.png';
+                        coneSelected = false;
+                      }
+                    });
+                  },
+                  child: Image.asset(coneImgPath),
+                ),
               ),
-            ),
-          ],
-        ),
+              Flexible(
+                child: InkWell(
+                  onTapDown: (details) {
+                    setState(() {
+                      if (!coneSelected && !cubeSelected) {
+                        cubeImgPath = 'assets/images/cube_selected.jpg';
+                        cubeSelected = true;
+                      } else {
+                        cubeImgPath = 'assets/images/cube.jpg';
+                        cubeSelected = false;
+                      }
+                    });
+                  },
+                  child: Image.asset(cubeImgPath),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
+  }
+}
+
+class StartingPosition extends StatefulWidget {
+  const StartingPosition({super.key});
+
+  @override
+  State<StartingPosition> createState() => _StartingPositionState();
+}
+
+class _StartingPositionState extends State<StartingPosition> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }

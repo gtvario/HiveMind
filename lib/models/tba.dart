@@ -10,7 +10,6 @@ const server = 'https://www.thebluealliance.com/api/v3';
 Future<List<Event>> fetchEvents() async {
   String url = '$server/team/frc33/events/2023';
   Map<String, String> header = {"X-TBA-Auth-Key": apiKey};
-  List<Event> eventsList;
   final dynamic parsed;
 
   final response = await http.get(

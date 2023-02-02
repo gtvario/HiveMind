@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hivemind/models/tba.dart';
 import 'package:hivemind/pages/auton_page.dart';
-import 'package:hivemind/widgets/charge_station_widget.dart';
-
-import '../widgets/scoring_widget.dart';
 
 class EventsPage extends StatefulWidget {
   const EventsPage({super.key});
@@ -21,6 +18,7 @@ class _EventsPageState extends State<EventsPage> {
       ),
       body: Column(
         children: <Widget>[
+          const AutonPage(),
           ElevatedButton(
             onPressed: () {
               fetchEvents().then((beeEvents) => {
@@ -29,7 +27,6 @@ class _EventsPageState extends State<EventsPage> {
             },
             child: const Text("Get Events"),
           ),
-          const AutonPage(),
         ],
       ),
     );

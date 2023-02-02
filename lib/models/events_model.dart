@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class Event {
   String? eventKey;
   String? eventName;
