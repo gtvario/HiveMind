@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hivemind/pages/events_page.dart';
+import 'package:hivemind/pages/match_scout_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,9 +17,10 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.yellow,
         ),
-        initialRoute: "/",
+        initialRoute: "/scout",
         routes: <String, WidgetBuilder>{
           "/": (BuildContext context) => const EventsPage(),
+          "/scout": (BuildContext context) => const MatchScoutPage(),
         });
   }
 }

@@ -12,7 +12,7 @@ class _ScoringState extends State<Scoring> {
   @override
   Widget build(BuildContext context) {
     return Transform.scale(
-      scale: 0.5,
+      scale: 1.75,
       child: Container(
         child: Transform.scale(
           scale: 1.25,
