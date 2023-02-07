@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hivemind/pages/auton_page.dart';
+import 'package:hivemind/models/match_scout_vars.dart';
+import 'package:hivemind/pages/endgame_page.dart';
+import 'package:hivemind/pages/teleop_page.dart';
 
 class MatchScoutPage extends StatefulWidget {
   const MatchScoutPage({super.key});
@@ -9,6 +12,14 @@ class MatchScoutPage extends StatefulWidget {
 }
 
 class _MatchScoutPageState extends State<MatchScoutPage> {
+  final PageController pageController = PageController();
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,13 +27,17 @@ class _MatchScoutPageState extends State<MatchScoutPage> {
         title: const Text('Hivemind TBA Events'),
       ),
       body: PageView(
+        controller: pageController,
         children: const [
           Center(
             child: AutonPage(),
           ),
           Center(
-            child: Text("TEST2"),
-          )
+            child: TeleopPage(),
+          ),
+          Center(
+            child: EndgamePage(),
+          ),
         ],
       ),
     );
