@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hivemind/widgets/charge_station_widget.dart';
 import 'package:hivemind/widgets/scoring_widget.dart';
 
 class AutonPage extends StatelessWidget {
@@ -6,13 +7,22 @@ class AutonPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Table(
-      children: const <TableRow>[
-        TableRow(children: <Widget>[
-          PreloadWidget(),
-          Scoring(),
-        ])
-      ],
+    return Container(
+      child: Row(
+        children: <Widget>[
+          Column(
+            children: const <Widget>[
+              PreloadWidget(),
+              Scoring(),
+            ],
+          ),
+          Column(
+            children: const <Widget>[
+              ChargeStation(),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

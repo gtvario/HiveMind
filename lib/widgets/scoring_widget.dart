@@ -12,77 +12,79 @@ class _ScoringState extends State<Scoring> {
   @override
   Widget build(BuildContext context) {
     return Transform.scale(
-      scale: 0.5,
-      child: Transform.scale(
-        scale: 1.25,
-        child: Column(
-          children: <Widget>[
-            const Text("Score"),
-            Table(
-              border: const TableBorder(
-                horizontalInside: BorderSide(
-                  width: 1,
-                  color: Colors.black,
-                  style: BorderStyle.solid,
+      scale: 1.75,
+      child: Container(
+        child: Transform.scale(
+          scale: 1.25,
+          child: Column(
+            children: <Widget>[
+              const Text("Score"),
+              Table(
+                border: const TableBorder(
+                  horizontalInside: BorderSide(
+                    width: 1,
+                    color: Colors.black,
+                    style: BorderStyle.solid,
+                  ),
+                  verticalInside: BorderSide(
+                    width: 1,
+                    color: Colors.black,
+                    style: BorderStyle.solid,
+                  ),
+                  top: BorderSide(
+                    width: 1,
+                    color: Colors.black,
+                    style: BorderStyle.solid,
+                  ),
                 ),
-                verticalInside: BorderSide(
-                  width: 1,
-                  color: Colors.black,
-                  style: BorderStyle.solid,
-                ),
-                top: BorderSide(
-                  width: 1,
-                  color: Colors.black,
-                  style: BorderStyle.solid,
-                ),
+                columnWidths: const <int, TableColumnWidth>{
+                  0: IntrinsicColumnWidth(),
+                  1: IntrinsicColumnWidth(),
+                  2: IntrinsicColumnWidth(),
+                },
+                children: <TableRow>[
+                  TableRow(
+                    children: <Widget>[
+                      Container(
+                        height: 50,
+                      ),
+                      Image.asset(
+                        "assets/images/cone.png",
+                        height: 100,
+                        width: 100,
+                      ),
+                      Image.asset(
+                        "assets/images/cube.jpg",
+                        height: 100,
+                        width: 100,
+                      ),
+                    ],
+                  ),
+                  const TableRow(
+                    children: <Widget>[
+                      Text("High"),
+                      CounterBox(),
+                      CounterBox(),
+                    ],
+                  ),
+                  const TableRow(
+                    children: <Widget>[
+                      Text("Mid"),
+                      CounterBox(),
+                      CounterBox(),
+                    ],
+                  ),
+                  const TableRow(
+                    children: <Widget>[
+                      Text("Low"),
+                      CounterBox(),
+                      CounterBox(),
+                    ],
+                  ),
+                ],
               ),
-              columnWidths: const <int, TableColumnWidth>{
-                0: IntrinsicColumnWidth(),
-                1: IntrinsicColumnWidth(),
-                2: IntrinsicColumnWidth(),
-              },
-              children: <TableRow>[
-                TableRow(
-                  children: <Widget>[
-                    Container(
-                      height: 50,
-                    ),
-                    Image.asset(
-                      "assets/images/cone.png",
-                      height: 100,
-                      width: 100,
-                    ),
-                    Image.asset(
-                      "assets/images/cube.jpg",
-                      height: 100,
-                      width: 100,
-                    ),
-                  ],
-                ),
-                const TableRow(
-                  children: <Widget>[
-                    Text("High"),
-                    CounterBox(),
-                    CounterBox(),
-                  ],
-                ),
-                const TableRow(
-                  children: <Widget>[
-                    Text("Mid"),
-                    CounterBox(),
-                    CounterBox(),
-                  ],
-                ),
-                const TableRow(
-                  children: <Widget>[
-                    Text("Low"),
-                    CounterBox(),
-                    CounterBox(),
-                  ],
-                ),
-              ],
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
