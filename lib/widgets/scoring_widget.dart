@@ -15,7 +15,7 @@ class _ScoringState extends State<Scoring> {
       scale: 1.75,
       child: Container(
         child: Transform.scale(
-          scale: 1.25,
+          scale: 1,
           child: Column(
             children: <Widget>[
               const Text("Score"),

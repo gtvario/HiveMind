@@ -12,6 +12,11 @@ class AutonPage extends StatelessWidget {
         children: <Widget>[
           Column(
             children: const <Widget>[
+              StartingPosition(),
+            ],
+          ),
+          Column(
+            children: const <Widget>[
               PreloadWidget(),
               Scoring(),
             ],
@@ -55,7 +60,7 @@ class _PreloadWidgetState extends State<PreloadWidget> {
           ),
           Row(
             children: [
-              Flexible(
+              SizedBox(
                 child: InkWell(
                   onTapDown: (details) {
                     setState(() {
@@ -71,7 +76,7 @@ class _PreloadWidgetState extends State<PreloadWidget> {
                   child: Image.asset(coneImgPath),
                 ),
               ),
-              Flexible(
+              SizedBox(
                 child: InkWell(
                   onTapDown: (details) {
                     setState(() {
