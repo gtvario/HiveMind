@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hivemind/models/globals.dart';
+import 'package:hivemind/pages/settings_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -54,6 +55,18 @@ class _HomePageState extends State<HomePage> {
                 enabled: isEnabled,
                 onTap: () {
                   Navigator.pop(context);
+                }),
+            ListTile(
+                leading: const Icon(Icons.settings),
+                title: const Text("Settings"),
+                enabled: isEnabled,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SettingsPage(),
+                    ),
+                  );
                 }),
           ],
         ),
