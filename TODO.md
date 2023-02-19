@@ -1,7 +1,7 @@
 # TODO To Get Hivemind in Working State for Kettering on 3/4/23
 ## Home Page
 - Navbar
-  - Password button to unlock the settings
+  - ~~Password button to unlock the settings~~
   - Settings can make a tablet a master device or not
 - Database
   - Student Table

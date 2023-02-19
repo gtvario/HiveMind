@@ -1,0 +1,11 @@
+{
+    "master": {
+        "isMaster": false,
+        "teamNumber": "",
+        "year": ""
+    },
+    "local":{
+        "studentName": "",
+        "playoffs": ""
+    }
+}

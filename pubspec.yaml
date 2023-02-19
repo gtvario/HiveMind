@@ -39,6 +39,9 @@ dependencies:
   http: ^0.13.5
   number_inc_dec: ^0.8.0
   settings_ui: ^2.0.2
+  sqflite: ^2.2.4+1
+  path_provider: ^2.0.12
+  path: ^1.8.2
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +66,7 @@ flutter:
   uses-material-design: true
   assets:
       - assets/images/
+      - assets/config/
       
   # To add assets to your application, add an assets section, like this:
   # assets:
