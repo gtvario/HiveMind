@@ -27,6 +27,9 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Future<File> get _localFile async {
     final path = await _localPath;
+    if (File('$path/settings.json').exists() == false) {
+      File('assets/config/default_settings.json').copy('$path/settings.json');
+    }
     return File('$path/settings.json');
   }
 
@@ -42,7 +45,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   void getPath() async {
-    final path = await _localPath;
+    final path = await _localFile;
     print(path);
   }
 
