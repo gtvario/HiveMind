@@ -1,6 +1,14 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:hivemind/models/globals.dart';
+import 'package:hivemind/models/match_model.dart';
 import 'package:hivemind/pages/settings_page.dart';
+import 'package:hivemind/models/tba.dart';
+import 'package:qr_flutter/qr_flutter.dart';
+
+import '../models/events_model.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,6 +19,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   bool isEnabled = false;
+  String currMatchList = "";
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +80,48 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+      body: Center(
+        child: Row(
+          children: [
+            ElevatedButton(
+              onPressed: () async {
+                fetchEvents().then(
+                  (List<Event> eventList) {
+                    for (var element in eventList) {
+                      fetchMatches(element.eventKey).then(
+                        (matchList) {
+                          setState(() {
+                            currMatchList = _compress(matchList.join(""));
+                            print(currMatchList);
+                          });
+                        },
+                      );
+                      break;
+                    }
+                  },
+                );
+              },
+              child: const Text("TEST BLUE ALLIANCE"),
+            ),
+            QrImage(data: currMatchList, version: QrVersions.auto),
+          ],
+        ),
+      ),
     );
+  }
+
+  String _compress(String json) {
+    final enCodedJson = utf8.encode(json);
+    final gZipJson = gzip.encode(enCodedJson);
+    final base64Json = base64.encode(gZipJson);
+    return base64Json;
+  }
+
+  String _decompress(String base64Json) {
+    final decodeBase64Json = base64.decode(base64Json);
+    final decodegZipJson = gzip.decode(decodeBase64Json);
+    final originalJson = utf8.decode(decodegZipJson);
+    return originalJson;
   }
 
   final _passwordInputController = TextEditingController();

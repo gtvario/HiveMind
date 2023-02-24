@@ -48,6 +48,17 @@ class _SettingsPageState extends State<SettingsPage> {
     });
   }
 
+  void writeJson() {
+    settings = {
+      "master": {
+        "isMaster": masterToggle,
+        "teamNumber": teamNumber,
+        "year": year
+      },
+    };
+    settingsContent.writeAsString(json.encode(settings));
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -71,6 +82,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 onToggle: (bool value) {
                   setState(() {
                     masterToggle = value;
+                    writeJson();
                   });
                 },
                 initialValue: masterToggle,
@@ -86,6 +98,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       } else {
                         teamNumber ??= "";
                       }
+                      writeJson();
                     });
                   })
                 },
@@ -101,6 +114,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       } else {
                         year ??= "";
                       }
+                      writeJson();
                     });
                   })
                 },

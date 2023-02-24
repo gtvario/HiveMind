@@ -22,7 +22,10 @@ class _EventsPageState extends State<EventsPage> {
           ElevatedButton(
             onPressed: () {
               fetchEvents().then((beeEvents) => {
-                    for (var event in beeEvents) {print(event.toString())}
+                    for (var event in beeEvents)
+                      {
+                        print(event.toString()),
+                      }
                   });
             },
             child: const Text("Get Events"),
