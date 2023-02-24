@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 import 'package:hivemind/models/globals.dart';
 import 'package:hivemind/models/match_model.dart';
 import 'package:hivemind/pages/settings_page.dart';
@@ -20,6 +21,34 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   bool isEnabled = false;
   String currMatchList = "";
+  final FlutterBlue flutterBlue = FlutterBlue.instance;
+  final List<BluetoothDevice> devicesList = <BluetoothDevice>[];
+
+  _showDeviceTolist(final BluetoothDevice device) {
+    if (!devicesList.contains(device)) {
+      setState(() {
+        devicesList.add(device);
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    flutterBlue.connectedDevices
+        .asStream()
+        .listen((List<BluetoothDevice> devices) {
+      for (BluetoothDevice device in devices) {
+        _showDeviceTolist(device);
+      }
+    });
+    flutterBlue.scanResults.listen((List<ScanResult> results) {
+      for (ScanResult result in results) {
+        _showDeviceTolist(result.device);
+      }
+    });
+    flutterBlue.startScan();
+  }
 
   @override
   Widget build(BuildContext context) {
