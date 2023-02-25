@@ -11,70 +11,131 @@ class _ChargeStationState extends State<ChargeStation> {
   String? chargeStationState;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.black),
-      ),
-      width: 200,
-      child: Column(
-        children: <Widget>[
-          const Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: EdgeInsets.all(10.0),
-              child: Text(
-                "Charge Station",
-                style: TextStyle(fontSize: 20),
+    return Column(
+      children: <Widget>[
+        const Text(
+          'Charging Station',
+          style: TextStyle(
+            fontSize: 65,
+            fontFamily: 'Schyler',
+          ),
+        ),
+        Row(
+          children: [
+            const SizedBox(width: 150),
+            Transform.scale(
+              scale: 1.5,
+              child: Radio(
+                visualDensity: const VisualDensity(
+                    horizontal: VisualDensity.minimumDensity,
+                    vertical: VisualDensity.minimumDensity),
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                value: 'Attempted',
+                groupValue: chargeStationState,
+                onChanged: (value) {
+                  setState(() {
+                    chargeStationState = value.toString();
+                  });
+                },
               ),
             ),
-          ),
-          RadioListTile(
-              title: const Text('Engaged'),
-              value: 'Engaged',
-              groupValue: chargeStationState,
-              onChanged: (value) {
-                setState(() {
-                  chargeStationState = value.toString();
-                });
-              }),
-          RadioListTile(
-              title: const Text('Docked'),
-              value: 'Docked',
-              groupValue: chargeStationState,
-              onChanged: (value) {
-                setState(() {
-                  chargeStationState = value.toString();
-                });
-              }),
-          RadioListTile(
-              title: const Text('Parked'),
-              value: 'Parked',
-              groupValue: chargeStationState,
-              onChanged: (value) {
-                setState(() {
-                  chargeStationState = value.toString();
-                });
-              }),
-          RadioListTile(
-              title: const Text('Attempted'),
-              value: 'Attempted',
-              groupValue: chargeStationState,
-              onChanged: (value) {
-                setState(() {
-                  chargeStationState = value.toString();
-                });
-              }),
-          RadioListTile(
-              title: const Text('Did Not Attempt'),
-              value: 'Did Not Attempt',
-              groupValue: chargeStationState,
-              onChanged: (value) {
-                setState(() {
-                  chargeStationState = value.toString();
-                });
-              }),
-        ],
-      ),
+            const Text(
+              'Attempted',
+              style: TextStyle(
+                fontSize: 20,
+                fontFamily: 'Tahoma',
+              ),
+            )
+          ],
+        ),
+        const SizedBox(height: 5),
+        Row(
+          children: [
+            const SizedBox(width: 150),
+            Transform.scale(
+              scale: 1.5,
+              child: Radio(
+                visualDensity: const VisualDensity(
+                    horizontal: VisualDensity.minimumDensity,
+                    vertical: VisualDensity.minimumDensity),
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                value: 'Engaged',
+                groupValue: chargeStationState,
+                onChanged: (value) {
+                  setState(() {
+                    chargeStationState = value.toString();
+                  });
+                },
+              ),
+            ),
+            const Text(
+              'Engaged',
+              style: TextStyle(
+                fontSize: 20,
+                fontFamily: 'Tahoma',
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 5),
+        Row(
+          children: [
+            const SizedBox(width: 150),
+            Transform.scale(
+              scale: 1.5,
+              child: Radio(
+                visualDensity: const VisualDensity(
+                    horizontal: VisualDensity.minimumDensity,
+                    vertical: VisualDensity.minimumDensity),
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                value: 'Parked',
+                groupValue: chargeStationState,
+                onChanged: (value) {
+                  setState(() {
+                    chargeStationState = value.toString();
+                  });
+                },
+              ),
+            ),
+            const Text(
+              'Parked',
+              style: TextStyle(
+                fontSize: 20,
+                fontFamily: 'Tahoma',
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 5),
+        Row(
+          children: [
+            const SizedBox(width: 150),
+            Transform.scale(
+              scale: 1.5,
+              child: Radio(
+                visualDensity: const VisualDensity(
+                    horizontal: VisualDensity.minimumDensity,
+                    vertical: VisualDensity.minimumDensity),
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                value: 'Did Not Attempt',
+                groupValue: chargeStationState,
+                onChanged: (value) {
+                  setState(() {
+                    chargeStationState = value.toString();
+                  });
+                },
+              ),
+            ),
+            const Text(
+              'Did Not Attempt',
+              style: TextStyle(
+                fontSize: 20,
+                fontFamily: 'Tahoma',
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

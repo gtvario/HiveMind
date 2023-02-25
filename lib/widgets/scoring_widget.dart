@@ -11,82 +11,80 @@ class Scoring extends StatefulWidget {
 class _ScoringState extends State<Scoring> {
   @override
   Widget build(BuildContext context) {
-    return Transform.scale(
-      scale: 1.75,
-      child: Container(
-        child: Transform.scale(
-          scale: 1,
-          child: Column(
-            children: <Widget>[
-              const Text("Score"),
-              Table(
-                border: const TableBorder(
-                  horizontalInside: BorderSide(
-                    width: 1,
-                    color: Colors.black,
-                    style: BorderStyle.solid,
-                  ),
-                  verticalInside: BorderSide(
-                    width: 1,
-                    color: Colors.black,
-                    style: BorderStyle.solid,
-                  ),
-                  top: BorderSide(
-                    width: 1,
-                    color: Colors.black,
-                    style: BorderStyle.solid,
-                  ),
-                ),
-                columnWidths: const <int, TableColumnWidth>{
-                  0: IntrinsicColumnWidth(),
-                  1: IntrinsicColumnWidth(),
-                  2: IntrinsicColumnWidth(),
-                },
-                children: <TableRow>[
-                  TableRow(
-                    children: <Widget>[
-                      Container(
-                        height: 50,
-                      ),
-                      Image.asset(
-                        "assets/images/cone.png",
-                        height: 100,
-                        width: 100,
-                      ),
-                      Image.asset(
-                        "assets/images/cube.jpg",
-                        height: 100,
-                        width: 100,
-                      ),
-                    ],
-                  ),
-                  const TableRow(
-                    children: <Widget>[
-                      Text("High"),
-                      CounterBox(),
-                      CounterBox(),
-                    ],
-                  ),
-                  const TableRow(
-                    children: <Widget>[
-                      Text("Mid"),
-                      CounterBox(),
-                      CounterBox(),
-                    ],
-                  ),
-                  const TableRow(
-                    children: <Widget>[
-                      Text("Low"),
-                      CounterBox(),
-                      CounterBox(),
-                    ],
-                  ),
-                ],
-              ),
-            ],
+    return Column(
+      children: [
+        const Text(
+          "Score",
+          style: TextStyle(
+            fontSize: 65,
+            fontFamily: 'Schyler',
           ),
         ),
-      ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Image.asset(
+              'assets/images/cone_new.png',
+              width: 75,
+              height: 75,
+            ),
+            const SizedBox(width: 60),
+            Image.asset(
+              'assets/images/cube_new.png',
+              width: 75,
+              height: 75,
+            ),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: const [
+            Text(
+              'High',
+              style: TextStyle(
+                fontSize: 40,
+                fontFamily: 'Schyler',
+              ),
+            ),
+            SizedBox(width: 20),
+            CounterBox(),
+            SizedBox(width: 20),
+            CounterBox(),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: const [
+            Text(
+              'Mid',
+              style: TextStyle(
+                fontSize: 40,
+                fontFamily: 'Schyler',
+              ),
+            ),
+            SizedBox(width: 20),
+            CounterBox(),
+            SizedBox(width: 20),
+            CounterBox(),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: const [
+            Text(
+              'Low',
+              style: TextStyle(
+                fontSize: 40,
+                fontFamily: 'Schyler',
+              ),
+            ),
+            SizedBox(width: 20),
+            CounterBox(),
+            SizedBox(width: 20),
+            CounterBox(),
+          ],
+        ),
+      ],
     );
   }
 }
