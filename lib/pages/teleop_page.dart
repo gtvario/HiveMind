@@ -1,5 +1,7 @@
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
+import 'package:hivemind/widgets/teleop_scoring_widget.dart';
+import 'package:hivemind/widgets/teleop_collect_widget.dart';
+import 'package:hivemind/widgets/defense_widget.dart';
 
 class TeleopPage extends StatefulWidget {
   const TeleopPage({super.key});
@@ -11,6 +13,20 @@ class TeleopPage extends StatefulWidget {
 class _TeleopPageState extends State<TeleopPage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Column(
+      children: <Widget>[
+        Row(
+          children: const [
+            TeleopScoringWidget(),
+          ],
+        ),
+        Row(
+          children: [
+            TeleopCollectWidget(),
+            Defense(),
+          ],
+        ),
+      ],
+    );
   }
 }

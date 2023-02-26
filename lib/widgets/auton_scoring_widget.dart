@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:number_inc_dec/number_inc_dec.dart';
+import 'package:hivemind/widgets/counter_box_widget.dart';
 
 class Scoring extends StatefulWidget {
   const Scoring({super.key});
@@ -85,25 +85,6 @@ class _ScoringState extends State<Scoring> {
           ],
         ),
       ],
-    );
-  }
-}
-
-class CounterBox extends StatelessWidget {
-  const CounterBox({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 100,
-      width: 100,
-      child: NumberInputPrefabbed.roundedButtons(
-        controller: TextEditingController(),
-        incDecBgColor: Colors.amber,
-        buttonArrangement: ButtonArrangement.incRightDecLeft,
-      ),
     );
   }
 }
