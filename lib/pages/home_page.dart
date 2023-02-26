@@ -2,13 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_blue/flutter_blue.dart';
 import 'package:hivemind/models/globals.dart';
-import 'package:hivemind/models/match_model.dart';
 import 'package:hivemind/pages/settings_page.dart';
 import 'package:hivemind/models/tba.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-
+import 'package:sqflite/sqflite.dart';
 import '../models/events_model.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,33 +19,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   bool isEnabled = false;
   String currMatchList = "";
-  final FlutterBlue flutterBlue = FlutterBlue.instance;
-  final List<BluetoothDevice> devicesList = <BluetoothDevice>[];
-
-  _showDeviceTolist(final BluetoothDevice device) {
-    if (!devicesList.contains(device)) {
-      setState(() {
-        devicesList.add(device);
-      });
-    }
-  }
+  late Future<Database> database;
 
   @override
   void initState() {
     super.initState();
-    flutterBlue.connectedDevices
-        .asStream()
-        .listen((List<BluetoothDevice> devices) {
-      for (BluetoothDevice device in devices) {
-        _showDeviceTolist(device);
-      }
-    });
-    flutterBlue.scanResults.listen((List<ScanResult> results) {
-      for (ScanResult result in results) {
-        _showDeviceTolist(result.device);
-      }
-    });
-    flutterBlue.startScan();
   }
 
   @override
@@ -117,6 +93,8 @@ class _HomePageState extends State<HomePage> {
                 fetchEvents().then(
                   (List<Event> eventList) {
                     for (var element in eventList) {
+                      element.insertDb();
+                      print(element.queryDb());
                       fetchMatches(element.eventKey).then(
                         (matchList) {
                           setState(() {
