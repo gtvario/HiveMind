@@ -27,21 +27,6 @@ class _HomePageState extends State<HomePage> {
   late File settingsContent;
   late Map<String, dynamic> settings;
 
-  Future<String> get _localPath async {
-    final directory = await getApplicationDocumentsDirectory();
-
-    return directory.path;
-  }
-
-  Future<File> get _localFile async {
-    final path = await _localPath;
-
-    if (!await File('$path/settings.json').exists()) {
-      File('assets/config/default_settings.json').copy('$path/settings.json');
-    }
-    return File('$path/settings.json');
-  }
-
   Future<void> readJson() async {
     settingsContent = await _localFile;
 
@@ -125,7 +110,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: updateHome() ? queenHome() : workerHome(),
+      body: updateHome() ? queenHome(teamNumber, year) : workerHome(),
     );
   }
 
@@ -172,7 +157,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-Widget queenHome() {
+Widget queenHome(teamNumber, year) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Row(
@@ -184,7 +169,13 @@ Widget queenHome() {
           width: 200.0,
           height: 200.0,
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              fetchEvents('frc$teamNumber', year).then((value) {
+                for (var event in value) {
+                  fetchMatches(event.eventKey).then((value) => print(value));
+                }
+              });
+            },
             child: const Text(
               "Get Matches",
               style: TextStyle(fontSize: 20),
@@ -260,4 +251,22 @@ Widget workerHome() {
       ],
     ),
   );
+}
+
+Future<String> get _localPath async {
+  final directory = await getApplicationDocumentsDirectory();
+
+  return directory.path;
+}
+
+Future<File> get _localFile async {
+  final path = await _localPath;
+
+  print(path);
+
+  if (!await File('$path/settings.json').exists()) {
+    Directory(path).create();
+    File('assets/config/default_settings.json').copy('$path/settings.json');
+  }
+  return File('$path/settings.json');
 }
