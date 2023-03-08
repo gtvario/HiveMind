@@ -1,10 +1,10 @@
+import 'package:hivemind/main.dart';
 import 'package:hivemind/models/database.dart';
 
 class Event {
   String? eventKey;
   String? eventName;
   int? eventYear;
-  final dbHelper = DatabaseHelper();
 
   Event({
     this.eventKey,
@@ -29,7 +29,7 @@ class Event {
 
   Future<List<Map<String, dynamic>>> queryDb() async {
     List<Map<String, dynamic>> result =
-        await dbHelper.query("SELECT * WHERE year='2022'");
+        await dbHelper.query(DatabaseHelper.eventTable);
 
     return result;
   }

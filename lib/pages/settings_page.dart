@@ -30,9 +30,9 @@ class _SettingsPageState extends State<SettingsPage> {
     final path = await _localPath;
 
     if (!await File('$path/settings.json').exists()) {
-      File('assets/config/default_settings.json').copy('$path\\settings.json');
+      File('assets/config/default_settings.json').copy('$path/settings.json');
     }
-    return File('$path\\settings.json');
+    return File('$path/settings.json');
   }
 
   Future<void> readJson() async {

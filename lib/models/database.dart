@@ -33,7 +33,10 @@ class DatabaseHelper {
   }
 
   Future<int> insert(Map<String, dynamic> row) async {
-    return await _db.insert(eventTable, row);
+    print(row);
+    return await _db.rawInsert(
+        'INSERT INTO $eventTable ($columnId, $columnName, $columnYear) VALUES($row['
+        '], )');
   }
 
   Future<List<Map<String, dynamic>>> query(String query) async {

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:hivemind/models/globals.dart';
 import 'package:hivemind/pages/settings_page.dart';
 import 'package:hivemind/models/tba.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:sqflite/sqflite.dart';
 import '../models/events_model.dart';
@@ -19,11 +20,50 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   bool isEnabled = false;
   String currMatchList = "";
-  late Future<Database> database;
+  String? year = "";
+  String? teamNumber = "";
+  bool masterToggle = false;
+
+  late File settingsContent;
+  late Map<String, dynamic> settings;
+
+  Future<String> get _localPath async {
+    final directory = await getApplicationDocumentsDirectory();
+
+    return directory.path;
+  }
+
+  Future<File> get _localFile async {
+    final path = await _localPath;
+
+    if (!await File('$path/settings.json').exists()) {
+      File('assets/config/default_settings.json').copy('$path/settings.json');
+    }
+    return File('$path/settings.json');
+  }
+
+  Future<void> readJson() async {
+    settingsContent = await _localFile;
+
+    final response = await settingsContent.readAsString();
+    final data = await jsonDecode(response);
+
+    setState(() {
+      masterToggle = data["master"]["isMaster"];
+      year = data["master"]["year"];
+      teamNumber = data["master"]["teamNumber"];
+    });
+  }
+
+  bool updateHome() {
+    readJson();
+    return masterToggle;
+  }
 
   @override
   void initState() {
     super.initState();
+    readJson();
   }
 
   @override
@@ -85,35 +125,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: Center(
-        child: Row(
-          children: [
-            ElevatedButton(
-              onPressed: () async {
-                fetchEvents().then(
-                  (List<Event> eventList) {
-                    for (var element in eventList) {
-                      element.insertDb();
-                      print(element.queryDb());
-                      fetchMatches(element.eventKey).then(
-                        (matchList) {
-                          setState(() {
-                            currMatchList = _compress(matchList.join(""));
-                            print(currMatchList);
-                          });
-                        },
-                      );
-                      break;
-                    }
-                  },
-                );
-              },
-              child: const Text("TEST BLUE ALLIANCE"),
-            ),
-            QrImage(data: currMatchList, version: QrVersions.auto),
-          ],
-        ),
-      ),
+      body: updateHome() ? queenHome() : workerHome(),
     );
   }
 
@@ -158,4 +170,94 @@ class _HomePageState extends State<HomePage> {
           );
         });
   }
+}
+
+Widget queenHome() {
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Row(
+      children: [
+        const Padding(
+          padding: EdgeInsets.all(16.0),
+        ),
+        SizedBox(
+          width: 200.0,
+          height: 200.0,
+          child: ElevatedButton(
+            onPressed: () {},
+            child: const Text(
+              "Get Matches",
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
+        ),
+        const Padding(
+          padding: EdgeInsets.all(16.0),
+        ),
+        SizedBox(
+          width: 200.0,
+          height: 200.0,
+          child: ElevatedButton(
+            onPressed: () {},
+            child: const Text(
+              "Sync With Workers",
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
+        ),
+        const Padding(
+          padding: EdgeInsets.all(16.0),
+        ),
+        SizedBox(
+          width: 200.0,
+          height: 200.0,
+          child: ElevatedButton(
+            onPressed: () {},
+            child: const Text(
+              "Sync with Sheet",
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget workerHome() {
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Row(
+      children: [
+        const Padding(
+          padding: EdgeInsets.all(16.0),
+        ),
+        SizedBox(
+          width: 200.0,
+          height: 200.0,
+          child: ElevatedButton(
+            onPressed: () {},
+            child: const Text(
+              "Sync with Queen",
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
+        ),
+        const Padding(
+          padding: EdgeInsets.all(16.0),
+        ),
+        SizedBox(
+          width: 200.0,
+          height: 200.0,
+          child: ElevatedButton(
+            onPressed: () {},
+            child: const Text(
+              "View Events",
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
 }
