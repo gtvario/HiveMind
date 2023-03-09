@@ -289,7 +289,7 @@ Future<void> writeMatchJson(String? key, String json) async {
     fileName = "UNKNOWN.json";
   }
 
-  File matchFile = File('$path/$fileName');
+  File matchFile = File('$path/MatchSchedules/$fileName');
 
   if (!matchFile.existsSync()) {
     matchFile.create(recursive: true);
