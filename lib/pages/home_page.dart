@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:hivemind/models/globals.dart';
+import 'package:hivemind/pages/events_page.dart';
 import 'package:hivemind/pages/settings_page.dart';
 import 'package:hivemind/models/tba.dart';
 import 'package:path_provider/path_provider.dart';
@@ -110,7 +111,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: updateHome() ? queenHome(teamNumber, year) : workerHome(),
+      body: updateHome() ? queenHome(teamNumber, year) : workerHome(context),
     );
   }
 
@@ -223,7 +224,7 @@ Widget queenHome(teamNumber, year) {
   );
 }
 
-Widget workerHome() {
+Widget workerHome(BuildContext context) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Row(
@@ -249,7 +250,12 @@ Widget workerHome() {
           width: 200.0,
           height: 200.0,
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const EventsPage()),
+              );
+            },
             child: const Text(
               "View Events",
               style: TextStyle(fontSize: 20),
@@ -269,8 +275,6 @@ Future<String> get _localPath async {
 
 Future<File> get _localFile async {
   final path = await _localPath;
-
-  print(path);
 
   if (!await File('$path/settings.json').exists()) {
     Directory(path).create();
