@@ -34,9 +34,6 @@ class _MatchScoutPageState extends State<MatchScoutPage> {
             child: AutonPage2(),
           ),
           Center(
-            child: AutonPage(),
-          ),
-          Center(
             child: TeleopPage(),
           ),
           Center(

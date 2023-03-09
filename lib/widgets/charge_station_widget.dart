@@ -12,6 +12,8 @@ class _ChargeStationState extends State<ChargeStation> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const Text(
           'Charging\nStation',
@@ -20,12 +22,13 @@ class _ChargeStationState extends State<ChargeStation> {
             fontFamily: 'Schyler',
           ),
         ),
+        const SizedBox(height: 10),
         Row(
           children: [
-            const SizedBox(width: 150),
             Transform.scale(
-              scale: 1.5,
+              scale: 2.0,
               child: Radio(
+                activeColor: Colors.amber,
                 visualDensity: const VisualDensity(
                     horizontal: VisualDensity.minimumDensity,
                     vertical: VisualDensity.minimumDensity),
@@ -39,22 +42,25 @@ class _ChargeStationState extends State<ChargeStation> {
                 },
               ),
             ),
+            const SizedBox(width: 10),
             const Text(
               'Attempted',
               style: TextStyle(
                 fontSize: 20,
                 fontFamily: 'Tahoma',
+                fontWeight: FontWeight.bold,
               ),
             )
           ],
         ),
-        const SizedBox(height: 5),
+        const SizedBox(height: 25),
         Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const SizedBox(width: 150),
             Transform.scale(
-              scale: 1.5,
+              scale: 2.0,
               child: Radio(
+                activeColor: Colors.amber,
                 visualDensity: const VisualDensity(
                     horizontal: VisualDensity.minimumDensity,
                     vertical: VisualDensity.minimumDensity),
@@ -68,22 +74,24 @@ class _ChargeStationState extends State<ChargeStation> {
                 },
               ),
             ),
+            const SizedBox(width: 10),
             const Text(
               'Engaged',
               style: TextStyle(
                 fontSize: 20,
                 fontFamily: 'Tahoma',
+                fontWeight: FontWeight.bold,
               ),
             ),
           ],
         ),
-        const SizedBox(height: 5),
+        const SizedBox(height: 25),
         Row(
           children: [
-            const SizedBox(width: 150),
             Transform.scale(
-              scale: 1.5,
+              scale: 2.0,
               child: Radio(
+                activeColor: Colors.amber,
                 visualDensity: const VisualDensity(
                     horizontal: VisualDensity.minimumDensity,
                     vertical: VisualDensity.minimumDensity),
@@ -97,22 +105,24 @@ class _ChargeStationState extends State<ChargeStation> {
                 },
               ),
             ),
+            const SizedBox(width: 10),
             const Text(
               'Parked',
               style: TextStyle(
                 fontSize: 20,
                 fontFamily: 'Tahoma',
+                fontWeight: FontWeight.bold,
               ),
             ),
           ],
         ),
-        const SizedBox(height: 5),
+        const SizedBox(height: 25),
         Row(
           children: [
-            const SizedBox(width: 150),
             Transform.scale(
-              scale: 1.5,
+              scale: 2.0,
               child: Radio(
+                activeColor: Colors.amber,
                 visualDensity: const VisualDensity(
                     horizontal: VisualDensity.minimumDensity,
                     vertical: VisualDensity.minimumDensity),
@@ -126,11 +136,13 @@ class _ChargeStationState extends State<ChargeStation> {
                 },
               ),
             ),
+            const SizedBox(width: 10),
             const Text(
               'Did Not Attempt',
               style: TextStyle(
                 fontSize: 20,
                 fontFamily: 'Tahoma',
+                fontWeight: FontWeight.bold,
               ),
             ),
           ],

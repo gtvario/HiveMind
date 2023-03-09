@@ -57,6 +57,7 @@ class _AutonPage2State extends State<AutonPage2> {
                     border: Border.all(color: Colors.black, width: 2)),
                 child: Row(
                   children: [
+                    const SizedBox(width: 15),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: const [
@@ -65,12 +66,14 @@ class _AutonPage2State extends State<AutonPage2> {
                         MobilityWidget(),
                       ],
                     ),
+                    SizedBox(width: 75),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: const [
                         ChargeStation(),
                       ],
                     ),
+                    const SizedBox(width: 15),
                   ],
                 ),
               ),

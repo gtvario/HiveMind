@@ -61,6 +61,7 @@ class _PreloadWidgetState extends State<PreloadWidget> {
                   child: Image.asset(coneImgPath),
                 ),
               ),
+              const SizedBox(width: 20),
               SizedBox(
                 width: 75,
                 height: 75,

@@ -23,12 +23,14 @@ class _MobilityWidgetState extends State<MobilityWidget> {
         Column(
           children: [
             const Text(
-              "Auton Movement?",
+              "Autonomous\nMobility?",
+              textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 45,
                 fontFamily: 'Schyler',
               ),
             ),
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
