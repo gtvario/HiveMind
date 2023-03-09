@@ -170,9 +170,17 @@ Widget queenHome(teamNumber, year) {
           height: 200.0,
           child: ElevatedButton(
             onPressed: () {
+              var json = "";
               fetchEvents('frc$teamNumber', year).then((value) {
                 for (var event in value) {
-                  fetchMatches(event.eventKey).then((value) => print(value));
+                  fetchMatches(event.eventKey).then((value) {
+                    for (var match in value) {
+                      json = "$json${jsonEncode(match.toJson())},";
+                    }
+
+                    json = json.substring(0, json.length - 1);
+                    writeMatchJson(event.eventKey, json);
+                  });
                 }
               });
             },
@@ -269,4 +277,23 @@ Future<File> get _localFile async {
     File('assets/config/default_settings.json').copy('$path/settings.json');
   }
   return File('$path/settings.json');
+}
+
+Future<void> writeMatchJson(String? key, String json) async {
+  final path = await _localPath;
+  String fileName = "";
+
+  if (key != null) {
+    fileName = "$key.json";
+  } else {
+    fileName = "UNKNOWN.json";
+  }
+
+  File matchFile = File('$path/$fileName');
+
+  if (!matchFile.existsSync()) {
+    matchFile.create(recursive: true);
+  }
+
+  matchFile.writeAsString(json);
 }
