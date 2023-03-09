@@ -14,9 +14,9 @@ class _ChargeStationState extends State<ChargeStation> {
     return Column(
       children: <Widget>[
         const Text(
-          'Charging Station',
+          'Charging\nStation',
           style: TextStyle(
-            fontSize: 65,
+            fontSize: 45,
             fontFamily: 'Schyler',
           ),
         ),

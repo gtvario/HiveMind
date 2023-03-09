@@ -29,8 +29,8 @@ class _HP_CollectWidgetState extends State<HP_CollectWidget> {
             });
           },
           child: SizedBox(
-            width: 100,
-            height: 100,
+            width: 85,
+            height: 85,
             child: Container(
               margin: const EdgeInsets.all(2.0),
               padding: const EdgeInsets.all(3.0),

@@ -14,7 +14,14 @@ class _TeleopPageState extends State<TeleopPage> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 30),
+        const SizedBox(height: 5),
+        const Text(
+          "Teleop",
+          style: TextStyle(
+            fontSize: 65,
+            fontFamily: 'Schyler',
+          ),
+        ),
         Row(
           mainAxisSize: MainAxisSize.max,
           children: const [
