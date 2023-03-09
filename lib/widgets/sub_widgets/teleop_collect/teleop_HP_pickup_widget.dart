@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_shapes/flutter_shapes.dart';
 
 class HP_CollectWidget extends StatefulWidget {
   const HP_CollectWidget({super.key});

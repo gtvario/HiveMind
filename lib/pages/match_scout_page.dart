@@ -30,12 +30,10 @@ class _MatchScoutPageState extends State<MatchScoutPage> {
         controller: pageController,
         children: const [
           Center(
-            //child: AutonPage(),
-            child: TeleopPage(),
+            child: AutonPage(),
           ),
           Center(
-            child: AutonPage(),
-            //child: TeleopPage(),
+            child: TeleopPage(),
           ),
           Center(
             child: EndgamePage(),
