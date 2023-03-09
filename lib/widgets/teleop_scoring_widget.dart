@@ -18,65 +18,74 @@ class _TeleopScoringWidgetState extends State<TeleopScoringWidget> {
       children: [
         Column(
           children: const [
-            SizedBox(width: 85, height: 85, child: ScoringBoxConeWidget()),
-            SizedBox(width: 85, height: 85, child: ScoringBoxConeWidget()),
-            SizedBox(width: 85, height: 85, child: ScoringBoxCommunityWidget()),
+            SizedBox(width: 100, height: 100, child: ScoringBoxConeWidget()),
+            SizedBox(width: 100, height: 100, child: ScoringBoxConeWidget()),
+            SizedBox(
+                width: 100, height: 100, child: ScoringBoxCommunityWidget()),
           ],
         ),
         Column(
           children: const [
-            SizedBox(width: 85, height: 85, child: ScoringBoxCubeWidget()),
-            SizedBox(width: 85, height: 85, child: ScoringBoxCubeWidget()),
-            SizedBox(width: 85, height: 85, child: ScoringBoxCommunityWidget()),
+            SizedBox(width: 100, height: 100, child: ScoringBoxCubeWidget()),
+            SizedBox(width: 100, height: 100, child: ScoringBoxCubeWidget()),
+            SizedBox(
+                width: 100, height: 100, child: ScoringBoxCommunityWidget()),
           ],
         ),
         Column(
           children: const [
-            SizedBox(width: 85, height: 85, child: ScoringBoxConeWidget()),
-            SizedBox(width: 85, height: 85, child: ScoringBoxConeWidget()),
-            SizedBox(width: 85, height: 85, child: ScoringBoxCommunityWidget()),
+            SizedBox(width: 100, height: 100, child: ScoringBoxConeWidget()),
+            SizedBox(width: 100, height: 100, child: ScoringBoxConeWidget()),
+            SizedBox(
+                width: 100, height: 100, child: ScoringBoxCommunityWidget()),
           ],
         ),
         Column(
           children: const [
-            SizedBox(width: 85, height: 85, child: ScoringBoxConeWidget()),
-            SizedBox(width: 85, height: 85, child: ScoringBoxConeWidget()),
-            SizedBox(width: 85, height: 85, child: ScoringBoxCommunityWidget()),
+            SizedBox(width: 100, height: 100, child: ScoringBoxConeWidget()),
+            SizedBox(width: 100, height: 100, child: ScoringBoxConeWidget()),
+            SizedBox(
+                width: 100, height: 100, child: ScoringBoxCommunityWidget()),
           ],
         ),
         Column(
           children: const [
-            SizedBox(width: 85, height: 85, child: ScoringBoxCubeWidget()),
-            SizedBox(width: 85, height: 85, child: ScoringBoxCubeWidget()),
-            SizedBox(width: 85, height: 85, child: ScoringBoxCommunityWidget()),
+            SizedBox(width: 100, height: 100, child: ScoringBoxCubeWidget()),
+            SizedBox(width: 100, height: 100, child: ScoringBoxCubeWidget()),
+            SizedBox(
+                width: 100, height: 100, child: ScoringBoxCommunityWidget()),
           ],
         ),
         Column(
           children: const [
-            SizedBox(width: 85, height: 85, child: ScoringBoxConeWidget()),
-            SizedBox(width: 85, height: 85, child: ScoringBoxConeWidget()),
-            SizedBox(width: 85, height: 85, child: ScoringBoxCommunityWidget()),
+            SizedBox(width: 100, height: 100, child: ScoringBoxConeWidget()),
+            SizedBox(width: 100, height: 100, child: ScoringBoxConeWidget()),
+            SizedBox(
+                width: 100, height: 100, child: ScoringBoxCommunityWidget()),
           ],
         ),
         Column(
           children: const [
-            SizedBox(width: 85, height: 85, child: ScoringBoxConeWidget()),
-            SizedBox(width: 85, height: 85, child: ScoringBoxConeWidget()),
-            SizedBox(width: 85, height: 85, child: ScoringBoxCommunityWidget()),
+            SizedBox(width: 100, height: 100, child: ScoringBoxConeWidget()),
+            SizedBox(width: 100, height: 100, child: ScoringBoxConeWidget()),
+            SizedBox(
+                width: 100, height: 100, child: ScoringBoxCommunityWidget()),
           ],
         ),
         Column(
           children: const [
-            SizedBox(width: 85, height: 85, child: ScoringBoxCubeWidget()),
-            SizedBox(width: 85, height: 85, child: ScoringBoxCubeWidget()),
-            SizedBox(width: 85, height: 85, child: ScoringBoxCommunityWidget()),
+            SizedBox(width: 100, height: 100, child: ScoringBoxCubeWidget()),
+            SizedBox(width: 100, height: 100, child: ScoringBoxCubeWidget()),
+            SizedBox(
+                width: 100, height: 100, child: ScoringBoxCommunityWidget()),
           ],
         ),
         Column(
           children: const [
-            SizedBox(width: 85, height: 85, child: ScoringBoxConeWidget()),
-            SizedBox(width: 85, height: 85, child: ScoringBoxConeWidget()),
-            SizedBox(width: 85, height: 85, child: ScoringBoxCommunityWidget()),
+            SizedBox(width: 100, height: 100, child: ScoringBoxConeWidget()),
+            SizedBox(width: 100, height: 100, child: ScoringBoxConeWidget()),
+            SizedBox(
+                width: 100, height: 100, child: ScoringBoxCommunityWidget()),
           ],
         ),
       ],

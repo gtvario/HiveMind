@@ -13,24 +13,31 @@ class _DefenseState extends State<Defense> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SmoothStarRating(
-        rating: rating,
-        isReadOnly: false,
-        size: 60,
-        filledIconData: Icons.star,
-        halfFilledIconData: Icons.star_half,
-        defaultIconData: Icons.star_border,
-        starCount: 5,
-        allowHalfRating: false,
-        spacing: 1.0,
-        color: Colors.amber,
-        borderColor: Colors.amber,
-        onRated: (value) {
-          print("rating value -> $value");
-          // print("rating value dd -> ${value.truncate()}");
-        },
-      ),
+    return Column(
+      children: [
+        const Text(
+          "Defense",
+          style: TextStyle(
+            fontSize: 65,
+            fontFamily: 'Schyler',
+          ),
+        ),
+        SizedBox(height: 25),
+        SmoothStarRating(
+          rating: rating,
+          isReadOnly: false,
+          size: 60,
+          filledIconData: Icons.star,
+          halfFilledIconData: Icons.star_half,
+          defaultIconData: Icons.star_border,
+          starCount: 5,
+          allowHalfRating: false,
+          spacing: 1.0,
+          color: Colors.amber,
+          borderColor: Colors.amber,
+          onRated: (value) {},
+        ),
+      ],
     );
   }
 }

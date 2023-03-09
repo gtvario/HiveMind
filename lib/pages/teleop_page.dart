@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hivemind/widgets/teleop_scoring_widget.dart';
 import 'package:hivemind/widgets/teleop_collect_widget.dart';
-import 'package:hivemind/widgets/defense_widget.dart';
 
 class TeleopPage extends StatefulWidget {
   const TeleopPage({super.key});
@@ -14,17 +13,33 @@ class _TeleopPageState extends State<TeleopPage> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: <Widget>[
+      children: [
+        SizedBox(height: 30),
         Row(
+          mainAxisSize: MainAxisSize.max,
           children: const [
+            SizedBox(width: 30),
             TeleopScoringWidget(),
           ],
         ),
-        Row(
-          children: [
-            TeleopCollectWidget(),
-            Defense(),
-          ],
+        Expanded(
+          child: Row(
+            children: [
+              SizedBox(width: 30),
+              Container(
+                margin: const EdgeInsets.all(15.0),
+                padding: const EdgeInsets.all(3.0),
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black, width: 2)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: const [
+                    TeleopCollectWidget(),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     );
