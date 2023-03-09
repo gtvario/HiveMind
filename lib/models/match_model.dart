@@ -18,6 +18,14 @@ class FRCMatch {
     matchType = json["comp_level"];
   }
 
+  Map<String, dynamic> toJson() => {
+        'event_key': eventKey,
+        'match_number': matchNumber,
+        'blue_alliance': blueAlliance,
+        'red_alliance': redAlliance,
+        'comp_level': matchType,
+      };
+
   @override
   String toString() {
     return "(Key: $eventKey, Match: $matchNumber, Red: $redAlliance, Blue: $blueAlliance, Type: $matchType)";

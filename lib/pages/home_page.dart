@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:hivemind/models/globals.dart';
+import 'package:hivemind/pages/events_page.dart';
 import 'package:hivemind/pages/settings_page.dart';
 import 'package:hivemind/models/tba.dart';
 import 'package:path_provider/path_provider.dart';
@@ -110,7 +111,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: updateHome() ? queenHome(teamNumber, year) : workerHome(),
+      body: updateHome() ? queenHome(teamNumber, year) : workerHome(context),
     );
   }
 
@@ -170,9 +171,17 @@ Widget queenHome(teamNumber, year) {
           height: 200.0,
           child: ElevatedButton(
             onPressed: () {
+              var json = "";
               fetchEvents('frc$teamNumber', year).then((value) {
                 for (var event in value) {
-                  fetchMatches(event.eventKey).then((value) => print(value));
+                  fetchMatches(event.eventKey).then((value) {
+                    for (var match in value) {
+                      json = "$json${jsonEncode(match.toJson())},";
+                    }
+
+                    json = json.substring(0, json.length - 1);
+                    writeMatchJson(event.eventKey, json);
+                  });
                 }
               });
             },
@@ -215,7 +224,7 @@ Widget queenHome(teamNumber, year) {
   );
 }
 
-Widget workerHome() {
+Widget workerHome(BuildContext context) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Row(
@@ -241,7 +250,12 @@ Widget workerHome() {
           width: 200.0,
           height: 200.0,
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const EventsPage()),
+              );
+            },
             child: const Text(
               "View Events",
               style: TextStyle(fontSize: 20),
@@ -262,11 +276,28 @@ Future<String> get _localPath async {
 Future<File> get _localFile async {
   final path = await _localPath;
 
-  print(path);
-
   if (!await File('$path/settings.json').exists()) {
     Directory(path).create();
     File('assets/config/default_settings.json').copy('$path/settings.json');
   }
   return File('$path/settings.json');
+}
+
+Future<void> writeMatchJson(String? key, String json) async {
+  final path = await _localPath;
+  String fileName = "";
+
+  if (key != null) {
+    fileName = "$key.json";
+  } else {
+    fileName = "UNKNOWN.json";
+  }
+
+  File matchFile = File('$path/MatchSchedules/$fileName');
+
+  if (!matchFile.existsSync()) {
+    matchFile.create(recursive: true);
+  }
+
+  matchFile.writeAsString(json);
 }
