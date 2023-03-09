@@ -1,6 +1,14 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:hivemind/models/globals.dart';
 import 'package:hivemind/pages/settings_page.dart';
+import 'package:hivemind/models/tba.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:qr_flutter/qr_flutter.dart';
+import 'package:sqflite/sqflite.dart';
+import '../models/events_model.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,6 +19,37 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   bool isEnabled = false;
+  String currMatchList = "";
+  String? year = "";
+  String? teamNumber = "";
+  bool masterToggle = false;
+
+  late File settingsContent;
+  late Map<String, dynamic> settings;
+
+  Future<void> readJson() async {
+    settingsContent = await _localFile;
+
+    final response = await settingsContent.readAsString();
+    final data = await jsonDecode(response);
+
+    setState(() {
+      masterToggle = data["master"]["isMaster"];
+      year = data["master"]["year"];
+      teamNumber = data["master"]["teamNumber"];
+    });
+  }
+
+  bool updateHome() {
+    readJson();
+    return masterToggle;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    readJson();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +110,22 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+      body: updateHome() ? queenHome(teamNumber, year) : workerHome(),
     );
+  }
+
+  String _compress(String json) {
+    final enCodedJson = utf8.encode(json);
+    final gZipJson = gzip.encode(enCodedJson);
+    final base64Json = base64.encode(gZipJson);
+    return base64Json;
+  }
+
+  String _decompress(String base64Json) {
+    final decodeBase64Json = base64.decode(base64Json);
+    final decodegZipJson = gzip.decode(decodeBase64Json);
+    final originalJson = utf8.decode(decodegZipJson);
+    return originalJson;
   }
 
   final _passwordInputController = TextEditingController();
@@ -101,4 +155,118 @@ class _HomePageState extends State<HomePage> {
           );
         });
   }
+}
+
+Widget queenHome(teamNumber, year) {
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Row(
+      children: [
+        const Padding(
+          padding: EdgeInsets.all(16.0),
+        ),
+        SizedBox(
+          width: 200.0,
+          height: 200.0,
+          child: ElevatedButton(
+            onPressed: () {
+              fetchEvents('frc$teamNumber', year).then((value) {
+                for (var event in value) {
+                  fetchMatches(event.eventKey).then((value) => print(value));
+                }
+              });
+            },
+            child: const Text(
+              "Get Matches",
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
+        ),
+        const Padding(
+          padding: EdgeInsets.all(16.0),
+        ),
+        SizedBox(
+          width: 200.0,
+          height: 200.0,
+          child: ElevatedButton(
+            onPressed: () {},
+            child: const Text(
+              "Sync With Workers",
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
+        ),
+        const Padding(
+          padding: EdgeInsets.all(16.0),
+        ),
+        SizedBox(
+          width: 200.0,
+          height: 200.0,
+          child: ElevatedButton(
+            onPressed: () {},
+            child: const Text(
+              "Sync with Sheet",
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget workerHome() {
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Row(
+      children: [
+        const Padding(
+          padding: EdgeInsets.all(16.0),
+        ),
+        SizedBox(
+          width: 200.0,
+          height: 200.0,
+          child: ElevatedButton(
+            onPressed: () {},
+            child: const Text(
+              "Sync with Queen",
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
+        ),
+        const Padding(
+          padding: EdgeInsets.all(16.0),
+        ),
+        SizedBox(
+          width: 200.0,
+          height: 200.0,
+          child: ElevatedButton(
+            onPressed: () {},
+            child: const Text(
+              "View Events",
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Future<String> get _localPath async {
+  final directory = await getApplicationDocumentsDirectory();
+
+  return directory.path;
+}
+
+Future<File> get _localFile async {
+  final path = await _localPath;
+
+  print(path);
+
+  if (!await File('$path/settings.json').exists()) {
+    Directory(path).create();
+    File('assets/config/default_settings.json').copy('$path/settings.json');
+  }
+  return File('$path/settings.json');
 }

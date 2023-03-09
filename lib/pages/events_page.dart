@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hivemind/models/tba.dart';
 import 'package:hivemind/pages/auton_page.dart';
 
 class EventsPage extends StatefulWidget {
@@ -20,11 +19,7 @@ class _EventsPageState extends State<EventsPage> {
         children: <Widget>[
           const AutonPage(),
           ElevatedButton(
-            onPressed: () {
-              fetchEvents().then((beeEvents) => {
-                    for (var event in beeEvents) {print(event.toString())}
-                  });
-            },
+            onPressed: () {},
             child: const Text("Get Events"),
           ),
         ],

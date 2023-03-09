@@ -1,30 +1,45 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-class Database {
-  Database._();
-  static final Database db = Database._();
-  static Database? _database;
+class DatabaseHelper {
+  static const _databaseName = "hivemind.db";
+  static const _databaseVersion = 1;
 
-  Future<Database?> get database async {
-    if (_database != null) {
-      return _database;
-    }
+  static const eventTable = 'events';
 
-    _database = await initDB();
-    return _database;
+  static const columnId = '_id';
+  static const columnName = 'name';
+  static const columnYear = 'year';
+
+  late Database _db;
+
+  // this opens the database (and creates it if it doesn't exist)
+  Future<void> init() async {
+// Get a location using getDatabasesPath
+    var databasesPath = await getDatabasesPath();
+    String path = join(databasesPath, _databaseName);
+    _db = await openDatabase(path, onCreate: _onCreate, version: 1);
   }
 
-  initDB() async {
-    return await openDatabase(
-      join(await getDatabasesPath(), 'hivemind.db'),
-      onCreate: (db, version) async {
-        await db.execute('''
-          CREATE TABLE students (
-            id 
+  // SQL code to create the database table
+  Future _onCreate(Database db, int version) async {
+    await db.execute('''
+          CREATE TABLE $eventTable (
+            $columnId TEXT PRIMARY KEY,
+            $columnName TEXT NOT NULL,
+            $columnYear INTEGER NOT NULL
           )
-        ''');
-      },
-    );
+          ''');
+  }
+
+  Future<int> insert(Map<String, dynamic> row) async {
+    print(row);
+    return await _db.rawInsert(
+        'INSERT INTO $eventTable ($columnId, $columnName, $columnYear) VALUES($row['
+        '], )');
+  }
+
+  Future<List<Map<String, dynamic>>> query(String query) async {
+    return await _db.query(query);
   }
 }

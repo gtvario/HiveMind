@@ -4,7 +4,14 @@ import 'package:hivemind/pages/match_scout_page.dart';
 import 'package:hivemind/pages/teleop_page.dart';
 import 'package:hivemind/pages/auton_page.dart';
 
-void main() {
+import 'models/database.dart';
+
+final dbHelper = DatabaseHelper();
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await dbHelper.init();
   runApp(const MyApp());
 }
 

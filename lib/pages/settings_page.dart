@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -17,6 +16,8 @@ class _SettingsPageState extends State<SettingsPage> {
   String? year = "";
   String? teamNumber = "";
   bool masterToggle = false;
+
+  late File settingsContent;
   late Map<String, dynamic> settings;
 
   Future<String> get _localPath async {
@@ -27,13 +28,20 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Future<File> get _localFile async {
     final path = await _localPath;
+    print(path);
+    if (!await File('$path/settings.json').exists()) {
+      Directory(path).create();
+      File('assets/config/default_settings.json').copy('$path/settings.json');
+    }
     return File('$path/settings.json');
   }
 
   Future<void> readJson() async {
-    final String response =
-        await rootBundle.loadString('assets/config/default_settings.json');
+    settingsContent = await _localFile;
+
+    final response = await settingsContent.readAsString();
     final data = await jsonDecode(response);
+
     setState(() {
       masterToggle = data["master"]["isMaster"];
       year = data["master"]["year"];
@@ -41,9 +49,15 @@ class _SettingsPageState extends State<SettingsPage> {
     });
   }
 
-  void getPath() async {
-    final path = await _localPath;
-    print(path);
+  void writeJson() {
+    settings = {
+      "master": {
+        "isMaster": masterToggle,
+        "teamNumber": teamNumber,
+        "year": year
+      },
+    };
+    settingsContent.writeAsString(json.encode(settings));
   }
 
   @override
@@ -51,7 +65,6 @@ class _SettingsPageState extends State<SettingsPage> {
     // TODO: implement initState
     super.initState();
     readJson();
-    getPath();
   }
 
   @override
@@ -70,6 +83,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 onToggle: (bool value) {
                   setState(() {
                     masterToggle = value;
+                    writeJson();
                   });
                 },
                 initialValue: masterToggle,
@@ -85,6 +99,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       } else {
                         teamNumber ??= "";
                       }
+                      writeJson();
                     });
                   })
                 },
@@ -100,6 +115,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       } else {
                         year ??= "";
                       }
+                      writeJson();
                     });
                   })
                 },

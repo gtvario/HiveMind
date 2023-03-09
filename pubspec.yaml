@@ -44,6 +44,8 @@ dependencies:
   path: ^1.8.2
   intl: ^0.18.0
   smooth_star_rating: ^1.1.1
+  qr_flutter: ^4.0.0
+  sqflite_common_ffi: ^2.2.1+1
 
 dev_dependencies:
   flutter_test:
