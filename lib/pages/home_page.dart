@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hivemind/models/globals.dart';
 import 'package:hivemind/pages/events_page.dart';
 import 'package:hivemind/pages/settings_page.dart';
@@ -275,10 +276,14 @@ Future<String> get _localPath async {
 
 Future<File> get _localFile async {
   final path = await _localPath;
-
+  var defaults = await rootBundle.load("assets/config/default_settings.json");
+  print(path);
   if (!await File('$path/settings.json').exists()) {
-    Directory(path).create();
-    File('assets/config/default_settings.json').copy('$path/settings.json');
+    await File('$path/settings.json').create(recursive: true);
+    File('$path/settings.json').writeAsBytes(
+      defaults.buffer
+          .asUint8List(defaults.offsetInBytes, defaults.lengthInBytes),
+    );
   }
   return File('$path/settings.json');
 }
