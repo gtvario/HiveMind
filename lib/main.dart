@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.yellow,
         ),
-        initialRoute: "/scout",
+        initialRoute: "/",
         routes: <String, WidgetBuilder>{
           "/": (BuildContext context) => const HomePage(),
           "/scout": (BuildContext context) => const MatchScoutPage(),

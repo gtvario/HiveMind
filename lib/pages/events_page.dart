@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hivemind/models/match_model.dart';
+import 'package:hivemind/pages/match_scout_page.dart';
 import 'package:path_provider/path_provider.dart';
 
 class EventsPage extends StatefulWidget {
@@ -55,7 +56,12 @@ class _EventsPageState extends State<EventsPage> {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
-              print(hiveMatchList.elementAt(index).matchNumber);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const MatchScoutPage(),
+                ),
+              );
             },
             child: Card(
               child: Padding(
