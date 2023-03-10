@@ -22,10 +22,11 @@ class _AutonPage2State extends State<AutonPage2> {
           "Autonomous",
           textAlign: TextAlign.left,
           style: TextStyle(
-            fontSize: 65,
-            fontFamily: 'Schyler',
-          ),
+              fontSize: 65,
+              fontFamily: 'Schyler',
+              decoration: TextDecoration.underline),
         ),
+        const SizedBox(height: 15),
         Row(
           mainAxisSize: MainAxisSize.max,
           children: const [
@@ -62,7 +63,7 @@ class _AutonPage2State extends State<AutonPage2> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: const [
                         PreloadWidget(),
-                        SizedBox(height: 35),
+                        SizedBox(height: 30),
                         MobilityWidget(),
                       ],
                     ),

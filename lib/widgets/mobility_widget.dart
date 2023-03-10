@@ -30,7 +30,7 @@ class _MobilityWidgetState extends State<MobilityWidget> {
                 fontFamily: 'Schyler',
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 5),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

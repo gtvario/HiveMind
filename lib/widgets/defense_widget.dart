@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smooth_star_rating/smooth_star_rating.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class Defense extends StatefulWidget {
   const Defense({super.key});
@@ -9,8 +9,6 @@ class Defense extends StatefulWidget {
 }
 
 class _DefenseState extends State<Defense> {
-  double rating = 3.5;
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -18,24 +16,55 @@ class _DefenseState extends State<Defense> {
         const Text(
           "Defense",
           style: TextStyle(
-            fontSize: 65,
+            fontSize: 55,
             fontFamily: 'Schyler',
           ),
         ),
-        SizedBox(height: 25),
-        SmoothStarRating(
-          rating: rating,
-          isReadOnly: false,
-          size: 60,
-          filledIconData: Icons.star,
-          halfFilledIconData: Icons.star_half,
-          defaultIconData: Icons.star_border,
-          starCount: 5,
-          allowHalfRating: false,
-          spacing: 1.0,
-          color: Colors.amber,
-          borderColor: Colors.amber,
-          onRated: (value) {},
+        const SizedBox(height: 20),
+        Transform.scale(
+          scale: 1.75,
+          child: RatingBar.builder(
+            initialRating: 3,
+            minRating: 0,
+            direction: Axis.horizontal,
+            allowHalfRating: true,
+            itemCount: 5,
+            itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+            itemBuilder: (context, _) => const Icon(
+              Icons.star,
+              color: Colors.amber,
+            ),
+            onRatingUpdate: (rating) {
+              // Do nothing
+            },
+          ),
+        ),
+        const SizedBox(height: 45),
+        const Text(
+          "Driving",
+          style: TextStyle(
+            fontSize: 55,
+            fontFamily: 'Schyler',
+          ),
+        ),
+        const SizedBox(height: 20),
+        Transform.scale(
+          scale: 1.75,
+          child: RatingBar.builder(
+            initialRating: 3,
+            minRating: 0,
+            direction: Axis.horizontal,
+            allowHalfRating: true,
+            itemCount: 5,
+            itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+            itemBuilder: (context, _) => const Icon(
+              Icons.star,
+              color: Colors.amber,
+            ),
+            onRatingUpdate: (rating) {
+              // Do nothing
+            },
+          ),
         ),
       ],
     );

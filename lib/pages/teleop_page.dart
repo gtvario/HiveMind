@@ -18,10 +18,11 @@ class _TeleopPageState extends State<TeleopPage> {
         const Text(
           "Teleop",
           style: TextStyle(
-            fontSize: 65,
-            fontFamily: 'Schyler',
-          ),
+              fontSize: 65,
+              fontFamily: 'Schyler',
+              decoration: TextDecoration.underline),
         ),
+        const SizedBox(height: 15),
         Row(
           mainAxisSize: MainAxisSize.max,
           children: const [
