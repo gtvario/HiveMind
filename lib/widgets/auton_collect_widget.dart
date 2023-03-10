@@ -37,7 +37,7 @@ class _AutonCollectWidgetState extends State<AutonCollectWidget> {
             height: 100,
             child: Image.asset(autoCollectConeImgPath),
           ),
-          CounterBox(),
+          const CounterBox(),
         ]),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           SizedBox(
@@ -45,7 +45,7 @@ class _AutonCollectWidgetState extends State<AutonCollectWidget> {
             height: 100,
             child: Image.asset(autoCollectCubeImgPath),
           ),
-          CounterBox(),
+          const CounterBox(),
         ]),
       ]),
     ]);

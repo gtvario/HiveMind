@@ -1,6 +1,3 @@
-import 'package:hivemind/main.dart';
-import 'package:hivemind/models/database.dart';
-
 class Event {
   String? eventKey;
   String? eventName;
@@ -16,22 +13,6 @@ class Event {
     eventKey = json['key'];
     eventName = json['name'];
     eventYear = json['year'];
-  }
-
-  Future insertDb() async {
-    Map<String, dynamic> row = {
-      DatabaseHelper.columnId: eventKey,
-      DatabaseHelper.columnName: eventName,
-      DatabaseHelper.columnYear: eventYear
-    };
-    final id = await dbHelper.insert(row);
-  }
-
-  Future<List<Map<String, dynamic>>> queryDb() async {
-    List<Map<String, dynamic>> result =
-        await dbHelper.query(DatabaseHelper.eventTable);
-
-    return result;
   }
 
   @override

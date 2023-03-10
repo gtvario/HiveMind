@@ -33,7 +33,7 @@ class _TeleopPageState extends State<TeleopPage> {
         Expanded(
           child: Row(
             children: [
-              SizedBox(width: 30),
+              const SizedBox(width: 30),
               Container(
                 margin: const EdgeInsets.all(15.0),
                 padding: const EdgeInsets.all(3.0),

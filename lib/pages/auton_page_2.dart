@@ -67,7 +67,7 @@ class _AutonPage2State extends State<AutonPage2> {
                         MobilityWidget(),
                       ],
                     ),
-                    SizedBox(width: 75),
+                    const SizedBox(width: 75),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: const [

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -28,10 +29,13 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Future<File> get _localFile async {
     final path = await _localPath;
-    print(path);
+    var defaults = await rootBundle.load("assets/config/default_settings.json");
     if (!await File('$path/settings.json').exists()) {
-      Directory(path).create();
-      File('assets/config/default_settings.json').copy('$path/settings.json');
+      await File('$path/settings.json').create(recursive: true);
+      File('$path/settings.json').writeAsBytes(
+        defaults.buffer
+            .asUint8List(defaults.offsetInBytes, defaults.lengthInBytes),
+      );
     }
     return File('$path/settings.json');
   }
@@ -62,7 +66,6 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     readJson();
   }

@@ -8,9 +8,6 @@ import 'package:hivemind/pages/events_page.dart';
 import 'package:hivemind/pages/settings_page.dart';
 import 'package:hivemind/models/tba.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:qr_flutter/qr_flutter.dart';
-import 'package:sqflite/sqflite.dart';
-import '../models/events_model.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
