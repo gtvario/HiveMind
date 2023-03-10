@@ -9,7 +9,6 @@ final dbHelper = DatabaseHelper();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await dbHelper.init();
   runApp(const MyApp());
 }
 

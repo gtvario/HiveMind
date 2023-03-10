@@ -177,10 +177,10 @@ Widget queenHome(teamNumber, year) {
                 for (var event in value) {
                   fetchMatches(event.eventKey).then((value) {
                     for (var match in value) {
-                      json = "$json${jsonEncode(match.toJson())},";
+                      json = "$json${jsonEncode(match.toJson())},\n";
                     }
 
-                    json = json.substring(0, json.length - 1);
+                    json = json.substring(0, json.length - 2);
                     writeMatchJson(event.eventKey, json);
                   });
                 }
