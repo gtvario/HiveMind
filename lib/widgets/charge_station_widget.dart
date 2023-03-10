@@ -11,70 +11,143 @@ class _ChargeStationState extends State<ChargeStation> {
   String? chargeStationState;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.black),
-      ),
-      width: 200,
-      child: Column(
-        children: <Widget>[
-          const Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: EdgeInsets.all(10.0),
-              child: Text(
-                "Charge Station",
-                style: TextStyle(fontSize: 20),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const Text(
+          'Charging\nStation',
+          style: TextStyle(
+            fontSize: 45,
+            fontFamily: 'Schyler',
+          ),
+        ),
+        const SizedBox(height: 10),
+        Row(
+          children: [
+            Transform.scale(
+              scale: 2.0,
+              child: Radio(
+                activeColor: Colors.amber,
+                visualDensity: const VisualDensity(
+                    horizontal: VisualDensity.minimumDensity,
+                    vertical: VisualDensity.minimumDensity),
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                value: 'Attempted',
+                groupValue: chargeStationState,
+                onChanged: (value) {
+                  setState(() {
+                    chargeStationState = value.toString();
+                  });
+                },
               ),
             ),
-          ),
-          RadioListTile(
-              title: const Text('Engaged'),
-              value: 'Engaged',
-              groupValue: chargeStationState,
-              onChanged: (value) {
-                setState(() {
-                  chargeStationState = value.toString();
-                });
-              }),
-          RadioListTile(
-              title: const Text('Docked'),
-              value: 'Docked',
-              groupValue: chargeStationState,
-              onChanged: (value) {
-                setState(() {
-                  chargeStationState = value.toString();
-                });
-              }),
-          RadioListTile(
-              title: const Text('Parked'),
-              value: 'Parked',
-              groupValue: chargeStationState,
-              onChanged: (value) {
-                setState(() {
-                  chargeStationState = value.toString();
-                });
-              }),
-          RadioListTile(
-              title: const Text('Attempted'),
-              value: 'Attempted',
-              groupValue: chargeStationState,
-              onChanged: (value) {
-                setState(() {
-                  chargeStationState = value.toString();
-                });
-              }),
-          RadioListTile(
-              title: const Text('Did Not Attempt'),
-              value: 'Did Not Attempt',
-              groupValue: chargeStationState,
-              onChanged: (value) {
-                setState(() {
-                  chargeStationState = value.toString();
-                });
-              }),
-        ],
-      ),
+            const SizedBox(width: 10),
+            const Text(
+              'Attempted',
+              style: TextStyle(
+                fontSize: 20,
+                fontFamily: 'Tahoma',
+                fontWeight: FontWeight.bold,
+              ),
+            )
+          ],
+        ),
+        const SizedBox(height: 25),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Transform.scale(
+              scale: 2.0,
+              child: Radio(
+                activeColor: Colors.amber,
+                visualDensity: const VisualDensity(
+                    horizontal: VisualDensity.minimumDensity,
+                    vertical: VisualDensity.minimumDensity),
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                value: 'Engaged',
+                groupValue: chargeStationState,
+                onChanged: (value) {
+                  setState(() {
+                    chargeStationState = value.toString();
+                  });
+                },
+              ),
+            ),
+            const SizedBox(width: 10),
+            const Text(
+              'Engaged',
+              style: TextStyle(
+                fontSize: 20,
+                fontFamily: 'Tahoma',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 25),
+        Row(
+          children: [
+            Transform.scale(
+              scale: 2.0,
+              child: Radio(
+                activeColor: Colors.amber,
+                visualDensity: const VisualDensity(
+                    horizontal: VisualDensity.minimumDensity,
+                    vertical: VisualDensity.minimumDensity),
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                value: 'Parked',
+                groupValue: chargeStationState,
+                onChanged: (value) {
+                  setState(() {
+                    chargeStationState = value.toString();
+                  });
+                },
+              ),
+            ),
+            const SizedBox(width: 10),
+            const Text(
+              'Parked',
+              style: TextStyle(
+                fontSize: 20,
+                fontFamily: 'Tahoma',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 25),
+        Row(
+          children: [
+            Transform.scale(
+              scale: 2.0,
+              child: Radio(
+                activeColor: Colors.amber,
+                visualDensity: const VisualDensity(
+                    horizontal: VisualDensity.minimumDensity,
+                    vertical: VisualDensity.minimumDensity),
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                value: 'Did Not Attempt',
+                groupValue: chargeStationState,
+                onChanged: (value) {
+                  setState(() {
+                    chargeStationState = value.toString();
+                  });
+                },
+              ),
+            ),
+            const SizedBox(width: 10),
+            const Text(
+              'Did Not Attempt',
+              style: TextStyle(
+                fontSize: 20,
+                fontFamily: 'Tahoma',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

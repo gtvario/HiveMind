@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hivemind/pages/auton_page.dart';
+import 'package:hivemind/pages/auton_page_2.dart';
 import 'package:hivemind/models/match_scout_vars.dart';
 import 'package:hivemind/pages/endgame_page.dart';
 import 'package:hivemind/pages/teleop_page.dart';
@@ -30,7 +31,7 @@ class _MatchScoutPageState extends State<MatchScoutPage> {
         controller: pageController,
         children: const [
           Center(
-            child: AutonPage(),
+            child: AutonPage2(),
           ),
           Center(
             child: TeleopPage(),

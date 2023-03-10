@@ -1,101 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:hivemind/widgets/charge_station_widget.dart';
-import 'package:hivemind/widgets/scoring_widget.dart';
+import 'package:hivemind/widgets/auton_scoring_widget.dart';
+import 'package:hivemind/widgets/preload_widget.dart';
+import 'package:number_inc_dec/number_inc_dec.dart';
 
 class AutonPage extends StatelessWidget {
   const AutonPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        children: <Widget>[
-          Column(
-            children: const <Widget>[
-              StartingPosition(),
-            ],
-          ),
-          Column(
-            children: const <Widget>[
-              PreloadWidget(),
-              Scoring(),
-            ],
-          ),
-          Column(
-            children: const <Widget>[
-              ChargeStation(),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class PreloadWidget extends StatefulWidget {
-  const PreloadWidget({super.key});
-
-  @override
-  State<PreloadWidget> createState() => _PreloadWidgetState();
-}
-
-class _PreloadWidgetState extends State<PreloadWidget> {
-  String coneImgPath = 'assets/images/cone.png';
-  String cubeImgPath = 'assets/images/cube.jpg';
-  bool coneSelected = false;
-  bool cubeSelected = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Transform.scale(
-      scale: 0.5,
-      child: Column(
-        children: [
-          const Text(
-            "Preload?",
-            style: TextStyle(
-              fontSize: 100,
-              fontFamily: 'Schyler',
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        Expanded(
+          child: Container(
+            //color: Colors.green,
+            padding: const EdgeInsets.all(20),
+            child: Image.asset(
+              'assets/images/2023_FieldImage.jpg',
+              width: 300,
+              height: 600,
+              fit: BoxFit.cover,
             ),
           ),
-          Row(
-            children: [
-              SizedBox(
-                child: InkWell(
-                  onTapDown: (details) {
-                    setState(() {
-                      if (!coneSelected && !cubeSelected) {
-                        coneImgPath = 'assets/images/cone_selected.png';
-                        coneSelected = true;
-                      } else {
-                        coneImgPath = 'assets/images/cone.png';
-                        coneSelected = false;
-                      }
-                    });
-                  },
-                  child: Image.asset(coneImgPath),
-                ),
-              ),
-              SizedBox(
-                child: InkWell(
-                  onTapDown: (details) {
-                    setState(() {
-                      if (!coneSelected && !cubeSelected) {
-                        cubeImgPath = 'assets/images/cube_selected.jpg';
-                        cubeSelected = true;
-                      } else {
-                        cubeImgPath = 'assets/images/cube.jpg';
-                        cubeSelected = false;
-                      }
-                    });
-                  },
-                  child: Image.asset(cubeImgPath),
-                ),
-              ),
-            ],
+        ),
+        Expanded(
+          child: Container(
+            //color: Colors.blue,
+            child: Column(
+              children: const <Widget>[
+                PreloadWidget(),
+              ],
+            ),
           ),
-        ],
-      ),
+        ),
+        Expanded(
+          child: Container(
+            //color: Colors.red,
+            child: Column(
+              children: const <Widget>[
+                Scoring(),
+                ChargeStation(),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -111,5 +62,25 @@ class _StartingPositionState extends State<StartingPosition> {
   @override
   Widget build(BuildContext context) {
     return Container();
+  }
+}
+
+class CounterBox extends StatelessWidget {
+  const CounterBox({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 100,
+      width: 100,
+      child: NumberInputPrefabbed.roundedButtons(
+        controller: TextEditingController(),
+        enabled: true,
+        incDecBgColor: Colors.amber,
+        buttonArrangement: ButtonArrangement.incRightDecLeft,
+      ),
+    );
   }
 }
