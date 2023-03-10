@@ -31,7 +31,7 @@ class _AutonPage2State extends State<AutonPage2> {
           mainAxisSize: MainAxisSize.max,
           children: const [
             SizedBox(width: 30),
-            TeleopScoringWidget(),
+            TeleopScoringWidget(mode: "auton"),
           ],
         ),
         Expanded(

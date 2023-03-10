@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ScoringBoxCommunityWidget extends StatefulWidget {
-  const ScoringBoxCommunityWidget({super.key});
+  final int boxIndex;
+  const ScoringBoxCommunityWidget({super.key, required this.boxIndex});
 
   @override
   State<ScoringBoxCommunityWidget> createState() =>

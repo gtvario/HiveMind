@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ScoringBoxCubeWidget extends StatefulWidget {
-  const ScoringBoxCubeWidget({super.key});
+  final int boxIndex;
+  const ScoringBoxCubeWidget({super.key, required this.boxIndex});
 
   @override
   State<ScoringBoxCubeWidget> createState() => _ScoringBoxCubeWidgetState();

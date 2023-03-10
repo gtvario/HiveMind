@@ -27,7 +27,7 @@ class _TeleopPageState extends State<TeleopPage> {
           mainAxisSize: MainAxisSize.max,
           children: const [
             SizedBox(width: 30),
-            TeleopScoringWidget(),
+            TeleopScoringWidget(mode: "teleop"),
           ],
         ),
         Expanded(

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class ScoringBoxConeWidget extends StatefulWidget {
-  const ScoringBoxConeWidget({super.key});
+  final int boxIndex;
+
+  const ScoringBoxConeWidget({Key? key, required this.boxIndex})
+      : super(key: key);
 
   @override
   State<ScoringBoxConeWidget> createState() => _ScoringBoxConeWidgetState();
