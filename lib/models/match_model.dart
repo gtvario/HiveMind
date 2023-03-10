@@ -18,6 +18,14 @@ class FRCMatch {
     matchType = json["comp_level"];
   }
 
+  FRCMatch.fromProcessedJson(Map<String, dynamic> json) {
+    eventKey = json["event_key"];
+    matchNumber = json["match_number"];
+    redAlliance = json["blue_alliance"];
+    blueAlliance = json["red_alliance"];
+    matchType = json["comp_level"];
+  }
+
   Map<String, dynamic> toJson() => {
         'event_key': eventKey,
         'match_number': matchNumber,
@@ -28,6 +36,6 @@ class FRCMatch {
 
   @override
   String toString() {
-    return "(Key: $eventKey, Match: $matchNumber, Red: $redAlliance, Blue: $blueAlliance, Type: $matchType)";
+    return "Match: $matchNumber, Red: $redAlliance, Blue: $blueAlliance";
   }
 }

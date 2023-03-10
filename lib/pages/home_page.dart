@@ -173,15 +173,16 @@ Widget queenHome(teamNumber, year) {
           child: ElevatedButton(
             onPressed: () {
               var json = "";
-              fetchEvents('frc$teamNumber', year).then((value) {
+              fetchEvents('frc$teamNumber', year).then((value) async {
                 for (var event in value) {
-                  fetchMatches(event.eventKey).then((value) {
+                  await fetchMatches(event.eventKey).then((value) {
                     for (var match in value) {
                       json = "$json${jsonEncode(match.toJson())},\n";
                     }
-
-                    json = json.substring(0, json.length - 2);
-                    writeMatchJson(event.eventKey, json);
+                    if (json.isNotEmpty) {
+                      json = json.substring(0, json.length - 2);
+                      writeMatchJson(event.eventKey, json);
+                    }
                   });
                 }
               });
@@ -277,7 +278,6 @@ Future<String> get _localPath async {
 Future<File> get _localFile async {
   final path = await _localPath;
   var defaults = await rootBundle.load("assets/config/default_settings.json");
-  print(path);
   if (!await File('$path/settings.json').exists()) {
     await File('$path/settings.json').create(recursive: true);
     File('$path/settings.json').writeAsBytes(

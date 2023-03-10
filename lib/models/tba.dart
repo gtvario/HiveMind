@@ -34,7 +34,6 @@ Future<List<FRCMatch>> fetchMatches(eventKey) async {
     Uri.parse(url),
     headers: header,
   );
-
   if (response.statusCode == 200) {
     parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
     return parsed.map<FRCMatch>((json) => FRCMatch.fromJson(json)).toList();
