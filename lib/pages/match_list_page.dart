@@ -50,26 +50,31 @@ class _MatchListPageState extends State<MatchListPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: hiveMatchList.length,
-      itemBuilder: (context, index) {
-        return GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const MatchScoutPage(),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Hivemind Events: ${widget.eventKey}'),
+      ),
+      body: ListView.builder(
+        itemCount: hiveMatchList.length,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const MatchScoutPage(),
+                ),
+              );
+            },
+            child: Card(
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Text(hiveMatchList.elementAt(index).toString()),
               ),
-            );
-          },
-          child: Card(
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Text(hiveMatchList.elementAt(index).toString()),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
