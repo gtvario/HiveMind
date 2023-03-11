@@ -18,147 +18,174 @@ class _TeleopScoringWidgetState extends State<TeleopScoringWidget> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Column(
-          children: const [
+          children: [
             SizedBox(
                 width: 90,
                 height: 90,
-                child: ScoringBoxConeWidget(boxIndex: 0)),
+                child:
+                    ScoringBoxConeWidget(boxIndex: 0, gameMode: widget.mode)),
             SizedBox(
                 width: 90,
                 height: 90,
-                child: ScoringBoxConeWidget(boxIndex: 1)),
+                child:
+                    ScoringBoxConeWidget(boxIndex: 1, gameMode: widget.mode)),
             SizedBox(
                 width: 90,
                 height: 90,
-                child: ScoringBoxCommunityWidget(boxIndex: 2)),
+                child: ScoringBoxCommunityWidget(
+                    boxIndex: 2, gameMode: widget.mode)),
           ],
         ),
         Column(
-          children: const [
+          children: [
             SizedBox(
                 width: 90,
                 height: 90,
-                child: ScoringBoxCubeWidget(boxIndex: 3)),
+                child:
+                    ScoringBoxCubeWidget(boxIndex: 3, gameMode: widget.mode)),
             SizedBox(
                 width: 90,
                 height: 90,
-                child: ScoringBoxCubeWidget(boxIndex: 4)),
+                child:
+                    ScoringBoxCubeWidget(boxIndex: 4, gameMode: widget.mode)),
             SizedBox(
                 width: 90,
                 height: 90,
-                child: ScoringBoxCommunityWidget(boxIndex: 5)),
+                child: ScoringBoxCommunityWidget(
+                    boxIndex: 5, gameMode: widget.mode)),
           ],
         ),
         Column(
-          children: const [
+          children: [
             SizedBox(
                 width: 90,
                 height: 90,
-                child: ScoringBoxConeWidget(boxIndex: 6)),
+                child:
+                    ScoringBoxConeWidget(boxIndex: 6, gameMode: widget.mode)),
             SizedBox(
                 width: 90,
                 height: 90,
-                child: ScoringBoxConeWidget(boxIndex: 7)),
+                child:
+                    ScoringBoxConeWidget(boxIndex: 7, gameMode: widget.mode)),
             SizedBox(
                 width: 90,
                 height: 90,
-                child: ScoringBoxCommunityWidget(boxIndex: 8)),
+                child: ScoringBoxCommunityWidget(
+                    boxIndex: 8, gameMode: widget.mode)),
           ],
         ),
         Column(
-          children: const [
+          children: [
             SizedBox(
                 width: 90,
                 height: 90,
-                child: ScoringBoxConeWidget(boxIndex: 9)),
+                child:
+                    ScoringBoxConeWidget(boxIndex: 9, gameMode: widget.mode)),
             SizedBox(
                 width: 90,
                 height: 90,
-                child: ScoringBoxConeWidget(boxIndex: 10)),
+                child:
+                    ScoringBoxConeWidget(boxIndex: 10, gameMode: widget.mode)),
             SizedBox(
                 width: 90,
                 height: 90,
-                child: ScoringBoxCommunityWidget(boxIndex: 11)),
+                child: ScoringBoxCommunityWidget(
+                    boxIndex: 11, gameMode: widget.mode)),
           ],
         ),
         Column(
-          children: const [
+          children: [
             SizedBox(
                 width: 90,
                 height: 90,
-                child: ScoringBoxCubeWidget(boxIndex: 12)),
+                child:
+                    ScoringBoxCubeWidget(boxIndex: 12, gameMode: widget.mode)),
             SizedBox(
                 width: 90,
                 height: 90,
-                child: ScoringBoxCubeWidget(boxIndex: 13)),
+                child:
+                    ScoringBoxCubeWidget(boxIndex: 13, gameMode: widget.mode)),
             SizedBox(
                 width: 90,
                 height: 90,
-                child: ScoringBoxCommunityWidget(boxIndex: 14)),
+                child: ScoringBoxCommunityWidget(
+                    boxIndex: 14, gameMode: widget.mode)),
           ],
         ),
         Column(
-          children: const [
+          children: [
             SizedBox(
                 width: 90,
                 height: 90,
-                child: ScoringBoxConeWidget(boxIndex: 15)),
+                child:
+                    ScoringBoxConeWidget(boxIndex: 15, gameMode: widget.mode)),
             SizedBox(
                 width: 90,
                 height: 90,
-                child: ScoringBoxConeWidget(boxIndex: 16)),
+                child:
+                    ScoringBoxConeWidget(boxIndex: 16, gameMode: widget.mode)),
             SizedBox(
                 width: 90,
                 height: 90,
-                child: ScoringBoxCommunityWidget(boxIndex: 17)),
+                child: ScoringBoxCommunityWidget(
+                    boxIndex: 17, gameMode: widget.mode)),
           ],
         ),
         Column(
-          children: const [
+          children: [
             SizedBox(
                 width: 90,
                 height: 90,
-                child: ScoringBoxConeWidget(boxIndex: 18)),
+                child:
+                    ScoringBoxConeWidget(boxIndex: 18, gameMode: widget.mode)),
             SizedBox(
                 width: 90,
                 height: 90,
-                child: ScoringBoxConeWidget(boxIndex: 19)),
+                child:
+                    ScoringBoxConeWidget(boxIndex: 19, gameMode: widget.mode)),
             SizedBox(
                 width: 90,
                 height: 90,
-                child: ScoringBoxCommunityWidget(boxIndex: 20)),
+                child: ScoringBoxCommunityWidget(
+                    boxIndex: 20, gameMode: widget.mode)),
           ],
         ),
         Column(
-          children: const [
+          children: [
             SizedBox(
                 width: 90,
                 height: 90,
-                child: ScoringBoxCubeWidget(boxIndex: 21)),
+                child:
+                    ScoringBoxCubeWidget(boxIndex: 21, gameMode: widget.mode)),
             SizedBox(
                 width: 90,
                 height: 90,
-                child: ScoringBoxCubeWidget(boxIndex: 22)),
+                child:
+                    ScoringBoxCubeWidget(boxIndex: 22, gameMode: widget.mode)),
             SizedBox(
                 width: 90,
                 height: 90,
-                child: ScoringBoxCommunityWidget(boxIndex: 23)),
+                child: ScoringBoxCommunityWidget(
+                    boxIndex: 23, gameMode: widget.mode)),
           ],
         ),
         Column(
-          children: const [
+          children: [
             SizedBox(
                 width: 90,
                 height: 90,
-                child: ScoringBoxConeWidget(boxIndex: 24)),
+                child:
+                    ScoringBoxConeWidget(boxIndex: 24, gameMode: widget.mode)),
             SizedBox(
                 width: 90,
                 height: 90,
-                child: ScoringBoxConeWidget(boxIndex: 25)),
+                child:
+                    ScoringBoxConeWidget(boxIndex: 25, gameMode: widget.mode)),
             SizedBox(
                 width: 90,
                 height: 90,
-                child: ScoringBoxCommunityWidget(boxIndex: 26)),
+                child: ScoringBoxCommunityWidget(
+                    boxIndex: 26, gameMode: widget.mode)),
           ],
         ),
       ],

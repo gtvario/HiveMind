@@ -1,0 +1,25 @@
+{
+	"auton":{
+		"preload": "none",
+		"mobility": 0,
+		"score_grid_auto":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+		"charge_station": "Did Not Attempt"
+	},
+	"teleop":{
+		"score_grid_teleop":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+	},
+	"endgame":{
+		"charge_station": "Did Not Attempt",
+		"defense": 3,
+		"driving": 3,
+        "robot_state": "",
+		"comments": ""
+	},
+    "final":{
+        "total_cone": 0,
+        "total_cube": 0,
+        "total_high": 0,
+        "total_mid": 0,
+        "total_low": 0
+    }
+}
