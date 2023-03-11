@@ -64,6 +64,7 @@ class _HomePageState extends State<HomePage> {
                 var input = await _showPasswordInputDialog(context);
                 int? password = int.tryParse(input ?? "");
                 if (password == queenPassword) {
+                  updateHome();
                   setState(() {
                     isEnabled = true;
                   });
@@ -109,7 +110,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: updateHome() ? queenHome(teamNumber, year) : workerHome(context),
+      body: masterToggle ? queenHome(teamNumber, year) : workerHome(context),
     );
   }
 
@@ -173,6 +174,7 @@ Widget queenHome(teamNumber, year) {
               fetchEvents('frc$teamNumber', year).then((value) async {
                 for (var event in value) {
                   await fetchMatches(event.eventKey).then((value) {
+                    print("Fetching ${event.eventKey}");
                     for (var match in value) {
                       json = "$json${jsonEncode(match.toJson())},\n";
                     }
