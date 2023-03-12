@@ -33,8 +33,11 @@ class _MatchListPageState extends State<MatchListPage> {
 
     curJson = await _localFile(eventKey);
     final response = await curJson.readAsString();
-    var list = response.split('\n');
+    final re = RegExp('(?=\{\"event_key\":)');
+    var list = response.split(re);
     for (var item in list) {
+      item = item.replaceAll(RegExp(',?\n?\$'),
+          ""); // Remove newlines and commas from the end of the string
       if (item.endsWith(',')) {
         item = item.substring(0, item.length - 1);
       }
