@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
-class ConeCollectWidget extends StatefulWidget {
-  const ConeCollectWidget({super.key});
+class DroppedConeCollectWidget extends StatefulWidget {
+  const DroppedConeCollectWidget({super.key});
 
   @override
-  State<ConeCollectWidget> createState() => _ConeCollectWidgetState();
+  State<DroppedConeCollectWidget> createState() =>
+      _DroppedConeCollectWidgetState();
 }
 
-class _ConeCollectWidgetState extends State<ConeCollectWidget> {
+class _DroppedConeCollectWidgetState extends State<DroppedConeCollectWidget> {
   int _itemCount = 0;
 
   @override
@@ -15,7 +16,7 @@ class _ConeCollectWidgetState extends State<ConeCollectWidget> {
     return Column(
       children: [
         const Text(
-          "Field\nCone",
+          "Dropped Cone",
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 22,
@@ -34,7 +35,7 @@ class _ConeCollectWidgetState extends State<ConeCollectWidget> {
               margin: const EdgeInsets.all(2.0),
               padding: const EdgeInsets.all(3.0),
               decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black),
+                  border: Border.all(color: Colors.black, width: 2),
                   color: Colors.yellow),
               child: Align(
                 alignment: Alignment.center,

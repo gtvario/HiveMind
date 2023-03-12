@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hivemind/widgets/teleop_scoring_widget.dart';
-import 'package:hivemind/widgets/teleop_collect_widget.dart';
+import 'package:hivemind/widgets/collected_pieces_widget.dart';
 
 class TeleopPage extends StatefulWidget {
   const TeleopPage({super.key});

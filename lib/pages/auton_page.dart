@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hivemind/widgets/teleop_scoring_widget.dart';
-import 'package:hivemind/widgets/teleop_collect_widget.dart';
+import 'package:hivemind/widgets/collected_pieces_widget.dart';
 import 'package:hivemind/widgets/preload_widget.dart';
 import 'package:hivemind/widgets/mobility_widget.dart';
 import 'package:hivemind/widgets/charge_station_widget.dart';
+import 'package:hivemind/widgets/dropped_pieces_widget.dart';
 
 class AutonPage extends StatefulWidget {
   const AutonPage({super.key});
@@ -50,7 +51,18 @@ class _AutonPageState extends State<AutonPage> {
                   ],
                 ),
               ),
-              const SizedBox(width: 5),
+              Container(
+                margin: const EdgeInsets.all(15.0),
+                padding: const EdgeInsets.all(3.0),
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black, width: 2)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: const [
+                    DroppedPieceWidget(),
+                  ],
+                ),
+              ),
               Container(
                 margin: const EdgeInsets.all(15.0),
                 padding: const EdgeInsets.all(3.0),
