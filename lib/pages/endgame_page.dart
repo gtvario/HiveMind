@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hivemind/widgets/charge_station_widget.dart';
 import 'package:hivemind/widgets/defense_widget.dart';
+import 'package:hivemind/widgets/robot_condition_widget.dart';
 
 class EndgamePage extends StatefulWidget {
   const EndgamePage({super.key});
@@ -12,12 +13,12 @@ class EndgamePage extends StatefulWidget {
 class _EndgamePageState extends State<EndgamePage> {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
       children: [
         const SizedBox(height: 5),
         const Text(
           "End Game",
-          textAlign: TextAlign.left,
+          textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: 65,
               fontFamily: 'Schyler',
@@ -33,32 +34,41 @@ class _EndgamePageState extends State<EndgamePage> {
                 ChargeStation(),
               ],
             ),
-            const SizedBox(width: 150),
+            const SizedBox(width: 50),
+            Column(
+              children: const [
+                RobotCondition(),
+              ],
+            ),
+            const SizedBox(width: 110),
             Column(
               children: const [
                 Defense(),
               ],
             ),
-            const SizedBox(width: 150),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: const [
-                SizedBox(
-                  width: 400,
-                  child: TextField(
-                    keyboardType: TextInputType.multiline,
-                    minLines: 15,
-                    maxLines: null,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Comments',
-                    ),
-                  ),
-                ),
-              ],
-            )
           ],
         ),
+        const SizedBox(
+          height: 35,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: const [
+            SizedBox(width: 25),
+            SizedBox(
+              width: 1150,
+              child: TextField(
+                keyboardType: TextInputType.multiline,
+                minLines: 5,
+                maxLines: null,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Comments',
+                ),
+              ),
+            ),
+          ],
+        )
       ],
     );
   }
