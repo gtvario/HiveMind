@@ -17,9 +17,12 @@ class MatchListPage extends StatefulWidget {
 }
 
 class _MatchListPageState extends State<MatchListPage> {
-  late io.File curJson;
+  late io.File curJson, settingsContent;
   List<FRCMatch> hiveMatchList = [];
   List<String> events = [];
+
+  String? studentName = "";
+  String? station = "";
 
   Future<void> getMatches(eventKey) async {
     List<FRCMatch> qualMatchList = [];
@@ -68,10 +71,23 @@ class _MatchListPageState extends State<MatchListPage> {
     });
   }
 
+  Future<void> readJson() async {
+    settingsContent = await _localSettings;
+
+    final response = await settingsContent.readAsString();
+    final data = await jsonDecode(response);
+
+    setState(() {
+      studentName = data["local"]["studentName"];
+      station = data["local"]["station"];
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     getMatches(widget.eventKey);
+    readJson();
   }
 
   @override
@@ -88,7 +104,11 @@ class _MatchListPageState extends State<MatchListPage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const MatchScoutPage(),
+                  builder: (context) => MatchScoutPage(
+                    station: station,
+                    studentName: studentName,
+                    match: hiveMatchList.elementAt(index),
+                  ),
                 ),
               );
             },
@@ -115,4 +135,10 @@ Future<io.File> _localFile(eventKey) async {
   final path = await _localPath;
 
   return io.File('$path/MatchSchedules/$eventKey.json');
+}
+
+Future<io.File> get _localSettings async {
+  final path = await _localPath;
+
+  return io.File('$path/settings.json');
 }

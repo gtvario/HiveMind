@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hivemind/pages/home_page.dart';
-import 'package:hivemind/pages/match_scout_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +21,6 @@ class MyApp extends StatelessWidget {
         initialRoute: "/",
         routes: <String, WidgetBuilder>{
           "/": (BuildContext context) => const HomePage(),
-          "/scout": (BuildContext context) => const MatchScoutPage(),
         });
   }
 }
