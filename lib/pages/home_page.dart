@@ -174,7 +174,6 @@ Widget queenHome(teamNumber, year) {
               fetchEvents('frc$teamNumber', year).then((value) async {
                 for (var event in value) {
                   await fetchMatches(event.eventKey).then((value) {
-                    print("Fetching ${event.eventKey}");
                     for (var match in value) {
                       json = "$json${jsonEncode(match.toJson())},\n";
                     }

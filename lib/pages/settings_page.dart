@@ -17,6 +17,8 @@ class _SettingsPageState extends State<SettingsPage> {
   String? year = "";
   String? teamNumber = "";
   bool masterToggle = false;
+  String? studentName = "";
+  String? station = "";
 
   late File settingsContent;
   late Map<String, dynamic> settings;
@@ -50,6 +52,8 @@ class _SettingsPageState extends State<SettingsPage> {
       masterToggle = data["master"]["isMaster"];
       year = data["master"]["year"];
       teamNumber = data["master"]["teamNumber"];
+      studentName = data["local"]["studentName"];
+      station = data["local"]["station"];
     });
   }
 
@@ -60,6 +64,7 @@ class _SettingsPageState extends State<SettingsPage> {
         "teamNumber": teamNumber,
         "year": year
       },
+      "local": {"studentName": studentName, "playoffs": "", "station": station}
     };
     settingsContent.writeAsString(json.encode(settings));
   }
@@ -130,11 +135,40 @@ class _SettingsPageState extends State<SettingsPage> {
             tiles: [
               SettingsTile(
                 title: const Text("Student Name"),
+                value: Text(studentName.toString()),
+                onPressed: (value) => {
+                  _showStudentNameInputDialog(context).then((value) {
+                    setState(() {
+                      if (value != null) {
+                        studentName = value;
+                      } else {
+                        studentName ??= "";
+                      }
+                      writeJson();
+                    });
+                  })
+                },
               ),
               SettingsTile.switchTile(
                 initialValue: false,
                 onToggle: (bool value) {},
                 title: const Text("Playoffs"),
+              ),
+              SettingsTile(
+                title: const Text("Station"),
+                value: Text(station.toString()),
+                onPressed: (value) => {
+                  _showStationInputDialog(context).then((value) {
+                    setState(() {
+                      if (value != null) {
+                        station = value;
+                      } else {
+                        station ??= "";
+                      }
+                      writeJson();
+                    });
+                  }),
+                },
               ),
             ],
           ),
@@ -146,6 +180,8 @@ class _SettingsPageState extends State<SettingsPage> {
 
 final _yearTextController = TextEditingController();
 final _teamNumberTextController = TextEditingController();
+final _studentNameTextController = TextEditingController();
+final _stationTextController = TextEditingController();
 
 Future<String?> _showYearInputDialog(BuildContext context) async {
   return showDialog(
@@ -189,6 +225,56 @@ Future<String?> _showTeamNumberInputDialog(BuildContext context) async {
             child: const Text('OK'),
             onPressed: () =>
                 Navigator.pop(context, _teamNumberTextController.text),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+Future<String?> _showStudentNameInputDialog(BuildContext context) async {
+  return showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: const Text("Enter Student Name"),
+        content: TextField(
+          controller: _studentNameTextController,
+        ),
+        actions: <Widget>[
+          ElevatedButton(
+            child: const Text("Cancel"),
+            onPressed: () => Navigator.pop(context),
+          ),
+          ElevatedButton(
+            child: const Text('OK'),
+            onPressed: () =>
+                Navigator.pop(context, _studentNameTextController.text),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+Future<String?> _showStationInputDialog(BuildContext context) async {
+  return showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: const Text("Enter Station (ex. Blue 1, Red 3, etc.)"),
+        content: TextField(
+          controller: _stationTextController,
+        ),
+        actions: <Widget>[
+          ElevatedButton(
+            child: const Text("Cancel"),
+            onPressed: () => Navigator.pop(context),
+          ),
+          ElevatedButton(
+            child: const Text('OK'),
+            onPressed: () =>
+                Navigator.pop(context, _stationTextController.text),
           ),
         ],
       );

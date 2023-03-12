@@ -31,7 +31,7 @@ class _MatchListPageState extends State<MatchListPage> {
       if (item.endsWith(',')) {
         item = item.substring(0, item.length - 1);
       }
-
+      //TODO filter by match type to get rid of non qualification matches or add in sorting for finals and semifinals
       matchList.add(FRCMatch.fromProcessedJson(jsonDecode(item)));
     }
     matchList.sort(
