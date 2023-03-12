@@ -22,7 +22,11 @@ class _MatchListPageState extends State<MatchListPage> {
   List<String> events = [];
 
   Future<void> getMatches(eventKey) async {
-    List<FRCMatch> matchList = [];
+    List<FRCMatch> qualMatchList = [];
+    List<FRCMatch> sfMatchList = [];
+    List<FRCMatch> finMatchList = [];
+    List<FRCMatch> combinedList = [];
+    FRCMatch curMatch;
 
     curJson = await _localFile(eventKey);
     final response = await curJson.readAsString();
@@ -31,14 +35,36 @@ class _MatchListPageState extends State<MatchListPage> {
       if (item.endsWith(',')) {
         item = item.substring(0, item.length - 1);
       }
-      //TODO filter by match type to get rid of non qualification matches or add in sorting for finals and semifinals
-      matchList.add(FRCMatch.fromProcessedJson(jsonDecode(item)));
+
+      curMatch = FRCMatch.fromProcessedJson(jsonDecode(item));
+
+      switch (curMatch.matchType) {
+        case 'qm':
+          qualMatchList.add(curMatch);
+          break;
+        case 'sf':
+          sfMatchList.add(curMatch);
+          break;
+        case 'f':
+          finMatchList.add(curMatch);
+          break;
+      }
     }
-    matchList.sort(
+    //sort lists of matches into number order
+    qualMatchList.sort(
       (a, b) => a.matchNumber!.compareTo(b.matchNumber as num),
     );
+    sfMatchList.sort(
+      (a, b) => a.matchNumber!.compareTo(b.matchNumber as num),
+    );
+    finMatchList.sort(
+      (a, b) => a.matchNumber!.compareTo(b.matchNumber as num),
+    );
+
+    combinedList = qualMatchList + sfMatchList + finMatchList;
+
     setState(() {
-      hiveMatchList = matchList;
+      hiveMatchList = combinedList;
     });
   }
 

@@ -36,6 +36,8 @@ class FRCMatch {
 
   @override
   String toString() {
-    return "Match: $matchNumber, Red: $redAlliance, Blue: $blueAlliance";
+    return "Match: $matchNumber || "
+        "Red Alliance: ${redAlliance?.elementAt(0).substring(3)}, ${redAlliance?.elementAt(1).substring(3)}, ${redAlliance?.elementAt(2).substring(3)} | "
+        "Blue Alliance: ${blueAlliance?.elementAt(0).substring(3)}, ${blueAlliance?.elementAt(1).substring(3)}, ${blueAlliance?.elementAt(2).substring(3)}";
   }
 }

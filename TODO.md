@@ -2,23 +2,19 @@
 ## Home Page
 - Navbar
   - ~~Password button to unlock the settings~~
-  - Settings can make a tablet a master device or not
-- Database
-  - Student Table
-  - Match Table
-  - Events Table
+  - ~~Settings can make a tablet a master device or not~~
 - Sidebar (Only Active on Queen)
-  - Event Import
+  - ~~Event Import~~
   - Edit Students
     - Table of student names
       - scrollable
       - First name, last name, Grade, Trash to delete
   - Device Assignment
   - Sync Data
-  - Settings
+  - ~~Settings~~
 - Design for Queen page
-  - Event Information
-    - Match Schedule
+  - ~~Event Information~~
+    - ~~Match Schedule~~
     - Team List
   - Scouting Data
     - View Pit Scouting
@@ -28,14 +24,14 @@
     - Tablet Assignments*
     - Student List
     - Settings Page Link
-- Design for Worker page
-- Password to unlock Queen page
+- ~~Design for Worker page~~
+- ~~Password to unlock Queen page~~
 ## Settings Page
-- Team Number
-- Year
+- ~~Team Number~~
+- ~~Year~~
 - Field Position
-- Driver Station
-- Student Name
+- ~~Driver Station~~
+- ~~Student Name~~
 - Playoffs?*
 ## Scouting Page/Form
 - Data collection to generate final string
@@ -43,12 +39,12 @@
 - QR code saving to device
 ### Auton Page
 1. Starting Position Widget
-2. Preload Widget
-    - Fix images to be same size
-3. Mobility Widget
-4. Piece Collection Widget
-5. Piece Scoring Widget
-6. Charge Station Widget
+~~2. Preload Widget~~
+~~    - Fix images to be same size~~
+~~3. Mobility Widget~~
+~~4. Piece Collection Widget~~
+~~5. Piece Scoring Widget~~
+~~6. Charge Station Widget~~
 ### Teleop Page
 1. Piece Collection Widget
 2. Piece Scoring Widget
