@@ -46,13 +46,12 @@
 ~~5. Piece Scoring Widget~~
 ~~6. Charge Station Widget~~
 ### Teleop Page
-1. Piece Collection Widget
-2. Piece Scoring Widget
-3. Scoring Location/Ability Widget
-4. Defense Timers Widget*
-5. Defense Quality Widget
+~~1. Piece Collection Widget~~
+~~2. Piece Scoring Widget~~
+3. Time Association With All Game Piece Interactions
 ### Endgame Page
-1. Charge Station Widget
-2. Driving Ability Widget
-3. Robot Performance Widget
-4. Comments Widget
+~~1. Charge Station Widget~~
+~~2. Driving Ability Widget~~
+~~3. Defense Quality Widget~~
+~~4. Robot Performance Widget~~
+~~5. Comments Widget~~
