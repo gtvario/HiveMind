@@ -58,8 +58,11 @@ class _EndgamePageState extends State<EndgamePage> {
             SizedBox(
               width: 1150,
               child: TextField(
+                style: TextStyle(
+                  fontSize: 24,
+                ),
                 keyboardType: TextInputType.multiline,
-                minLines: 5,
+                minLines: 4,
                 maxLines: null,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
-class CubeCollectWidget extends StatefulWidget {
-  const CubeCollectWidget({super.key});
+class DroppedCubeCollectWidget extends StatefulWidget {
+  const DroppedCubeCollectWidget({super.key});
 
   @override
-  State<CubeCollectWidget> createState() => _CubeCollectWidgetState();
+  State<DroppedCubeCollectWidget> createState() =>
+      _DroppedCubeCollectWidgetState();
 }
 
-class _CubeCollectWidgetState extends State<CubeCollectWidget> {
+class _DroppedCubeCollectWidgetState extends State<DroppedCubeCollectWidget> {
   int _itemCount = 0;
 
   @override
@@ -15,7 +16,7 @@ class _CubeCollectWidgetState extends State<CubeCollectWidget> {
     return Column(
       children: [
         const Text(
-          "Field\nCube",
+          "Dropped Cube",
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 22,
@@ -34,8 +35,8 @@ class _CubeCollectWidgetState extends State<CubeCollectWidget> {
               margin: const EdgeInsets.all(2.0),
               padding: const EdgeInsets.all(3.0),
               decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black),
-                  color: Color.fromARGB(255, 225, 132, 241)),
+                  border: Border.all(color: Colors.black, width: 2),
+                  color: const Color.fromARGB(255, 225, 132, 241)),
               child: Align(
                 alignment: Alignment.center,
                 child: Text(

@@ -37,7 +37,7 @@ class _HP_CollectWidgetState extends State<HP_CollectWidget> {
               margin: const EdgeInsets.all(2.0),
               padding: const EdgeInsets.all(3.0),
               decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black),
+                  border: Border.all(color: Colors.black, width: 2),
                   color: Colors.lightGreen),
               child: Align(
                 alignment: Alignment.center,
