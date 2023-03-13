@@ -68,7 +68,19 @@ class _EndgamePageState extends State<EndgamePage> {
               ),
             ),
           ],
-        )
+        ),
+        Center(
+          child: SizedBox(
+            width: 1200,
+            height: 50,
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text("Submit"),
+            ),
+          ),
+        ),
       ],
     );
   }

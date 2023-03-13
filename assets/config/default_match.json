@@ -1,0 +1,25 @@
+{
+	"auton":{
+		"preload": "none",
+		"mobility": 0,
+		"score_grid_auto":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+		"charge_station": "Did Not Attempt",
+        "hp_station_auto": 0,
+        "field_cone_auto": 0,
+        "field_cube_auto": 0,
+        "dropped_auto": 0
+	},
+	"teleop":{
+		"score_grid_teleop":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        "hp_station_teleop": 0,
+        "field_cone_teleop": 0,
+        "field_cube_teleop": 0,
+        "dropped_teleop": 0
+    },
+	"endgame":{
+		"charge_station": "Did Not Attempt",
+		"defense": 3,
+		"driving": 3,
+		"comments": ""
+	}
+}
