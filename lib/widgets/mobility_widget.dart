@@ -9,10 +9,6 @@ class MobilityWidget extends StatefulWidget {
 
 class _MobilityWidgetState extends State<MobilityWidget> {
   String autoMovementText = 'No';
-  bool preloadCone = false;
-  bool preloadCube = false;
-  bool autoCollectCone = false;
-  bool autoCollectCube = false;
   bool autoMovement = false;
 
   @override
@@ -28,6 +24,7 @@ class _MobilityWidgetState extends State<MobilityWidget> {
               style: TextStyle(
                 fontSize: 45,
                 fontFamily: 'Schyler',
+                decoration: TextDecoration.underline,
               ),
             ),
             const SizedBox(height: 5),

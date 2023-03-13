@@ -31,6 +31,7 @@ class _PreloadWidgetState extends State<PreloadWidget> {
                 style: TextStyle(
                   fontSize: 45,
                   fontFamily: 'Schyler',
+                  decoration: TextDecoration.underline,
                 ),
               ),
             ],

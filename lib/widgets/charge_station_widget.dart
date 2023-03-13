@@ -20,6 +20,7 @@ class _ChargeStationState extends State<ChargeStation> {
           style: TextStyle(
             fontSize: 45,
             fontFamily: 'Schyler',
+            decoration: TextDecoration.underline,
           ),
         ),
         const SizedBox(height: 10),

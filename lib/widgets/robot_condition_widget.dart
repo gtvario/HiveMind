@@ -18,9 +18,9 @@ class _RobotConditionState extends State<RobotCondition> {
         const Text(
           'Did the\nRobot Break?',
           style: TextStyle(
-            fontSize: 45,
-            fontFamily: 'Schyler',
-          ),
+              fontSize: 45,
+              fontFamily: 'Schyler',
+              decoration: TextDecoration.underline),
         ),
         const SizedBox(height: 10),
         Row(
