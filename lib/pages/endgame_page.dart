@@ -53,9 +53,9 @@ class _EndgamePageState extends State<EndgamePage> {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: const [
-            SizedBox(width: 25),
-            SizedBox(
+          children: [
+            const SizedBox(width: 25),
+            const SizedBox(
               width: 1150,
               child: TextField(
                 style: TextStyle(
