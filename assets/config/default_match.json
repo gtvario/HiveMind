@@ -7,19 +7,23 @@
         "hp_station_auto": 0,
         "field_cone_auto": 0,
         "field_cube_auto": 0,
-        "dropped_auto": 0
+        "dropped_cube_auto": 0,
+		"dropped_cone_auto": 0
 	},
 	"teleop":{
 		"score_grid_teleop":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
         "hp_station_teleop": 0,
         "field_cone_teleop": 0,
         "field_cube_teleop": 0,
-        "dropped_teleop": 0
+        "dropped_cube_teleop": 0,
+		"dropped_cone_teleop": 0
     },
 	"endgame":{
 		"charge_station": "Did Not Attempt",
-		"defense": 3,
+		"defense_played": "No",
+		"defense_score": 3,
 		"driving": 3,
+		"robot_status": "No",
 		"comments": ""
 	}
 }
