@@ -53,9 +53,9 @@ class _EndgamePageState extends State<EndgamePage> {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: const [
-            SizedBox(width: 25),
-            SizedBox(
+          children: [
+            const SizedBox(width: 25),
+            const SizedBox(
               width: 1150,
               child: TextField(
                 style: TextStyle(
@@ -70,19 +70,17 @@ class _EndgamePageState extends State<EndgamePage> {
                 ),
               ),
             ),
-          ],
-        ),
-        Center(
-          child: SizedBox(
-            width: 1200,
-            height: 50,
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text("Submit"),
+            const Padding(padding: EdgeInsets.all(10)),
+            SizedBox(
+              height: 150,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text("Submit"),
+              ),
             ),
-          ),
+          ],
         ),
       ],
     );
