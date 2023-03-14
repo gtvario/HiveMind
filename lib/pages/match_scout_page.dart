@@ -5,8 +5,10 @@ import 'package:flutter/services.dart';
 import 'package:hivemind/models/match_model.dart';
 import 'package:hivemind/pages/auton_page.dart';
 import 'package:hivemind/pages/endgame_page.dart';
+import 'package:hivemind/pages/finalize_data.dart';
 import 'package:hivemind/pages/teleop_page.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:hivemind/models/scout_data_model.dart';
 
 class MatchScoutPage extends StatefulWidget {
   final String? station, studentName;
@@ -25,6 +27,7 @@ class _MatchScoutPageState extends State<MatchScoutPage> {
   final PageController pageController = PageController();
   int? stationNum = 0, team = 0;
   String? alliance = "";
+  ScoutData scoutData = ScoutData();
 
   @override
   void dispose() {
@@ -80,15 +83,18 @@ class _MatchScoutPageState extends State<MatchScoutPage> {
       ),
       body: PageView(
         controller: pageController,
-        children: const [
+        children: [
           Center(
-            child: AutonPage(),
+            child: AutonPage(scoutData: scoutData),
           ),
           Center(
             child: TeleopPage(),
           ),
           Center(
             child: EndgamePage(),
+          ),
+          Center(
+            child: SumbitDataPage(),
           ),
         ],
       ),

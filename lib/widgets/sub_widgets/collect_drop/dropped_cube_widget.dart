@@ -19,7 +19,7 @@ class _DroppedCubeCollectWidgetState extends State<DroppedCubeCollectWidget> {
           "Dropped Cube",
           textAlign: TextAlign.center,
           style: TextStyle(
-            fontSize: 22,
+            fontSize: 16,
           ),
         ),
         GestureDetector(
@@ -29,8 +29,8 @@ class _DroppedCubeCollectWidgetState extends State<DroppedCubeCollectWidget> {
             });
           },
           child: SizedBox(
-            width: 85,
-            height: 85,
+            width: 60,
+            height: 60,
             child: Container(
               margin: const EdgeInsets.all(2.0),
               padding: const EdgeInsets.all(3.0),
@@ -60,8 +60,8 @@ class _DroppedCubeCollectWidgetState extends State<DroppedCubeCollectWidget> {
             });
           },
           child: SizedBox(
-            width: 50,
-            height: 50,
+            width: 35,
+            height: 35,
             child: Container(
               margin: const EdgeInsets.all(2.0),
               padding: const EdgeInsets.all(3.0),

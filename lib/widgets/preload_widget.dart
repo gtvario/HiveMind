@@ -12,12 +12,10 @@ class _PreloadWidgetState extends State<PreloadWidget> {
   String cubeImgPath = 'assets/images/cube_new.png';
   String autoCollectConeImgPath = 'assets/images/cone_new.png';
   String autoCollectCubeImgPath = 'assets/images/cube_new.png';
-  String autoMovementText = 'No';
   bool preloadCone = false;
   bool preloadCube = false;
   bool autoCollectCone = false;
   bool autoCollectCube = false;
-  bool autoMovement = false;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +27,7 @@ class _PreloadWidgetState extends State<PreloadWidget> {
               Text(
                 "Preload?",
                 style: TextStyle(
-                  fontSize: 45,
+                  fontSize: 35,
                   fontFamily: 'Schyler',
                   decoration: TextDecoration.underline,
                 ),
@@ -40,8 +38,8 @@ class _PreloadWidgetState extends State<PreloadWidget> {
           Row(
             children: [
               SizedBox(
-                width: 75,
-                height: 75,
+                width: 50,
+                height: 50,
                 child: InkWell(
                   onTapDown: (details) {
                     setState(() {
@@ -63,8 +61,8 @@ class _PreloadWidgetState extends State<PreloadWidget> {
               ),
               const SizedBox(width: 20),
               SizedBox(
-                width: 75,
-                height: 75,
+                width: 50,
+                height: 50,
                 child: InkWell(
                   onTapDown: (details) {
                     setState(() {

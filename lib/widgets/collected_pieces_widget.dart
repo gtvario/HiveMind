@@ -18,18 +18,18 @@ class _TeleopCollectWidgetState extends State<TeleopCollectWidget> {
         const Text(
           'Picked Up',
           style: TextStyle(
-              fontSize: 45,
+              fontSize: 35,
               fontFamily: 'Schyler',
               decoration: TextDecoration.underline),
         ),
-        const SizedBox(height: 15),
+        const SizedBox(height: 7.5),
         Row(
           children: const [
-            SizedBox(width: 100, height: 225, child: HP_CollectWidget()),
+            SizedBox(width: 75, height: 135, child: HP_CollectWidget()),
             SizedBox(width: 5),
-            SizedBox(width: 100, height: 225, child: ConeCollectWidget()),
+            SizedBox(width: 75, height: 135, child: ConeCollectWidget()),
             SizedBox(width: 5),
-            SizedBox(width: 100, height: 225, child: CubeCollectWidget()),
+            SizedBox(width: 75, height: 135, child: CubeCollectWidget()),
           ],
         ),
       ],

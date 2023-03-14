@@ -22,7 +22,7 @@ class _MobilityWidgetState extends State<MobilityWidget> {
               "Autonomous\nMobility?",
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 45,
+                fontSize: 30,
                 fontFamily: 'Schyler',
                 decoration: TextDecoration.underline,
               ),
@@ -33,7 +33,7 @@ class _MobilityWidgetState extends State<MobilityWidget> {
               children: [
                 SizedBox(
                   width: 100,
-                  height: 50,
+                  height: 40,
                   child: InkWell(
                     onTapDown: (details) {
                       setState(() {
@@ -51,7 +51,7 @@ class _MobilityWidgetState extends State<MobilityWidget> {
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                         color: Color.fromARGB(255, 179, 32, 32),
-                        fontSize: 50,
+                        fontSize: 35,
                         fontFamily: 'Schyler',
                       ),
                     ),

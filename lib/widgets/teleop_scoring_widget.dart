@@ -20,18 +20,18 @@ class _TeleopScoringWidgetState extends State<TeleopScoringWidget> {
         Column(
           children: [
             SizedBox(
-                width: 90,
-                height: 90,
+                width: 55,
+                height: 55,
                 child:
                     ScoringBoxConeWidget(boxIndex: 0, gameMode: widget.mode)),
             SizedBox(
-                width: 90,
-                height: 90,
+                width: 55,
+                height: 55,
                 child:
                     ScoringBoxConeWidget(boxIndex: 1, gameMode: widget.mode)),
             SizedBox(
-                width: 90,
-                height: 90,
+                width: 55,
+                height: 55,
                 child: ScoringBoxCommunityWidget(
                     boxIndex: 2, gameMode: widget.mode)),
           ],
@@ -39,18 +39,18 @@ class _TeleopScoringWidgetState extends State<TeleopScoringWidget> {
         Column(
           children: [
             SizedBox(
-                width: 90,
-                height: 90,
+                width: 55,
+                height: 55,
                 child:
                     ScoringBoxCubeWidget(boxIndex: 3, gameMode: widget.mode)),
             SizedBox(
-                width: 90,
-                height: 90,
+                width: 55,
+                height: 55,
                 child:
                     ScoringBoxCubeWidget(boxIndex: 4, gameMode: widget.mode)),
             SizedBox(
-                width: 90,
-                height: 90,
+                width: 55,
+                height: 55,
                 child: ScoringBoxCommunityWidget(
                     boxIndex: 5, gameMode: widget.mode)),
           ],
@@ -58,18 +58,18 @@ class _TeleopScoringWidgetState extends State<TeleopScoringWidget> {
         Column(
           children: [
             SizedBox(
-                width: 90,
-                height: 90,
+                width: 55,
+                height: 55,
                 child:
                     ScoringBoxConeWidget(boxIndex: 6, gameMode: widget.mode)),
             SizedBox(
-                width: 90,
-                height: 90,
+                width: 55,
+                height: 55,
                 child:
                     ScoringBoxConeWidget(boxIndex: 7, gameMode: widget.mode)),
             SizedBox(
-                width: 90,
-                height: 90,
+                width: 55,
+                height: 55,
                 child: ScoringBoxCommunityWidget(
                     boxIndex: 8, gameMode: widget.mode)),
           ],
@@ -77,18 +77,18 @@ class _TeleopScoringWidgetState extends State<TeleopScoringWidget> {
         Column(
           children: [
             SizedBox(
-                width: 90,
-                height: 90,
+                width: 55,
+                height: 55,
                 child:
                     ScoringBoxConeWidget(boxIndex: 9, gameMode: widget.mode)),
             SizedBox(
-                width: 90,
-                height: 90,
+                width: 55,
+                height: 55,
                 child:
                     ScoringBoxConeWidget(boxIndex: 10, gameMode: widget.mode)),
             SizedBox(
-                width: 90,
-                height: 90,
+                width: 55,
+                height: 55,
                 child: ScoringBoxCommunityWidget(
                     boxIndex: 11, gameMode: widget.mode)),
           ],
@@ -96,18 +96,18 @@ class _TeleopScoringWidgetState extends State<TeleopScoringWidget> {
         Column(
           children: [
             SizedBox(
-                width: 90,
-                height: 90,
+                width: 55,
+                height: 55,
                 child:
                     ScoringBoxCubeWidget(boxIndex: 12, gameMode: widget.mode)),
             SizedBox(
-                width: 90,
-                height: 90,
+                width: 55,
+                height: 55,
                 child:
                     ScoringBoxCubeWidget(boxIndex: 13, gameMode: widget.mode)),
             SizedBox(
-                width: 90,
-                height: 90,
+                width: 55,
+                height: 55,
                 child: ScoringBoxCommunityWidget(
                     boxIndex: 14, gameMode: widget.mode)),
           ],
@@ -115,18 +115,18 @@ class _TeleopScoringWidgetState extends State<TeleopScoringWidget> {
         Column(
           children: [
             SizedBox(
-                width: 90,
-                height: 90,
+                width: 55,
+                height: 55,
                 child:
                     ScoringBoxConeWidget(boxIndex: 15, gameMode: widget.mode)),
             SizedBox(
-                width: 90,
-                height: 90,
+                width: 55,
+                height: 55,
                 child:
                     ScoringBoxConeWidget(boxIndex: 16, gameMode: widget.mode)),
             SizedBox(
-                width: 90,
-                height: 90,
+                width: 55,
+                height: 55,
                 child: ScoringBoxCommunityWidget(
                     boxIndex: 17, gameMode: widget.mode)),
           ],
@@ -134,18 +134,18 @@ class _TeleopScoringWidgetState extends State<TeleopScoringWidget> {
         Column(
           children: [
             SizedBox(
-                width: 90,
-                height: 90,
+                width: 55,
+                height: 55,
                 child:
                     ScoringBoxConeWidget(boxIndex: 18, gameMode: widget.mode)),
             SizedBox(
-                width: 90,
-                height: 90,
+                width: 55,
+                height: 55,
                 child:
                     ScoringBoxConeWidget(boxIndex: 19, gameMode: widget.mode)),
             SizedBox(
-                width: 90,
-                height: 90,
+                width: 55,
+                height: 55,
                 child: ScoringBoxCommunityWidget(
                     boxIndex: 20, gameMode: widget.mode)),
           ],
@@ -153,18 +153,18 @@ class _TeleopScoringWidgetState extends State<TeleopScoringWidget> {
         Column(
           children: [
             SizedBox(
-                width: 90,
-                height: 90,
+                width: 55,
+                height: 55,
                 child:
                     ScoringBoxCubeWidget(boxIndex: 21, gameMode: widget.mode)),
             SizedBox(
-                width: 90,
-                height: 90,
+                width: 55,
+                height: 55,
                 child:
                     ScoringBoxCubeWidget(boxIndex: 22, gameMode: widget.mode)),
             SizedBox(
-                width: 90,
-                height: 90,
+                width: 55,
+                height: 55,
                 child: ScoringBoxCommunityWidget(
                     boxIndex: 23, gameMode: widget.mode)),
           ],
@@ -172,18 +172,18 @@ class _TeleopScoringWidgetState extends State<TeleopScoringWidget> {
         Column(
           children: [
             SizedBox(
-                width: 90,
-                height: 90,
+                width: 55,
+                height: 55,
                 child:
                     ScoringBoxConeWidget(boxIndex: 24, gameMode: widget.mode)),
             SizedBox(
-                width: 90,
-                height: 90,
+                width: 55,
+                height: 55,
                 child:
                     ScoringBoxConeWidget(boxIndex: 25, gameMode: widget.mode)),
             SizedBox(
-                width: 90,
-                height: 90,
+                width: 55,
+                height: 55,
                 child: ScoringBoxCommunityWidget(
                     boxIndex: 26, gameMode: widget.mode)),
           ],

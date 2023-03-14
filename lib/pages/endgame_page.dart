@@ -20,11 +20,11 @@ class _EndgamePageState extends State<EndgamePage> {
           "End Game",
           textAlign: TextAlign.center,
           style: TextStyle(
-              fontSize: 65,
+              fontSize: 55,
               fontFamily: 'Schyler',
               decoration: TextDecoration.underline),
         ),
-        const SizedBox(height: 50),
+        const SizedBox(height: 10),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -40,7 +40,7 @@ class _EndgamePageState extends State<EndgamePage> {
                 RobotCondition(),
               ],
             ),
-            const SizedBox(width: 110),
+            const SizedBox(width: 85),
             Column(
               children: const [
                 Defense(),
@@ -56,13 +56,13 @@ class _EndgamePageState extends State<EndgamePage> {
           children: const [
             SizedBox(width: 25),
             SizedBox(
-              width: 1150,
+              width: 900,
               child: TextField(
                 style: TextStyle(
                   fontSize: 24,
                 ),
                 keyboardType: TextInputType.multiline,
-                minLines: 4,
+                minLines: 3,
                 maxLines: null,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),

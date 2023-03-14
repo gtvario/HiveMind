@@ -18,7 +18,7 @@ class _ChargeStationState extends State<ChargeStation> {
         const Text(
           'Charging\nStation',
           style: TextStyle(
-            fontSize: 45,
+            fontSize: 35,
             fontFamily: 'Schyler',
             decoration: TextDecoration.underline,
           ),
@@ -27,7 +27,7 @@ class _ChargeStationState extends State<ChargeStation> {
         Row(
           children: [
             Transform.scale(
-              scale: 2.0,
+              scale: 1.25,
               child: Radio(
                 activeColor: Colors.amber,
                 visualDensity: const VisualDensity(
@@ -54,12 +54,12 @@ class _ChargeStationState extends State<ChargeStation> {
             )
           ],
         ),
-        const SizedBox(height: 25),
+        const SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Transform.scale(
-              scale: 2.0,
+              scale: 1.25,
               child: Radio(
                 activeColor: Colors.amber,
                 visualDensity: const VisualDensity(
@@ -86,11 +86,11 @@ class _ChargeStationState extends State<ChargeStation> {
             ),
           ],
         ),
-        const SizedBox(height: 25),
+        const SizedBox(height: 10),
         Row(
           children: [
             Transform.scale(
-              scale: 2.0,
+              scale: 1.25,
               child: Radio(
                 activeColor: Colors.amber,
                 visualDensity: const VisualDensity(
@@ -117,11 +117,11 @@ class _ChargeStationState extends State<ChargeStation> {
             ),
           ],
         ),
-        const SizedBox(height: 25),
+        const SizedBox(height: 10),
         Row(
           children: [
             Transform.scale(
-              scale: 2.0,
+              scale: 1.25,
               child: Radio(
                 activeColor: Colors.amber,
                 visualDensity: const VisualDensity(

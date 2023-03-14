@@ -17,18 +17,16 @@ class _DroppedPieceWidgetState extends State<DroppedPieceWidget> {
         const Text(
           'Dropped',
           style: TextStyle(
-              fontSize: 45,
+              fontSize: 35,
               fontFamily: 'Schyler',
               decoration: TextDecoration.underline),
         ),
-        const SizedBox(height: 15),
+        const SizedBox(height: 7.5),
         Row(
           children: const [
-            SizedBox(
-                width: 100, height: 225, child: DroppedConeCollectWidget()),
+            SizedBox(width: 75, height: 135, child: DroppedConeCollectWidget()),
             SizedBox(width: 5),
-            SizedBox(
-                width: 100, height: 225, child: DroppedCubeCollectWidget()),
+            SizedBox(width: 75, height: 135, child: DroppedCubeCollectWidget()),
           ],
         ),
       ],

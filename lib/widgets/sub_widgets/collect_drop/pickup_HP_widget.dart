@@ -21,7 +21,7 @@ class _HP_CollectWidgetState extends State<HP_CollectWidget> {
           "HP\nStation",
           textAlign: TextAlign.center,
           style: TextStyle(
-            fontSize: 22,
+            fontSize: 16,
           ),
         ),
         GestureDetector(
@@ -31,8 +31,8 @@ class _HP_CollectWidgetState extends State<HP_CollectWidget> {
             });
           },
           child: SizedBox(
-            width: 85,
-            height: 85,
+            width: 60,
+            height: 60,
             child: Container(
               margin: const EdgeInsets.all(2.0),
               padding: const EdgeInsets.all(3.0),
@@ -62,8 +62,8 @@ class _HP_CollectWidgetState extends State<HP_CollectWidget> {
             });
           },
           child: SizedBox(
-            width: 50,
-            height: 50,
+            width: 35,
+            height: 35,
             child: Container(
               margin: const EdgeInsets.all(2.0),
               padding: const EdgeInsets.all(3.0),

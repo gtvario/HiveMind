@@ -22,7 +22,7 @@ class _DefenseState extends State<Defense> {
             const Text(
               "Defense - ",
               style: TextStyle(
-                fontSize: 55,
+                fontSize: 35,
                 fontFamily: 'Schyler',
               ),
             ),
@@ -45,7 +45,7 @@ class _DefenseState extends State<Defense> {
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   color: Color.fromARGB(255, 179, 32, 32),
-                  fontSize: 55,
+                  fontSize: 35,
                   fontFamily: 'Schyler',
                 ),
               ),
@@ -54,7 +54,7 @@ class _DefenseState extends State<Defense> {
         ),
         const SizedBox(height: 20),
         Transform.scale(
-          scale: 1.75,
+          scale: 1.2,
           child: RatingBar.builder(
             ignoreGestures: !defensePlayedBool,
             initialRating: 3,
@@ -76,13 +76,13 @@ class _DefenseState extends State<Defense> {
         const Text(
           "Driving",
           style: TextStyle(
-            fontSize: 55,
+            fontSize: 35,
             fontFamily: 'Schyler',
           ),
         ),
         const SizedBox(height: 20),
         Transform.scale(
-          scale: 1.75,
+          scale: 1.2,
           child: RatingBar.builder(
             initialRating: 3,
             minRating: 0,

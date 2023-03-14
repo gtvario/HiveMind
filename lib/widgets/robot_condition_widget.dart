@@ -18,7 +18,7 @@ class _RobotConditionState extends State<RobotCondition> {
         const Text(
           'Did the\nRobot Break?',
           style: TextStyle(
-              fontSize: 45,
+              fontSize: 35,
               fontFamily: 'Schyler',
               decoration: TextDecoration.underline),
         ),
@@ -26,7 +26,7 @@ class _RobotConditionState extends State<RobotCondition> {
         Row(
           children: [
             Transform.scale(
-              scale: 2.0,
+              scale: 1.25,
               child: Radio(
                 activeColor: Colors.amber,
                 visualDensity: const VisualDensity(
@@ -53,12 +53,12 @@ class _RobotConditionState extends State<RobotCondition> {
             )
           ],
         ),
-        const SizedBox(height: 25),
+        const SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Transform.scale(
-              scale: 2.0,
+              scale: 1.25,
               child: Radio(
                 activeColor: Colors.amber,
                 visualDensity: const VisualDensity(
@@ -76,7 +76,7 @@ class _RobotConditionState extends State<RobotCondition> {
             ),
             const SizedBox(width: 10),
             const Text(
-              'Did not move for the whole match',
+              'Did not move for\nthe whole match',
               style: TextStyle(
                 fontSize: 20,
                 fontFamily: 'Tahoma',
@@ -85,11 +85,11 @@ class _RobotConditionState extends State<RobotCondition> {
             ),
           ],
         ),
-        const SizedBox(height: 25),
+        const SizedBox(height: 10),
         Row(
           children: [
             Transform.scale(
-              scale: 2.0,
+              scale: 1.25,
               child: Radio(
                 activeColor: Colors.amber,
                 visualDensity: const VisualDensity(
@@ -107,7 +107,7 @@ class _RobotConditionState extends State<RobotCondition> {
             ),
             const SizedBox(width: 10),
             const Text(
-              'Completely stopped for part of the match',
+              'Completely stopped\nfor part of the match',
               style: TextStyle(
                 fontSize: 20,
                 fontFamily: 'Tahoma',
@@ -116,11 +116,11 @@ class _RobotConditionState extends State<RobotCondition> {
             ),
           ],
         ),
-        const SizedBox(height: 25),
+        const SizedBox(height: 10),
         Row(
           children: [
             Transform.scale(
-              scale: 2.0,
+              scale: 1.25,
               child: Radio(
                 activeColor: Colors.amber,
                 visualDensity: const VisualDensity(
@@ -147,11 +147,11 @@ class _RobotConditionState extends State<RobotCondition> {
             ),
           ],
         ),
-        const SizedBox(height: 25),
+        const SizedBox(height: 10),
         Row(
           children: [
             Transform.scale(
-              scale: 2.0,
+              scale: 1.25,
               child: Radio(
                 activeColor: Colors.amber,
                 visualDensity: const VisualDensity(
@@ -169,7 +169,7 @@ class _RobotConditionState extends State<RobotCondition> {
             ),
             const SizedBox(width: 10),
             const Text(
-              'A mechanism broke (elaborate in comments)',
+              'A mechanism broke\n(elaborate in comments)',
               style: TextStyle(
                 fontSize: 20,
                 fontFamily: 'Tahoma',
@@ -178,11 +178,11 @@ class _RobotConditionState extends State<RobotCondition> {
             ),
           ],
         ),
-        const SizedBox(height: 25),
+        const SizedBox(height: 10),
         Row(
           children: [
             Transform.scale(
-              scale: 2.0,
+              scale: 1.25,
               child: Radio(
                 activeColor: Colors.amber,
                 visualDensity: const VisualDensity(
