@@ -75,9 +75,9 @@ class _AutonPageState extends State<AutonPage> {
                     const SizedBox(width: 15),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      children: const [
-                        PreloadWidget(),
-                        SizedBox(height: 15),
+                      children: [
+                        PreloadWidget(scoutData: widget.scoutData),
+                        const SizedBox(height: 15),
                         MobilityWidget(),
                       ],
                     ),

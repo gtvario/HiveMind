@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hivemind/models/scout_data_model.dart';
 
 class PreloadWidget extends StatefulWidget {
-  const PreloadWidget({super.key});
+  final ScoutData scoutData;
+  const PreloadWidget({super.key, required this.scoutData});
 
   @override
   State<PreloadWidget> createState() => _PreloadWidgetState();
@@ -10,12 +12,27 @@ class PreloadWidget extends StatefulWidget {
 class _PreloadWidgetState extends State<PreloadWidget> {
   String coneImgPath = 'assets/images/cone_new.png';
   String cubeImgPath = 'assets/images/cube_new.png';
-  String autoCollectConeImgPath = 'assets/images/cone_new.png';
-  String autoCollectCubeImgPath = 'assets/images/cube_new.png';
   bool preloadCone = false;
   bool preloadCube = false;
-  bool autoCollectCone = false;
-  bool autoCollectCube = false;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.scoutData.readFile();
+    String preload = widget.scoutData.getAutoPreload;
+    setState(() {
+      if (preload == 'cube') {
+        preloadCube = true;
+        preloadCone = false;
+      } else if (preload == 'cone') {
+        preloadCube = false;
+        preloadCone = true;
+      } else {
+        preloadCone = false;
+        preloadCube = false;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,13 +63,16 @@ class _PreloadWidgetState extends State<PreloadWidget> {
                       if (!preloadCone) {
                         coneImgPath = 'assets/images/cone_new_check.png';
                         preloadCone = true;
+                        widget.scoutData.setAutoPreload = 'cone';
                         if (preloadCube) {
                           cubeImgPath = 'assets/images/cube_new.png';
                           preloadCube = false;
+                          widget.scoutData.setAutoPreload = 'none';
                         }
                       } else {
                         coneImgPath = 'assets/images/cone_new.png';
                         preloadCone = false;
+                        widget.scoutData.setAutoPreload = 'none';
                       }
                     });
                   },
@@ -69,13 +89,16 @@ class _PreloadWidgetState extends State<PreloadWidget> {
                       if (!preloadCube) {
                         cubeImgPath = 'assets/images/cube_new_check.png';
                         preloadCube = true;
+                        widget.scoutData.setAutoPreload = 'cube';
                         if (preloadCone) {
                           coneImgPath = 'assets/images/cone_new.png';
                           preloadCone = false;
+                          widget.scoutData.setAutoPreload = 'none';
                         }
                       } else {
                         cubeImgPath = 'assets/images/cube_new.png';
                         preloadCube = false;
+                        widget.scoutData.setAutoPreload = 'none';
                       }
                     });
                   },
