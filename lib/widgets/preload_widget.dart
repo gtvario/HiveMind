@@ -16,9 +16,9 @@ class _PreloadWidgetState extends State<PreloadWidget> {
   bool preloadCube = false;
 
   @override
-  void initState() {
+  void initState() async {
     super.initState();
-    widget.scoutData.readFile();
+    await widget.scoutData.readFile();
     String preload = widget.scoutData.getAutoPreload;
     setState(() {
       if (preload == 'cube') {
