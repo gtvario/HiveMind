@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/services.dart';
+import 'package:hivemind/models/match_scout_vars.dart';
 import 'package:path_provider/path_provider.dart';
 
 class ScoutData {
@@ -91,10 +93,10 @@ class ScoutData {
 
   String filePath = "";
 
-  ScoutData(int? matchNum, int teamNum, String? eventKey) {
+  ScoutData(int? matchNum, int teamNum, String? event) {
     matchNum = matchNum;
     teamNum = teamNum;
-    eventKey = eventKey;
+    eventKey = event;
 
     filePath = "${eventKey}_Match${matchNum}_$teamNum.json";
   }
@@ -269,10 +271,48 @@ class ScoutData {
 
   writeFile() async {
     File matchFile = await _localFile;
+
+    var obj = {
+      "auton": {
+        "preload": autoPreload,
+        "mobility": autoMobility,
+        "score_grid_auto": scoreGridAuto,
+        "charge_station": autoChargeStation,
+        "hp_station_auto": hpStationAuto,
+        "field_cone_auto": fieldConeAuto,
+        "field_cube_auto": fieldCubeAuto,
+        "dropped_cube_auto": droppedAutoCube,
+        "dropped_cone_auto": droppedAutoCone
+      },
+      "teleop": {
+        "score_grid_teleop": scoreGridTeleop,
+        "hp_station_teleop": hpStationTeleop,
+        "field_cone_teleop": fieldConeTeleop,
+        "field_cube_teleop": fieldCubeTeleop,
+        "dropped_cube_teleop": droppedTeleopCube,
+        "dropped_cone_teleop": droppedTeleopCone
+      },
+      "endgame": {
+        "charge_station": endgameChargeStation,
+        "defense_played": playedDefense,
+        "defense_score": defenseScore,
+        "driving": drivingScore,
+        "robot_status": robotCondition,
+        "comments": comments
+      }
+    };
+
+    String data = jsonEncode(obj);
+    matchFile.writeAsString(data);
   }
 
-  readFile() async {
+  Future<void> readFile() async {
     File matchFile = await _localFile;
+
+    final response = await matchFile.readAsString();
+    final data = await jsonDecode(response);
+
+    autoPreload = data["auton"]["preload"];
   }
 
   Future<String> get _localPath async {
