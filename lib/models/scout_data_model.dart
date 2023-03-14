@@ -81,7 +81,96 @@ class ScoutData {
   int defenseScore = 3, drivingScore = 3;
   bool playedDefense = false;
 
-  ScoutData({
-    required this.autoChargeStation,
-  });
+  int matchNum = 0;
+  String teamNum = "", eventKey = "";
+
+  ScoutData(int matchNum, String teamNum, String eventKey) {
+    matchNum = matchNum;
+    teamNum = teamNum;
+    eventKey = eventKey;
+  }
+
+  String get getAutoPreload {
+    return autoPreload;
+  }
+
+  String get getAutoChargeStation {
+    return autoChargeStation;
+  }
+
+  List<int> get getAutoGrid {
+    return scoreGridAuto;
+  }
+
+  int get getMobility {
+    return mobility;
+  }
+
+  int get getHPStationAuto {
+    return hpStationAuto;
+  }
+
+  int get getFieldConeAuto {
+    return fieldConeAuto;
+  }
+
+  int get getFieldCubeAuto {
+    return fieldCubeAuto;
+  }
+
+  int get getDroppedAutoCone {
+    return droppedAutoCone;
+  }
+
+  int get getDroppedAutoCube {
+    return droppedAutoCube;
+  }
+
+  List<int> get getTeleopGrid {
+    return scoreGridTeleop;
+  }
+
+  int get getHPStationTeleop {
+    return hpStationTeleop;
+  }
+
+  int get getFieldConeTeleop {
+    return fieldConeTeleop;
+  }
+
+  int get getFieldCubeTeleop {
+    return fieldCubeTeleop;
+  }
+
+  int get getDroppedTeleopCone {
+    return droppedTeleopCone;
+  }
+
+  int get getDroppedTeleopCube {
+    return droppedTeleopCube;
+  }
+
+  String get getEndgameChargeStation {
+    return endgameChargeStation;
+  }
+
+  String get getRobotCondition {
+    return robotCondition;
+  }
+
+  String get getComments {
+    return comments;
+  }
+
+  int get getDefenseScore {
+    return defenseScore;
+  }
+
+  int get getDriveScore {
+    return drivingScore;
+  }
+
+  bool get getPlayedDefense {
+    return playedDefense;
+  }
 }
