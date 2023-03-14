@@ -16,22 +16,31 @@ class _PreloadWidgetState extends State<PreloadWidget> {
   bool preloadCube = false;
 
   @override
-  void initState() async {
+  void initState() {
     super.initState();
-    await widget.scoutData.readFile();
-    String preload = widget.scoutData.getAutoPreload;
-    setState(() {
-      if (preload == 'cube') {
-        preloadCube = true;
-        preloadCone = false;
-      } else if (preload == 'cone') {
-        preloadCube = false;
-        preloadCone = true;
-      } else {
-        preloadCone = false;
-        preloadCube = false;
-      }
-    });
+    readScoutFile().then(
+      (value) {
+        String preload = widget.scoutData.getAutoPreload;
+        setState(() {
+          if (preload == 'cube') {
+            preloadCube = true;
+            preloadCone = false;
+            cubeImgPath = 'assets/images/cube_new_check.png';
+            coneImgPath = 'assets/images/cone_new.png';
+          } else if (preload == 'cone') {
+            preloadCube = false;
+            preloadCone = true;
+            coneImgPath = 'assets/images/cone_new_check.png';
+            cubeImgPath = 'assets/images/cube_new.png';
+          } else {
+            preloadCone = false;
+            preloadCube = false;
+            coneImgPath = 'assets/images/cone_new.png';
+            cubeImgPath = 'assets/images/cube_new.png';
+          }
+        });
+      },
+    );
   }
 
   @override
@@ -110,5 +119,9 @@ class _PreloadWidgetState extends State<PreloadWidget> {
         ],
       ),
     ]);
+  }
+
+  Future<void> readScoutFile() async {
+    await widget.scoutData.readFile();
   }
 }
