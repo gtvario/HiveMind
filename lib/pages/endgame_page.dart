@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hivemind/models/scout_data_model.dart';
 import 'package:hivemind/widgets/charge_station_widget.dart';
 import 'package:hivemind/widgets/defense_widget.dart';
 import 'package:hivemind/widgets/robot_condition_widget.dart';
 
 class EndgamePage extends StatefulWidget {
-  const EndgamePage({super.key});
+  final ScoutData scoutData;
+  const EndgamePage({super.key, required this.scoutData});
 
   @override
   State<EndgamePage> createState() => _EndgamePageState();

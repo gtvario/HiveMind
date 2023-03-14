@@ -27,7 +27,7 @@ class _MatchScoutPageState extends State<MatchScoutPage> {
   final PageController pageController = PageController();
   int? stationNum = 0, team = 0;
   String? alliance = "";
-  ScoutData scoutData = ScoutData();
+  late ScoutData scoutData;
 
   @override
   void dispose() {
@@ -66,7 +66,11 @@ class _MatchScoutPageState extends State<MatchScoutPage> {
       alliance = allianceColor;
       stationNum = stationNumber;
       team = curTeam;
+      scoutData =
+          ScoutData(widget.match?.matchNumber, curTeam, widget.match?.eventKey);
     });
+
+    scoutData.readFile();
   }
 
   @override
@@ -83,18 +87,19 @@ class _MatchScoutPageState extends State<MatchScoutPage> {
       ),
       body: PageView(
         controller: pageController,
+        onPageChanged: (value) => scoutData.writeFile(),
         children: [
           Center(
             child: AutonPage(scoutData: scoutData),
           ),
           Center(
-            child: TeleopPage(),
+            child: TeleopPage(scoutData: scoutData),
           ),
           Center(
-            child: EndgamePage(),
+            child: EndgamePage(scoutData: scoutData),
           ),
           Center(
-            child: SumbitDataPage(),
+            child: SubmitDataPage(scoutData: scoutData),
           ),
         ],
       ),

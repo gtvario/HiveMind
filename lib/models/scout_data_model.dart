@@ -1,3 +1,8 @@
+import 'dart:io';
+
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
+
 class ScoutData {
   // Auton
   String autoPreload = "none", autoChargeStation = "Did Not Attempt";
@@ -81,13 +86,17 @@ class ScoutData {
   int defenseScore = 3, drivingScore = 3;
   bool playedDefense = false;
 
-  int matchNum = 0;
-  String teamNum = "", eventKey = "";
+  int? matchNum = 0, teamNum = 0;
+  String? eventKey = "";
 
-  ScoutData(int matchNum, String teamNum, String eventKey) {
+  String filePath = "";
+
+  ScoutData(int? matchNum, int teamNum, String? eventKey) {
     matchNum = matchNum;
     teamNum = teamNum;
     eventKey = eventKey;
+
+    filePath = "${eventKey}_Match${matchNum}_$teamNum.json";
   }
 
   String get getAutoPreload {
@@ -172,5 +181,117 @@ class ScoutData {
 
   bool get getPlayedDefense {
     return playedDefense;
+  }
+
+  set setAutoPreload(String preload) {
+    autoPreload = preload;
+  }
+
+  set setAutoChargeStation(String chargeStationAuto) {
+    autoChargeStation = chargeStationAuto;
+  }
+
+  set setAutoGrid(List<int> autoGrid) {
+    autoGrid = autoGrid;
+  }
+
+  set setMobility(int mobility) {
+    mobility = mobility;
+  }
+
+  set setHPStationAuto(int hpAuto) {
+    hpStationAuto = hpAuto;
+  }
+
+  set setFieldConeAuto(int fieldConeAuto) {
+    fieldConeAuto = fieldConeAuto;
+  }
+
+  set setFieldCubeAuto(int fieldCubeAuto) {
+    fieldCubeAuto = fieldCubeAuto;
+  }
+
+  set setDroppedAutoCone(int dropConeAuto) {
+    droppedAutoCone = dropConeAuto;
+  }
+
+  set setDroppedAutoCube(int dropCubeAuto) {
+    droppedAutoCube = dropCubeAuto;
+  }
+
+  set setTeleopGrid(List<int> teleopGrid) {
+    scoreGridTeleop = teleopGrid;
+  }
+
+  set setHPStationTeleop(int hpTeleop) {
+    hpStationTeleop = hpTeleop;
+  }
+
+  set setFieldConeTeleop(int fieldConeTeleop) {
+    fieldConeTeleop = fieldConeTeleop;
+  }
+
+  set setFieldCubeTeleop(int fieldCubeTeleop) {
+    fieldCubeTeleop = fieldCubeTeleop;
+  }
+
+  set setDroppedTeleopCone(int droppedConeTeleop) {
+    droppedTeleopCone = droppedConeTeleop;
+  }
+
+  set setDroppedTeleopCube(int droppedCubeTeleop) {
+    droppedTeleopCube = droppedCubeTeleop;
+  }
+
+  set setEndgameChargeStation(String endgameCharge) {
+    endgameChargeStation = endgameCharge;
+  }
+
+  set setRobotCondition(String condition) {
+    robotCondition = condition;
+  }
+
+  set setComments(String comments) {
+    comments = comments;
+  }
+
+  set setDefenseScore(int defenseScore) {
+    defenseScore = defenseScore;
+  }
+
+  set setDriveScore(int driveScore) {
+    drivingScore = driveScore;
+  }
+
+  set setPlayedDefense(bool playDefense) {
+    playedDefense = playDefense;
+  }
+
+  writeFile() async {
+    File matchFile = await _localFile;
+  }
+
+  readFile() async {
+    File matchFile = await _localFile;
+  }
+
+  Future<String> get _localPath async {
+    final directory = await getApplicationDocumentsDirectory();
+
+    return directory.path;
+  }
+
+  Future<File> get _localFile async {
+    final path = await _localPath;
+    var defaults = await rootBundle.load("assets/config/default_match.json");
+    var matchFile = File('$path/$eventKey/$filePath');
+    if (!await matchFile.exists()) {
+      await matchFile.create(recursive: true);
+      matchFile.writeAsBytes(
+        defaults.buffer
+            .asUint8List(defaults.offsetInBytes, defaults.lengthInBytes),
+      );
+    }
+    return matchFile;
   }
 }

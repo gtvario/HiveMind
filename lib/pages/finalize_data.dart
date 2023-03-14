@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:hivemind/models/scout_data_model.dart';
 
-class SumbitDataPage extends StatefulWidget {
-  const SumbitDataPage({super.key});
+class SubmitDataPage extends StatefulWidget {
+  final ScoutData scoutData;
+  const SubmitDataPage({super.key, required this.scoutData});
 
   @override
-  State<SumbitDataPage> createState() => _SumbitDataPageState();
+  State<SubmitDataPage> createState() => _SubmitDataPageState();
 }
 
-class _SumbitDataPageState extends State<SumbitDataPage> {
+class _SubmitDataPageState extends State<SubmitDataPage> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -25,6 +27,7 @@ class _SumbitDataPageState extends State<SumbitDataPage> {
             height: 50,
             child: ElevatedButton(
               onPressed: () {
+                widget.scoutData.writeFile();
                 Navigator.pop(context);
               },
               child: const Text(

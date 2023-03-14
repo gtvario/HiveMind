@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hivemind/models/scout_data_model.dart';
 import 'package:hivemind/widgets/teleop_scoring_widget.dart';
 import 'package:hivemind/widgets/collected_pieces_widget.dart';
 import 'package:hivemind/widgets/dropped_pieces_widget.dart';
 
 class TeleopPage extends StatefulWidget {
-  const TeleopPage({super.key});
+  final ScoutData scoutData;
+  const TeleopPage({super.key, required this.scoutData});
 
   @override
   State<TeleopPage> createState() => _TeleopPageState();
