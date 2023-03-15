@@ -28,9 +28,12 @@ class _TeleopPageState extends State<TeleopPage> {
         const SizedBox(height: 10),
         Row(
           mainAxisSize: MainAxisSize.max,
-          children: const [
+          children: [
             SizedBox(width: 30),
-            TeleopScoringWidget(mode: "teleop"),
+            TeleopScoringWidget(
+              mode: 'teleop',
+              scoutData: widget.scoutData,
+            ),
           ],
         ),
         Expanded(
@@ -44,8 +47,11 @@ class _TeleopPageState extends State<TeleopPage> {
                     border: Border.all(color: Colors.black, width: 2)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    TeleopCollectWidget(),
+                  children: [
+                    TeleopCollectWidget(
+                      mode: 'teleop',
+                      scoutData: widget.scoutData,
+                    ),
                   ],
                 ),
               ),
@@ -56,8 +62,11 @@ class _TeleopPageState extends State<TeleopPage> {
                     border: Border.all(color: Colors.black, width: 2)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    DroppedPieceWidget(),
+                  children: [
+                    DroppedPieceWidget(
+                      mode: 'teleop',
+                      scoutData: widget.scoutData,
+                    ),
                   ],
                 ),
               ),

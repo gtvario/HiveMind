@@ -32,9 +32,12 @@ class _AutonPageState extends State<AutonPage> {
         const SizedBox(height: 10),
         Row(
           mainAxisSize: MainAxisSize.max,
-          children: const [
-            SizedBox(width: 30),
-            TeleopScoringWidget(mode: "auto"),
+          children: [
+            const SizedBox(width: 30),
+            TeleopScoringWidget(
+              mode: "auton",
+              scoutData: widget.scoutData,
+            ),
           ],
         ),
         Expanded(
@@ -48,8 +51,11 @@ class _AutonPageState extends State<AutonPage> {
                     border: Border.all(color: Colors.black, width: 2)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    TeleopCollectWidget(),
+                  children: [
+                    TeleopCollectWidget(
+                      mode: "auton",
+                      scoutData: widget.scoutData,
+                    ),
                   ],
                 ),
               ),
@@ -60,8 +66,11 @@ class _AutonPageState extends State<AutonPage> {
                     border: Border.all(color: Colors.black, width: 2)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    DroppedPieceWidget(),
+                  children: [
+                    DroppedPieceWidget(
+                      mode: "auton",
+                      scoutData: widget.scoutData,
+                    ),
                   ],
                 ),
               ),
@@ -78,14 +87,19 @@ class _AutonPageState extends State<AutonPage> {
                       children: [
                         PreloadWidget(scoutData: widget.scoutData),
                         const SizedBox(height: 15),
-                        MobilityWidget(),
+                        MobilityWidget(
+                          scoutData: widget.scoutData,
+                        ),
                       ],
                     ),
                     const SizedBox(width: 75),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      children: const [
-                        ChargeStation(),
+                      children: [
+                        ChargeStation(
+                          mode: "auton",
+                          scoutData: widget.scoutData,
+                        ),
                       ],
                     ),
                     const SizedBox(width: 15),

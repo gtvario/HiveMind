@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hivemind/models/scout_data_model.dart';
 
 class DroppedConeCollectWidget extends StatefulWidget {
-  const DroppedConeCollectWidget({super.key});
+  final String mode;
+  final ScoutData scoutData;
+  const DroppedConeCollectWidget(
+      {super.key, required this.mode, required this.scoutData});
 
   @override
   State<DroppedConeCollectWidget> createState() =>
@@ -10,6 +14,16 @@ class DroppedConeCollectWidget extends StatefulWidget {
 
 class _DroppedConeCollectWidgetState extends State<DroppedConeCollectWidget> {
   int _itemCount = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.mode == 'auton') {
+      _itemCount = widget.scoutData.getDroppedAutoCone;
+    } else {
+      _itemCount = widget.scoutData.getDroppedTeleopCone;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +41,11 @@ class _DroppedConeCollectWidgetState extends State<DroppedConeCollectWidget> {
             setState(() {
               _itemCount++;
             });
+            if (widget.mode == 'auton') {
+              widget.scoutData.setDroppedAutoCone = _itemCount;
+            } else {
+              widget.scoutData.setDroppedTeleopCone = _itemCount;
+            }
           },
           child: SizedBox(
             width: 60,
@@ -58,6 +77,11 @@ class _DroppedConeCollectWidgetState extends State<DroppedConeCollectWidget> {
                 _itemCount--;
               }
             });
+            if (widget.mode == 'auton') {
+              widget.scoutData.setDroppedAutoCone = _itemCount;
+            } else {
+              widget.scoutData.setDroppedTeleopCone = _itemCount;
+            }
           },
           child: SizedBox(
             width: 35,

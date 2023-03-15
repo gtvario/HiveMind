@@ -1,9 +1,13 @@
 // ignore_for_file: camel_case_types
 
 import 'package:flutter/material.dart';
+import 'package:hivemind/models/scout_data_model.dart';
 
 class HP_CollectWidget extends StatefulWidget {
-  const HP_CollectWidget({super.key});
+  final String mode;
+  final ScoutData scoutData;
+  const HP_CollectWidget(
+      {super.key, required this.mode, required this.scoutData});
 
   @override
   State<HP_CollectWidget> createState() => _HP_CollectWidgetState();
@@ -11,6 +15,18 @@ class HP_CollectWidget extends StatefulWidget {
 
 class _HP_CollectWidgetState extends State<HP_CollectWidget> {
   int _itemCount = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      if (widget.mode == "auton") {
+        _itemCount = widget.scoutData.getHPStationAuto;
+      } else {
+        _itemCount = widget.scoutData.getHPStationTeleop;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +45,11 @@ class _HP_CollectWidgetState extends State<HP_CollectWidget> {
             setState(() {
               _itemCount++;
             });
+            if (widget.mode == "auton") {
+              widget.scoutData.setHPStationAuto = _itemCount;
+            } else {
+              widget.scoutData.setHPStationTeleop = _itemCount;
+            }
           },
           child: SizedBox(
             width: 60,
@@ -60,6 +81,11 @@ class _HP_CollectWidgetState extends State<HP_CollectWidget> {
                 _itemCount--;
               }
             });
+            if (widget.mode == "auton") {
+              widget.scoutData.setHPStationAuto = _itemCount;
+            } else {
+              widget.scoutData.setHPStationTeleop = _itemCount;
+            }
           },
           child: SizedBox(
             width: 35,

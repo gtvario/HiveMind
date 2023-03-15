@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hivemind/models/scout_data_model.dart';
 
 class MobilityWidget extends StatefulWidget {
-  const MobilityWidget({super.key});
+  final ScoutData scoutData;
+
+  const MobilityWidget({super.key, required this.scoutData});
 
   @override
   State<MobilityWidget> createState() => _MobilityWidgetState();
@@ -9,7 +12,22 @@ class MobilityWidget extends StatefulWidget {
 
 class _MobilityWidgetState extends State<MobilityWidget> {
   String autoMovementText = 'No';
-  bool autoMovement = false;
+  int autoMovement = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    readScoutFile().then((value) {
+      setState(() {
+        autoMovement = widget.scoutData.getMobility;
+        if (autoMovement == 0) {
+          autoMovementText = 'No';
+        } else {
+          autoMovementText = 'Yes';
+        }
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,13 +55,14 @@ class _MobilityWidgetState extends State<MobilityWidget> {
                   child: InkWell(
                     onTapDown: (details) {
                       setState(() {
-                        if (!autoMovement) {
-                          autoMovement = true;
+                        if (autoMovement == 0) {
+                          autoMovement = 1;
                           autoMovementText = 'Yes';
                         } else {
-                          autoMovement = false;
+                          autoMovement = 0;
                           autoMovementText = 'No';
                         }
+                        widget.scoutData.setMobility = autoMovement;
                       });
                     },
                     child: Text(
@@ -63,5 +82,9 @@ class _MobilityWidgetState extends State<MobilityWidget> {
         ),
       ],
     );
+  }
+
+  Future<void> readScoutFile() async {
+    await widget.scoutData.readFile();
   }
 }

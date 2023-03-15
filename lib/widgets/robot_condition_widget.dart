@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:hivemind/models/scout_data_model.dart';
 
 class RobotCondition extends StatefulWidget {
-  const RobotCondition({super.key});
+  final ScoutData scoutData;
+  const RobotCondition({super.key, required this.scoutData});
 
   @override
   State<RobotCondition> createState() => _RobotConditionState();
 }
 
 class _RobotConditionState extends State<RobotCondition> {
-  String? robotConditionState;
+  String robotConditionState = "";
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      robotConditionState = widget.scoutData.getRobotCondition;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -39,6 +50,7 @@ class _RobotConditionState extends State<RobotCondition> {
                   setState(() {
                     robotConditionState = value.toString();
                   });
+                  widget.scoutData.setRobotCondition = robotConditionState;
                 },
               ),
             ),
@@ -71,6 +83,7 @@ class _RobotConditionState extends State<RobotCondition> {
                   setState(() {
                     robotConditionState = value.toString();
                   });
+                  widget.scoutData.setRobotCondition = robotConditionState;
                 },
               ),
             ),
@@ -102,6 +115,7 @@ class _RobotConditionState extends State<RobotCondition> {
                   setState(() {
                     robotConditionState = value.toString();
                   });
+                  widget.scoutData.setRobotCondition = robotConditionState;
                 },
               ),
             ),
@@ -133,6 +147,7 @@ class _RobotConditionState extends State<RobotCondition> {
                   setState(() {
                     robotConditionState = value.toString();
                   });
+                  widget.scoutData.setRobotCondition = robotConditionState;
                 },
               ),
             ),
@@ -164,6 +179,7 @@ class _RobotConditionState extends State<RobotCondition> {
                   setState(() {
                     robotConditionState = value.toString();
                   });
+                  widget.scoutData.setRobotCondition = robotConditionState;
                 },
               ),
             ),
@@ -195,6 +211,7 @@ class _RobotConditionState extends State<RobotCondition> {
                   setState(() {
                     robotConditionState = value.toString();
                   });
+                  widget.scoutData.setRobotCondition = robotConditionState;
                 },
               ),
             ),

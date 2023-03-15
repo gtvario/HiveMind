@@ -13,6 +13,16 @@ class EndgamePage extends StatefulWidget {
 }
 
 class _EndgamePageState extends State<EndgamePage> {
+  final commentController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      commentController.text = widget.scoutData.getComments;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -32,20 +42,27 @@ class _EndgamePageState extends State<EndgamePage> {
           children: [
             const SizedBox(width: 50),
             Column(
-              children: const [
-                ChargeStation(),
+              children: [
+                ChargeStation(
+                  mode: 'endgame',
+                  scoutData: widget.scoutData,
+                ),
               ],
             ),
             const SizedBox(width: 50),
             Column(
-              children: const [
-                RobotCondition(),
+              children: [
+                RobotCondition(
+                  scoutData: widget.scoutData,
+                ),
               ],
             ),
             const SizedBox(width: 85),
             Column(
-              children: const [
-                Defense(),
+              children: [
+                Defense(
+                  scoutData: widget.scoutData,
+                ),
               ],
             ),
           ],
@@ -55,22 +72,29 @@ class _EndgamePageState extends State<EndgamePage> {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: const [
-            SizedBox(width: 25),
+          children: [
+            const SizedBox(width: 25),
             SizedBox(
               width: 900,
               child: TextField(
-                style: TextStyle(
+                controller: commentController,
+                style: const TextStyle(
                   fontSize: 24,
                 ),
                 keyboardType: TextInputType.multiline,
                 minLines: 3,
                 maxLines: null,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Comments',
                 ),
               ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                widget.scoutData.setComments = commentController.text;
+              },
+              child: const Text("Submit Comment"),
             ),
           ],
         ),

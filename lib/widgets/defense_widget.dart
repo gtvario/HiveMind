@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:hivemind/models/scout_data_model.dart';
 
 class Defense extends StatefulWidget {
-  const Defense({super.key});
+  final ScoutData scoutData;
+  const Defense({super.key, required this.scoutData});
 
   @override
   State<Defense> createState() => _DefenseState();
@@ -11,7 +13,24 @@ class Defense extends StatefulWidget {
 class _DefenseState extends State<Defense> {
   String defensePlayed = 'No';
   bool defensePlayedBool = false;
+  double defenseRating = 3, driveRating = 3;
   Color _starColor = Colors.grey;
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      defensePlayedBool = widget.scoutData.getPlayedDefense;
+      defenseRating = widget.scoutData.getDefenseScore.toDouble();
+      driveRating = widget.scoutData.getDriveScore.toDouble();
+
+      if (defensePlayedBool) {
+        defensePlayed = 'Yes';
+      } else {
+        defensePlayed = 'No';
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +58,8 @@ class _DefenseState extends State<Defense> {
                     _starColor = Colors.grey;
                   }
                 });
+
+                widget.scoutData.setPlayedDefense = defensePlayedBool;
               },
               child: Text(
                 defensePlayed,
@@ -57,7 +78,7 @@ class _DefenseState extends State<Defense> {
           scale: 1.2,
           child: RatingBar.builder(
             ignoreGestures: !defensePlayedBool,
-            initialRating: 3,
+            initialRating: defenseRating,
             minRating: 0,
             direction: Axis.horizontal,
             allowHalfRating: true,
@@ -68,7 +89,11 @@ class _DefenseState extends State<Defense> {
               color: _starColor,
             ),
             onRatingUpdate: (rating) {
-              // Do nothing
+              setState(() {
+                defenseRating = rating;
+              });
+
+              widget.scoutData.setDefenseScore = defenseRating.toInt();
             },
           ),
         ),
@@ -84,7 +109,7 @@ class _DefenseState extends State<Defense> {
         Transform.scale(
           scale: 1.2,
           child: RatingBar.builder(
-            initialRating: 3,
+            initialRating: driveRating,
             minRating: 0,
             direction: Axis.horizontal,
             allowHalfRating: true,
@@ -95,7 +120,11 @@ class _DefenseState extends State<Defense> {
               color: Colors.amber,
             ),
             onRatingUpdate: (rating) {
-              // Do nothing
+              setState(() {
+                driveRating = rating;
+              });
+
+              widget.scoutData.setDriveScore = driveRating.toInt();
             },
           ),
         ),

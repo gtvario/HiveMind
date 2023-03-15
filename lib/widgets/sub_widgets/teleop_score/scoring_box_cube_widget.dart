@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:hivemind/models/globals.dart';
+import 'package:hivemind/models/scout_data_model.dart';
 
 class ScoringBoxCubeWidget extends StatefulWidget {
   final int boxIndex;
   final String gameMode;
+  final ScoutData scoutData;
 
   const ScoringBoxCubeWidget(
-      {super.key, required this.boxIndex, required this.gameMode});
+      {super.key,
+      required this.boxIndex,
+      required this.gameMode,
+      required this.scoutData});
 
   @override
   State<ScoringBoxCubeWidget> createState() => _ScoringBoxCubeWidgetState();
@@ -18,19 +22,25 @@ class _ScoringBoxCubeWidgetState extends State<ScoringBoxCubeWidget> {
   @override
   void initState() {
     super.initState();
-    String correspondingBoxVal;
+    int correspondingBoxVal;
 
-    correspondingBoxVal = scoringArray[widget.boxIndex];
-    if (correspondingBoxVal != "0") {
-      if (correspondingBoxVal.contains("PRPL")) {
-        _color = Colors.purple;
-      } else {
-        _color = Colors.yellow;
-      }
+    if (widget.gameMode == 'auton') {
+      correspondingBoxVal =
+          widget.scoutData.getAutoGrid.elementAt(widget.boxIndex);
     } else {
-      _color = Colors.grey;
+      correspondingBoxVal =
+          widget.scoutData.getTeleopGrid.elementAt(widget.boxIndex);
     }
-    setState(() {});
+
+    setState(() {
+      if (correspondingBoxVal == 1) {
+        _color = Colors.purple;
+      } else if (correspondingBoxVal == 2) {
+        _color = Colors.yellow;
+      } else {
+        _color = Colors.grey;
+      }
+    });
   }
 
   @override
@@ -42,10 +52,18 @@ class _ScoringBoxCubeWidgetState extends State<ScoringBoxCubeWidget> {
             // use setState
             if (_color == Colors.purple) {
               _color = Colors.grey;
-              scoringArray[widget.boxIndex] = "0";
+              if (widget.gameMode == "auton") {
+                widget.scoutData.setAutoGrid = [widget.boxIndex, 0];
+              } else {
+                widget.scoutData.setTeleopGrid = [widget.boxIndex, 0];
+              }
             } else {
               _color = Colors.purple;
-              scoringArray[widget.boxIndex] = "${widget.gameMode}_PRPL";
+              if (widget.gameMode == "auton") {
+                widget.scoutData.setAutoGrid = [widget.boxIndex, 1];
+              } else {
+                widget.scoutData.setTeleopGrid = [widget.boxIndex, 1];
+              }
             }
           });
         },

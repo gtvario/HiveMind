@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hivemind/models/scout_data_model.dart';
 
 class ConeCollectWidget extends StatefulWidget {
-  const ConeCollectWidget({super.key});
+  final String mode;
+  final ScoutData scoutData;
+  const ConeCollectWidget(
+      {super.key, required this.mode, required this.scoutData});
 
   @override
   State<ConeCollectWidget> createState() => _ConeCollectWidgetState();
@@ -9,6 +13,20 @@ class ConeCollectWidget extends StatefulWidget {
 
 class _ConeCollectWidgetState extends State<ConeCollectWidget> {
   int _itemCount = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    readScoutFile().then((value) {
+      setState(() {
+        if (widget.mode == "auton") {
+          _itemCount = widget.scoutData.getFieldConeAuto;
+        } else {
+          _itemCount = widget.scoutData.getFieldConeTeleop;
+        }
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +44,11 @@ class _ConeCollectWidgetState extends State<ConeCollectWidget> {
             setState(() {
               _itemCount++;
             });
+            if (widget.mode == "auton") {
+              widget.scoutData.setFieldConeAuto = _itemCount;
+            } else {
+              widget.scoutData.setFieldConeTeleop = _itemCount;
+            }
           },
           child: SizedBox(
             width: 60,
@@ -57,6 +80,11 @@ class _ConeCollectWidgetState extends State<ConeCollectWidget> {
                 _itemCount--;
               }
             });
+            if (widget.mode == "auton") {
+              widget.scoutData.setFieldConeAuto = _itemCount;
+            } else {
+              widget.scoutData.setFieldConeTeleop = _itemCount;
+            }
           },
           child: SizedBox(
             width: 35,
@@ -70,5 +98,9 @@ class _ConeCollectWidgetState extends State<ConeCollectWidget> {
         ),
       ],
     );
+  }
+
+  Future<void> readScoutFile() async {
+    await widget.scoutData.readFile();
   }
 }

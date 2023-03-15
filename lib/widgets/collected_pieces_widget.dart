@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:hivemind/models/scout_data_model.dart';
 import 'package:hivemind/widgets/sub_widgets/collect_drop/pickup_HP_widget.dart';
 import 'package:hivemind/widgets/sub_widgets/collect_drop/pickup_cone_widget.dart';
 import 'package:hivemind/widgets/sub_widgets/collect_drop/pickup_cube_widget.dart';
 
 class TeleopCollectWidget extends StatefulWidget {
-  const TeleopCollectWidget({super.key});
+  final String mode;
+  final ScoutData scoutData;
+  const TeleopCollectWidget(
+      {super.key, required this.mode, required this.scoutData});
 
   @override
   State<TeleopCollectWidget> createState() => _TeleopCollectWidgetState();
@@ -24,12 +28,30 @@ class _TeleopCollectWidgetState extends State<TeleopCollectWidget> {
         ),
         const SizedBox(height: 7.5),
         Row(
-          children: const [
-            SizedBox(width: 75, height: 135, child: HP_CollectWidget()),
-            SizedBox(width: 5),
-            SizedBox(width: 75, height: 135, child: ConeCollectWidget()),
-            SizedBox(width: 5),
-            SizedBox(width: 75, height: 135, child: CubeCollectWidget()),
+          children: [
+            SizedBox(
+                width: 75,
+                height: 135,
+                child: HP_CollectWidget(
+                  mode: widget.mode,
+                  scoutData: widget.scoutData,
+                )),
+            const SizedBox(width: 5),
+            SizedBox(
+                width: 75,
+                height: 135,
+                child: ConeCollectWidget(
+                  mode: widget.mode,
+                  scoutData: widget.scoutData,
+                )),
+            const SizedBox(width: 5),
+            SizedBox(
+                width: 75,
+                height: 135,
+                child: CubeCollectWidget(
+                  mode: widget.mode,
+                  scoutData: widget.scoutData,
+                )),
           ],
         ),
       ],
