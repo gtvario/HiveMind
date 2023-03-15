@@ -194,7 +194,7 @@ class ScoutData {
   }
 
   set setAutoGrid(List<int> autoGrid) {
-    autoGrid = autoGrid;
+    scoreGridAuto[autoGrid[0]] = autoGrid[1];
   }
 
   set setMobility(int mobility) {
@@ -222,7 +222,7 @@ class ScoutData {
   }
 
   set setTeleopGrid(List<int> teleopGrid) {
-    scoreGridTeleop = teleopGrid;
+    scoreGridTeleop[teleopGrid[0]] = teleopGrid[1];
   }
 
   set setHPStationTeleop(int hpTeleop) {
