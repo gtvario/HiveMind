@@ -75,7 +75,7 @@ class _EndgamePageState extends State<EndgamePage> {
           children: [
             const SizedBox(width: 25),
             SizedBox(
-              width: 900,
+              width: 500,
               child: TextField(
                 controller: commentController,
                 style: const TextStyle(
