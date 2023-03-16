@@ -1,9 +1,13 @@
 // ignore_for_file: camel_case_types
 
 import 'package:flutter/material.dart';
+import 'package:hivemind/models/scout_data_model.dart';
 
 class HP_CollectWidget extends StatefulWidget {
-  const HP_CollectWidget({super.key});
+  final String mode;
+  final ScoutData scoutData;
+  const HP_CollectWidget(
+      {super.key, required this.mode, required this.scoutData});
 
   @override
   State<HP_CollectWidget> createState() => _HP_CollectWidgetState();
@@ -11,6 +15,19 @@ class HP_CollectWidget extends StatefulWidget {
 
 class _HP_CollectWidgetState extends State<HP_CollectWidget> {
   int _itemCount = 0;
+  @override
+  void initState() {
+    super.initState();
+    readScoutFile().then((value) {
+      setState(() {
+        if (widget.mode == "auton") {
+          _itemCount = widget.scoutData.getHPStationAuto;
+        } else {
+          _itemCount = widget.scoutData.getHPStationTeleop;
+        }
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +38,7 @@ class _HP_CollectWidgetState extends State<HP_CollectWidget> {
           "HP\nStation",
           textAlign: TextAlign.center,
           style: TextStyle(
-            fontSize: 22,
+            fontSize: 16,
           ),
         ),
         GestureDetector(
@@ -29,10 +46,15 @@ class _HP_CollectWidgetState extends State<HP_CollectWidget> {
             setState(() {
               _itemCount++;
             });
+            if (widget.mode == "auton") {
+              widget.scoutData.setHPStationAuto = _itemCount;
+            } else {
+              widget.scoutData.setHPStationTeleop = _itemCount;
+            }
           },
           child: SizedBox(
-            width: 85,
-            height: 85,
+            width: 60,
+            height: 60,
             child: Container(
               margin: const EdgeInsets.all(2.0),
               padding: const EdgeInsets.all(3.0),
@@ -60,10 +82,15 @@ class _HP_CollectWidgetState extends State<HP_CollectWidget> {
                 _itemCount--;
               }
             });
+            if (widget.mode == "auton") {
+              widget.scoutData.setHPStationAuto = _itemCount;
+            } else {
+              widget.scoutData.setHPStationTeleop = _itemCount;
+            }
           },
           child: SizedBox(
-            width: 50,
-            height: 50,
+            width: 35,
+            height: 35,
             child: Container(
               margin: const EdgeInsets.all(2.0),
               padding: const EdgeInsets.all(3.0),
@@ -73,5 +100,9 @@ class _HP_CollectWidgetState extends State<HP_CollectWidget> {
         ),
       ],
     );
+  }
+
+  Future<void> readScoutFile() async {
+    await widget.scoutData.readFile();
   }
 }

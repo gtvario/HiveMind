@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hivemind/models/scout_data_model.dart';
 
 class CubeCollectWidget extends StatefulWidget {
-  const CubeCollectWidget({super.key});
+  final String mode;
+  final ScoutData scoutData;
+  const CubeCollectWidget(
+      {super.key, required this.mode, required this.scoutData});
 
   @override
   State<CubeCollectWidget> createState() => _CubeCollectWidgetState();
@@ -11,6 +15,18 @@ class _CubeCollectWidgetState extends State<CubeCollectWidget> {
   int _itemCount = 0;
 
   @override
+  void initState() {
+    super.initState();
+    setState(() {
+      if (widget.mode == "auton") {
+        _itemCount = widget.scoutData.getFieldCubeAuto;
+      } else {
+        _itemCount = widget.scoutData.getFieldCubeTeleop;
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
@@ -18,7 +34,7 @@ class _CubeCollectWidgetState extends State<CubeCollectWidget> {
           "Field\nCube",
           textAlign: TextAlign.center,
           style: TextStyle(
-            fontSize: 22,
+            fontSize: 16,
           ),
         ),
         GestureDetector(
@@ -26,10 +42,15 @@ class _CubeCollectWidgetState extends State<CubeCollectWidget> {
             setState(() {
               _itemCount++;
             });
+            if (widget.mode == "auton") {
+              widget.scoutData.setFieldCubeAuto = _itemCount;
+            } else {
+              widget.scoutData.setFieldCubeTeleop = _itemCount;
+            }
           },
           child: SizedBox(
-            width: 85,
-            height: 85,
+            width: 60,
+            height: 60,
             child: Container(
               margin: const EdgeInsets.all(2.0),
               padding: const EdgeInsets.all(3.0),
@@ -57,10 +78,15 @@ class _CubeCollectWidgetState extends State<CubeCollectWidget> {
                 _itemCount--;
               }
             });
+            if (widget.mode == "auton") {
+              widget.scoutData.setFieldCubeAuto = _itemCount;
+            } else {
+              widget.scoutData.setFieldCubeTeleop = _itemCount;
+            }
           },
           child: SizedBox(
-            width: 50,
-            height: 50,
+            width: 35,
+            height: 35,
             child: Container(
               margin: const EdgeInsets.all(2.0),
               padding: const EdgeInsets.all(3.0),

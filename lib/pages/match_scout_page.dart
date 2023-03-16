@@ -5,8 +5,10 @@ import 'package:flutter/services.dart';
 import 'package:hivemind/models/match_model.dart';
 import 'package:hivemind/pages/auton_page.dart';
 import 'package:hivemind/pages/endgame_page.dart';
+import 'package:hivemind/pages/finalize_data.dart';
 import 'package:hivemind/pages/teleop_page.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:hivemind/models/scout_data_model.dart';
 
 class MatchScoutPage extends StatefulWidget {
   final String? station, studentName;
@@ -25,6 +27,7 @@ class _MatchScoutPageState extends State<MatchScoutPage> {
   final PageController pageController = PageController();
   int? stationNum = 0, team = 0;
   String? alliance = "";
+  late ScoutData scoutData;
 
   @override
   void dispose() {
@@ -63,7 +66,11 @@ class _MatchScoutPageState extends State<MatchScoutPage> {
       alliance = allianceColor;
       stationNum = stationNumber;
       team = curTeam;
+      scoutData =
+          ScoutData(widget.match?.matchNumber, curTeam, widget.match?.eventKey);
     });
+
+    scoutData.readFile();
   }
 
   @override
@@ -80,15 +87,19 @@ class _MatchScoutPageState extends State<MatchScoutPage> {
       ),
       body: PageView(
         controller: pageController,
-        children: const [
+        onPageChanged: (value) => scoutData.writeFile(),
+        children: [
           Center(
-            child: AutonPage(),
+            child: AutonPage(scoutData: scoutData),
           ),
           Center(
-            child: TeleopPage(),
+            child: TeleopPage(scoutData: scoutData),
           ),
           Center(
-            child: EndgamePage(),
+            child: EndgamePage(scoutData: scoutData),
+          ),
+          Center(
+            child: SubmitDataPage(scoutData: scoutData),
           ),
         ],
       ),

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hivemind/models/scout_data_model.dart';
 import 'package:hivemind/widgets/teleop_scoring_widget.dart';
 import 'package:hivemind/widgets/collected_pieces_widget.dart';
 import 'package:hivemind/widgets/dropped_pieces_widget.dart';
 
 class TeleopPage extends StatefulWidget {
-  const TeleopPage({super.key});
+  final ScoutData scoutData;
+  const TeleopPage({super.key, required this.scoutData});
 
   @override
   State<TeleopPage> createState() => _TeleopPageState();
@@ -19,16 +21,19 @@ class _TeleopPageState extends State<TeleopPage> {
         const Text(
           "Teleop",
           style: TextStyle(
-              fontSize: 65,
+              fontSize: 55,
               fontFamily: 'Schyler',
               decoration: TextDecoration.underline),
         ),
-        const SizedBox(height: 15),
+        const SizedBox(height: 10),
         Row(
           mainAxisSize: MainAxisSize.max,
-          children: const [
+          children: [
             SizedBox(width: 30),
-            TeleopScoringWidget(mode: "teleop"),
+            TeleopScoringWidget(
+              mode: 'teleop',
+              scoutData: widget.scoutData,
+            ),
           ],
         ),
         Expanded(
@@ -42,8 +47,11 @@ class _TeleopPageState extends State<TeleopPage> {
                     border: Border.all(color: Colors.black, width: 2)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    TeleopCollectWidget(),
+                  children: [
+                    TeleopCollectWidget(
+                      mode: 'teleop',
+                      scoutData: widget.scoutData,
+                    ),
                   ],
                 ),
               ),
@@ -54,8 +62,11 @@ class _TeleopPageState extends State<TeleopPage> {
                     border: Border.all(color: Colors.black, width: 2)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    DroppedPieceWidget(),
+                  children: [
+                    DroppedPieceWidget(
+                      mode: 'teleop',
+                      scoutData: widget.scoutData,
+                    ),
                   ],
                 ),
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hivemind/models/scout_data_model.dart';
 import 'package:hivemind/widgets/teleop_scoring_widget.dart';
 import 'package:hivemind/widgets/collected_pieces_widget.dart';
 import 'package:hivemind/widgets/preload_widget.dart';
@@ -7,7 +8,8 @@ import 'package:hivemind/widgets/charge_station_widget.dart';
 import 'package:hivemind/widgets/dropped_pieces_widget.dart';
 
 class AutonPage extends StatefulWidget {
-  const AutonPage({super.key});
+  final ScoutData scoutData;
+  const AutonPage({super.key, required this.scoutData});
 
   @override
   State<AutonPage> createState() => _AutonPageState();
@@ -23,16 +25,19 @@ class _AutonPageState extends State<AutonPage> {
           "Autonomous",
           textAlign: TextAlign.left,
           style: TextStyle(
-              fontSize: 65,
+              fontSize: 55,
               fontFamily: 'Schyler',
               decoration: TextDecoration.underline),
         ),
-        const SizedBox(height: 15),
+        const SizedBox(height: 10),
         Row(
           mainAxisSize: MainAxisSize.max,
-          children: const [
-            SizedBox(width: 30),
-            TeleopScoringWidget(mode: "auto"),
+          children: [
+            const SizedBox(width: 30),
+            TeleopScoringWidget(
+              mode: "auton",
+              scoutData: widget.scoutData,
+            ),
           ],
         ),
         Expanded(
@@ -46,8 +51,11 @@ class _AutonPageState extends State<AutonPage> {
                     border: Border.all(color: Colors.black, width: 2)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    TeleopCollectWidget(),
+                  children: [
+                    TeleopCollectWidget(
+                      mode: "auton",
+                      scoutData: widget.scoutData,
+                    ),
                   ],
                 ),
               ),
@@ -58,8 +66,11 @@ class _AutonPageState extends State<AutonPage> {
                     border: Border.all(color: Colors.black, width: 2)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    DroppedPieceWidget(),
+                  children: [
+                    DroppedPieceWidget(
+                      mode: "auton",
+                      scoutData: widget.scoutData,
+                    ),
                   ],
                 ),
               ),
@@ -73,17 +84,22 @@ class _AutonPageState extends State<AutonPage> {
                     const SizedBox(width: 15),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      children: const [
-                        PreloadWidget(),
-                        SizedBox(height: 30),
-                        MobilityWidget(),
+                      children: [
+                        PreloadWidget(scoutData: widget.scoutData),
+                        const SizedBox(height: 15),
+                        MobilityWidget(
+                          scoutData: widget.scoutData,
+                        ),
                       ],
                     ),
                     const SizedBox(width: 75),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      children: const [
-                        ChargeStation(),
+                      children: [
+                        ChargeStation(
+                          mode: "auton",
+                          scoutData: widget.scoutData,
+                        ),
                       ],
                     ),
                     const SizedBox(width: 15),

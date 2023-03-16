@@ -1,14 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:hivemind/models/scout_data_model.dart';
 
 class ChargeStation extends StatefulWidget {
-  const ChargeStation({super.key});
+  final String mode;
+  final ScoutData scoutData;
+
+  const ChargeStation({super.key, required this.mode, required this.scoutData});
 
   @override
   State<ChargeStation> createState() => _ChargeStationState();
 }
 
 class _ChargeStationState extends State<ChargeStation> {
-  String? chargeStationState;
+  String chargeStationState = "";
+
+  @override
+  void initState() {
+    super.initState();
+    readScoutFile().then((value) {
+      setState(() {
+        if (widget.mode == "auton") {
+          chargeStationState = widget.scoutData.getAutoChargeStation;
+        } else {
+          chargeStationState = widget.scoutData.getEndgameChargeStation;
+        }
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -18,7 +37,7 @@ class _ChargeStationState extends State<ChargeStation> {
         const Text(
           'Charging\nStation',
           style: TextStyle(
-            fontSize: 45,
+            fontSize: 35,
             fontFamily: 'Schyler',
             decoration: TextDecoration.underline,
           ),
@@ -27,7 +46,7 @@ class _ChargeStationState extends State<ChargeStation> {
         Row(
           children: [
             Transform.scale(
-              scale: 2.0,
+              scale: 1.25,
               child: Radio(
                 activeColor: Colors.amber,
                 visualDensity: const VisualDensity(
@@ -40,6 +59,7 @@ class _ChargeStationState extends State<ChargeStation> {
                   setState(() {
                     chargeStationState = value.toString();
                   });
+                  setMatchData();
                 },
               ),
             ),
@@ -54,12 +74,12 @@ class _ChargeStationState extends State<ChargeStation> {
             )
           ],
         ),
-        const SizedBox(height: 25),
+        const SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Transform.scale(
-              scale: 2.0,
+              scale: 1.25,
               child: Radio(
                 activeColor: Colors.amber,
                 visualDensity: const VisualDensity(
@@ -72,6 +92,7 @@ class _ChargeStationState extends State<ChargeStation> {
                   setState(() {
                     chargeStationState = value.toString();
                   });
+                  setMatchData();
                 },
               ),
             ),
@@ -86,11 +107,11 @@ class _ChargeStationState extends State<ChargeStation> {
             ),
           ],
         ),
-        const SizedBox(height: 25),
+        const SizedBox(height: 10),
         Row(
           children: [
             Transform.scale(
-              scale: 2.0,
+              scale: 1.25,
               child: Radio(
                 activeColor: Colors.amber,
                 visualDensity: const VisualDensity(
@@ -103,6 +124,7 @@ class _ChargeStationState extends State<ChargeStation> {
                   setState(() {
                     chargeStationState = value.toString();
                   });
+                  setMatchData();
                 },
               ),
             ),
@@ -117,11 +139,11 @@ class _ChargeStationState extends State<ChargeStation> {
             ),
           ],
         ),
-        const SizedBox(height: 25),
+        const SizedBox(height: 10),
         Row(
           children: [
             Transform.scale(
-              scale: 2.0,
+              scale: 1.25,
               child: Radio(
                 activeColor: Colors.amber,
                 visualDensity: const VisualDensity(
@@ -134,6 +156,7 @@ class _ChargeStationState extends State<ChargeStation> {
                   setState(() {
                     chargeStationState = value.toString();
                   });
+                  setMatchData();
                 },
               ),
             ),
@@ -150,5 +173,18 @@ class _ChargeStationState extends State<ChargeStation> {
         ),
       ],
     );
+  }
+
+  setMatchData() {
+    if (widget.mode == "auton") {
+      widget.scoutData.setAutoChargeStation = chargeStationState;
+    } else {
+      widget.scoutData.setEndgameChargeStation = chargeStationState;
+    }
+    widget.scoutData.writeFile();
+  }
+
+  Future<void> readScoutFile() async {
+    await widget.scoutData.readFile();
   }
 }

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hivemind/models/scout_data_model.dart';
 
 class MobilityWidget extends StatefulWidget {
-  const MobilityWidget({super.key});
+  final ScoutData scoutData;
+
+  const MobilityWidget({super.key, required this.scoutData});
 
   @override
   State<MobilityWidget> createState() => _MobilityWidgetState();
@@ -9,7 +12,22 @@ class MobilityWidget extends StatefulWidget {
 
 class _MobilityWidgetState extends State<MobilityWidget> {
   String autoMovementText = 'No';
-  bool autoMovement = false;
+  int autoMovement = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    readScoutFile().then((value) {
+      setState(() {
+        autoMovement = widget.scoutData.getMobility;
+        if (autoMovement == 0) {
+          autoMovementText = 'No';
+        } else {
+          autoMovementText = 'Yes';
+        }
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +40,7 @@ class _MobilityWidgetState extends State<MobilityWidget> {
               "Autonomous\nMobility?",
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 45,
+                fontSize: 30,
                 fontFamily: 'Schyler',
                 decoration: TextDecoration.underline,
               ),
@@ -33,17 +51,18 @@ class _MobilityWidgetState extends State<MobilityWidget> {
               children: [
                 SizedBox(
                   width: 100,
-                  height: 50,
+                  height: 40,
                   child: InkWell(
                     onTapDown: (details) {
                       setState(() {
-                        if (!autoMovement) {
-                          autoMovement = true;
+                        if (autoMovement == 0) {
+                          autoMovement = 1;
                           autoMovementText = 'Yes';
                         } else {
-                          autoMovement = false;
+                          autoMovement = 0;
                           autoMovementText = 'No';
                         }
+                        widget.scoutData.setMobility = autoMovement;
                       });
                     },
                     child: Text(
@@ -51,7 +70,7 @@ class _MobilityWidgetState extends State<MobilityWidget> {
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                         color: Color.fromARGB(255, 179, 32, 32),
-                        fontSize: 50,
+                        fontSize: 35,
                         fontFamily: 'Schyler',
                       ),
                     ),
@@ -63,5 +82,9 @@ class _MobilityWidgetState extends State<MobilityWidget> {
         ),
       ],
     );
+  }
+
+  Future<void> readScoutFile() async {
+    await widget.scoutData.readFile();
   }
 }
