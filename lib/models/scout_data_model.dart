@@ -276,7 +276,7 @@ class ScoutData {
     var obj = {
       "auton": {
         "preload": autoPreload,
-        "mobility": autoMobility,
+        "mobility": mobility,
         "score_grid_auto": scoreGridAuto,
         "charge_station": autoChargeStation,
         "hp_station_auto": hpStationAuto,
