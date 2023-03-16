@@ -47,6 +47,7 @@ dependencies:
   qr_flutter: ^4.0.0
   sqflite_common_ffi: ^2.2.1+1
   flutter_rating_bar: ^4.0.1
+  flutter_launcher_icons: ^0.12.0
 
 dev_dependencies:
   flutter_test:
@@ -61,7 +62,10 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/playstore.png"
 # The following section is specific to Flutter packages.
 flutter:
 
