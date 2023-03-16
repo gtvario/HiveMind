@@ -15,16 +15,17 @@ class HP_CollectWidget extends StatefulWidget {
 
 class _HP_CollectWidgetState extends State<HP_CollectWidget> {
   int _itemCount = 0;
-
   @override
   void initState() {
     super.initState();
-    setState(() {
-      if (widget.mode == "auton") {
-        _itemCount = widget.scoutData.getHPStationAuto;
-      } else {
-        _itemCount = widget.scoutData.getHPStationTeleop;
-      }
+    readScoutFile().then((value) {
+      setState(() {
+        if (widget.mode == "auton") {
+          _itemCount = widget.scoutData.getHPStationAuto;
+        } else {
+          _itemCount = widget.scoutData.getHPStationTeleop;
+        }
+      });
     });
   }
 
@@ -99,5 +100,9 @@ class _HP_CollectWidgetState extends State<HP_CollectWidget> {
         ),
       ],
     );
+  }
+
+  Future<void> readScoutFile() async {
+    await widget.scoutData.readFile();
   }
 }

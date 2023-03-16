@@ -99,6 +99,7 @@ class ScoutData {
     eventKey = event;
 
     filePath = "${eventKey}_Match${matchNum}_$teamNum.json";
+    readFile();
   }
 
   String get getAutoPreload {
@@ -197,20 +198,20 @@ class ScoutData {
     scoreGridAuto[autoGrid[0]] = autoGrid[1];
   }
 
-  set setMobility(int mobility) {
-    mobility = mobility;
+  set setMobility(int autoMobility) {
+    mobility = autoMobility;
   }
 
   set setHPStationAuto(int hpAuto) {
     hpStationAuto = hpAuto;
   }
 
-  set setFieldConeAuto(int fieldConeAuto) {
-    fieldConeAuto = fieldConeAuto;
+  set setFieldConeAuto(int fieldAutoCone) {
+    fieldConeAuto = fieldAutoCone;
   }
 
-  set setFieldCubeAuto(int fieldCubeAuto) {
-    fieldCubeAuto = fieldCubeAuto;
+  set setFieldCubeAuto(int fieldAutoCube) {
+    fieldCubeAuto = fieldAutoCube;
   }
 
   set setDroppedAutoCone(int dropConeAuto) {

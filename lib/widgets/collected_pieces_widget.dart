@@ -16,6 +16,12 @@ class TeleopCollectWidget extends StatefulWidget {
 
 class _TeleopCollectWidgetState extends State<TeleopCollectWidget> {
   @override
+  void initState() {
+    super.initState();
+    readScoutFile();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
@@ -56,5 +62,9 @@ class _TeleopCollectWidgetState extends State<TeleopCollectWidget> {
         ),
       ],
     );
+  }
+
+  Future<void> readScoutFile() async {
+    await widget.scoutData.readFile();
   }
 }
