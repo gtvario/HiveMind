@@ -77,6 +77,9 @@ class _EndgamePageState extends State<EndgamePage> {
             SizedBox(
               width: 500,
               child: TextField(
+                onChanged: (value) {
+                  widget.scoutData.setComments = value;
+                },
                 controller: commentController,
                 style: const TextStyle(
                   fontSize: 24,
@@ -89,12 +92,6 @@ class _EndgamePageState extends State<EndgamePage> {
                   hintText: 'Comments',
                 ),
               ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                widget.scoutData.setComments = commentController.text;
-              },
-              child: const Text("Submit Comment"),
             ),
           ],
         ),
