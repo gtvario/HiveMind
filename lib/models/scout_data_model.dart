@@ -230,12 +230,12 @@ class ScoutData {
     hpStationTeleop = hpTeleop;
   }
 
-  set setFieldConeTeleop(int fieldConeTeleop) {
-    fieldConeTeleop = fieldConeTeleop;
+  set setFieldConeTeleop(int fieldTeleopCone) {
+    fieldConeTeleop = fieldTeleopCone;
   }
 
-  set setFieldCubeTeleop(int fieldCubeTeleop) {
-    fieldCubeTeleop = fieldCubeTeleop;
+  set setFieldCubeTeleop(int fieldTeleopCube) {
+    fieldCubeTeleop = fieldTeleopCube;
   }
 
   set setDroppedTeleopCone(int droppedConeTeleop) {
@@ -254,12 +254,12 @@ class ScoutData {
     robotCondition = condition;
   }
 
-  set setComments(String comments) {
-    comments = comments;
+  set setComments(String comment) {
+    comments = comment;
   }
 
-  set setDefenseScore(int defenseScore) {
-    defenseScore = defenseScore;
+  set setDefenseScore(int defenseScores) {
+    defenseScore = defenseScores;
   }
 
   set setDriveScore(int driveScore) {
