@@ -23,10 +23,10 @@ class _SettingsPageState extends State<SettingsPage> {
   late File settingsContent;
   late Map<String, dynamic> settings;
 
-  Future<String> get _localPath async {
-    final directory = await getApplicationDocumentsDirectory();
+  Future<String?> get _localPath async {
+    final directory = await getExternalStorageDirectory();
 
-    return directory.path;
+    return directory?.path;
   }
 
   Future<File> get _localFile async {

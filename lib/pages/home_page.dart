@@ -7,6 +7,7 @@ import 'package:hivemind/models/globals.dart';
 import 'package:hivemind/pages/events_page.dart';
 import 'package:hivemind/pages/settings_page.dart';
 import 'package:hivemind/models/tba.dart';
+import 'package:hivemind/widgets/queen_home_widget.dart';
 import 'package:path_provider/path_provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -110,7 +111,9 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: masterToggle ? queenHome(teamNumber, year) : workerHome(context),
+      body: masterToggle
+          ? QueenHome(teamNumber: teamNumber, year: year)
+          : workerHome(context),
     );
   }
 
@@ -157,73 +160,6 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-Widget queenHome(teamNumber, year) {
-  return Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: Row(
-      children: [
-        const Padding(
-          padding: EdgeInsets.all(16.0),
-        ),
-        SizedBox(
-          width: 200.0,
-          height: 200.0,
-          child: ElevatedButton(
-            onPressed: () {
-              var json = "";
-              fetchEvents('frc$teamNumber', year).then((value) async {
-                for (var event in value) {
-                  await fetchMatches(event.eventKey).then((value) {
-                    for (var match in value) {
-                      json = "$json${jsonEncode(match.toJson())},\n";
-                    }
-                    if (json.isNotEmpty) {
-                      json = json.substring(0, json.length - 2);
-                      writeMatchJson(event.eventKey, json);
-                    }
-                  });
-                }
-              });
-            },
-            child: const Text(
-              "Get Matches",
-              style: TextStyle(fontSize: 20),
-            ),
-          ),
-        ),
-        const Padding(
-          padding: EdgeInsets.all(16.0),
-        ),
-        SizedBox(
-          width: 200.0,
-          height: 200.0,
-          child: ElevatedButton(
-            onPressed: () {},
-            child: const Text(
-              "Sync With Workers",
-              style: TextStyle(fontSize: 20),
-            ),
-          ),
-        ),
-        const Padding(
-          padding: EdgeInsets.all(16.0),
-        ),
-        SizedBox(
-          width: 200.0,
-          height: 200.0,
-          child: ElevatedButton(
-            onPressed: () {},
-            child: const Text(
-              "Sync with Sheet",
-              style: TextStyle(fontSize: 20),
-            ),
-          ),
-        ),
-      ],
-    ),
-  );
-}
-
 Widget workerHome(BuildContext context) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
@@ -267,10 +203,10 @@ Widget workerHome(BuildContext context) {
   );
 }
 
-Future<String> get _localPath async {
-  final directory = await getApplicationDocumentsDirectory();
+Future<String?> get _localPath async {
+  final directory = await getExternalStorageDirectory();
 
-  return directory.path;
+  return directory?.path;
 }
 
 Future<File> get _localFile async {

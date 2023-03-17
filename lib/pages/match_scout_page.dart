@@ -106,10 +106,10 @@ class _MatchScoutPageState extends State<MatchScoutPage> {
     );
   }
 
-  Future<String> get _localPath async {
-    final directory = await getApplicationDocumentsDirectory();
+  Future<String?> get _localPath async {
+    final directory = await getExternalStorageDirectory();
 
-    return directory.path;
+    return directory?.path;
   }
 
   Future<File> getMatchFile(curTeam) async {

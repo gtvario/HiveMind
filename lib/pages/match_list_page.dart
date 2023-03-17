@@ -128,10 +128,10 @@ class _MatchListPageState extends State<MatchListPage> {
   }
 }
 
-Future<String> get _localPath async {
-  final directory = await getApplicationDocumentsDirectory();
+Future<String?> get _localPath async {
+  final directory = await getExternalStorageDirectory();
 
-  return directory.path;
+  return directory?.path;
 }
 
 Future<io.File> _localFile(eventKey) async {
