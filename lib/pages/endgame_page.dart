@@ -95,6 +95,7 @@ class _EndgamePageState extends State<EndgamePage> {
             ),
           ],
         ),
+        const SizedBox(height: 25),
       ],
     );
   }

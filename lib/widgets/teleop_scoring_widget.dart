@@ -101,6 +101,7 @@ class _TeleopScoringWidgetState extends State<TeleopScoringWidget> {
                     scoutData: widget.scoutData)),
           ],
         ),
+        const SizedBox(width: 5),
         Column(
           children: [
             SizedBox(
@@ -176,6 +177,7 @@ class _TeleopScoringWidgetState extends State<TeleopScoringWidget> {
                     scoutData: widget.scoutData)),
           ],
         ),
+        const SizedBox(width: 5),
         Column(
           children: [
             SizedBox(
