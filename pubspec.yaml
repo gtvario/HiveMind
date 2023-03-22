@@ -51,6 +51,8 @@ dependencies:
   nearby_connections: ^3.3.0
   permission_handler: ^10.2.0
   device_info_plus: ^8.1.0
+  image_picker: ^0.8.7
+  network_info_plus: ^3.0.2
 
 dev_dependencies:
   flutter_test:
