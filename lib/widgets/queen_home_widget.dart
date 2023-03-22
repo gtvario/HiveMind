@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:hivemind/models/tba.dart';
 import 'package:hivemind/pages/home_page.dart';
+import 'package:hivemind/pages/queen_worker_sync_page.dart';
 
 class QueenHome extends StatefulWidget {
   final dynamic teamNumber;
@@ -75,7 +76,13 @@ class _QueenHomeState extends State<QueenHome> {
             width: 200.0,
             height: 200.0,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const QueenWorkerSyncPage()),
+                );
+              },
               child: const Text(
                 "Sync With Workers",
                 style: TextStyle(fontSize: 20),
