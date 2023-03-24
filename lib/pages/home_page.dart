@@ -7,6 +7,7 @@ import 'package:hivemind/models/globals.dart';
 import 'package:hivemind/pages/events_page.dart';
 import 'package:hivemind/pages/settings_page.dart';
 import 'package:hivemind/models/tba.dart';
+import 'package:hivemind/pages/worker_to_queen_sync_page.dart';
 import 'package:hivemind/widgets/queen_home_widget.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -172,7 +173,14 @@ Widget workerHome(BuildContext context) {
           width: 200.0,
           height: 200.0,
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const WorkerToQueenSyncPage(),
+                ),
+              );
+            },
             child: const Text(
               "Sync with Queen",
               style: TextStyle(fontSize: 20),
