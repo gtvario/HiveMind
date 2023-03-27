@@ -27,6 +27,7 @@ class _TeleopPageState extends State<TeleopPage> {
         ),
         const SizedBox(height: 10),
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: [
             SizedBox(width: 30),
@@ -38,6 +39,7 @@ class _TeleopPageState extends State<TeleopPage> {
         ),
         Expanded(
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(width: 30),
               Container(

@@ -64,8 +64,10 @@ class _DefenseState extends State<Defense> {
               child: Text(
                 defensePlayed,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Color.fromARGB(255, 179, 32, 32),
+                style: TextStyle(
+                  color: defensePlayedBool
+                      ? Colors.green
+                      : Color.fromARGB(255, 81, 5, 5),
                   fontSize: 35,
                   fontFamily: 'Schyler',
                 ),

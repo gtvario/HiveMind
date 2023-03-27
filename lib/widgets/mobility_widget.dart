@@ -11,7 +11,6 @@ class MobilityWidget extends StatefulWidget {
 }
 
 class _MobilityWidgetState extends State<MobilityWidget> {
-  String autoMovementText = 'No';
   int autoMovement = 0;
 
   @override
@@ -20,11 +19,6 @@ class _MobilityWidgetState extends State<MobilityWidget> {
     readScoutFile().then((value) {
       setState(() {
         autoMovement = widget.scoutData.getMobility;
-        if (autoMovement == 0) {
-          autoMovementText = 'No';
-        } else {
-          autoMovementText = 'Yes';
-        }
       });
     });
   }
@@ -40,12 +34,12 @@ class _MobilityWidgetState extends State<MobilityWidget> {
               "Autonomous\nMobility?",
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 30,
+                fontSize: 35,
                 fontFamily: 'Schyler',
                 decoration: TextDecoration.underline,
               ),
             ),
-            const SizedBox(height: 5),
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -57,20 +51,20 @@ class _MobilityWidgetState extends State<MobilityWidget> {
                       setState(() {
                         if (autoMovement == 0) {
                           autoMovement = 1;
-                          autoMovementText = 'Yes';
                         } else {
                           autoMovement = 0;
-                          autoMovementText = 'No';
                         }
                         widget.scoutData.setMobility = autoMovement;
                       });
                     },
                     child: Text(
-                      autoMovementText,
+                      autoMovement == 1 ? 'Yes' : 'No',
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        color: Color.fromARGB(255, 179, 32, 32),
-                        fontSize: 35,
+                      style: TextStyle(
+                        color: autoMovement == 1
+                            ? Colors.green
+                            : Color.fromARGB(255, 81, 5, 5),
+                        fontSize: 50,
                         fontFamily: 'Schyler',
                       ),
                     ),

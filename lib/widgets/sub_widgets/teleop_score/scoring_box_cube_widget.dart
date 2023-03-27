@@ -17,7 +17,7 @@ class ScoringBoxCubeWidget extends StatefulWidget {
 }
 
 class _ScoringBoxCubeWidgetState extends State<ScoringBoxCubeWidget> {
-  Color _color = Colors.grey;
+  Color _color = Color.fromARGB(255, 165, 153, 167);
 
   @override
   void initState() {
@@ -38,7 +38,7 @@ class _ScoringBoxCubeWidgetState extends State<ScoringBoxCubeWidget> {
       } else if (correspondingBoxVal == 2) {
         _color = Colors.yellow;
       } else {
-        _color = Colors.grey;
+        _color = Color.fromARGB(255, 165, 153, 167);
       }
     });
   }
@@ -51,7 +51,7 @@ class _ScoringBoxCubeWidgetState extends State<ScoringBoxCubeWidget> {
           setState(() {
             // use setState
             if (_color == Colors.purple) {
-              _color = Colors.grey;
+              _color = Color.fromARGB(255, 165, 153, 167);
               if (widget.gameMode == "auton") {
                 widget.scoutData.setAutoGrid = [widget.boxIndex, 0];
               } else {

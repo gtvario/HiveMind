@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hivemind/models/match_model.dart';
 import 'package:hivemind/pages/auton_page.dart';
+import 'package:hivemind/pages/start_page.dart';
 import 'package:hivemind/pages/endgame_page.dart';
 import 'package:hivemind/pages/finalize_data.dart';
 import 'package:hivemind/pages/teleop_page.dart';
@@ -90,7 +91,10 @@ class _MatchScoutPageState extends State<MatchScoutPage> {
         onPageChanged: (value) => scoutData.writeFile(),
         children: [
           Center(
-            child: AutonPage(scoutData: scoutData),
+            child: StartMatchPage(scoutData: scoutData),
+          ),
+          Center(
+            child: AutonPage(scoutData: scoutData, notifyParent: refresh),
           ),
           Center(
             child: TeleopPage(scoutData: scoutData),
@@ -104,6 +108,10 @@ class _MatchScoutPageState extends State<MatchScoutPage> {
         ],
       ),
     );
+  }
+
+  refresh() {
+    setState(() {});
   }
 
   Future<String?> get _localPath async {
