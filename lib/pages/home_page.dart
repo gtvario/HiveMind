@@ -177,7 +177,9 @@ Widget workerHome(BuildContext context) {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const WorkerToQueenSyncPage(),
+                  builder: (context) => const WorkerToQueenSyncPage(
+                    deviceType: DeviceType.advertiser,
+                  ),
                 ),
               );
             },

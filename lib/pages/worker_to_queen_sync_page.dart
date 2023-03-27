@@ -1,71 +1,209 @@
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 
+import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
-import 'package:nearby_connections/nearby_connections.dart';
+import 'package:flutter_nearby_connections/flutter_nearby_connections.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:path_provider/path_provider.dart';
 
+enum DeviceType { advertiser, browser }
+
 class WorkerToQueenSyncPage extends StatefulWidget {
-  const WorkerToQueenSyncPage({super.key});
+  final DeviceType deviceType;
+  const WorkerToQueenSyncPage({super.key, required this.deviceType});
 
   @override
   State<WorkerToQueenSyncPage> createState() => _WorkerToQueenSyncPageState();
 }
 
 class _WorkerToQueenSyncPageState extends State<WorkerToQueenSyncPage> {
-  final String userName = "Red 3";
-  final Strategy strategy = Strategy.P2P_STAR;
-  Map<String, ConnectionInfo> endpointMap = {};
+  List<Device> devices = [];
+  List<Device> connectedDevices = [];
+  late NearbyService nearbyService;
+  late StreamSubscription subscription;
+  late StreamSubscription receivedDataSubscription;
 
-  String? tempFileUri; //reference to the file currently being transferred
-  Map<int, String> map = {};
+  bool isInit = false;
+
+  @override
+  void initState() {
+    super.initState();
+    initSync();
+  }
+
+  @override
+  void dispose() {
+    subscription.cancel();
+    receivedDataSubscription.cancel();
+    nearbyService.stopBrowsingForPeers();
+    nearbyService.stopAdvertisingPeer();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Hivemind | Sync With Queen'),
-      ),
-      body: Center(
-        child: ListView(
-          children: [
-            Wrap(
-              children: <Widget>[
-                ElevatedButton(
-                  child: const Text("Start Advertising"),
-                  onPressed: () async {
-                    try {
-                      bool a = await Nearby().startAdvertising(
-                        userName,
-                        strategy,
-                        onConnectionInitiated: onConnectionInit,
-                        onConnectionResult: (id, status) {
-                          showSnackbar(status);
-                        },
-                        onDisconnected: (id) {
-                          showSnackbar(
-                              "Disconnected: ${endpointMap[id]!.endpointName}, id $id");
-                          setState(() {
-                            endpointMap.remove(id);
-                          });
-                        },
-                      );
-                      showSnackbar("ADVERTISING: $a");
-                    } catch (exception) {
-                      showSnackbar(exception);
-                    }
-                  },
-                ),
-                ElevatedButton(
-                  child: const Text("Stop Advertising"),
-                  onPressed: () async {
-                    await Nearby().stopAdvertising();
-                  },
-                ),
-              ],
-            ),
-          ],
+        appBar: AppBar(
+          title: const Text('Hivemind | Sync With Queen'),
         ),
-      ),
-    );
+        body: ListView.builder(
+            itemCount: getItemCount(),
+            itemBuilder: (context, index) {
+              final device = widget.deviceType == DeviceType.advertiser
+                  ? connectedDevices[index]
+                  : devices[index];
+              return Container(
+                margin: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                            child: GestureDetector(
+                          onTap: () => _onTabItemListener(device),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(device.deviceName),
+                              Text(
+                                getStateName(device.state),
+                                style: TextStyle(
+                                    color: getStateColor(device.state)),
+                              ),
+                            ],
+                          ),
+                        )),
+                        // Request connect
+                        GestureDetector(
+                          onTap: () => _onButtonClicked(device),
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                            padding: const EdgeInsets.all(8.0),
+                            height: 35,
+                            width: 100,
+                            color: getButtonColor(device.state),
+                            child: Center(
+                              child: Text(
+                                getButtonStateName(device.state),
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 8.0,
+                    ),
+                    const Divider(
+                      height: 1,
+                      color: Colors.grey,
+                    )
+                  ],
+                ),
+              );
+            }));
+  }
+
+  String getStateName(SessionState state) {
+    switch (state) {
+      case SessionState.notConnected:
+        return "disconnected";
+      case SessionState.connecting:
+        return "waiting";
+      default:
+        return "connected";
+    }
+  }
+
+  String getButtonStateName(SessionState state) {
+    switch (state) {
+      case SessionState.notConnected:
+      case SessionState.connecting:
+        return "Connect";
+      default:
+        return "Disconnect";
+    }
+  }
+
+  Color getStateColor(SessionState state) {
+    switch (state) {
+      case SessionState.notConnected:
+        return Colors.black;
+      case SessionState.connecting:
+        return Colors.grey;
+      default:
+        return Colors.green;
+    }
+  }
+
+  Color getButtonColor(SessionState state) {
+    switch (state) {
+      case SessionState.notConnected:
+      case SessionState.connecting:
+        return Colors.green;
+      default:
+        return Colors.red;
+    }
+  }
+
+  _onTabItemListener(Device device) {
+    if (device.state == SessionState.connected) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            final myController = TextEditingController();
+            return AlertDialog(
+              title: const Text("Send message"),
+              content: TextField(controller: myController),
+              actions: [
+                TextButton(
+                  child: const Text("Cancel"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                TextButton(
+                  child: const Text("Send"),
+                  onPressed: () {
+                    nearbyService.sendMessage(
+                        device.deviceId, myController.text);
+                    myController.text = '';
+                  },
+                )
+              ],
+            );
+          });
+    }
+  }
+
+  int getItemCount() {
+    if (widget.deviceType == DeviceType.advertiser) {
+      return connectedDevices.length;
+    } else {
+      return devices.length;
+    }
+  }
+
+  _onButtonClicked(Device device) {
+    switch (device.state) {
+      case SessionState.notConnected:
+        nearbyService.invitePeer(
+          deviceID: device.deviceId,
+          deviceName: device.deviceName,
+        );
+        break;
+      case SessionState.connected:
+        nearbyService.disconnectPeer(deviceID: device.deviceId);
+        break;
+      case SessionState.connecting:
+        break;
+    }
   }
 
   void showSnackbar(dynamic a) {
@@ -74,105 +212,70 @@ class _WorkerToQueenSyncPageState extends State<WorkerToQueenSyncPage> {
     ));
   }
 
-  /// Called upon Connection request (on both devices)
-  /// Both need to accept connection to start sending/receiving
-  void onConnectionInit(String id, ConnectionInfo info) {
-    showModalBottomSheet(
-      context: context,
-      builder: (builder) {
-        return Center(
-          child: Column(
-            children: <Widget>[
-              Text("id: $id"),
-              Text("Token: ${info.authenticationToken}"),
-              Text("Name${info.endpointName}"),
-              Text("Incoming: ${info.isIncomingConnection}"),
-              ElevatedButton(
-                child: const Text("Accept Connection"),
-                onPressed: () {
-                  Navigator.pop(context);
-                  setState(() {
-                    endpointMap[id] = info;
-                  });
-                  Nearby().acceptConnection(
-                    id,
-                    onPayLoadRecieved: (endid, payload) async {
-                      if (payload.type == PayloadType.BYTES) {
-                        String str = String.fromCharCodes(payload.bytes!);
-                        showSnackbar("$endid: $str");
+  void initSync() async {
+    nearbyService = NearbyService();
+    String devInfo = '';
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    if (Platform.isAndroid) {
+      AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+      devInfo = androidInfo.model;
+    }
+    if (Platform.isIOS) {
+      IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+      devInfo = iosInfo.localizedModel;
+    }
+    await nearbyService.init(
+        serviceType: 'mpconn',
+        deviceName: devInfo,
+        strategy: Strategy.P2P_CLUSTER,
+        callback: (isRunning) async {
+          if (isRunning) {
+            if (widget.deviceType == DeviceType.browser) {
+              await nearbyService.stopBrowsingForPeers();
+              await Future.delayed(const Duration(microseconds: 200));
+              await nearbyService.startBrowsingForPeers();
+            } else {
+              await nearbyService.stopAdvertisingPeer();
+              await nearbyService.stopBrowsingForPeers();
+              await Future.delayed(const Duration(microseconds: 200));
+              await nearbyService.startAdvertisingPeer();
+              await nearbyService.startBrowsingForPeers();
+            }
+          }
+        });
+    subscription =
+        nearbyService.stateChangedSubscription(callback: (devicesList) {
+      for (var element in devicesList) {
+        print(
+            " deviceId: ${element.deviceId} | deviceName: ${element.deviceName} | state: ${element.state}");
 
-                        if (str.contains(':')) {
-                          // used for file payload as file payload is mapped as
-                          // payloadId:filename
-                          int payloadId = int.parse(str.split(':')[0]);
-                          String fileName = (str.split(':')[1]);
+        if (Platform.isAndroid) {
+          if (element.state == SessionState.connected) {
+            nearbyService.stopBrowsingForPeers();
+          } else {
+            nearbyService.startBrowsingForPeers();
+          }
+        }
+      }
 
-                          if (map.containsKey(payloadId)) {
-                            if (tempFileUri != null) {
-                              moveFile(tempFileUri!, fileName);
-                            } else {
-                              showSnackbar("File doesn't exist");
-                            }
-                          } else {
-                            //add to map if not already
-                            map[payloadId] = fileName;
-                          }
-                        }
-                      } else if (payload.type == PayloadType.FILE) {
-                        showSnackbar("$endid: File transfer started");
-                        tempFileUri = payload.uri;
-                      }
-                    },
-                    onPayloadTransferUpdate: (endid, payloadTransferUpdate) {
-                      if (payloadTransferUpdate.status ==
-                          PayloadStatus.IN_PROGRESS) {
-                        print(payloadTransferUpdate.bytesTransferred);
-                      } else if (payloadTransferUpdate.status ==
-                          PayloadStatus.FAILURE) {
-                        print("failed");
-                        showSnackbar("$endid: FAILED to transfer file");
-                      } else if (payloadTransferUpdate.status ==
-                          PayloadStatus.SUCCESS) {
-                        showSnackbar(
-                            "$endid success, total bytes = ${payloadTransferUpdate.totalBytes}");
+      setState(() {
+        devices.clear();
+        devices.addAll(devicesList);
+        connectedDevices.clear();
+        connectedDevices.addAll(devicesList
+            .where((d) => d.state == SessionState.connected)
+            .toList());
+      });
+    });
 
-                        if (map.containsKey(payloadTransferUpdate.id)) {
-                          //rename the file now
-                          String name = map[payloadTransferUpdate.id]!;
-                          moveFile(tempFileUri!, name);
-                        } else {
-                          //bytes not received till yet
-                          map[payloadTransferUpdate.id] = "";
-                        }
-                      }
-                    },
-                  );
-                },
-              ),
-              ElevatedButton(
-                child: const Text("Reject Connection"),
-                onPressed: () async {
-                  Navigator.pop(context);
-                  try {
-                    await Nearby().rejectConnection(id);
-                  } catch (e) {
-                    showSnackbar(e);
-                  }
-                },
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  Future<bool> moveFile(String uri, String fileName) async {
-    String parentDir = (await getExternalStorageDirectory())!.absolute.path;
-    final b =
-        await Nearby().copyFileAndDeleteOriginal(uri, '$parentDir/$fileName');
-
-    showSnackbar("Moved file:$b");
-    return b;
+    receivedDataSubscription =
+        nearbyService.dataReceivedSubscription(callback: (data) {
+      print("dataReceivedSubscription: ${jsonEncode(data)}");
+      showToast(jsonEncode(data),
+          context: context,
+          axis: Axis.horizontal,
+          alignment: Alignment.center,
+          position: StyledToastPosition.bottom);
+    });
   }
 }

@@ -1,25 +1,104 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'dart:math';
-
 import 'package:device_info/device_info.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nearby_connections/flutter_nearby_connections.dart';
-import 'package:flutter_styled_toast/flutter_styled_toast.dart';
-import 'package:path_provider/path_provider.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+Route<dynamic> generateRoute(RouteSettings settings) {
+  switch (settings.name) {
+    case '/':
+      return MaterialPageRoute(builder: (_) => Home());
+    case 'browser':
+      return MaterialPageRoute(
+          builder: (_) =>
+              const DevicesListScreen(deviceType: DeviceType.browser));
+    case 'advertiser':
+      return MaterialPageRoute(
+          builder: (_) =>
+              const DevicesListScreen(deviceType: DeviceType.advertiser));
+    default:
+      return MaterialPageRoute(
+          builder: (_) => Scaffold(
+                body: Center(
+                    child: Text('No route defined for ${settings.name}')),
+              ));
+  }
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      onGenerateRoute: generateRoute,
+      initialRoute: '/',
+    );
+  }
+}
+
+class Home extends StatelessWidget {
+  const Home({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        children: [
+          Expanded(
+            child: InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, 'browser');
+              },
+              child: Container(
+                color: Colors.red,
+                child: const Center(
+                    child: Text(
+                  'BROWSER',
+                  style: TextStyle(color: Colors.white, fontSize: 40),
+                )),
+              ),
+            ),
+          ),
+          Expanded(
+            child: InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, 'advertiser');
+              },
+              child: Container(
+                color: Colors.green,
+                child: const Center(
+                    child: Text(
+                  'ADVERTISER',
+                  style: TextStyle(color: Colors.white, fontSize: 40),
+                )),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
 enum DeviceType { advertiser, browser }
 
-class QueenWorkerSyncPage extends StatefulWidget {
+class DevicesListScreen extends StatefulWidget {
+  const DevicesListScreen({super.key, required this.deviceType});
+
   final DeviceType deviceType;
-  const QueenWorkerSyncPage({super.key, required this.deviceType});
 
   @override
-  State<QueenWorkerSyncPage> createState() => _QueenWorkerSyncPageState();
+  _DevicesListScreenState createState() => _DevicesListScreenState();
 }
 
-class _QueenWorkerSyncPageState extends State<QueenWorkerSyncPage> {
+class _DevicesListScreenState extends State<DevicesListScreen> {
   List<Device> devices = [];
   List<Device> connectedDevices = [];
   late NearbyService nearbyService;
@@ -31,7 +110,7 @@ class _QueenWorkerSyncPageState extends State<QueenWorkerSyncPage> {
   @override
   void initState() {
     super.initState();
-    initSync();
+    init();
   }
 
   @override
@@ -47,8 +126,9 @@ class _QueenWorkerSyncPageState extends State<QueenWorkerSyncPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Hivemind | Sync With Queen'),
+          title: Text(widget.deviceType.toString().substring(11).toUpperCase()),
         ),
+        backgroundColor: Colors.white,
         body: ListView.builder(
             itemCount: getItemCount(),
             itemBuilder: (context, index) {
@@ -206,13 +286,7 @@ class _QueenWorkerSyncPageState extends State<QueenWorkerSyncPage> {
     }
   }
 
-  void showSnackbar(dynamic a) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(a.toString()),
-    ));
-  }
-
-  void initSync() async {
+  void init() async {
     nearbyService = NearbyService();
     String devInfo = '';
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
@@ -245,7 +319,7 @@ class _QueenWorkerSyncPageState extends State<QueenWorkerSyncPage> {
         });
     subscription =
         nearbyService.stateChangedSubscription(callback: (devicesList) {
-      for (var element in devicesList) {
+      devicesList.forEach((element) {
         print(
             " deviceId: ${element.deviceId} | deviceName: ${element.deviceName} | state: ${element.state}");
 
@@ -256,7 +330,7 @@ class _QueenWorkerSyncPageState extends State<QueenWorkerSyncPage> {
             nearbyService.startBrowsingForPeers();
           }
         }
-      }
+      });
 
       setState(() {
         devices.clear();

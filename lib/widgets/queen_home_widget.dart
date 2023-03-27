@@ -80,7 +80,9 @@ class _QueenHomeState extends State<QueenHome> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const QueenWorkerSyncPage()),
+                      builder: (context) => const QueenWorkerSyncPage(
+                            deviceType: DeviceType.browser,
+                          )),
                 );
               },
               child: const Text(
