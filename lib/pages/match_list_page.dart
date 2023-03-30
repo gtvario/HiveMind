@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:hivemind/models/match_model.dart';
@@ -18,7 +19,8 @@ class MatchListPage extends StatefulWidget {
 
 class _MatchListPageState extends State<MatchListPage> {
   late io.File curJson, settingsContent;
-  List<FRCMatch> hiveMatchList = [];
+  List<FRCMatch> hiveMatchListTODO = [];
+  List<FRCMatch> hiveMatchListComplete = [];
   List<String> events = [];
 
   String? studentName = "";
@@ -29,7 +31,14 @@ class _MatchListPageState extends State<MatchListPage> {
     List<FRCMatch> sfMatchList = [];
     List<FRCMatch> finMatchList = [];
     List<FRCMatch> combinedList = [];
+    List<FRCMatch> completeList = [];
+    List<FRCMatch> todoList = [];
     FRCMatch curMatch;
+
+    hiveMatchListComplete.clear();
+    hiveMatchListTODO.clear();
+
+    var path = await _localPath;
 
     curJson = await _localFile(eventKey);
     final response = await curJson.readAsString();
@@ -67,10 +76,37 @@ class _MatchListPageState extends State<MatchListPage> {
       (a, b) => a.matchNumber!.compareTo(b.matchNumber as num),
     );
 
-    combinedList = qualMatchList + sfMatchList + finMatchList;
+    combinedList = qualMatchList;
+
+    for (var match in combinedList) {
+      String teamNum = "";
+      if (station == "Blue 1" || station == "Blue 2" || station == "Blue 3") {
+        teamNum = match.blueAlliance?.elementAt(int.parse(station![5]) - 1);
+        teamNum = teamNum.substring(3);
+      } else if (station == "Red 1" ||
+          station == "Red 3" ||
+          station == "Red 3") {
+        teamNum = match.blueAlliance?.elementAt(int.parse(station![4]) - 1);
+        teamNum = teamNum.substring(3);
+      }
+      var matchFile =
+          "$path/${match.eventKey}/${match.eventKey}_Match${match.matchNumber}_$teamNum.json";
+      print("$matchFile\n");
+
+      if (await File(matchFile).exists()) {
+        print("found");
+        completeList.add(match);
+      } else {
+        todoList.add(match);
+      }
+    }
+
+    print(completeList);
+    print("todo $todoList");
 
     setState(() {
-      hiveMatchList = combinedList;
+      hiveMatchListComplete = completeList;
+      hiveMatchListTODO = todoList;
     });
   }
 
@@ -86,43 +122,96 @@ class _MatchListPageState extends State<MatchListPage> {
     });
   }
 
+  Future<void> _refreshPage() async {
+    await getMatches(widget.eventKey);
+  }
+
   @override
   void initState() {
     super.initState();
-    getMatches(widget.eventKey);
-    readJson();
+    readJson().then(
+      (value) {
+        getMatches(widget.eventKey);
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Hivemind Events: ${widget.eventKey}'),
-      ),
-      body: ListView.builder(
-        itemCount: hiveMatchList.length,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => MatchScoutPage(
-                    station: station,
-                    studentName: studentName,
-                    match: hiveMatchList.elementAt(index),
-                  ),
-                ),
-              );
-            },
-            child: Card(
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Text(hiveMatchList.elementAt(index).toString()),
-              ),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Hivemind Events: ${widget.eventKey}'),
+          bottom: const TabBar(tabs: <Widget>[
+            Tab(
+              child: Text("TODO"),
             ),
-          );
-        },
+            Tab(
+              child: Text("Completed"),
+            ),
+          ]),
+        ),
+        body: TabBarView(children: [
+          RefreshIndicator(
+            onRefresh: _refreshPage,
+            child: ListView.builder(
+              itemCount: hiveMatchListTODO.length,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MatchScoutPage(
+                          station: station,
+                          studentName: studentName,
+                          match: hiveMatchListTODO.elementAt(index),
+                        ),
+                      ),
+                    );
+                  },
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child:
+                          Text(hiveMatchListTODO.elementAt(index).toString()),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+          RefreshIndicator(
+            onRefresh: _refreshPage,
+            child: ListView.builder(
+              itemCount: hiveMatchListComplete.length,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MatchScoutPage(
+                          station: station,
+                          studentName: studentName,
+                          match: hiveMatchListComplete.elementAt(index),
+                        ),
+                      ),
+                    );
+                  },
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Text(
+                          hiveMatchListComplete.elementAt(index).toString()),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ]),
       ),
     );
   }

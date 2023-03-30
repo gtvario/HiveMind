@@ -40,9 +40,8 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  bool updateHome() {
-    readJson();
-    return masterToggle;
+  Future<void> updateHome() async {
+    await readJson();
   }
 
   @override
@@ -111,9 +110,14 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: masterToggle
-          ? QueenHome(teamNumber: teamNumber, year: year)
-          : workerHome(context),
+      body: RefreshIndicator(
+        onRefresh: updateHome,
+        child: Container(
+          child: masterToggle
+              ? QueenHome(teamNumber: teamNumber, year: year)
+              : workerHome(context),
+        ),
+      ),
     );
   }
 
