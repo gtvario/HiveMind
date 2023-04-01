@@ -86,26 +86,29 @@ class _MatchScoutPageState extends State<MatchScoutPage> {
                 ? Colors.red
                 : Colors.black,
       ),
-      body: PageView(
-        controller: pageController,
-        onPageChanged: (value) => scoutData.writeFile(),
-        children: [
-          Center(
-            child: StartMatchPage(scoutData: scoutData),
-          ),
-          Center(
-            child: AutonPage(scoutData: scoutData, notifyParent: refresh),
-          ),
-          Center(
-            child: TeleopPage(scoutData: scoutData),
-          ),
-          Center(
-            child: EndgamePage(scoutData: scoutData),
-          ),
-          Center(
-            child: SubmitDataPage(scoutData: scoutData),
-          ),
-        ],
+      body: WillPopScope(
+        onWillPop: _onWillPop,
+        child: PageView(
+          controller: pageController,
+          onPageChanged: (value) => scoutData.writeFile(),
+          children: [
+            Center(
+              child: StartMatchPage(scoutData: scoutData),
+            ),
+            Center(
+              child: AutonPage(scoutData: scoutData, notifyParent: refresh),
+            ),
+            Center(
+              child: TeleopPage(scoutData: scoutData),
+            ),
+            Center(
+              child: EndgamePage(scoutData: scoutData),
+            ),
+            Center(
+              child: SubmitDataPage(scoutData: scoutData),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -133,5 +136,26 @@ class _MatchScoutPageState extends State<MatchScoutPage> {
       );
     }
     return matchFile;
+  }
+
+  Future<bool> _onWillPop() async {
+    return (await showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Are you sure?'),
+            content: const Text('Do you want to exit this match?'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: const Text('No'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: const Text('Yes'),
+              ),
+            ],
+          ),
+        )) ??
+        false;
   }
 }
