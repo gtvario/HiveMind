@@ -160,14 +160,31 @@ class _MatchListPageState extends State<MatchListPage> {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => MatchScoutPage(
-                          station: station,
-                          studentName: studentName,
-                          match: hiveMatchListTODO.elementAt(index),
-                        ),
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: const Text('Are you sure?'),
+                        content: Text(
+                            'Do you want to enter match ${hiveMatchListTODO.elementAt(index).matchNumber}?'),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () => Navigator.of(context).pop(true),
+                            child: const Text('No'),
+                          ),
+                          TextButton(
+                            onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => MatchScoutPage(
+                                  station: station,
+                                  studentName: studentName,
+                                  match: hiveMatchListTODO.elementAt(index),
+                                ),
+                              ),
+                            ),
+                            child: const Text('Yes'),
+                          ),
+                        ],
                       ),
                     );
                   },
