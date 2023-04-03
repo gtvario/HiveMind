@@ -27,7 +27,7 @@ class _AutonPageState extends State<AutonPage> {
   void initState() {
     super.initState();
 
-    timer = Timer.periodic(const Duration(seconds: 13), (Timer timer) {
+    timer = Timer.periodic(const Duration(seconds: 15), (Timer timer) {
       changeBackground = true;
       setState(() {});
     });
