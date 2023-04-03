@@ -172,16 +172,21 @@ class _MatchListPageState extends State<MatchListPage> {
                             child: const Text('No'),
                           ),
                           TextButton(
-                            onPressed: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => MatchScoutPage(
-                                  station: station,
-                                  studentName: studentName,
-                                  match: hiveMatchListTODO.elementAt(index),
+                            onPressed: () {
+                              Navigator.of(context).pop(true);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MatchScoutPage(
+                                    station: station,
+                                    studentName: studentName,
+                                    match: hiveMatchListTODO.elementAt(index),
+                                  ),
                                 ),
-                              ),
-                            ),
+                              ).then(
+                                (value) => _refreshPage(),
+                              );
+                            },
                             child: const Text('Yes'),
                           ),
                         ],
