@@ -27,8 +27,27 @@ class _SubmitDataPageState extends State<SubmitDataPage> {
             height: 50,
             child: ElevatedButton(
               onPressed: () {
-                widget.scoutData.writeFile();
-                Navigator.pop(context);
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text('Are you sure?'),
+                    content: const Text('Do you want to Submit?'),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () => Navigator.of(context).pop(true),
+                        child: const Text('No'),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop(true);
+                          widget.scoutData.writeFile();
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Yes'),
+                      ),
+                    ],
+                  ),
+                );
               },
               child: const Text(
                 "Submit",
