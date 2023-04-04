@@ -93,7 +93,8 @@ class _MatchScoutPageState extends State<MatchScoutPage> {
           onPageChanged: (value) => scoutData.writeFile(),
           children: [
             Center(
-              child: StartMatchPage(scoutData: scoutData),
+              child:
+                  StartMatchPage(scoutData: scoutData, allianceColor: alliance),
             ),
             Center(
               child: AutonPage(scoutData: scoutData, notifyParent: refresh),

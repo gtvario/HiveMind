@@ -84,9 +84,9 @@ class _MatchListPageState extends State<MatchListPage> {
         teamNum = match.blueAlliance?.elementAt(int.parse(station![5]) - 1);
         teamNum = teamNum.substring(3);
       } else if (station == "Red 1" ||
-          station == "Red 3" ||
+          station == "Red 2" ||
           station == "Red 3") {
-        teamNum = match.blueAlliance?.elementAt(int.parse(station![4]) - 1);
+        teamNum = match.redAlliance?.elementAt(int.parse(station![4]) - 1);
         teamNum = teamNum.substring(3);
       }
       var matchFile =
@@ -172,16 +172,21 @@ class _MatchListPageState extends State<MatchListPage> {
                             child: const Text('No'),
                           ),
                           TextButton(
-                            onPressed: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => MatchScoutPage(
-                                  station: station,
-                                  studentName: studentName,
-                                  match: hiveMatchListTODO.elementAt(index),
+                            onPressed: () {
+                              Navigator.of(context).pop(true);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MatchScoutPage(
+                                    station: station,
+                                    studentName: studentName,
+                                    match: hiveMatchListTODO.elementAt(index),
+                                  ),
                                 ),
-                              ),
-                            ),
+                              ).then(
+                                (value) => _refreshPage(),
+                              );
+                            },
                             child: const Text('Yes'),
                           ),
                         ],

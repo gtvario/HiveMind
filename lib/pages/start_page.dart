@@ -1,12 +1,12 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:hivemind/models/scout_data_model.dart';
 import 'package:hivemind/widgets/preload_widget.dart';
 
 class StartMatchPage extends StatefulWidget {
   final ScoutData scoutData;
-  const StartMatchPage({super.key, required this.scoutData});
+  final String? allianceColor;
+  const StartMatchPage(
+      {super.key, required this.scoutData, required this.allianceColor});
 
   @override
   State<StartMatchPage> createState() => _StartMatchPageState();
@@ -27,10 +27,13 @@ class _StartMatchPageState extends State<StartMatchPage> {
   void createHighlightOverlay({
     required AlignmentDirectional alignment,
     required Color borderColor,
-    required double x_pos,
-    required double y_pos,
+    required double xPos,
+    required double yPos,
   }) {
     // Remove the existing OverlayEntry.
+    double adjustedXPos = ((xPos - 10) - 470) / 470;
+    double adjustedYPos = ((yPos + 35) - 250) / 250;
+    widget.scoutData.setStartingPos = [adjustedXPos, adjustedYPos];
     removeHighlightOverlay();
 
     assert(overlayEntry == null);
@@ -42,8 +45,7 @@ class _StartMatchPageState extends State<StartMatchPage> {
         // relative to the NavigationBar destination.
         return SafeArea(
           child: Align(
-            alignment: Alignment(
-                ((x_pos - 10) - 470) / 470, (((y_pos + 35) - 250) / 250)),
+            alignment: Alignment(adjustedXPos, adjustedYPos),
             heightFactor: 1.0,
             child: Transform.scale(
                 scale: 1.5, child: Icon(Icons.circle, color: Colors.red)),
@@ -71,6 +73,14 @@ class _StartMatchPageState extends State<StartMatchPage> {
 
   @override
   Widget build(BuildContext context) {
+    String fieldImagePath = "";
+
+    if (widget.allianceColor == 'Red') {
+      fieldImagePath = 'assets/images/RedField.png';
+    } else {
+      fieldImagePath = 'assets/images/BlueField.png';
+    }
+
     return Row(
       children: [
         SizedBox(width: 35),
@@ -90,12 +100,12 @@ class _StartMatchPageState extends State<StartMatchPage> {
                   createHighlightOverlay(
                     alignment: AlignmentDirectional.bottomStart,
                     borderColor: Colors.red,
-                    x_pos: _tapPosition.dx,
-                    y_pos: _tapPosition.dy,
+                    xPos: _tapPosition.dx,
+                    yPos: _tapPosition.dy,
                   );
                 },
                 child: Image.asset(
-                  'assets/images/BlueField.png',
+                  fieldImagePath,
                 ),
               ),
             ),
