@@ -6,6 +6,7 @@ import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nearby_connections/flutter_nearby_connections.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:path_provider/path_provider.dart';
 
 enum DeviceType { advertiser, browser }
 
@@ -155,10 +156,9 @@ class _WorkerToQueenSyncPageState extends State<WorkerToQueenSyncPage> {
       showDialog(
           context: context,
           builder: (BuildContext context) {
-            final myController = TextEditingController();
             return AlertDialog(
               title: const Text("Send message"),
-              content: TextField(controller: myController),
+              content: const Text("Sync Match Data With Queen"),
               actions: [
                 TextButton(
                   child: const Text("Cancel"),
@@ -169,9 +169,7 @@ class _WorkerToQueenSyncPageState extends State<WorkerToQueenSyncPage> {
                 TextButton(
                   child: const Text("Send"),
                   onPressed: () {
-                    nearbyService.sendMessage(
-                        device.deviceId, myController.text);
-                    myController.text = '';
+                    sendMatches(device);
                   },
                 )
               ],
@@ -278,5 +276,38 @@ class _WorkerToQueenSyncPageState extends State<WorkerToQueenSyncPage> {
           textColor: Colors.white,
           fontSize: 16.0);
     });
+  }
+
+  void sendMatches(Device device) {
+    String message = "";
+    //get match folder
+    var path = _localPath;
+    List<FileSystemEntity> folders = Directory('$path').listSync();
+    print(folders);
+
+    //loop through folder
+    //send file
+    //move file to processed
+    nearbyService.sendMessage(device.deviceId, message);
+  }
+
+  String _compress(String json) {
+    final enCodedJson = utf8.encode(json);
+    final gZipJson = gzip.encode(enCodedJson);
+    final base64Json = base64.encode(gZipJson);
+    return base64Json;
+  }
+
+  String _decompress(String base64Json) {
+    final decodeBase64Json = base64.decode(base64Json);
+    final decodegZipJson = gzip.decode(decodeBase64Json);
+    final originalJson = utf8.decode(decodegZipJson);
+    return originalJson;
+  }
+
+  Future<String?> get _localPath async {
+    final directory = await getExternalStorageDirectory();
+
+    return directory?.path;
   }
 }

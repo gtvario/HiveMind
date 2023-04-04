@@ -118,20 +118,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  String _compress(String json) {
-    final enCodedJson = utf8.encode(json);
-    final gZipJson = gzip.encode(enCodedJson);
-    final base64Json = base64.encode(gZipJson);
-    return base64Json;
-  }
-
-  String _decompress(String base64Json) {
-    final decodeBase64Json = base64.decode(base64Json);
-    final decodegZipJson = gzip.decode(decodeBase64Json);
-    final originalJson = utf8.decode(decodegZipJson);
-    return originalJson;
-  }
-
   final _passwordInputController = TextEditingController();
 
   Future<String?> _showPasswordInputDialog(BuildContext context) async {
