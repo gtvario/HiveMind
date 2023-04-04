@@ -33,7 +33,18 @@ class _StartMatchPageState extends State<StartMatchPage> {
     // Remove the existing OverlayEntry.
     double adjustedXPos = ((xPos - 10) - 470) / 470;
     double adjustedYPos = ((yPos + 35) - 250) / 250;
-    widget.scoutData.setStartingPos = [adjustedXPos, adjustedYPos];
+    double fieldAdjustedX = 0;
+    double fieldAdjustedY = 0;
+
+    if (widget.allianceColor == 'Red') {
+      fieldAdjustedX = (xPos * -1) + 628;
+      fieldAdjustedY = (yPos) - 172;
+    } else {
+      fieldAdjustedX = xPos - 40;
+      fieldAdjustedY = (yPos) - 172;
+    }
+
+    widget.scoutData.setStartingPos = [fieldAdjustedX, fieldAdjustedY];
     removeHighlightOverlay();
 
     assert(overlayEntry == null);
