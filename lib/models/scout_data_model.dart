@@ -310,7 +310,10 @@ class ScoutData {
   Future<void> readFile() async {
     File matchFile = await _localFile;
 
-    final response = await matchFile.readAsString();
+    var response = await matchFile.readAsString();
+    while (response == "") {
+      response = await matchFile.readAsString();
+    }
     final data = await jsonDecode(response);
 
     autoPreload = data["auton"]["preload"];
