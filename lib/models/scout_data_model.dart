@@ -326,8 +326,6 @@ class ScoutData {
       response = await matchFile.readAsString();
     }
     final data = await jsonDecode(response);
-
-    autoPreload = data["auton"]["preload"];
   }
 
   Future<String?> get _localPath async {

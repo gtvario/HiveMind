@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:hivemind/models/scout_data_model.dart';
 import 'package:hivemind/widgets/teleop_scoring_widget.dart';
 import 'package:hivemind/widgets/collected_pieces_widget.dart';
-import 'package:hivemind/widgets/preload_widget.dart';
 import 'package:hivemind/widgets/mobility_widget.dart';
 import 'package:hivemind/widgets/charge_station_widget_auton.dart';
 import 'package:hivemind/widgets/dropped_pieces_widget.dart';
