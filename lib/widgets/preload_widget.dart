@@ -20,8 +20,9 @@ class _PreloadWidgetState extends State<PreloadWidget> {
     super.initState();
     readScoutFile().then(
       (value) {
-        String preload = widget.scoutData.getAutoPreload;
         setState(() {
+          String preload = widget.scoutData.getAutoPreload;
+
           if (preload == 'cube') {
             preloadCube = true;
             preloadCone = false;
@@ -71,7 +72,6 @@ class _PreloadWidgetState extends State<PreloadWidget> {
                   if (preloadCube) {
                     cubeImgPath = 'assets/images/cube_new.png';
                     preloadCube = false;
-                    widget.scoutData.setAutoPreload = 'none';
                   }
                 } else {
                   coneImgPath = 'assets/images/cone_new.png';
@@ -97,7 +97,6 @@ class _PreloadWidgetState extends State<PreloadWidget> {
                   if (preloadCone) {
                     coneImgPath = 'assets/images/cone_new.png';
                     preloadCone = false;
-                    widget.scoutData.setAutoPreload = 'none';
                   }
                 } else {
                   cubeImgPath = 'assets/images/cube_new.png';
