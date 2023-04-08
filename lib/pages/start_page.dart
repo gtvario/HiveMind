@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hivemind/models/scout_data_model.dart';
 import 'package:hivemind/widgets/preload_widget.dart';
+import 'package:hivemind/models/globals.dart';
 
 class StartMatchPage extends StatefulWidget {
   final ScoutData scoutData;
@@ -16,6 +17,7 @@ class _StartMatchPageState extends State<StartMatchPage> {
   OverlayEntry? overlayEntry;
   int currentPageIndex = 0;
   var _tapPosition;
+  String dropdownValue = "Select Student Name";
 
   void _handleTapDown(TapDownDetails details) {
     final RenderBox referenceBox = context.findRenderObject() as RenderBox;
@@ -98,6 +100,23 @@ class _StartMatchPageState extends State<StartMatchPage> {
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            DropdownButton(
+              value: dropdownValue,
+              icon: const Icon(Icons.keyboard_arrow_down),
+              items: studentList.map(
+                (item) {
+                  return DropdownMenuItem(
+                    value: item,
+                    child: Text(item),
+                  );
+                },
+              ).toList(),
+              onChanged: (value) {
+                setState(() {
+                  dropdownValue = value!;
+                });
+              },
+            ),
             Container(
               decoration: BoxDecoration(border: Border.all(width: 5.0)),
               width: 600,
