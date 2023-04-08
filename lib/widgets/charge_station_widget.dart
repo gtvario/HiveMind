@@ -53,7 +53,7 @@ class _ChargeStationState extends State<ChargeStation> {
                     horizontal: VisualDensity.minimumDensity,
                     vertical: VisualDensity.minimumDensity),
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                value: 'Attempted',
+                value: 'Engaged',
                 groupValue: chargeStationState,
                 onChanged: (value) {
                   setState(() {
@@ -65,7 +65,7 @@ class _ChargeStationState extends State<ChargeStation> {
             ),
             const SizedBox(width: 10),
             const Text(
-              'Attempted',
+              'Engaged',
               style: TextStyle(
                 fontSize: 20,
                 fontFamily: 'Tahoma',
@@ -86,7 +86,7 @@ class _ChargeStationState extends State<ChargeStation> {
                     horizontal: VisualDensity.minimumDensity,
                     vertical: VisualDensity.minimumDensity),
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                value: 'Engaged',
+                value: 'Attempted',
                 groupValue: chargeStationState,
                 onChanged: (value) {
                   setState(() {
@@ -98,7 +98,7 @@ class _ChargeStationState extends State<ChargeStation> {
             ),
             const SizedBox(width: 10),
             const Text(
-              'Engaged',
+              'Attempted',
               style: TextStyle(
                 fontSize: 20,
                 fontFamily: 'Tahoma',
