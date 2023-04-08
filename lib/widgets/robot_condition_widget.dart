@@ -35,38 +35,6 @@ class _RobotConditionState extends State<RobotCondition> {
         ),
         const SizedBox(height: 10),
         Row(
-          children: [
-            Transform.scale(
-              scale: 1.25,
-              child: Radio(
-                activeColor: Colors.amber,
-                visualDensity: const VisualDensity(
-                    horizontal: VisualDensity.minimumDensity,
-                    vertical: VisualDensity.minimumDensity),
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                value: 'No',
-                groupValue: robotConditionState,
-                onChanged: (value) {
-                  setState(() {
-                    robotConditionState = value.toString();
-                  });
-                  widget.scoutData.setRobotCondition = robotConditionState;
-                },
-              ),
-            ),
-            const SizedBox(width: 10),
-            const Text(
-              'No',
-              style: TextStyle(
-                fontSize: 20,
-                fontFamily: 'Tahoma',
-                fontWeight: FontWeight.bold,
-              ),
-            )
-          ],
-        ),
-        const SizedBox(height: 10),
-        Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Transform.scale(
