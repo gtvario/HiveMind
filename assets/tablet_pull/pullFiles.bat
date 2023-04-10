@@ -1,0 +1,2 @@
+python pullFiles.py
+pause
