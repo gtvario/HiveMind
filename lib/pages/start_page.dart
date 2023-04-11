@@ -46,7 +46,14 @@ class _StartMatchPageState extends State<StartMatchPage> {
       fieldAdjustedY = (yPos) - 172;
     }
 
-    widget.scoutData.setStartingPos = [fieldAdjustedX, fieldAdjustedY];
+    if (fieldAdjustedX < 130) {
+      widget.scoutData.setStartingPos = 'Bump';
+    } else if (fieldAdjustedX < 260) {
+      widget.scoutData.setStartingPos = 'Middle';
+    } else {
+      widget.scoutData.setStartingPos = 'Clear';
+    }
+
     removeHighlightOverlay();
 
     assert(overlayEntry == null);
@@ -61,7 +68,7 @@ class _StartMatchPageState extends State<StartMatchPage> {
             alignment: Alignment(adjustedXPos, adjustedYPos),
             heightFactor: 1.0,
             child: Transform.scale(
-                scale: 1.5, child: Icon(Icons.circle, color: Colors.red)),
+                scale: 1.5, child: const Icon(Icons.circle, color: Colors.red)),
           ),
         );
       },
@@ -96,7 +103,7 @@ class _StartMatchPageState extends State<StartMatchPage> {
 
     return Row(
       children: [
-        SizedBox(width: 35),
+        const SizedBox(width: 35),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

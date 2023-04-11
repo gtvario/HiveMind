@@ -7,8 +7,9 @@ import 'package:path_provider/path_provider.dart';
 
 class ScoutData {
   // Auton
-  String autoPreload = "none", autoChargeStation = "Did Not Attempt";
-  List<double> startingPos = [0.0, 0.0];
+  String autoPreload = "none",
+      autoChargeStation = "Did Not Attempt",
+      startingPos = "NA";
   List<int> scoreGridAuto = [
     0,
     0,
@@ -111,7 +112,7 @@ class ScoutData {
     return autoChargeStation;
   }
 
-  List<double> get getStartingPos {
+  String get getStartingPos {
     return startingPos;
   }
 
@@ -203,9 +204,8 @@ class ScoutData {
     scoreGridAuto[autoGrid[0]] = autoGrid[1];
   }
 
-  set setStartingPos(List<double> startPos) {
-    startingPos[0] = startPos[0];
-    startingPos[1] = startPos[1];
+  set setStartingPos(String startPos) {
+    startingPos = startPos;
   }
 
   set setMobility(int autoMobility) {
