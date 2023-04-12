@@ -19,6 +19,7 @@ class ScoringBoxCommunityWidget extends StatefulWidget {
 
 class _ScoringBoxCommunityWidgetState extends State<ScoringBoxCommunityWidget> {
   Color _color = Colors.grey;
+  String _text = '';
 
   @override
   void initState() {
@@ -36,10 +37,16 @@ class _ScoringBoxCommunityWidgetState extends State<ScoringBoxCommunityWidget> {
     setState(() {
       if (correspondingBoxVal == 1) {
         _color = Colors.purple;
+        _text = '';
       } else if (correspondingBoxVal == 2) {
         _color = Colors.yellow;
+        _text = '';
+      } else if (correspondingBoxVal == 3) {
+        _color = Colors.lightBlueAccent;
+        _text = 'x2';
       } else {
         _color = Colors.grey;
+        _text = '';
       }
     });
   }
@@ -50,25 +57,32 @@ class _ScoringBoxCommunityWidgetState extends State<ScoringBoxCommunityWidget> {
       body: GestureDetector(
         onTap: () {
           setState(() {
-            if (_color == Colors.yellow) {
-              _color = Colors.purple;
-              if (widget.gameMode == "auton") {
+            if (widget.gameMode == "auton") {
+              _text = '';
+              if (_color == Colors.yellow) {
+                _color = Colors.purple;
                 widget.scoutData.setAutoGrid = [widget.boxIndex, 1];
-              } else {
-                widget.scoutData.setTeleopGrid = [widget.boxIndex, 1];
-              }
-            } else if (_color == Colors.purple) {
-              _color = Colors.grey;
-              if (widget.gameMode == "auton") {
+              } else if (_color == Colors.purple) {
+                _color = Colors.grey;
                 widget.scoutData.setAutoGrid = [widget.boxIndex, 0];
               } else {
-                widget.scoutData.setTeleopGrid = [widget.boxIndex, 0];
+                _color = Colors.yellow;
+                widget.scoutData.setAutoGrid = [widget.boxIndex, 2];
               }
             } else {
-              _color = Colors.yellow;
-              if (widget.gameMode == "auton") {
-                widget.scoutData.setAutoGrid = [widget.boxIndex, 2];
+              _text = '';
+              if (_color == Colors.yellow) {
+                _color = Colors.purple;
+                widget.scoutData.setTeleopGrid = [widget.boxIndex, 1];
+              } else if (_color == Colors.purple) {
+                _color = Colors.lightBlueAccent;
+                _text = 'x2';
+                widget.scoutData.setTeleopGrid = [widget.boxIndex, 3];
+              } else if (_color == Colors.lightBlueAccent) {
+                _color = Colors.grey;
+                widget.scoutData.setTeleopGrid = [widget.boxIndex, 0];
               } else {
+                _color = Colors.yellow;
                 widget.scoutData.setTeleopGrid = [widget.boxIndex, 2];
               }
             }
@@ -79,6 +93,13 @@ class _ScoringBoxCommunityWidgetState extends State<ScoringBoxCommunityWidget> {
             padding: const EdgeInsets.all(3.0),
             decoration: BoxDecoration(
                 border: Border.all(color: Colors.black), color: _color),
+            child: Center(
+              child: Text(_text,
+                  style: const TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black)),
+            ),
           ),
         ),
       ),
