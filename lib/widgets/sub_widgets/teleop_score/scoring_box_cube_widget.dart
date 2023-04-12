@@ -18,6 +18,7 @@ class ScoringBoxCubeWidget extends StatefulWidget {
 
 class _ScoringBoxCubeWidgetState extends State<ScoringBoxCubeWidget> {
   Color _color = Color.fromARGB(255, 165, 153, 167);
+  String _text = '';
 
   @override
   void initState() {
@@ -33,12 +34,21 @@ class _ScoringBoxCubeWidgetState extends State<ScoringBoxCubeWidget> {
     }
 
     setState(() {
+      // 0 = Empty
+      // 1 = Cube
+      // 2 = Cone
+      // 3 = Cube x2
+      // 4 = Cone x2
+      // 5 = Hybrid x2
       if (correspondingBoxVal == 1) {
         _color = Colors.purple;
-      } else if (correspondingBoxVal == 2) {
-        _color = Colors.yellow;
+        _text = '';
+      } else if (correspondingBoxVal == 3) {
+        _color = Colors.purple;
+        _text = 'x2';
       } else {
-        _color = Color.fromARGB(255, 165, 153, 167);
+        _color = const Color.fromARGB(255, 165, 153, 167);
+        _text = '';
       }
     });
   }
@@ -48,30 +58,47 @@ class _ScoringBoxCubeWidgetState extends State<ScoringBoxCubeWidget> {
     return Scaffold(
       body: GestureDetector(
         onTap: () {
-          setState(() {
-            // use setState
-            if (_color == Colors.purple) {
-              _color = Color.fromARGB(255, 165, 153, 167);
+          setState(
+            () {
+              // use setState
               if (widget.gameMode == "auton") {
-                widget.scoutData.setAutoGrid = [widget.boxIndex, 0];
+                if (_color == Colors.purple) {
+                  _color = const Color.fromARGB(255, 165, 153, 167);
+                  widget.scoutData.setAutoGrid = [widget.boxIndex, 0];
+                } else {
+                  _color = Colors.purple;
+                  widget.scoutData.setAutoGrid = [widget.boxIndex, 1];
+                }
               } else {
-                widget.scoutData.setTeleopGrid = [widget.boxIndex, 0];
+                if (_color == Colors.purple) {
+                  if (_text == '') {
+                    _text = 'x2';
+                    widget.scoutData.setTeleopGrid = [widget.boxIndex, 3];
+                  } else {
+                    _text = '';
+                    _color = const Color.fromARGB(255, 165, 153, 167);
+                    widget.scoutData.setTeleopGrid = [widget.boxIndex, 0];
+                  }
+                } else {
+                  _color = Colors.purple;
+                  widget.scoutData.setTeleopGrid = [widget.boxIndex, 1];
+                }
               }
-            } else {
-              _color = Colors.purple;
-              if (widget.gameMode == "auton") {
-                widget.scoutData.setAutoGrid = [widget.boxIndex, 1];
-              } else {
-                widget.scoutData.setTeleopGrid = [widget.boxIndex, 1];
-              }
-            }
-          });
+            },
+          );
         },
         child: SizedBox.expand(
           child: Container(
             padding: const EdgeInsets.all(3.0),
             decoration: BoxDecoration(
                 border: Border.all(color: Colors.black), color: _color),
+            child: Center(
+              child: Text(_text,
+                  style: const TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black)),
+            ),
           ),
         ),
       ),

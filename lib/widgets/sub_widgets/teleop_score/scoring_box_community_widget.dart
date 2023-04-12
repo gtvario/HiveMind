@@ -35,13 +35,19 @@ class _ScoringBoxCommunityWidgetState extends State<ScoringBoxCommunityWidget> {
     }
 
     setState(() {
+      // 0 = Empty
+      // 1 = Cube
+      // 2 = Cone
+      // 3 = Cube x2
+      // 4 = Cone x2
+      // 5 = Hybrid x2
       if (correspondingBoxVal == 1) {
         _color = Colors.purple;
         _text = '';
       } else if (correspondingBoxVal == 2) {
         _color = Colors.yellow;
         _text = '';
-      } else if (correspondingBoxVal == 3) {
+      } else if (correspondingBoxVal == 5) {
         _color = Colors.lightBlueAccent;
         _text = 'x2';
       } else {
@@ -77,7 +83,7 @@ class _ScoringBoxCommunityWidgetState extends State<ScoringBoxCommunityWidget> {
               } else if (_color == Colors.purple) {
                 _color = Colors.lightBlueAccent;
                 _text = 'x2';
-                widget.scoutData.setTeleopGrid = [widget.boxIndex, 3];
+                widget.scoutData.setTeleopGrid = [widget.boxIndex, 5];
               } else if (_color == Colors.lightBlueAccent) {
                 _color = Colors.grey;
                 widget.scoutData.setTeleopGrid = [widget.boxIndex, 0];

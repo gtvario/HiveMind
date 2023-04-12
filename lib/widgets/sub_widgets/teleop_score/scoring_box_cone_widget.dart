@@ -35,10 +35,16 @@ class _ScoringBoxConeWidgetState extends State<ScoringBoxConeWidget> {
     }
 
     setState(() {
+      // 0 = Empty
+      // 1 = Cube
+      // 2 = Cone
+      // 3 = Cube x2
+      // 4 = Cone x2
+      // 5 = Hybrid x2
       if (correspondingBoxVal == 2) {
         _color = Colors.yellow;
         _text = '';
-      } else if (correspondingBoxVal == 3) {
+      } else if (correspondingBoxVal == 4) {
         _color = Colors.yellow;
         _text = 'x2';
       } else {
@@ -66,17 +72,16 @@ class _ScoringBoxConeWidgetState extends State<ScoringBoxConeWidget> {
               }
             } else {
               if (_color == Colors.yellow) {
-                if (_text == 'x2') {
+                if (_text == '') {
+                  _text = 'x2';
+                  widget.scoutData.setTeleopGrid = [widget.boxIndex, 4];
+                } else {
                   _text = '';
                   _color = const Color.fromARGB(255, 167, 167, 153);
                   widget.scoutData.setTeleopGrid = [widget.boxIndex, 0];
-                } else {
-                  _text = 'x2';
-                  widget.scoutData.setTeleopGrid = [widget.boxIndex, 3];
                 }
               } else {
                 _color = Colors.yellow;
-
                 widget.scoutData.setTeleopGrid = [widget.boxIndex, 2];
               }
             }
