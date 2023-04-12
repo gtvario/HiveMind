@@ -18,7 +18,8 @@ class ScoringBoxConeWidget extends StatefulWidget {
 }
 
 class _ScoringBoxConeWidgetState extends State<ScoringBoxConeWidget> {
-  Color _color = Color.fromARGB(255, 167, 167, 153);
+  Color _color = const Color.fromARGB(255, 167, 167, 153);
+  String _text = '';
 
   @override
   void initState() {
@@ -34,12 +35,15 @@ class _ScoringBoxConeWidgetState extends State<ScoringBoxConeWidget> {
     }
 
     setState(() {
-      if (correspondingBoxVal == 1) {
-        _color = Colors.purple;
-      } else if (correspondingBoxVal == 2) {
+      if (correspondingBoxVal == 2) {
         _color = Colors.yellow;
+        _text = '';
+      } else if (correspondingBoxVal == 3) {
+        _color = Colors.yellow;
+        _text = 'x2';
       } else {
-        _color = Color.fromARGB(255, 167, 167, 153);
+        _color = const Color.fromARGB(255, 167, 167, 153);
+        _text = '';
       }
     });
   }
@@ -51,18 +55,28 @@ class _ScoringBoxConeWidgetState extends State<ScoringBoxConeWidget> {
         onTap: () {
           setState(() {
             // use setState
-            if (_color == Colors.yellow) {
-              _color = Color.fromARGB(255, 167, 167, 153);
-              if (widget.gameMode == "auton") {
+            if (widget.gameMode == "auton") {
+              _text = '';
+              if (_color == Colors.yellow) {
+                _color = const Color.fromARGB(255, 167, 167, 153);
                 widget.scoutData.setAutoGrid = [widget.boxIndex, 0];
               } else {
-                widget.scoutData.setTeleopGrid = [widget.boxIndex, 0];
+                _color = Colors.yellow;
+                widget.scoutData.setAutoGrid = [widget.boxIndex, 2];
               }
             } else {
-              _color = Colors.yellow;
-              if (widget.gameMode == "auton") {
-                widget.scoutData.setAutoGrid = [widget.boxIndex, 2];
+              if (_color == Colors.yellow) {
+                if (_text == 'x2') {
+                  _text = '';
+                  _color = const Color.fromARGB(255, 167, 167, 153);
+                  widget.scoutData.setTeleopGrid = [widget.boxIndex, 0];
+                } else {
+                  _text = 'x2';
+                  widget.scoutData.setTeleopGrid = [widget.boxIndex, 3];
+                }
               } else {
+                _color = Colors.yellow;
+
                 widget.scoutData.setTeleopGrid = [widget.boxIndex, 2];
               }
             }
@@ -73,6 +87,13 @@ class _ScoringBoxConeWidgetState extends State<ScoringBoxConeWidget> {
             padding: const EdgeInsets.all(3.0),
             decoration: BoxDecoration(
                 border: Border.all(color: Colors.black), color: _color),
+            child: Center(
+              child: Text(_text,
+                  style: const TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black)),
+            ),
           ),
         ),
       ),
