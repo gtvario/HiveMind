@@ -85,6 +85,14 @@ class _StartMatchPageState extends State<StartMatchPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    setState(() {
+      dropdownValue = widget.scoutData.getStudentName;
+    });
+  }
+
+  @override
   void dispose() {
     // Make sure to remove OverlayEntry when the widget is disposed.
     removeHighlightOverlay();
@@ -121,6 +129,7 @@ class _StartMatchPageState extends State<StartMatchPage> {
               onChanged: (value) {
                 setState(() {
                   dropdownValue = value!;
+                  widget.scoutData.setStudentName = value;
                 });
               },
             ),

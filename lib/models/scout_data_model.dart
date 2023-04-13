@@ -92,6 +92,7 @@ class ScoutData {
 
   int? matchNum = 0, teamNum = 0;
   String? eventKey = "";
+  String studentName = "Select Student Name";
 
   String filePath = "";
 
@@ -192,6 +193,10 @@ class ScoutData {
     return playedDefense;
   }
 
+  String get getStudentName {
+    return studentName;
+  }
+
   set setAutoPreload(String preload) {
     autoPreload = preload;
   }
@@ -280,6 +285,10 @@ class ScoutData {
     playedDefense = playDefense;
   }
 
+  set setStudentName(String name) {
+    studentName = name;
+  }
+
   writeFile() async {
     File matchFile = await _localFile;
 
@@ -311,7 +320,8 @@ class ScoutData {
         "driving": drivingScore,
         "robot_status": robotCondition,
         "comments": comments
-      }
+      },
+      "name": studentName
     };
 
     String data = jsonEncode(obj);

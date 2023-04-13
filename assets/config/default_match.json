@@ -26,5 +26,6 @@
 		"driving": 3,
 		"robot_status": "No",
 		"comments": ""
-	}
+	},
+	"name": ""
 }
