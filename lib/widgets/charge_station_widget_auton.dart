@@ -45,38 +45,6 @@ class _ChargeStationAutonState extends State<ChargeStationAuton> {
         ),
         const SizedBox(height: 10),
         Row(
-          children: [
-            Transform.scale(
-              scale: 1.25,
-              child: Radio(
-                activeColor: Colors.amber,
-                visualDensity: const VisualDensity(
-                    horizontal: VisualDensity.minimumDensity,
-                    vertical: VisualDensity.minimumDensity),
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                value: 'Docked',
-                groupValue: chargeStationState,
-                onChanged: (value) {
-                  setState(() {
-                    chargeStationState = value.toString();
-                  });
-                  setMatchData();
-                },
-              ),
-            ),
-            const SizedBox(width: 10),
-            const Text(
-              'Docked',
-              style: TextStyle(
-                fontSize: 20,
-                fontFamily: 'Tahoma',
-                fontWeight: FontWeight.bold,
-              ),
-            )
-          ],
-        ),
-        const SizedBox(height: 10),
-        Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Transform.scale(
@@ -106,6 +74,38 @@ class _ChargeStationAutonState extends State<ChargeStationAuton> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+          ],
+        ),
+        const SizedBox(height: 10),
+        Row(
+          children: [
+            Transform.scale(
+              scale: 1.25,
+              child: Radio(
+                activeColor: Colors.amber,
+                visualDensity: const VisualDensity(
+                    horizontal: VisualDensity.minimumDensity,
+                    vertical: VisualDensity.minimumDensity),
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                value: 'Docked',
+                groupValue: chargeStationState,
+                onChanged: (value) {
+                  setState(() {
+                    chargeStationState = value.toString();
+                  });
+                  setMatchData();
+                },
+              ),
+            ),
+            const SizedBox(width: 10),
+            const Text(
+              'Docked',
+              style: TextStyle(
+                fontSize: 20,
+                fontFamily: 'Tahoma',
+                fontWeight: FontWeight.bold,
+              ),
+            )
           ],
         ),
         const SizedBox(height: 10),

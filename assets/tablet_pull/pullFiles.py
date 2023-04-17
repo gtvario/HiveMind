@@ -1,3 +1,4 @@
+import json
 import subprocess
 import os
 import time
@@ -76,6 +77,7 @@ while True:
                     local_file_path = os.path.normpath(os.path.join(local_dir, file_name))
                     if not os.path.exists(local_file_path) or overwrite_files:
                         subprocess.call([adb_path, "pull", device_file_path, local_dir])
+
                         copiedFiles += 1
                     else:
                         skippedFiles += 1

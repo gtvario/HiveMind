@@ -47,11 +47,11 @@ class _StartMatchPageState extends State<StartMatchPage> {
     }
 
     if (fieldAdjustedX < 130) {
-      widget.scoutData.setStartingPos = 'Bump';
+      widget.scoutData.setStartingPos = 'bump';
     } else if (fieldAdjustedX < 260) {
-      widget.scoutData.setStartingPos = 'Middle';
+      widget.scoutData.setStartingPos = 'middle';
     } else {
-      widget.scoutData.setStartingPos = 'Clear';
+      widget.scoutData.setStartingPos = 'clear';
     }
 
     removeHighlightOverlay();
