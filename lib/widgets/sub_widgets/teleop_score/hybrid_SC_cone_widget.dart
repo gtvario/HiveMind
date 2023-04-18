@@ -19,7 +19,7 @@ class _HybridSuperChargedConeCollectWidgetState
   @override
   void initState() {
     super.initState();
-    _itemCount = widget.scoutData.getDroppedTeleopCone;
+    _itemCount = widget.scoutData.getHybridSprChrgTeleopCone;
   }
 
   @override
@@ -38,7 +38,7 @@ class _HybridSuperChargedConeCollectWidgetState
             setState(() {
               _itemCount++;
             });
-            widget.scoutData.setDroppedTeleopCone = _itemCount;
+            widget.scoutData.setHybridSprChrgTeleopCone = _itemCount;
           },
           child: SizedBox(
             width: 60,
@@ -70,7 +70,7 @@ class _HybridSuperChargedConeCollectWidgetState
                 _itemCount--;
               }
             });
-            widget.scoutData.setDroppedTeleopCone = _itemCount;
+            widget.scoutData.setHybridSprChrgTeleopCone = _itemCount;
           },
           child: SizedBox(
             width: 35,

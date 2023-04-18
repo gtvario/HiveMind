@@ -81,7 +81,9 @@ class ScoutData {
       fieldConeTeleop = 0,
       fieldCubeTeleop = 0,
       droppedTeleopCone = 0,
-      droppedTeleopCube = 0;
+      droppedTeleopCube = 0,
+      hybridSprChrgTeleopCone = 0,
+      hybridSprChrgTeleopCube = 0;
 
   // Endgame
   String endgameChargeStation = "Did Not Attempt",
@@ -167,6 +169,14 @@ class ScoutData {
 
   int get getDroppedTeleopCube {
     return droppedTeleopCube;
+  }
+
+  int get getHybridSprChrgTeleopCone {
+    return hybridSprChrgTeleopCone;
+  }
+
+  int get getHybridSprChrgTeleopCube {
+    return hybridSprChrgTeleopCube;
   }
 
   String get getEndgameChargeStation {
@@ -261,6 +271,14 @@ class ScoutData {
     droppedTeleopCube = droppedCubeTeleop;
   }
 
+  set setHybridSprChrgTeleopCone(int hybScCone) {
+    hybridSprChrgTeleopCone = hybScCone;
+  }
+
+  set setHybridSprChrgTeleopCube(int hybScCube) {
+    hybridSprChrgTeleopCube = hybScCube;
+  }
+
   set setEndgameChargeStation(String endgameCharge) {
     endgameChargeStation = endgameCharge;
   }
@@ -311,7 +329,9 @@ class ScoutData {
         "field_cone_teleop": fieldConeTeleop,
         "field_cube_teleop": fieldCubeTeleop,
         "dropped_cube_teleop": droppedTeleopCube,
-        "dropped_cone_teleop": droppedTeleopCone
+        "dropped_cone_teleop": droppedTeleopCone,
+        "hybrid_cube": hybridSprChrgTeleopCube,
+        "hybrid_cone": hybridSprChrgTeleopCone
       },
       "endgame": {
         "charge_station": endgameChargeStation,

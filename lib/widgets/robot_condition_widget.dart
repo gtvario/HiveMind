@@ -16,7 +16,12 @@ class _RobotConditionState extends State<RobotCondition> {
   void initState() {
     super.initState();
     setState(() {
-      robotConditionState = "No";
+      if (widget.scoutData.getRobotCondition == "") {
+        robotConditionState = "No";
+        widget.scoutData.setRobotCondition = robotConditionState;
+      } else {
+        robotConditionState = widget.scoutData.getRobotCondition;
+      }
     });
   }
 
