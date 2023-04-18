@@ -17,7 +17,9 @@
         "field_cone_teleop": 0,
         "field_cube_teleop": 0,
         "dropped_cube_teleop": 0,
-		"dropped_cone_teleop": 0
+		"dropped_cone_teleop": 0,
+		"hybrid_cone": 0,
+		"hybrid_cube": 0
     },
 	"endgame":{
 		"charge_station": "Did Not Attempt",

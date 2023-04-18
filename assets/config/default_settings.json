@@ -1,8 +1,8 @@
 {
     "master": {
         "isMaster": false,
-        "teamNumber": "",
-        "year": ""
+        "teamNumber": "33",
+        "year": "2023"
     },
     "local":{
         "studentName": "",
