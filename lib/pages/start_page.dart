@@ -118,6 +118,10 @@ class _StartMatchPageState extends State<StartMatchPage> {
             DropdownButton(
               value: dropdownValue,
               icon: const Icon(Icons.keyboard_arrow_down),
+              style: const TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 255, 0, 0)),
               items: studentList.map(
                 (item) {
                   return DropdownMenuItem(
