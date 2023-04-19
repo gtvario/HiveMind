@@ -26,6 +26,7 @@ class _DefenseState extends State<Defense> {
 
       if (defensePlayedBool) {
         defensePlayed = 'Yes';
+        _starColor = Colors.amber;
       } else {
         defensePlayed = 'No';
       }
