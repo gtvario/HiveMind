@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:hivemind/models/scout_data_model.dart';
 
-class MobilityWidget extends StatefulWidget {
+class StartZoneWidget extends StatefulWidget {
   final ScoutData scoutData;
 
-  const MobilityWidget({super.key, required this.scoutData});
+  const StartZoneWidget({super.key, required this.scoutData});
 
   @override
-  State<MobilityWidget> createState() => _MobilityWidgetState();
+  State<StartZoneWidget> createState() => _StartZoneWidgetState();
 }
 
-class _MobilityWidgetState extends State<MobilityWidget> {
+class _StartZoneWidgetState extends State<StartZoneWidget> {
   int autoMovement = 0;
 
   @override
@@ -18,7 +18,7 @@ class _MobilityWidgetState extends State<MobilityWidget> {
     super.initState();
     readScoutFile().then((value) {
       setState(() {
-        autoMovement = widget.scoutData.getMobility;
+        autoMovement = widget.scoutData.getStartZone;
       });
     });
   }
@@ -31,7 +31,7 @@ class _MobilityWidgetState extends State<MobilityWidget> {
         Column(
           children: [
             const Text(
-              "Autonomous\nMobility?",
+              "Autonomous\nLeave Start Zone?",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 35,
@@ -54,7 +54,7 @@ class _MobilityWidgetState extends State<MobilityWidget> {
                         } else {
                           autoMovement = 0;
                         }
-                        widget.scoutData.setMobility = autoMovement;
+                        widget.scoutData.setStartZone = autoMovement;
                       });
                     },
                     child: Text(

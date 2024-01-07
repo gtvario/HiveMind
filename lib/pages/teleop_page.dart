@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hivemind/models/scout_data_model.dart';
 import 'package:hivemind/widgets/teleop_scoring_widget.dart';
-import 'package:hivemind/widgets/collected_pieces_widget.dart';
-import 'package:hivemind/widgets/dropped_pieces_widget.dart';
-import 'package:hivemind/widgets/hybrid_supercharged_widget.dart';
 
 class TeleopPage extends StatefulWidget {
   final ScoutData scoutData;
@@ -37,59 +34,6 @@ class _TeleopPageState extends State<TeleopPage> {
               scoutData: widget.scoutData,
             ),
           ],
-        ),
-        Expanded(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(width: 30),
-              Container(
-                margin: const EdgeInsets.all(15.0),
-                padding: const EdgeInsets.all(3.0),
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black, width: 2)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    TeleopCollectWidget(
-                      mode: 'teleop',
-                      scoutData: widget.scoutData,
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.all(15.0),
-                padding: const EdgeInsets.all(3.0),
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black, width: 2)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    DroppedPieceWidget(
-                      mode: 'teleop',
-                      scoutData: widget.scoutData,
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.all(15.0),
-                padding: const EdgeInsets.all(3.0),
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black, width: 2)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    HybridSuperChargedWidget(
-                      mode: 'teleop',
-                      scoutData: widget.scoutData,
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
         ),
       ],
     );

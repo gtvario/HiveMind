@@ -13,8 +13,8 @@ from googleapiclient.http import MediaFileUpload
 SCOPES = ['https://www.googleapis.com/auth/drive']
 
 # Define the local folder where the JSONs are stored and the Google Drive folder ID for uploading
-localUploadFolder = 'C:/Users/cmwal/Documents/Robotics/Scripting/pull_files_from_tablet/match_files'
-topFolderId = '1aV2zVknV5WDAnn2P4InBt5tlKcWqgLZC'
+localUploadFolder = 'C:/Users/gtvar/Documents/match_files'
+topFolderId = '1k1TRXbPCqJI3y9vDsfWe3xG9Idj44wAJ'
 
 def main():
 
@@ -30,7 +30,7 @@ def main():
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                'credentials.json', SCOPES)
+                'json_pull_cred.json', SCOPES)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
         with open('token.json', 'w') as token:

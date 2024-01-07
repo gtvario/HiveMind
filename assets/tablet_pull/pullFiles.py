@@ -15,9 +15,9 @@ def signal_handler(sig, frame):
 signal.signal(signal.SIGINT, signal_handler)
 
 # Set the path to the adb executable
-adb_path = 'C:/Users/cmwal/AppData/Local/Android/Sdk/platform-tools/adb.exe'
-device_dir = '/sdcard/Android/data/com.example.hivemind/files/2023micmp3/'
-local_dir = 'C:/Users/cmwal/Documents/Robotics/Scripting/pull_files_from_tablet/match_files'
+adb_path = 'C:/Users/gtvar/AppData/Local/Android/Sdk/platform-tools/adb.exe'
+device_dir = '/sdcard/Android/data/com.example.hivemind/files/2023arc/'
+local_dir = 'C:/Users/gtvar/Documents/match_files'
 
 device_id = ''
 device_id_old = ''

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hivemind/models/scout_data_model.dart';
-import 'package:hivemind/widgets/preload_widget.dart';
 import 'package:hivemind/models/globals.dart';
 
 class StartMatchPage extends StatefulWidget {
@@ -46,13 +45,7 @@ class _StartMatchPageState extends State<StartMatchPage> {
       fieldAdjustedY = (yPos) - 172;
     }
 
-    if (fieldAdjustedX < 130) {
-      widget.scoutData.setStartingPos = 'bump';
-    } else if (fieldAdjustedX < 260) {
-      widget.scoutData.setStartingPos = 'middle';
-    } else {
-      widget.scoutData.setStartingPos = 'clear';
-    }
+    if (fieldAdjustedX < 130) {}
 
     removeHighlightOverlay();
 
@@ -164,9 +157,7 @@ class _StartMatchPageState extends State<StartMatchPage> {
         Expanded(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              PreloadWidget(scoutData: widget.scoutData),
-            ],
+            children: [],
           ),
         )
       ],
