@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Hivemind',
         theme: ThemeData(
+          fontFamily: 'Schyler',
           primarySwatch: Colors.yellow,
         ),
         initialRoute: "/",

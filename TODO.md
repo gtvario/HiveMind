@@ -17,13 +17,19 @@
 - Teleop
   - Amp scoring (teleop)
   - Speaker scoring (teleop)
-  - Does the position scored from matter? Could have defined field positions for scoring
+    - Click to mark scoring location
+      - Box for Amp (Made and Missed)
+      - Box for Speaker (Made and Missed)
+      - Box on the right with list of  
   - Missed Shots
+  - Trap - Which one
+  - 
+
   
 
 - End Game
   - Hang - Which chain
-  - Trap - Which one
+  - Highnote
   - Defense
   - Driving
   - Robotic Condition
