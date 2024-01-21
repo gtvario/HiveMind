@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hivemind/models/scout_data_model.dart';
 import 'package:hivemind/models/globals.dart';
 import 'package:hivemind/widgets/leave_zone_widget.dart';
+import 'package:hivemind/widgets/note_widget.dart';
 
 class AutonPage extends StatefulWidget {
   final Function() notifyParent;
@@ -108,7 +109,7 @@ class _AutonPageState extends State<AutonPage> {
     if (widget.allianceColor == 'Red') {
       fieldImagePath = 'assets/images/RedField.png';
     } else {
-      fieldImagePath = 'assets/images/BlueField.png';
+      fieldImagePath = 'assets/images/BlueField_Auton.png';
     }
 
     return AnimatedContainer(
@@ -130,29 +131,76 @@ class _AutonPageState extends State<AutonPage> {
                   "Autonomous",
                   textAlign: TextAlign.left,
                   style: TextStyle(
-                      fontSize: 55, decoration: TextDecoration.underline),
+                      fontFamily: 'Schyler',
+                      fontSize: 40,
+                      decoration: TextDecoration.underline),
                 ),
                 const SizedBox(height: 10),
                 Container(
                   decoration: BoxDecoration(border: Border.all(width: 5.0)),
                   width: 600,
                   height: 400,
-                  child: GestureDetector(
-                    onTapDown: (details) {
-                      _handleTapDown(details);
-                      setState(() {
-                        currentPageIndex = 1;
-                      });
-                      createHighlightOverlay(
-                        alignment: AlignmentDirectional.bottomStart,
-                        borderColor: Colors.red,
-                        xPos: _tapPosition.dx,
-                        yPos: _tapPosition.dy,
-                      );
-                    },
-                    child: Image.asset(
-                      fieldImagePath,
-                    ),
+                  child: Stack(
+                    children: [
+                      Image.asset(
+                        fieldImagePath,
+                      ),
+                      const Positioned(
+                        top: 44,
+                        left: 128,
+                        height: 25,
+                        width: 25,
+                        child: Note(),
+                      ),
+                      const Positioned(
+                        top: 113,
+                        left: 128,
+                        height: 25,
+                        width: 25,
+                        child: Note(),
+                      ),
+                      const Positioned(
+                          top: 182,
+                          left: 128,
+                          height: 25,
+                          width: 25,
+                          child: Note()),
+                      const Positioned(
+                        top: 22,
+                        left: 392,
+                        height: 25,
+                        width: 25,
+                        child: Note(),
+                      ),
+                      const Positioned(
+                        top: 102,
+                        left: 392,
+                        height: 25,
+                        width: 25,
+                        child: Note(),
+                      ),
+                      const Positioned(
+                        top: 182,
+                        left: 392,
+                        height: 25,
+                        width: 25,
+                        child: Note(),
+                      ),
+                      const Positioned(
+                        top: 262,
+                        left: 392,
+                        height: 25,
+                        width: 25,
+                        child: Note(),
+                      ),
+                      const Positioned(
+                        top: 342,
+                        left: 392,
+                        height: 25,
+                        width: 25,
+                        child: Note(),
+                      ),
+                    ],
                   ),
                 ),
               ],
