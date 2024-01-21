@@ -5,6 +5,7 @@ import 'package:hivemind/models/scout_data_model.dart';
 import 'package:hivemind/models/globals.dart';
 import 'package:hivemind/widgets/leave_zone_widget.dart';
 import 'package:hivemind/widgets/note_widget.dart';
+import 'package:hivemind/widgets/speaker_pickup_widget.dart';
 
 class AutonPage extends StatefulWidget {
   final Function() notifyParent;
@@ -122,96 +123,99 @@ class _AutonPageState extends State<AutonPage> {
         ),
         child: Row(
           children: [
-            const SizedBox(width: 35),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(height: 5),
-                const Text(
-                  "Autonomous",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                      fontFamily: 'Schyler',
-                      fontSize: 40,
-                      decoration: TextDecoration.underline),
-                ),
-                const SizedBox(height: 10),
-                Container(
-                  decoration: BoxDecoration(border: Border.all(width: 5.0)),
-                  width: 600,
-                  height: 400,
-                  child: Stack(
-                    children: [
-                      Image.asset(
-                        fieldImagePath,
-                      ),
-                      const Positioned(
-                        top: 44,
-                        left: 128,
-                        height: 25,
-                        width: 25,
-                        child: Note(),
-                      ),
-                      const Positioned(
-                        top: 113,
-                        left: 128,
-                        height: 25,
-                        width: 25,
-                        child: Note(),
-                      ),
-                      const Positioned(
-                          top: 182,
-                          left: 128,
-                          height: 25,
-                          width: 25,
-                          child: Note()),
-                      const Positioned(
-                        top: 22,
-                        left: 392,
-                        height: 25,
-                        width: 25,
-                        child: Note(),
-                      ),
-                      const Positioned(
-                        top: 102,
-                        left: 392,
-                        height: 25,
-                        width: 25,
-                        child: Note(),
-                      ),
-                      const Positioned(
-                        top: 182,
-                        left: 392,
-                        height: 25,
-                        width: 25,
-                        child: Note(),
-                      ),
-                      const Positioned(
-                        top: 262,
-                        left: 392,
-                        height: 25,
-                        width: 25,
-                        child: Note(),
-                      ),
-                      const Positioned(
-                        top: 342,
-                        left: 392,
-                        height: 25,
-                        width: 25,
-                        child: Note(),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
             Expanded(
+                flex: 75,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 5),
+                    const Text(
+                      "Autonomous",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          fontFamily: 'Schyler',
+                          fontSize: 40,
+                          decoration: TextDecoration.underline),
+                    ),
+                    const SizedBox(height: 10),
+                    Container(
+                      decoration: BoxDecoration(border: Border.all(width: 5.0)),
+                      width: 600,
+                      height: 400,
+                      child: Stack(
+                        children: [
+                          Image.asset(
+                            fieldImagePath,
+                          ),
+                          const Positioned(
+                            top: 44,
+                            left: 128,
+                            height: 25,
+                            width: 25,
+                            child: Note(),
+                          ),
+                          const Positioned(
+                            top: 113,
+                            left: 128,
+                            height: 25,
+                            width: 25,
+                            child: Note(),
+                          ),
+                          const Positioned(
+                              top: 182,
+                              left: 128,
+                              height: 25,
+                              width: 25,
+                              child: Note()),
+                          const Positioned(
+                            top: 22,
+                            left: 392,
+                            height: 25,
+                            width: 25,
+                            child: Note(),
+                          ),
+                          const Positioned(
+                            top: 102,
+                            left: 392,
+                            height: 25,
+                            width: 25,
+                            child: Note(),
+                          ),
+                          const Positioned(
+                            top: 182,
+                            left: 392,
+                            height: 25,
+                            width: 25,
+                            child: Note(),
+                          ),
+                          const Positioned(
+                            top: 262,
+                            left: 392,
+                            height: 25,
+                            width: 25,
+                            child: Note(),
+                          ),
+                          const Positioned(
+                            top: 342,
+                            left: 392,
+                            height: 25,
+                            width: 25,
+                            child: Note(),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                )),
+            Expanded(
+              flex: 25,
               child: Column(
+                mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
                     "Left Starting Zone?",
-                    textAlign: TextAlign.left,
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 35, decoration: TextDecoration.underline),
                   ),
@@ -230,24 +234,78 @@ class _AutonPageState extends State<AutonPage> {
                       ),
                     ],
                   ),
+                  Row(children: [
+                    Expanded(
+                        child: Container(
+                            alignment: Alignment.center,
+                            margin: const EdgeInsets.all(15.0),
+                            padding: const EdgeInsets.all(3.0),
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.black)),
+                            child: Text('Speaker')))
+                  ]),
+                  Row(children: [
+                    Expanded(
+                        flex: 50,
+                        child: Column(children: [
+                          Text('Made'),
+                          Container(
+                              margin: const EdgeInsets.all(15.0),
+                              padding: const EdgeInsets.all(3.0),
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.black)),
+                              child: SpeakerPickup())
+                        ])),
+                    Expanded(
+                        flex: 50,
+                        child: Column(children: [
+                          Text('Missed'),
+                          Container(
+                              margin: const EdgeInsets.all(15.0),
+                              padding: const EdgeInsets.all(3.0),
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.black)),
+                              child: SpeakerPickup())
+                        ]))
+                  ]),
+                  Row(children: [
+                    Expanded(
+                        child: Container(
+                            alignment: Alignment.center,
+                            margin: const EdgeInsets.all(15.0),
+                            padding: const EdgeInsets.all(3.0),
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.black)),
+                            child: Text('Amp')))
+                  ]),
+                  Row(children: [
+                    Expanded(
+                        flex: 50,
+                        child: Column(children: [
+                          Text('Made'),
+                          Container(
+                              margin: const EdgeInsets.all(15.0),
+                              padding: const EdgeInsets.all(3.0),
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.black)),
+                              child: SpeakerPickup())
+                        ])),
+                    Expanded(
+                        flex: 50,
+                        child: Column(children: [
+                          Text('Missed'),
+                          Container(
+                              margin: const EdgeInsets.all(15.0),
+                              padding: const EdgeInsets.all(3.0),
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.black)),
+                              child: SpeakerPickup())
+                        ]))
+                  ])
                 ],
               ),
             )
           ],
-        )
-
-        //   Column(children: [
-
-        //     Row(
-        // mainAxisSize: MainAxisSize.max,
-        // mainAxisAlignment: MainAxisAlignment.center,
-        //       children: const [
-        //         SizedBox(width: 30),
-        //         LeaveZone(),
-        //       ],
-        //     )
-        //   ],
-        // ),
-        );
+        ));
   }
 }
