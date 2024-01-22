@@ -217,7 +217,9 @@ class _AutonPageState extends State<AutonPage> {
                     "Left Starting Zone?",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        fontSize: 35, decoration: TextDecoration.underline),
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.underline),
                   ),
                   Row(
                     mainAxisSize: MainAxisSize.max,
@@ -225,81 +227,93 @@ class _AutonPageState extends State<AutonPage> {
                     children: const [
                       Text(
                         "No",
-                        style: TextStyle(fontSize: 35),
+                        style: TextStyle(fontSize: 24),
                       ),
                       LeaveZone(),
                       Text(
                         "Yes",
-                        style: TextStyle(fontSize: 35),
+                        style: TextStyle(fontSize: 24),
                       ),
                     ],
                   ),
+                  SizedBox(height: 30),
                   Row(children: [
                     Expanded(
-                        child: Container(
-                            alignment: Alignment.center,
-                            margin: const EdgeInsets.all(15.0),
-                            padding: const EdgeInsets.all(3.0),
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.black)),
-                            child: Text('Speaker')))
-                  ]),
-                  Row(children: [
-                    Expanded(
-                        flex: 50,
-                        child: Column(children: [
-                          Text('Made'),
-                          Container(
-                              margin: const EdgeInsets.all(15.0),
-                              padding: const EdgeInsets.all(3.0),
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.black)),
-                              child: SpeakerPickup())
-                        ])),
-                    Expanded(
-                        flex: 50,
-                        child: Column(children: [
-                          Text('Missed'),
-                          Container(
-                              margin: const EdgeInsets.all(15.0),
-                              padding: const EdgeInsets.all(3.0),
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.black)),
-                              child: SpeakerPickup())
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                          const Text('Speaker',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 24)),
+                          const SizedBox(height: 7),
+                          Row(children: [
+                            Expanded(
+                                flex: 1,
+                                child: Column(children: const [
+                                  Text('Made',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16)),
+                                  SizedBox(height: 5),
+                                  SizedBox(
+                                    width: 75,
+                                    child: SpeakerPickup(),
+                                  )
+                                ])),
+                            Expanded(
+                                flex: 1,
+                                child: Column(children: const [
+                                  Text('Missed',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16)),
+                                  SizedBox(height: 5),
+                                  SizedBox(
+                                    width: 75,
+                                    child: SpeakerPickup(),
+                                  )
+                                ])),
+                          ])
                         ]))
                   ]),
+                  SizedBox(height: 30),
                   Row(children: [
                     Expanded(
-                        child: Container(
-                            alignment: Alignment.center,
-                            margin: const EdgeInsets.all(15.0),
-                            padding: const EdgeInsets.all(3.0),
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.black)),
-                            child: Text('Amp')))
-                  ]),
-                  Row(children: [
-                    Expanded(
-                        flex: 50,
-                        child: Column(children: [
-                          Text('Made'),
-                          Container(
-                              margin: const EdgeInsets.all(15.0),
-                              padding: const EdgeInsets.all(3.0),
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.black)),
-                              child: SpeakerPickup())
-                        ])),
-                    Expanded(
-                        flex: 50,
-                        child: Column(children: [
-                          Text('Missed'),
-                          Container(
-                              margin: const EdgeInsets.all(15.0),
-                              padding: const EdgeInsets.all(3.0),
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.black)),
-                              child: SpeakerPickup())
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                          const Text('Amp',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 24)),
+                          const SizedBox(height: 7),
+                          Row(children: [
+                            Expanded(
+                                flex: 1,
+                                child: Column(children: const [
+                                  Text('Made',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16)),
+                                  SizedBox(height: 5),
+                                  SizedBox(
+                                    width: 75,
+                                    child: SpeakerPickup(),
+                                  )
+                                ])),
+                            Expanded(
+                                flex: 1,
+                                child: Column(children: const [
+                                  Text('Missed',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16)),
+                                  SizedBox(height: 5),
+                                  SizedBox(
+                                    width: 75,
+                                    child: SpeakerPickup(),
+                                  )
+                                ])),
+                          ])
                         ]))
                   ])
                 ],
