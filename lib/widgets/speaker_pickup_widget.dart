@@ -1,19 +1,18 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:hivemind/models/scout_data_model.dart';
 
 class SpeakerPickup extends StatefulWidget {
-  const SpeakerPickup({super.key});
+  final ScoutData scoutData;
+  const SpeakerPickup({super.key, required this.scoutData});
 
   @override
   State<SpeakerPickup> createState() => _SpeakerPickupState();
 }
 
 class _SpeakerPickupState extends State<SpeakerPickup> {
-  late Offset _startPos;
-  late Offset _endPos;
   int _made_count = 0;
   int _missed_count = 0;
-  Image _imagePath = Image.asset('assets/images/note.png');
+  final Image _imagePath = Image.asset('assets/images/note.png');
 
   @override
   void initState() {
@@ -30,9 +29,10 @@ class _SpeakerPickupState extends State<SpeakerPickup> {
           setState(() {
             _made_count++;
           });
+          widget.scoutData.setSpeakerCountAuto = _made_count;
         },
       ),
-      Text(_made_count.toString(), style: TextStyle(fontSize: 35)),
+      Text(_made_count.toString(), style: const TextStyle(fontSize: 35)),
       GestureDetector(
         child: Image.asset('assets/images/DownArrow.png'),
         onTapUp: (details) {
@@ -41,6 +41,7 @@ class _SpeakerPickupState extends State<SpeakerPickup> {
               _made_count--;
             }
           });
+          widget.scoutData.setSpeakerCountAuto = _made_count;
         },
       )
     ]);

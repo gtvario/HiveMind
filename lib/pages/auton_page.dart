@@ -147,60 +147,68 @@ class _AutonPageState extends State<AutonPage> {
                           Image.asset(
                             fieldImagePath,
                           ),
-                          const Positioned(
+                          Positioned(
                             top: 44,
                             left: 128,
                             height: 25,
                             width: 25,
-                            child: Note(),
+                            child:
+                                Note(scoutData: widget.scoutData, notePos: 0),
                           ),
-                          const Positioned(
+                          Positioned(
                             top: 113,
                             left: 128,
                             height: 25,
                             width: 25,
-                            child: Note(),
+                            child:
+                                Note(scoutData: widget.scoutData, notePos: 1),
                           ),
-                          const Positioned(
+                          Positioned(
                               top: 182,
                               left: 128,
                               height: 25,
                               width: 25,
-                              child: Note()),
-                          const Positioned(
+                              child: Note(
+                                  scoutData: widget.scoutData, notePos: 2)),
+                          Positioned(
                             top: 22,
                             left: 392,
                             height: 25,
                             width: 25,
-                            child: Note(),
+                            child:
+                                Note(scoutData: widget.scoutData, notePos: 3),
                           ),
-                          const Positioned(
+                          Positioned(
                             top: 102,
                             left: 392,
                             height: 25,
                             width: 25,
-                            child: Note(),
+                            child:
+                                Note(scoutData: widget.scoutData, notePos: 4),
                           ),
-                          const Positioned(
+                          Positioned(
                             top: 182,
                             left: 392,
                             height: 25,
                             width: 25,
-                            child: Note(),
+                            child:
+                                Note(scoutData: widget.scoutData, notePos: 5),
                           ),
-                          const Positioned(
+                          Positioned(
                             top: 262,
                             left: 392,
                             height: 25,
                             width: 25,
-                            child: Note(),
+                            child:
+                                Note(scoutData: widget.scoutData, notePos: 6),
                           ),
-                          const Positioned(
+                          Positioned(
                             top: 342,
                             left: 392,
                             height: 25,
                             width: 25,
-                            child: Note(),
+                            child:
+                                Note(scoutData: widget.scoutData, notePos: 7),
                           ),
                         ],
                       ),
@@ -224,19 +232,19 @@ class _AutonPageState extends State<AutonPage> {
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
+                    children: [
+                      const Text(
                         "No",
                         style: TextStyle(fontSize: 24),
                       ),
-                      LeaveZone(),
-                      Text(
+                      LeaveZone(scoutData: widget.scoutData),
+                      const Text(
                         "Yes",
                         style: TextStyle(fontSize: 24),
                       ),
                     ],
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   Row(children: [
                     Expanded(
                         child: Column(
@@ -249,34 +257,36 @@ class _AutonPageState extends State<AutonPage> {
                           Row(children: [
                             Expanded(
                                 flex: 1,
-                                child: Column(children: const [
-                                  Text('Made',
+                                child: Column(children: [
+                                  const Text('Made',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16)),
-                                  SizedBox(height: 5),
+                                  const SizedBox(height: 5),
                                   SizedBox(
                                     width: 75,
-                                    child: SpeakerPickup(),
+                                    child: SpeakerPickup(
+                                        scoutData: widget.scoutData),
                                   )
                                 ])),
                             Expanded(
                                 flex: 1,
-                                child: Column(children: const [
-                                  Text('Missed',
+                                child: Column(children: [
+                                  const Text('Missed',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16)),
-                                  SizedBox(height: 5),
+                                  const SizedBox(height: 5),
                                   SizedBox(
                                     width: 75,
-                                    child: SpeakerPickup(),
+                                    child: SpeakerPickup(
+                                        scoutData: widget.scoutData),
                                   )
                                 ])),
                           ])
                         ]))
                   ]),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   Row(children: [
                     Expanded(
                         child: Column(
@@ -289,28 +299,30 @@ class _AutonPageState extends State<AutonPage> {
                           Row(children: [
                             Expanded(
                                 flex: 1,
-                                child: Column(children: const [
-                                  Text('Made',
+                                child: Column(children: [
+                                  const Text('Made',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16)),
-                                  SizedBox(height: 5),
+                                  const SizedBox(height: 5),
                                   SizedBox(
                                     width: 75,
-                                    child: SpeakerPickup(),
+                                    child: SpeakerPickup(
+                                        scoutData: widget.scoutData),
                                   )
                                 ])),
                             Expanded(
                                 flex: 1,
-                                child: Column(children: const [
-                                  Text('Missed',
+                                child: Column(children: [
+                                  const Text('Missed',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16)),
-                                  SizedBox(height: 5),
+                                  const SizedBox(height: 5),
                                   SizedBox(
                                     width: 75,
-                                    child: SpeakerPickup(),
+                                    child: SpeakerPickup(
+                                        scoutData: widget.scoutData),
                                   )
                                 ])),
                           ])

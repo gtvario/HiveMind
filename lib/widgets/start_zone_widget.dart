@@ -18,7 +18,7 @@ class _StartZoneWidgetState extends State<StartZoneWidget> {
     super.initState();
     readScoutFile().then((value) {
       setState(() {
-        autoMovement = widget.scoutData.getStartZone;
+        autoMovement = widget.scoutData.getStartingPos;
       });
     });
   }
@@ -54,7 +54,7 @@ class _StartZoneWidgetState extends State<StartZoneWidget> {
                         } else {
                           autoMovement = 0;
                         }
-                        widget.scoutData.setStartZone = autoMovement;
+                        widget.scoutData.setStartingPos = autoMovement;
                       });
                     },
                     child: Text(

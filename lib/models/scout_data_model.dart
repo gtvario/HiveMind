@@ -12,7 +12,7 @@ class ScoutData {
   int ampCountAuto = 0;
   int missedSpeakerCountAuto = 0; // Do we need this??
   int missedAmpCountAuto = 0; // Do we need this??
-  List<int> fieldPickupAuto = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+  List<int> fieldPickupAuto = [0, 0, 0, 0, 0, 0, 0, 0];
 
   // Teleop
 
