@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:hivemind/models/scout_data_model.dart';
 
 class Note extends StatefulWidget {
-  const Note({super.key});
+  final ScoutData scoutData;
+  const Note({super.key, required this.scoutData});
 
   @override
   State<Note> createState() => _NoteState();
 }
 
 class _NoteState extends State<Note> {
+  List<int> fieldNotes = [0, 0, 0, 0, 0, 0, 0, 0, 0];
   bool _checked = false;
   Image _image_path = Image.asset('assets/images/note.png');
 
