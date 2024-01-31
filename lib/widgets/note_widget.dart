@@ -12,11 +12,21 @@ class Note extends StatefulWidget {
 
 class _NoteState extends State<Note> {
   bool _checked = false;
+  List<int> _fieldNotes = [0, 0, 0, 0, 0, 0, 0, 0];
   Image _image_path = Image.asset('assets/images/note.png');
 
   @override
   void initState() {
     super.initState();
+    _fieldNotes = widget.scoutData.getFieldPickupAuto;
+    setState(() {
+      _checked = _fieldNotes[widget.notePos] == 1;
+      if (_checked) {
+        _image_path = Image.asset('assets/images/checkmark.png');
+      } else {
+        _image_path = Image.asset('assets/images/note.png');
+      }
+    });
   }
 
   @override

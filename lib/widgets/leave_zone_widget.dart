@@ -13,6 +13,14 @@ class _LeaveZoneState extends State<LeaveZone> {
   bool light = false;
 
   @override
+  void initState() {
+    super.initState();
+    setState(() {
+      light = widget.scoutData.getLeaveZone;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Switch(
       // This bool value toggles the switch.

@@ -266,7 +266,10 @@ class _AutonPageState extends State<AutonPage> {
                                   SizedBox(
                                     width: 75,
                                     child: SpeakerPickup(
-                                        scoutData: widget.scoutData),
+                                      scoutData: widget.scoutData,
+                                      scoringStation:
+                                          ScoringStation.speakerMade,
+                                    ),
                                   )
                                 ])),
                             Expanded(
@@ -280,7 +283,9 @@ class _AutonPageState extends State<AutonPage> {
                                   SizedBox(
                                     width: 75,
                                     child: SpeakerPickup(
-                                        scoutData: widget.scoutData),
+                                        scoutData: widget.scoutData,
+                                        scoringStation:
+                                            ScoringStation.speakerMissed),
                                   )
                                 ])),
                           ])
@@ -308,7 +313,8 @@ class _AutonPageState extends State<AutonPage> {
                                   SizedBox(
                                     width: 75,
                                     child: SpeakerPickup(
-                                        scoutData: widget.scoutData),
+                                        scoutData: widget.scoutData,
+                                        scoringStation: ScoringStation.ampMade),
                                   )
                                 ])),
                             Expanded(
@@ -322,7 +328,9 @@ class _AutonPageState extends State<AutonPage> {
                                   SizedBox(
                                     width: 75,
                                     child: SpeakerPickup(
-                                        scoutData: widget.scoutData),
+                                        scoutData: widget.scoutData,
+                                        scoringStation:
+                                            ScoringStation.ampMissed),
                                   )
                                 ])),
                           ])
