@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hivemind/models/scout_data_model.dart';
 
 class LeaveZone extends StatefulWidget {
-  const LeaveZone({super.key});
+  final ScoutData scoutData;
+  const LeaveZone({super.key, required this.scoutData});
 
   @override
   State<LeaveZone> createState() => _LeaveZoneState();
@@ -9,6 +11,14 @@ class LeaveZone extends StatefulWidget {
 
 class _LeaveZoneState extends State<LeaveZone> {
   bool light = false;
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      light = widget.scoutData.getLeaveZone;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +31,7 @@ class _LeaveZoneState extends State<LeaveZone> {
         setState(() {
           light = value;
         });
+        widget.scoutData.setLeaveZone = light;
       },
     );
   }

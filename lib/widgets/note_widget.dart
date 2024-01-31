@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hivemind/models/scout_data_model.dart';
 
 class Note extends StatefulWidget {
-  const Note({super.key});
+  final int notePos;
+  final ScoutData scoutData;
+  const Note({super.key, required this.scoutData, required this.notePos});
 
   @override
   State<Note> createState() => _NoteState();
@@ -9,12 +12,21 @@ class Note extends StatefulWidget {
 
 class _NoteState extends State<Note> {
   bool _checked = false;
+  List<int> _fieldNotes = [0, 0, 0, 0, 0, 0, 0, 0];
   Image _image_path = Image.asset('assets/images/note.png');
 
   @override
   void initState() {
     super.initState();
-    setState(() {});
+    _fieldNotes = widget.scoutData.getFieldPickupAuto;
+    setState(() {
+      _checked = _fieldNotes[widget.notePos] == 1;
+      if (_checked) {
+        _image_path = Image.asset('assets/images/checkmark.png');
+      } else {
+        _image_path = Image.asset('assets/images/note.png');
+      }
+    });
   }
 
   @override
@@ -28,9 +40,11 @@ class _NoteState extends State<Note> {
             if (!_checked) {
               _image_path = Image.asset('assets/images/checkmark.png');
               _checked = true;
+              widget.scoutData.setFieldPickupAuto = [widget.notePos, 1];
             } else {
               _image_path = Image.asset('assets/images/note.png');
               _checked = false;
+              widget.scoutData.setFieldPickupAuto = [widget.notePos, 0];
             }
           });
         },

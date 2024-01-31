@@ -2,6 +2,8 @@ library hivemind.globals;
 
 int queenPassword = 8675309;
 
+enum ScoringStation { speakerMade, speakerMissed, ampMade, ampMissed }
+
 List<String> studentList = [
   'Select Student Name',
   'Ethan Dhomnic',

@@ -6,7 +6,13 @@ import 'package:path_provider/path_provider.dart';
 
 class ScoutData {
   // Auton
-  int startZone = 0;
+  int startingPos = 0;
+  bool leaveZone = false;
+  int speakerCountAuto = 0;
+  int ampCountAuto = 0;
+  int missedSpeakerCountAuto = 0; // Do we need this??
+  int missedAmpCountAuto = 0; // Do we need this??
+  List<int> fieldPickupAuto = [0, 0, 0, 0, 0, 0, 0, 0];
 
   // Teleop
 
@@ -31,9 +37,71 @@ class ScoutData {
     readFile();
   }
 
-  int get getStartZone {
-    return startZone;
+// ***************************
+// Auto Getters
+// ***************************
+  int get getStartingPos {
+    return startingPos;
   }
+
+  bool get getLeaveZone {
+    return leaveZone;
+  }
+
+  int get getSpeakerCountAuto {
+    return speakerCountAuto;
+  }
+
+  int get getAmpCountAuto {
+    return ampCountAuto;
+  }
+
+  int get getMissedSpeakerCountAuto {
+    return missedSpeakerCountAuto;
+  }
+
+  int get getMissedAmpCountAuto {
+    return missedAmpCountAuto;
+  }
+
+  List<int> get getFieldPickupAuto {
+    return fieldPickupAuto;
+  }
+
+// ***************************
+// Auto Setters
+// ***************************
+  set setStartingPos(int argIn) {
+    startingPos = argIn;
+  }
+
+  set setLeaveZone(bool argIn) {
+    leaveZone = argIn;
+  }
+
+  set setSpeakerCountAuto(int argIn) {
+    speakerCountAuto = argIn;
+  }
+
+  set setAmpCountAuto(int argIn) {
+    ampCountAuto = argIn;
+  }
+
+  set setMissedSpeakerCountAuto(int argIn) {
+    missedSpeakerCountAuto = argIn;
+  }
+
+  set setMissedAmpCountAuto(int argIn) {
+    missedAmpCountAuto = argIn;
+  }
+
+  set setFieldPickupAuto(List<int> argIn) {
+    fieldPickupAuto[argIn[0]] = argIn[1];
+  }
+
+  // **************************
+  // Teleop
+  // **************************
 
   String get getComments {
     return comments;
@@ -57,10 +125,6 @@ class ScoutData {
 
   String get getRobotCondition {
     return condition;
-  }
-
-  set setStartZone(int startZoneState) {
-    startZone = startZoneState;
   }
 
   set setComments(String comment) {
@@ -91,7 +155,15 @@ class ScoutData {
     File matchFile = await _localFile;
 
     var obj = {
-      "auton": {'start_zone': startZone},
+      "auton": {
+        "position": startingPos,
+        "leave": leaveZone,
+        "note_auto_speaker": speakerCountAuto,
+        "note_auto_amp": ampCountAuto,
+        "missed_speaker_auto": missedSpeakerCountAuto,
+        "missed_amp_auto": missedAmpCountAuto,
+        "field_pickup_auto": fieldPickupAuto
+      },
       "teleop": {},
       "endgame": {
         "robot_condition": condition,

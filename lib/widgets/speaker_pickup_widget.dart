@@ -1,23 +1,33 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:hivemind/models/globals.dart';
+import 'package:hivemind/models/scout_data_model.dart';
 
 class SpeakerPickup extends StatefulWidget {
-  const SpeakerPickup({super.key});
+  final ScoutData scoutData;
+  final ScoringStation scoringStation;
+  const SpeakerPickup(
+      {super.key, required this.scoutData, required this.scoringStation});
 
   @override
   State<SpeakerPickup> createState() => _SpeakerPickupState();
 }
 
 class _SpeakerPickupState extends State<SpeakerPickup> {
-  late Offset _startPos;
-  late Offset _endPos;
-  int _made_count = 0;
-  int _missed_count = 0;
-  Image _imagePath = Image.asset('assets/images/note.png');
+  int _count = 0;
+  final Image _imagePath = Image.asset('assets/images/note.png');
 
   @override
   void initState() {
     super.initState();
+    if (widget.scoringStation == ScoringStation.ampMade) {
+      _count = widget.scoutData.getAmpCountAuto;
+    } else if (widget.scoringStation == ScoringStation.ampMissed) {
+      _count = widget.scoutData.getMissedAmpCountAuto;
+    } else if (widget.scoringStation == ScoringStation.speakerMade) {
+      _count = widget.scoutData.getSpeakerCountAuto;
+    } else if (widget.scoringStation == ScoringStation.speakerMissed) {
+      _count = widget.scoutData.getMissedSpeakerCountAuto;
+    }
     setState(() {});
   }
 
@@ -28,19 +38,37 @@ class _SpeakerPickupState extends State<SpeakerPickup> {
         child: Image.asset('assets/images/UpArrow.png'),
         onTapUp: (details) {
           setState(() {
-            _made_count++;
+            _count++;
           });
+          if (widget.scoringStation == ScoringStation.ampMade) {
+            widget.scoutData.setAmpCountAuto = _count;
+          } else if (widget.scoringStation == ScoringStation.ampMissed) {
+            widget.scoutData.setMissedAmpCountAuto = _count;
+          } else if (widget.scoringStation == ScoringStation.speakerMade) {
+            widget.scoutData.setSpeakerCountAuto = _count;
+          } else if (widget.scoringStation == ScoringStation.speakerMissed) {
+            widget.scoutData.setMissedSpeakerCountAuto = _count;
+          }
         },
       ),
-      Text(_made_count.toString(), style: TextStyle(fontSize: 35)),
+      Text(_count.toString(), style: const TextStyle(fontSize: 35)),
       GestureDetector(
         child: Image.asset('assets/images/DownArrow.png'),
         onTapUp: (details) {
           setState(() {
-            if (_made_count > 0) {
-              _made_count--;
+            if (_count > 0) {
+              _count--;
             }
           });
+          if (widget.scoringStation == ScoringStation.ampMade) {
+            widget.scoutData.setAmpCountAuto = _count;
+          } else if (widget.scoringStation == ScoringStation.ampMissed) {
+            widget.scoutData.setMissedAmpCountAuto = _count;
+          } else if (widget.scoringStation == ScoringStation.speakerMade) {
+            widget.scoutData.setSpeakerCountAuto = _count;
+          } else if (widget.scoringStation == ScoringStation.speakerMissed) {
+            widget.scoutData.setMissedSpeakerCountAuto = _count;
+          }
         },
       )
     ]);
