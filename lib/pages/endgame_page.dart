@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hivemind/models/scout_data_model.dart';
 import 'package:hivemind/widgets/defense_widget.dart';
 import 'package:hivemind/widgets/robot_condition_widget.dart';
-import 'package:hivemind/widgets/charge_station_widget.dart';
+import 'package:hivemind/widgets/chain_hang_widget.dart';
 
 class EndgamePage extends StatefulWidget {
   final ScoutData scoutData;
@@ -43,7 +43,7 @@ class _EndgamePageState extends State<EndgamePage> {
             const SizedBox(width: 50),
             Column(
               children: [
-                ChargeStation(
+                ChainHang(
                   mode: 'endgame',
                   scoutData: widget.scoutData,
                 ),

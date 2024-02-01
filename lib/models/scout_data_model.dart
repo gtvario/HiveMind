@@ -17,6 +17,7 @@ class ScoutData {
   // Teleop
 
   // Endgame
+  String chainHang = "";
   String condition = "";
   String comments = "";
   int defenseScore = 3, drivingScore = 3;
@@ -100,8 +101,11 @@ class ScoutData {
   }
 
   // **************************
-  // Teleop
+  // Endgame Getters
   // **************************
+  String get getChainHang {
+    return chainHang;
+  }
 
   String get getComments {
     return comments;
@@ -125,6 +129,13 @@ class ScoutData {
 
   String get getRobotCondition {
     return condition;
+  }
+
+  // **************************
+  // Endgame Setters
+  // **************************
+  set setChainHang(String argIn) {
+    chainHang = argIn;
   }
 
   set setComments(String comment) {
@@ -166,6 +177,7 @@ class ScoutData {
       },
       "teleop": {},
       "endgame": {
+        "chain_hang": chainHang,
         "robot_condition": condition,
         "defense_played": playedDefense,
         "defense_score": defenseScore,

@@ -37,46 +37,53 @@ class _DefenseState extends State<Defense> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const Text(
+          "Defense Played?",
+          style: TextStyle(
+            fontSize: 35,
+            fontFamily: 'Schyler',
+          ),
+        ),
         Row(
           children: [
-            const Text(
-              "Defense - ",
+            Text(
+              'No',
+              textAlign: TextAlign.center,
               style: TextStyle(
+                color: defensePlayedBool ? Colors.grey : Colors.amber,
                 fontSize: 35,
                 fontFamily: 'Schyler',
               ),
             ),
-            InkWell(
-              onTapDown: (details) {
+            Switch(
+              // This bool value toggles the switch.
+              value: defensePlayedBool,
+              activeColor: Colors.amber,
+              onChanged: (bool value) {
+                // This is called when the user toggles the switch.
                 setState(() {
-                  if (!defensePlayedBool) {
-                    defensePlayedBool = true;
-                    defensePlayed = 'Yes';
+                  defensePlayedBool = value;
+                  if (defensePlayedBool) {
                     _starColor = Colors.amber;
                   } else {
-                    defensePlayedBool = false;
-                    defensePlayed = 'No';
                     _starColor = Colors.grey;
                   }
                 });
-
                 widget.scoutData.setPlayedDefense = defensePlayedBool;
               },
-              child: Text(
-                defensePlayed,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: defensePlayedBool
-                      ? Colors.green
-                      : Color.fromARGB(255, 81, 5, 5),
-                  fontSize: 35,
-                  fontFamily: 'Schyler',
-                ),
+            ),
+            Text(
+              'Yes',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: defensePlayedBool ? Colors.amber : Colors.grey,
+                fontSize: 35,
+                fontFamily: 'Schyler',
               ),
             ),
           ],
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 5),
         Transform.scale(
           scale: 1.2,
           child: RatingBar.builder(

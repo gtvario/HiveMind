@@ -1,18 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:hivemind/models/scout_data_model.dart';
 
-class ChargeStation extends StatefulWidget {
+class ChainHang extends StatefulWidget {
   final String mode;
   final ScoutData scoutData;
 
-  const ChargeStation({super.key, required this.mode, required this.scoutData});
+  const ChainHang({super.key, required this.mode, required this.scoutData});
 
   @override
-  State<ChargeStation> createState() => _ChargeStationState();
+  State<ChainHang> createState() => _ChainHangState();
 }
 
-class _ChargeStationState extends State<ChargeStation> {
-  String chargeStationState = "";
+class _ChainHangState extends State<ChainHang> {
+  String hangState = "";
+  String _radioValue = "";
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      if (widget.scoutData.getChainHang == "") {
+        hangState = "No";
+        widget.scoutData.setRobotCondition = hangState;
+      } else {
+        hangState = widget.scoutData.getChainHang;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +35,7 @@ class _ChargeStationState extends State<ChargeStation> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const Text(
-          'Charging\nStation',
+          'Did They Hang',
           style: TextStyle(
             fontSize: 35,
             fontFamily: 'Schyler',
@@ -39,19 +53,19 @@ class _ChargeStationState extends State<ChargeStation> {
                     horizontal: VisualDensity.minimumDensity,
                     vertical: VisualDensity.minimumDensity),
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                value: 'Engaged',
-                groupValue: chargeStationState,
+                value: 'Yes',
+                groupValue: hangState,
                 onChanged: (value) {
                   setState(() {
-                    chargeStationState = value.toString();
+                    hangState = value.toString();
+                    widget.scoutData.setChainHang = hangState;
                   });
-                  setMatchData();
                 },
               ),
             ),
             const SizedBox(width: 10),
             const Text(
-              'Engaged',
+              'Yes',
               style: TextStyle(
                 fontSize: 20,
                 fontFamily: 'Tahoma',
@@ -72,13 +86,45 @@ class _ChargeStationState extends State<ChargeStation> {
                     horizontal: VisualDensity.minimumDensity,
                     vertical: VisualDensity.minimumDensity),
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                value: 'Attempted',
-                groupValue: chargeStationState,
+                value: 'No',
+                groupValue: hangState,
                 onChanged: (value) {
                   setState(() {
-                    chargeStationState = value.toString();
+                    hangState = value.toString();
+                    widget.scoutData.setChainHang = hangState;
                   });
-                  setMatchData();
+                },
+              ),
+            ),
+            const SizedBox(width: 10),
+            const Text(
+              'No',
+              style: TextStyle(
+                fontSize: 20,
+                fontFamily: 'Tahoma',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 10),
+        Row(
+          children: [
+            Transform.scale(
+              scale: 1.25,
+              child: Radio(
+                activeColor: Colors.amber,
+                visualDensity: const VisualDensity(
+                    horizontal: VisualDensity.minimumDensity,
+                    vertical: VisualDensity.minimumDensity),
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                value: 'Attempted',
+                groupValue: hangState,
+                onChanged: (value) {
+                  setState(() {
+                    hangState = value.toString();
+                    widget.scoutData.setChainHang = hangState;
+                  });
                 },
               ),
             ),
@@ -104,45 +150,13 @@ class _ChargeStationState extends State<ChargeStation> {
                     horizontal: VisualDensity.minimumDensity,
                     vertical: VisualDensity.minimumDensity),
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                value: 'Parked',
-                groupValue: chargeStationState,
-                onChanged: (value) {
-                  setState(() {
-                    chargeStationState = value.toString();
-                  });
-                  setMatchData();
-                },
-              ),
-            ),
-            const SizedBox(width: 10),
-            const Text(
-              'Parked',
-              style: TextStyle(
-                fontSize: 20,
-                fontFamily: 'Tahoma',
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 10),
-        Row(
-          children: [
-            Transform.scale(
-              scale: 1.25,
-              child: Radio(
-                activeColor: Colors.amber,
-                visualDensity: const VisualDensity(
-                    horizontal: VisualDensity.minimumDensity,
-                    vertical: VisualDensity.minimumDensity),
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 value: 'Did Not Attempt',
-                groupValue: chargeStationState,
+                groupValue: hangState,
                 onChanged: (value) {
                   setState(() {
-                    chargeStationState = value.toString();
+                    hangState = value.toString();
+                    widget.scoutData.setChainHang = hangState;
                   });
-                  setMatchData();
                 },
               ),
             ),
@@ -159,13 +173,5 @@ class _ChargeStationState extends State<ChargeStation> {
         ),
       ],
     );
-  }
-
-  setMatchData() {
-    widget.scoutData.writeFile();
-  }
-
-  Future<void> readScoutFile() async {
-    await widget.scoutData.readFile();
   }
 }
