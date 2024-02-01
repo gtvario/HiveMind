@@ -106,8 +106,8 @@ class _StartMatchPageState extends State<StartMatchPage> {
       children: [
         const SizedBox(width: 35),
         Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const SizedBox(height: 22),
             DropdownButton(
               value: dropdownValue,
               icon: const Icon(Icons.keyboard_arrow_down),
@@ -130,29 +130,30 @@ class _StartMatchPageState extends State<StartMatchPage> {
                 });
               },
             ),
-            Container(
-              decoration: BoxDecoration(border: Border.all(width: 5.0)),
-              width: 600,
-              height: 400,
-              child: GestureDetector(
-                onTapDown: (details) {
-                  _handleTapDown(details);
-                  setState(() {
-                    currentPageIndex = 1;
-                  });
-                  createHighlightOverlay(
-                    alignment: AlignmentDirectional.bottomStart,
-                    borderColor: Colors.red,
-                    xPos: _tapPosition.dx,
-                    yPos: _tapPosition.dy,
-                  );
-                },
-                child: Image.asset(
-                  fieldImagePath,
-                ),
-              ),
-            ),
           ],
+        ),
+        const SizedBox(width: 35),
+        Container(
+          decoration: BoxDecoration(border: Border.all(width: 5.0)),
+          width: 600,
+          height: 400,
+          child: GestureDetector(
+            onTapDown: (details) {
+              _handleTapDown(details);
+              setState(() {
+                currentPageIndex = 1;
+              });
+              createHighlightOverlay(
+                alignment: AlignmentDirectional.bottomStart,
+                borderColor: Colors.red,
+                xPos: _tapPosition.dx,
+                yPos: _tapPosition.dy,
+              );
+            },
+            child: Image.asset(
+              fieldImagePath,
+            ),
+          ),
         ),
         Expanded(
           child: Column(

@@ -25,7 +25,7 @@ class _LeaveZoneState extends State<LeaveZone> {
     return Switch(
       // This bool value toggles the switch.
       value: light,
-      activeColor: Colors.yellow,
+      activeColor: Colors.amber,
       onChanged: (bool value) {
         // This is called when the user toggles the switch.
         setState(() {

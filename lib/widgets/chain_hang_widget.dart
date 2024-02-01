@@ -13,16 +13,12 @@ class ChainHang extends StatefulWidget {
 
 class _ChainHangState extends State<ChainHang> {
   String hangState = "";
-  String _radioValue = "";
 
   @override
   void initState() {
     super.initState();
     setState(() {
-      if (widget.scoutData.getChainHang == "") {
-        hangState = "No";
-        widget.scoutData.setRobotCondition = hangState;
-      } else {
+      if (widget.scoutData.getChainHang != "") {
         hangState = widget.scoutData.getChainHang;
       }
     });
@@ -53,7 +49,7 @@ class _ChainHangState extends State<ChainHang> {
                     horizontal: VisualDensity.minimumDensity,
                     vertical: VisualDensity.minimumDensity),
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                value: 'Yes',
+                value: 'No',
                 groupValue: hangState,
                 onChanged: (value) {
                   setState(() {
@@ -65,7 +61,7 @@ class _ChainHangState extends State<ChainHang> {
             ),
             const SizedBox(width: 10),
             const Text(
-              'Yes',
+              'No',
               style: TextStyle(
                 fontSize: 20,
                 fontFamily: 'Tahoma',
@@ -86,7 +82,7 @@ class _ChainHangState extends State<ChainHang> {
                     horizontal: VisualDensity.minimumDensity,
                     vertical: VisualDensity.minimumDensity),
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                value: 'No',
+                value: 'Yes',
                 groupValue: hangState,
                 onChanged: (value) {
                   setState(() {
@@ -98,7 +94,7 @@ class _ChainHangState extends State<ChainHang> {
             ),
             const SizedBox(width: 10),
             const Text(
-              'No',
+              'Yes',
               style: TextStyle(
                 fontSize: 20,
                 fontFamily: 'Tahoma',
