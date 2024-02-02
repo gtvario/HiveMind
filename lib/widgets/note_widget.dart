@@ -22,7 +22,7 @@ class _NoteState extends State<Note> {
     setState(() {
       _checked = _fieldNotes[widget.notePos] == 1;
       if (_checked) {
-        _image_path = Image.asset('assets/images/checkmark.png');
+        _image_path = Image.asset('assets/images/note_attempted.png');
       } else {
         _image_path = Image.asset('assets/images/note.png');
       }
@@ -38,7 +38,7 @@ class _NoteState extends State<Note> {
         onTapDown: (tap) {
           setState(() {
             if (!_checked) {
-              _image_path = Image.asset('assets/images/checkmark.png');
+              _image_path = Image.asset('assets/images/note_attempted.png');
               _checked = true;
               widget.scoutData.setFieldPickupAuto = [widget.notePos, 1];
             } else {

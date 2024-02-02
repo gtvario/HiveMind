@@ -95,11 +95,14 @@ class _StartMatchPageState extends State<StartMatchPage> {
   @override
   Widget build(BuildContext context) {
     String fieldImagePath = "";
+    Alignment fieldAlignment;
 
     if (widget.allianceColor == 'Red') {
       fieldImagePath = 'assets/images/RedField.png';
+      fieldAlignment = Alignment.centerRight;
     } else {
       fieldImagePath = 'assets/images/BlueField.png';
+      fieldAlignment = Alignment.centerLeft;
     }
 
     return Row(
@@ -134,6 +137,7 @@ class _StartMatchPageState extends State<StartMatchPage> {
         ),
         const SizedBox(width: 35),
         Container(
+          alignment: fieldAlignment,
           decoration: BoxDecoration(border: Border.all(width: 5.0)),
           width: 600,
           height: 400,

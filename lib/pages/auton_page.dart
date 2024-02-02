@@ -106,11 +106,38 @@ class _AutonPageState extends State<AutonPage> {
   @override
   Widget build(BuildContext context) {
     String fieldImagePath = "";
+    double leftAlignment;
+    int notePosColumn;
+    double fieldImageWidth = 600;
+    List<List<double>> notepositionsX = [
+      [128, 436.5],
+      [128, 436.5],
+      [128, 436.5],
+      [392, 174],
+      [392, 174],
+      [392, 174],
+      [392, 174],
+      [392, 174]
+    ];
+    List<List<double>> notepositionsY = [
+      [44, 45],
+      [113, 114],
+      [182, 183],
+      [22, 23],
+      [102, 103],
+      [182, 182.5],
+      [262, 262],
+      [342, 341]
+    ];
 
     if (widget.allianceColor == 'Red') {
       fieldImagePath = 'assets/images/RedField.png';
+      leftAlignment = 186;
+      notePosColumn = 1;
     } else {
       fieldImagePath = 'assets/images/BlueField_Auton.png';
+      leftAlignment = 0;
+      notePosColumn = 0;
     }
 
     return AnimatedContainer(
@@ -140,71 +167,74 @@ class _AutonPageState extends State<AutonPage> {
                     const SizedBox(height: 10),
                     Container(
                       decoration: BoxDecoration(border: Border.all(width: 5.0)),
-                      width: 600,
+                      width: fieldImageWidth,
                       height: 400,
                       child: Stack(
                         children: [
-                          Image.asset(
-                            fieldImagePath,
-                          ),
                           Positioned(
-                            top: 44,
-                            left: 128,
+                              left: leftAlignment,
+                              height: 390,
+                              child: Image.asset(
+                                fieldImagePath,
+                              )),
+                          Positioned(
+                            top: notepositionsY[0][notePosColumn],
+                            left: notepositionsX[0][notePosColumn],
                             height: 25,
                             width: 25,
                             child:
                                 Note(scoutData: widget.scoutData, notePos: 0),
                           ),
                           Positioned(
-                            top: 113,
-                            left: 128,
+                            top: notepositionsY[1][notePosColumn],
+                            left: notepositionsX[1][notePosColumn],
                             height: 25,
                             width: 25,
                             child:
                                 Note(scoutData: widget.scoutData, notePos: 1),
                           ),
                           Positioned(
-                              top: 182,
-                              left: 128,
+                              top: notepositionsY[2][notePosColumn],
+                              left: notepositionsX[2][notePosColumn],
                               height: 25,
                               width: 25,
                               child: Note(
                                   scoutData: widget.scoutData, notePos: 2)),
                           Positioned(
-                            top: 22,
-                            left: 392,
+                            top: notepositionsY[3][notePosColumn],
+                            left: notepositionsX[3][notePosColumn],
                             height: 25,
                             width: 25,
                             child:
                                 Note(scoutData: widget.scoutData, notePos: 3),
                           ),
                           Positioned(
-                            top: 102,
-                            left: 392,
+                            top: notepositionsY[4][notePosColumn],
+                            left: notepositionsX[4][notePosColumn],
                             height: 25,
                             width: 25,
                             child:
                                 Note(scoutData: widget.scoutData, notePos: 4),
                           ),
                           Positioned(
-                            top: 182,
-                            left: 392,
+                            top: notepositionsY[5][notePosColumn],
+                            left: notepositionsX[5][notePosColumn],
                             height: 25,
                             width: 25,
                             child:
                                 Note(scoutData: widget.scoutData, notePos: 5),
                           ),
                           Positioned(
-                            top: 262,
-                            left: 392,
+                            top: notepositionsY[6][notePosColumn],
+                            left: notepositionsX[6][notePosColumn],
                             height: 25,
                             width: 25,
                             child:
                                 Note(scoutData: widget.scoutData, notePos: 6),
                           ),
                           Positioned(
-                            top: 342,
-                            left: 392,
+                            top: notepositionsY[7][notePosColumn],
+                            left: notepositionsX[7][notePosColumn],
                             height: 25,
                             width: 25,
                             child:
