@@ -17,6 +17,7 @@ class _StartMatchPageState extends State<StartMatchPage> {
   int currentPageIndex = 0;
   var _tapPosition;
   String dropdownValue = "Select Student Name";
+  List<double> robotStartingPos = [0, 0];
 
   void _handleTapDown(TapDownDetails details) {
     final RenderBox referenceBox = context.findRenderObject() as RenderBox;
@@ -26,8 +27,6 @@ class _StartMatchPageState extends State<StartMatchPage> {
   }
 
   void createHighlightOverlay({
-    required AlignmentDirectional alignment,
-    required Color borderColor,
     required double xPos,
     required double yPos,
   }) {
@@ -37,10 +36,14 @@ class _StartMatchPageState extends State<StartMatchPage> {
     double fieldAdjustedX = 0;
     double fieldAdjustedY = 0;
 
+    String robot_image = '';
+
     if (widget.allianceColor == 'Red') {
+      robot_image = 'assets/images/red_robot.png';
       fieldAdjustedX = (xPos * -1) + 628;
       fieldAdjustedY = (yPos) - 172;
     } else {
+      robot_image = 'assets/images/blue_robot.png';
       fieldAdjustedX = xPos - 40;
       fieldAdjustedY = (yPos) - 172;
     }
@@ -60,8 +63,7 @@ class _StartMatchPageState extends State<StartMatchPage> {
           child: Align(
             alignment: Alignment(adjustedXPos, adjustedYPos),
             heightFactor: 1.0,
-            child: Transform.scale(
-                scale: 1.5, child: const Icon(Icons.circle, color: Colors.red)),
+            child: Image.asset(robot_image),
           ),
         );
       },
@@ -94,6 +96,16 @@ class _StartMatchPageState extends State<StartMatchPage> {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // executes after build
+      robotStartingPos = widget.scoutData.getStartingPos;
+      if (robotStartingPos[0] > 0 && robotStartingPos[1] > 0) {
+        createHighlightOverlay(
+          xPos: robotStartingPos[0],
+          yPos: robotStartingPos[1],
+        );
+      }
+    });
     String fieldImagePath = "";
     Alignment fieldAlignment;
 
@@ -145,11 +157,13 @@ class _StartMatchPageState extends State<StartMatchPage> {
             onTapDown: (details) {
               _handleTapDown(details);
               setState(() {
+                widget.scoutData.setStartingPos = [
+                  _tapPosition.dx,
+                  _tapPosition.dy
+                ];
                 currentPageIndex = 1;
               });
               createHighlightOverlay(
-                alignment: AlignmentDirectional.bottomStart,
-                borderColor: Colors.red,
                 xPos: _tapPosition.dx,
                 yPos: _tapPosition.dy,
               );

@@ -6,7 +6,7 @@ import 'package:path_provider/path_provider.dart';
 
 class ScoutData {
   // Auton
-  int startingPos = 0;
+  List<double> startingPos = [0, 0];
   bool leaveZone = false;
   int speakerCountAuto = 0;
   int ampCountAuto = 0;
@@ -41,7 +41,7 @@ class ScoutData {
 // ***************************
 // Auto Getters
 // ***************************
-  int get getStartingPos {
+  List<double> get getStartingPos {
     return startingPos;
   }
 
@@ -72,7 +72,7 @@ class ScoutData {
 // ***************************
 // Auto Setters
 // ***************************
-  set setStartingPos(int argIn) {
+  set setStartingPos(List<double> argIn) {
     startingPos = argIn;
   }
 
