@@ -8,10 +8,10 @@ class ScoutData {
   // Auton
   List<double> startingPos = [0, 0];
   bool leaveZone = false;
-  int speakerCountAuto = 0;
-  int ampCountAuto = 0;
-  int missedSpeakerCountAuto = 0; // Do we need this??
-  int missedAmpCountAuto = 0; // Do we need this??
+  int autoSpeakerMade = 0;
+  int autoAmpMade = 0;
+  int autoSpeakerMissed = 0; // Do we need this??
+  int autoAmpMissed = 0; // Do we need this??
   List<int> fieldPickupAuto = [0, 0, 0, 0, 0, 0, 0, 0];
 
   // Teleop
@@ -49,20 +49,20 @@ class ScoutData {
     return leaveZone;
   }
 
-  int get getSpeakerCountAuto {
-    return speakerCountAuto;
+  int get getAutoSpeakerMade {
+    return autoSpeakerMade;
   }
 
-  int get getAmpCountAuto {
-    return ampCountAuto;
+  int get getAutoAmpMade {
+    return autoAmpMade;
   }
 
-  int get getMissedSpeakerCountAuto {
-    return missedSpeakerCountAuto;
+  int get getAutoSpeakerMissed {
+    return autoSpeakerMissed;
   }
 
-  int get getMissedAmpCountAuto {
-    return missedAmpCountAuto;
+  int get getAutoAmpMissed {
+    return autoAmpMissed;
   }
 
   List<int> get getFieldPickupAuto {
@@ -80,20 +80,20 @@ class ScoutData {
     leaveZone = argIn;
   }
 
-  set setSpeakerCountAuto(int argIn) {
-    speakerCountAuto = argIn;
+  set setAutoSpeakerMade(int argIn) {
+    autoSpeakerMade = argIn;
   }
 
-  set setAmpCountAuto(int argIn) {
-    ampCountAuto = argIn;
+  set setAutoAmpMade(int argIn) {
+    autoAmpMade = argIn;
   }
 
-  set setMissedSpeakerCountAuto(int argIn) {
-    missedSpeakerCountAuto = argIn;
+  set setAutoSpeakerMissed(int argIn) {
+    autoSpeakerMissed = argIn;
   }
 
-  set setMissedAmpCountAuto(int argIn) {
-    missedAmpCountAuto = argIn;
+  set setAutoAmpMissed(int argIn) {
+    autoAmpMissed = argIn;
   }
 
   set setFieldPickupAuto(List<int> argIn) {
@@ -167,12 +167,12 @@ class ScoutData {
 
     var obj = {
       "auton": {
-        "position": startingPos,
-        "leave": leaveZone,
-        "note_auto_speaker": speakerCountAuto,
-        "note_auto_amp": ampCountAuto,
-        "missed_speaker_auto": missedSpeakerCountAuto,
-        "missed_amp_auto": missedAmpCountAuto,
+        "start_position": startingPos,
+        "leave_start_zone": leaveZone,
+        "auto_speaker_made": autoSpeakerMade,
+        "auto_amp_made": autoAmpMade,
+        "auto_speaker_missed": autoSpeakerMissed,
+        "auto_amp_missed": autoAmpMissed,
         "field_pickup_auto": fieldPickupAuto
       },
       "teleop": {},
