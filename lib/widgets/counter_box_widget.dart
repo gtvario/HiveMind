@@ -15,7 +15,7 @@ class CounterBox extends StatelessWidget {
         controller: TextEditingController(),
         enabled: true,
         incDecBgColor: Colors.amber,
-        buttonArrangement: ButtonArrangement.incRightDecLeft,
+        buttonArrangement: ButtonArrangement.rightEnd,
       ),
     );
   }
