@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinbox/flutter_spinbox.dart';
 import 'package:hivemind/models/scout_data_model.dart';
 import 'package:hivemind/widgets/counter_box_widget.dart';
 import 'package:hivemind/widgets/teleop_scoring_widget.dart';
@@ -29,9 +30,9 @@ class _TeleopPageState extends State<TeleopPage> {
     required double yPos,
   }) {
     // Remove the existing OverlayEntry.
-    double adjustedXPos = ((xPos - 10) - 470) / 470;
+    double adjustedXPos = ((xPos - 10) - 495) / 495;
     double adjustedYPos = ((yPos + 35) - 250) / 250;
-
+    //print("X: $xPos Y: $yPos adjX: $adjustedXPos adjY: $adjustedYPos");
     removeHighlightOverlay();
 
     assert(overlayEntry == null);
@@ -71,50 +72,191 @@ class _TeleopPageState extends State<TeleopPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 5),
-        const Text(
-          "Teleop",
-          style: TextStyle(
-              fontSize: 55,
-              fontFamily: 'Schyler',
-              decoration: TextDecoration.underline),
-        ),
-        const SizedBox(height: 10),
-        Row(
-          //Scoring counters
-          children: [
-            CounterBox(),
-            CounterBox(),
-            CounterBox(),
-          ],
-        ),
-        Row(
-          children: [
-            Container(
-              width: 800,
-              height: 250,
-              child: GestureDetector(
-                //Add onTap
-                child: Image.asset("assets/images/field24.png"),
-                onTapDown: (details) {
-                  _handleTapDown(details);
-                  setState(() {
-                    currentPageIndex = 1;
-                  });
-                  createHighlightOverlay(
-                    alignment: AlignmentDirectional.bottomStart,
-                    borderColor: Colors.red,
-                    xPos: _tapPosition.dx,
-                    yPos: _tapPosition.dy,
-                  );
-                },
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const SizedBox(height: 5),
+          const Text(
+            "Teleop",
+            style: TextStyle(
+                fontSize: 55,
+                fontFamily: 'Schyler',
+                decoration: TextDecoration.underline),
+          ),
+          const SizedBox(height: 10),
+          Row(
+            //Scoring counters
+            children: [
+              Column(
+                children: [
+                  const Text("Speaker"),
+                  Row(
+                    children: [
+                      Column(
+                        children: [
+                          const Text("Made"),
+                          SizedBox(
+                            width: 50,
+                            height: 200,
+                            child: SpinBox(
+                              min: 0,
+                              max: 90,
+                              value: 0,
+                              direction: Axis.vertical,
+                              spacing: 1,
+                              showButtons: true,
+                              enabled: false,
+                              iconColor: MaterialStateProperty.all(Colors.red),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          const Text("Miss"),
+                          SizedBox(
+                            width: 50,
+                            height: 200,
+                            child: SpinBox(
+                              min: 0,
+                              max: 90,
+                              value: 0,
+                              direction: Axis.vertical,
+                              spacing: 1,
+                              showButtons: true,
+                              enabled: false,
+                              iconColor: MaterialStateProperty.all(Colors.red),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  )
+                ],
               ),
-            ),
-          ],
-        )
-      ],
+              const Padding(padding: EdgeInsets.all(20)),
+              Column(
+                children: [
+                  const Text("Amp"),
+                  Row(
+                    children: [
+                      Column(
+                        children: [
+                          const Text("Made"),
+                          SizedBox(
+                            width: 50,
+                            height: 200,
+                            child: SpinBox(
+                              min: 0,
+                              max: 90,
+                              value: 0,
+                              direction: Axis.vertical,
+                              spacing: 1,
+                              showButtons: true,
+                              enabled: false,
+                              iconColor: MaterialStateProperty.all(Colors.red),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          const Text("Miss"),
+                          SizedBox(
+                            width: 50,
+                            height: 200,
+                            child: SpinBox(
+                              min: 0,
+                              max: 90,
+                              value: 0,
+                              direction: Axis.vertical,
+                              spacing: 1,
+                              showButtons: true,
+                              enabled: false,
+                              iconColor: MaterialStateProperty.all(Colors.red),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  )
+                ],
+              ),
+              const Padding(padding: EdgeInsets.all(20)),
+              Column(
+                children: [
+                  Row(
+                    children: [
+                      Column(
+                        children: [
+                          const Text("TITLE"),
+                          SizedBox(
+                            width: 50,
+                            height: 200,
+                            child: SpinBox(
+                              min: 0,
+                              max: 90,
+                              value: 0,
+                              direction: Axis.vertical,
+                              spacing: 1,
+                              showButtons: true,
+                              enabled: false,
+                              iconColor: MaterialStateProperty.all(Colors.red),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          const Text("TITLE"),
+                          SizedBox(
+                            width: 50,
+                            height: 200,
+                            child: SpinBox(
+                              min: 0,
+                              max: 90,
+                              value: 0,
+                              direction: Axis.vertical,
+                              spacing: 1,
+                              showButtons: true,
+                              enabled: false,
+                              iconColor: MaterialStateProperty.all(Colors.red),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  )
+                ],
+              )
+            ],
+          ),
+          Row(
+            children: [
+              Container(
+                width: 450,
+                height: 250,
+                child: GestureDetector(
+                  //Add onTap
+                  child: Image.asset("assets/images/field24.png"),
+                  onTapDown: (details) {
+                    _handleTapDown(details);
+                    setState(() {
+                      currentPageIndex = 1;
+                    });
+                    createHighlightOverlay(
+                      alignment: AlignmentDirectional.bottomStart,
+                      borderColor: Colors.red,
+                      xPos: _tapPosition.dx,
+                      yPos: _tapPosition.dy,
+                    );
+                  },
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 }
