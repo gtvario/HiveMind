@@ -15,6 +15,7 @@ class TeleopPage extends StatefulWidget {
 class _TeleopPageState extends State<TeleopPage> {
   OverlayEntry? overlayEntry;
   int currentPageIndex = 0;
+  bool leftTrap = false, centerTrap = false, rightTrap = false;
   var _tapPosition;
   void _handleTapDown(TapDownDetails details) {
     final RenderBox referenceBox = context.findRenderObject() as RenderBox;
@@ -185,11 +186,57 @@ class _TeleopPageState extends State<TeleopPage> {
               const Padding(padding: EdgeInsets.all(20)),
               Column(
                 children: [
+                  const Text("Trap"),
+                  Column(
+                    children: [
+                      SizedBox(
+                        height: 50,
+                        width: 150,
+                        child: CheckboxListTile(
+                            title: const Text("Left"),
+                            value: leftTrap,
+                            onChanged: (value) {
+                              setState(() {
+                                leftTrap = !leftTrap;
+                              });
+                            }),
+                      ),
+                      SizedBox(
+                        height: 50,
+                        width: 150,
+                        child: CheckboxListTile(
+                            title: const Text("Center"),
+                            value: centerTrap,
+                            onChanged: (value) {
+                              setState(() {
+                                centerTrap = !centerTrap;
+                              });
+                            }),
+                      ),
+                      SizedBox(
+                        height: 50,
+                        width: 150,
+                        child: CheckboxListTile(
+                            title: const Text("Right"),
+                            value: rightTrap,
+                            onChanged: (value) {
+                              setState(() {
+                                rightTrap = !rightTrap;
+                              });
+                            }),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              const Padding(padding: EdgeInsets.all(20)),
+              Column(
+                children: [
                   Row(
                     children: [
                       Column(
                         children: [
-                          const Text("TITLE"),
+                          const Text("Passed"),
                           SizedBox(
                             width: 50,
                             height: 200,
@@ -200,40 +247,21 @@ class _TeleopPageState extends State<TeleopPage> {
                               direction: Axis.vertical,
                               spacing: 1,
                               showButtons: true,
-                              enabled: false,
+                              enabled: true,
                               iconColor: MaterialStateProperty.all(Colors.red),
                             ),
                           ),
                         ],
                       ),
-                      Column(
-                        children: [
-                          const Text("TITLE"),
-                          SizedBox(
-                            width: 50,
-                            height: 200,
-                            child: SpinBox(
-                              min: 0,
-                              max: 90,
-                              value: 0,
-                              direction: Axis.vertical,
-                              spacing: 1,
-                              showButtons: true,
-                              enabled: false,
-                              iconColor: MaterialStateProperty.all(Colors.red),
-                            ),
-                          ),
-                        ],
-                      )
                     ],
                   )
                 ],
-              )
+              ),
             ],
           ),
           Row(
             children: [
-              Container(
+              SizedBox(
                 width: 450,
                 height: 250,
                 child: GestureDetector(
