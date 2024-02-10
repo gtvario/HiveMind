@@ -31,7 +31,7 @@ class _ChainHangState extends State<ChainHang> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const Text(
-          'Did They Hang',
+          'Stage Status',
           style: TextStyle(
             fontSize: 35,
             fontFamily: 'Schyler',
@@ -49,7 +49,7 @@ class _ChainHangState extends State<ChainHang> {
                     horizontal: VisualDensity.minimumDensity,
                     vertical: VisualDensity.minimumDensity),
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                value: 'No',
+                value: 'Hanging',
                 groupValue: hangState,
                 onChanged: (value) {
                   setState(() {
@@ -61,7 +61,7 @@ class _ChainHangState extends State<ChainHang> {
             ),
             const SizedBox(width: 10),
             const Text(
-              'No',
+              'Hanging',
               style: TextStyle(
                 fontSize: 20,
                 fontFamily: 'Tahoma',
@@ -82,7 +82,7 @@ class _ChainHangState extends State<ChainHang> {
                     horizontal: VisualDensity.minimumDensity,
                     vertical: VisualDensity.minimumDensity),
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                value: 'Yes',
+                value: 'Parked',
                 groupValue: hangState,
                 onChanged: (value) {
                   setState(() {
@@ -94,7 +94,7 @@ class _ChainHangState extends State<ChainHang> {
             ),
             const SizedBox(width: 10),
             const Text(
-              'Yes',
+              'Parked',
               style: TextStyle(
                 fontSize: 20,
                 fontFamily: 'Tahoma',
@@ -114,7 +114,7 @@ class _ChainHangState extends State<ChainHang> {
                     horizontal: VisualDensity.minimumDensity,
                     vertical: VisualDensity.minimumDensity),
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                value: 'Attempted',
+                value: 'Neither',
                 groupValue: hangState,
                 onChanged: (value) {
                   setState(() {
@@ -126,39 +126,7 @@ class _ChainHangState extends State<ChainHang> {
             ),
             const SizedBox(width: 10),
             const Text(
-              'Attempted',
-              style: TextStyle(
-                fontSize: 20,
-                fontFamily: 'Tahoma',
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 10),
-        Row(
-          children: [
-            Transform.scale(
-              scale: 1.25,
-              child: Radio(
-                activeColor: Colors.amber,
-                visualDensity: const VisualDensity(
-                    horizontal: VisualDensity.minimumDensity,
-                    vertical: VisualDensity.minimumDensity),
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                value: 'Did Not Attempt',
-                groupValue: hangState,
-                onChanged: (value) {
-                  setState(() {
-                    hangState = value.toString();
-                    widget.scoutData.setChainHang = hangState;
-                  });
-                },
-              ),
-            ),
-            const SizedBox(width: 10),
-            const Text(
-              'Did Not Attempt',
+              'Neither',
               style: TextStyle(
                 fontSize: 20,
                 fontFamily: 'Tahoma',

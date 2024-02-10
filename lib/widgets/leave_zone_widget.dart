@@ -10,13 +10,13 @@ class LeaveZone extends StatefulWidget {
 }
 
 class _LeaveZoneState extends State<LeaveZone> {
-  bool light = false;
+  bool zoneLeft = false;
 
   @override
   void initState() {
     super.initState();
     setState(() {
-      light = widget.scoutData.getLeaveZone;
+      zoneLeft = widget.scoutData.getLeaveZone;
     });
   }
 
@@ -24,14 +24,14 @@ class _LeaveZoneState extends State<LeaveZone> {
   Widget build(BuildContext context) {
     return Switch(
       // This bool value toggles the switch.
-      value: light,
+      value: zoneLeft,
       activeColor: Colors.amber,
       onChanged: (bool value) {
         // This is called when the user toggles the switch.
         setState(() {
-          light = value;
+          zoneLeft = value;
         });
-        widget.scoutData.setLeaveZone = light;
+        widget.scoutData.setLeaveZone = zoneLeft;
       },
     );
   }

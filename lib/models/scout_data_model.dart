@@ -7,7 +7,7 @@ import 'package:path_provider/path_provider.dart';
 class ScoutData {
   // Auton
   List<double> startingPos = [0, 0];
-  bool leaveZone = false;
+  int leaveZone = 0;
   int autoSpeakerMade = 0;
   int autoAmpMade = 0;
   int autoSpeakerMissed = 0; // Do we need this??
@@ -15,6 +15,12 @@ class ScoutData {
   List<int> fieldPickupAuto = [0, 0, 0, 0, 0, 0, 0, 0];
 
   // Teleop
+  int trapsScored = 0;
+  int notesPassed = 0;
+  int teleopSpeakerMade = 0;
+  int teleopAmpMade = 0;
+  int teleopSpeakerMissed = 0;
+  int teleopAmpMissed = 0;
 
   // Endgame
   String chainHang = "";
@@ -46,7 +52,7 @@ class ScoutData {
   }
 
   bool get getLeaveZone {
-    return leaveZone;
+    return leaveZone == 0 ? false : true;
   }
 
   int get getAutoSpeakerMade {
@@ -77,7 +83,7 @@ class ScoutData {
   }
 
   set setLeaveZone(bool argIn) {
-    leaveZone = argIn;
+    leaveZone = argIn == false ? 0 : 1;
   }
 
   set setAutoSpeakerMade(int argIn) {
@@ -98,6 +104,60 @@ class ScoutData {
 
   set setFieldPickupAuto(List<int> argIn) {
     fieldPickupAuto[argIn[0]] = argIn[1];
+  }
+
+  // **************************
+  // Teleop Getters
+  // **************************
+  int get getTrapsScored {
+    return trapsScored;
+  }
+
+  int get getNotesPassed {
+    return notesPassed;
+  }
+
+  int get getTeleopSpeakerMade {
+    return teleopSpeakerMade;
+  }
+
+  int get getTeleopAmpMade {
+    return teleopAmpMade;
+  }
+
+  int get getTeleopSpeakerMissed {
+    return teleopSpeakerMissed;
+  }
+
+  int get getTeleopAmpMissed {
+    return teleopAmpMissed;
+  }
+
+  // ***************************
+  // Auto Setters
+  // ***************************
+  set setNotesPassed(int argIn) {
+    notesPassed = argIn;
+  }
+
+  set setTrapsScored(int argIn) {
+    setTrapsScored = argIn;
+  }
+
+  set setTeleopSpeakerMade(int argIn) {
+    teleopSpeakerMade = argIn;
+  }
+
+  set setTeleopAmpMade(int argIn) {
+    teleopAmpMade = argIn;
+  }
+
+  set setTeleopSpeakerMissed(int argIn) {
+    teleopSpeakerMissed = argIn;
+  }
+
+  set setTeleopAmpMissed(int argIn) {
+    teleopAmpMissed = argIn;
   }
 
   // **************************
@@ -170,12 +230,19 @@ class ScoutData {
         "start_position": startingPos,
         "leave_start_zone": leaveZone,
         "auto_speaker_made": autoSpeakerMade,
-        "auto_amp_made": autoAmpMade,
         "auto_speaker_missed": autoSpeakerMissed,
+        "auto_amp_made": autoAmpMade,
         "auto_amp_missed": autoAmpMissed,
         "field_pickup_auto": fieldPickupAuto
       },
-      "teleop": {},
+      "teleop": {
+        "notes_passed": notesPassed,
+        "traps_scored": trapsScored,
+        "teleop_speaker_made": teleopSpeakerMade,
+        "teleop_speaker_missed": teleopSpeakerMissed,
+        "teleop_amp_made": teleopAmpMade,
+        "teleop_amp_missed": teleopAmpMissed
+      },
       "endgame": {
         "chain_hang": chainHang,
         "robot_condition": condition,
