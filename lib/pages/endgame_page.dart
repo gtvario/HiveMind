@@ -42,9 +42,9 @@ class _EndgamePageState extends State<EndgamePage> {
           children: [
             const SizedBox(width: 50),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ChainHang(
-                  mode: 'endgame',
                   scoutData: widget.scoutData,
                 ),
               ],

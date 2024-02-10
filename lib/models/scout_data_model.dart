@@ -24,6 +24,7 @@ class ScoutData {
 
   // Endgame
   String chainHang = "";
+  int onstageParked = 0;
   String condition = "";
   String comments = "";
   int defenseScore = 3, drivingScore = 3;
@@ -167,6 +168,10 @@ class ScoutData {
     return chainHang;
   }
 
+  int get getOnstageParked {
+    return onstageParked;
+  }
+
   String get getComments {
     return comments;
   }
@@ -196,6 +201,10 @@ class ScoutData {
   // **************************
   set setChainHang(String argIn) {
     chainHang = argIn;
+  }
+
+  set setOnstageParked(int argIn) {
+    onstageParked = argIn;
   }
 
   set setComments(String comment) {
@@ -245,6 +254,7 @@ class ScoutData {
       },
       "endgame": {
         "chain_hang": chainHang,
+        "onstage_parked": onstageParked,
         "robot_condition": condition,
         "defense_played": playedDefense,
         "defense_score": defenseScore,
