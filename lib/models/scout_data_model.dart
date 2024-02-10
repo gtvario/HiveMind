@@ -7,7 +7,7 @@ import 'package:path_provider/path_provider.dart';
 class ScoutData {
   // Auton
   List<double> startingPos = [0, 0];
-  bool leaveZone = false;
+  int leaveZone = 0;
   int autoSpeakerMade = 0;
   int autoAmpMade = 0;
   int autoSpeakerMissed = 0; // Do we need this??
@@ -52,7 +52,7 @@ class ScoutData {
   }
 
   bool get getLeaveZone {
-    return leaveZone;
+    return leaveZone == 0 ? false : true;
   }
 
   int get getAutoSpeakerMade {
@@ -83,7 +83,7 @@ class ScoutData {
   }
 
   set setLeaveZone(bool argIn) {
-    leaveZone = argIn;
+    leaveZone = argIn == false ? 0 : 1;
   }
 
   set setAutoSpeakerMade(int argIn) {
