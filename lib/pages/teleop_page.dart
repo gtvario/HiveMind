@@ -19,9 +19,9 @@ class _TeleopPageState extends State<TeleopPage> {
   bool scoringEnable = false;
   double currTapX = -1, currTapY = -1;
 
-  EventList? currEvent;
+  ScoreEvent? currEvent;
 
-  List<EventList> gameEvents = [];
+  List<ScoreEvent> gameEvents = [];
   var _tapPosition;
   void _handleTapDown(TapDownDetails details) {
     final RenderBox referenceBox = context.findRenderObject() as RenderBox;
@@ -43,7 +43,7 @@ class _TeleopPageState extends State<TeleopPage> {
     currTapX = adjustedXPos;
     currTapY = adjustedYPos;
 
-    currEvent ??= EventList(currTapX, currTapY);
+    currEvent ??= ScoreEvent(currTapX, currTapY);
 
     currEvent?.setXPos = currTapX;
     currEvent?.setYPos = currTapY;
@@ -438,12 +438,12 @@ class _TeleopPageState extends State<TeleopPage> {
   }
 }
 
-class EventList {
+class ScoreEvent {
   double xPos = 0, yPos = 0;
   int speakMade = 0, speakMiss = 0, ampMade = 0, ampMiss = 0, pass = 0;
   bool trapL = false, trapR = false, trapC = false;
 
-  EventList(this.xPos, this.yPos);
+  ScoreEvent(this.xPos, this.yPos);
 
   @override
   String toString() => "X: $xPos, Y:$yPos";
