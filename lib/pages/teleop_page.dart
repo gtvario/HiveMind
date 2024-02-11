@@ -17,6 +17,11 @@ class _TeleopPageState extends State<TeleopPage> {
   int currentPageIndex = 0;
   bool leftTrap = false, centerTrap = false, rightTrap = false;
   bool scoringEnable = false;
+  double currTapX = -1, currTapY = -1;
+
+  EventList? currEvent;
+
+  List<EventList> gameEvents = [];
   var _tapPosition;
   void _handleTapDown(TapDownDetails details) {
     final RenderBox referenceBox = context.findRenderObject() as RenderBox;
@@ -34,7 +39,15 @@ class _TeleopPageState extends State<TeleopPage> {
     // Remove the existing OverlayEntry.
     double adjustedXPos = ((xPos - 10) - 450) / 450;
     double adjustedYPos = ((yPos + 35) - 250) / 250;
-    //print("X: $xPos Y: $yPos adjX: $adjustedXPos adjY: $adjustedYPos");
+
+    currTapX = adjustedXPos;
+    currTapY = adjustedYPos;
+
+    currEvent ??= EventList(currTapX, currTapY);
+
+    currEvent?.setXPos = currTapX;
+    currEvent?.setYPos = currTapY;
+
     removeHighlightOverlay();
 
     assert(overlayEntry == null);
@@ -116,6 +129,16 @@ class _TeleopPageState extends State<TeleopPage> {
                                               Colors.green)
                                           : MaterialStateProperty.all(
                                               Colors.red),
+                                      onChanged: (value) {
+                                        setState(() {
+                                          currEvent?.setSpeakMade =
+                                              value.toInt();
+                                          gameEvents.add(currEvent!);
+                                          currEvent = null;
+                                          removeHighlightOverlay();
+                                          scoringEnable = false;
+                                        });
+                                      },
                                     ),
                                   ),
                                 ],
@@ -139,6 +162,16 @@ class _TeleopPageState extends State<TeleopPage> {
                                               Colors.green)
                                           : MaterialStateProperty.all(
                                               Colors.red),
+                                      onChanged: (value) {
+                                        setState(() {
+                                          currEvent?.setSpeakMiss =
+                                              value.toInt();
+                                          gameEvents.add(currEvent!);
+                                          currEvent = null;
+                                          removeHighlightOverlay();
+                                          scoringEnable = false;
+                                        });
+                                      },
                                     ),
                                   ),
                                 ],
@@ -172,6 +205,15 @@ class _TeleopPageState extends State<TeleopPage> {
                                               Colors.green)
                                           : MaterialStateProperty.all(
                                               Colors.red),
+                                      onChanged: (value) {
+                                        setState(() {
+                                          currEvent?.setAmpMade = value.toInt();
+                                          gameEvents.add(currEvent!);
+                                          currEvent = null;
+                                          removeHighlightOverlay();
+                                          scoringEnable = false;
+                                        });
+                                      },
                                     ),
                                   ),
                                 ],
@@ -195,6 +237,15 @@ class _TeleopPageState extends State<TeleopPage> {
                                               Colors.green)
                                           : MaterialStateProperty.all(
                                               Colors.red),
+                                      onChanged: (value) {
+                                        setState(() {
+                                          currEvent?.setAmpMiss = value.toInt();
+                                          gameEvents.add(currEvent!);
+                                          currEvent = null;
+                                          removeHighlightOverlay();
+                                          scoringEnable = false;
+                                        });
+                                      },
                                     ),
                                   ),
                                 ],
@@ -222,6 +273,11 @@ class _TeleopPageState extends State<TeleopPage> {
                                     onChanged: (value) {
                                       setState(() {
                                         leftTrap = !leftTrap;
+                                        currEvent?.setTrapL = leftTrap;
+                                        gameEvents.add(currEvent!);
+                                        currEvent = null;
+                                        removeHighlightOverlay();
+                                        scoringEnable = false;
                                       });
                                     }),
                               ),
@@ -235,6 +291,11 @@ class _TeleopPageState extends State<TeleopPage> {
                                     onChanged: (value) {
                                       setState(() {
                                         centerTrap = !centerTrap;
+                                        currEvent?.setTrapC = centerTrap;
+                                        gameEvents.add(currEvent!);
+                                        currEvent = null;
+                                        removeHighlightOverlay();
+                                        scoringEnable = false;
                                       });
                                     }),
                               ),
@@ -248,6 +309,11 @@ class _TeleopPageState extends State<TeleopPage> {
                                     onChanged: (value) {
                                       setState(() {
                                         rightTrap = !rightTrap;
+                                        currEvent?.setTrapR = rightTrap;
+                                        gameEvents.add(currEvent!);
+                                        currEvent = null;
+                                        removeHighlightOverlay();
+                                        scoringEnable = false;
                                       });
                                     }),
                               ),
@@ -281,6 +347,9 @@ class _TeleopPageState extends State<TeleopPage> {
                                               Colors.red),
                                       onChanged: (value) {
                                         setState(() {
+                                          currEvent?.setPass = value.toInt();
+                                          gameEvents.add(currEvent!);
+                                          currEvent = null;
                                           scoringEnable = false;
                                           removeHighlightOverlay();
                                         });
@@ -298,40 +367,165 @@ class _TeleopPageState extends State<TeleopPage> {
                 ],
               ),
               const Padding(padding: EdgeInsets.all(20)),
-              Column(
-                children: [
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 550,
-                        height: 250,
-                        child: GestureDetector(
-                          //Add onTap
-                          child: Image.asset("assets/images/field24.png"),
-                          onTapDown: (details) {
-                            _handleTapDown(details);
-                            setState(() {
-                              currentPageIndex = 1;
-                              scoringEnable = true;
-                            });
-                            createHighlightOverlay(
-                              alignment: AlignmentDirectional.bottomStart,
-                              borderColor: Colors.red,
-                              xPos: _tapPosition.dx,
-                              yPos: _tapPosition.dy,
-                            );
-                          },
+              Expanded(
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 550,
+                          height: 250,
+                          child: GestureDetector(
+                            //Add onTap
+                            child: Image.asset("assets/images/field24.png"),
+                            onTapDown: (details) {
+                              _handleTapDown(details);
+                              setState(() {
+                                currentPageIndex = 1;
+                                scoringEnable = true;
+                              });
+                              createHighlightOverlay(
+                                alignment: AlignmentDirectional.bottomStart,
+                                borderColor: Colors.red,
+                                xPos: _tapPosition.dx,
+                                yPos: _tapPosition.dy,
+                              );
+                            },
+                          ),
                         ),
+                      ],
+                    ),
+                    const Padding(padding: EdgeInsets.all(20)),
+                    SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: gameEvents.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    gameEvents.removeAt(index);
+                                  });
+                                },
+                                child: Card(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Column(
+                                      children: [
+                                        Text(gameEvents[index].toString()),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  const Padding(padding: EdgeInsets.all(90)),
-                ],
+                    ),
+                  ],
+                ),
               )
             ],
           )
         ],
       ),
     );
+  }
+}
+
+class EventList {
+  double xPos = 0, yPos = 0;
+  int speakMade = 0, speakMiss = 0, ampMade = 0, ampMiss = 0, pass = 0;
+  bool trapL = false, trapR = false, trapC = false;
+
+  EventList(this.xPos, this.yPos);
+
+  @override
+  String toString() => "X: $xPos, Y:$yPos";
+
+  set setXPos(double xPosition) {
+    xPos = xPosition;
+  }
+
+  set setYPos(double yPosition) {
+    yPos = yPosition;
+  }
+
+  set setSpeakMade(int speakerMade) {
+    speakMade = speakerMade;
+  }
+
+  set setSpeakMiss(int speakerMiss) {
+    speakMiss = speakerMiss;
+  }
+
+  set setAmpMade(int amplifyMade) {
+    ampMade = amplifyMade;
+  }
+
+  set setAmpMiss(int amplifyMiss) {
+    ampMiss = amplifyMiss;
+  }
+
+  set setPass(int passing) {
+    pass = passing;
+  }
+
+  set setTrapL(bool trapLeft) {
+    trapL = trapLeft;
+  }
+
+  set setTrapR(bool trapRight) {
+    trapR = trapRight;
+  }
+
+  set setTrapC(bool trapCenter) {
+    trapC = trapCenter;
+  }
+
+  // Getters
+  double get getXPos {
+    return xPos;
+  }
+
+  double get getYPos {
+    return yPos;
+  }
+
+  int get getSpeakMade {
+    return speakMade;
+  }
+
+  int get getSpeakMiss {
+    return speakMiss;
+  }
+
+  int get getYAmpMade {
+    return ampMade;
+  }
+
+  int get getAmpMiss {
+    return ampMiss;
+  }
+
+  int get getPass {
+    return pass;
+  }
+
+  bool get getTrapL {
+    return trapL;
+  }
+
+  bool get getTrapR {
+    return trapR;
+  }
+
+  bool get getTrapC {
+    return trapC;
   }
 }

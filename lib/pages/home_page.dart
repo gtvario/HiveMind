@@ -235,13 +235,10 @@ Future<void> writeMatchJson(String? key, String json) async {
   } else {
     fileName = "UNKNOWN.json";
   }
-
   File matchFile = File('$path/MatchSchedules/$fileName');
   Directory("$path/MatchSchedules").create();
-  print(matchFile.path);
 
   if (!await matchFile.exists()) {
-    print("Creating file");
     matchFile.create(recursive: true);
   }
 

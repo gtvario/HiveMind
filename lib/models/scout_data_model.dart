@@ -52,7 +52,10 @@ class ScoutData {
   }
 
   bool get getLeaveZone {
-    return leaveZone == 0 ? false : true;
+    if (leaveZone == 0) {
+      return false;
+    }
+    return true;
   }
 
   int get getAutoSpeakerMade {

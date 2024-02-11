@@ -91,18 +91,13 @@ class _MatchListPageState extends State<MatchListPage> {
       }
       var matchFile =
           "$path/${match.eventKey}/${match.eventKey}_Match${match.matchNumber}_$teamNum.json";
-      print("$matchFile\n");
 
       if (await File(matchFile).exists()) {
-        print("found");
         completeList.add(match);
       } else {
         todoList.add(match);
       }
     }
-
-    print(completeList);
-    print("todo $todoList");
 
     setState(() {
       hiveMatchListComplete = completeList;
