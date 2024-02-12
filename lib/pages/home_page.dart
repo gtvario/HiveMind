@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hivemind/models/globals.dart';
@@ -23,7 +24,6 @@ class _HomePageState extends State<HomePage> {
   String? year = "";
   String? teamNumber = "";
   bool masterToggle = false;
-
   late File settingsContent;
   late Map<String, dynamic> settings;
 
@@ -60,22 +60,30 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.only(right: 40.0),
             child: GestureDetector(
               onTap: () async {
-                _passwordInputController.clear();
-                var input = await _showPasswordInputDialog(context);
-                int? password = int.tryParse(input ?? "");
-                if (password == queenPassword) {
-                  updateHome();
-                  setState(() {
-                    isEnabled = true;
-                  });
-                } else if (password != queenPassword && password != null) {
+                if (!isEnabled) {
+                  _passwordInputController.clear();
+                  var input = await _showPasswordInputDialog(context);
+                  int? password = int.tryParse(input ?? "");
+                  if (password == queenPassword) {
+                    updateHome();
+                    setState(() {
+                      isEnabled = true;
+                    });
+                  } else if (password != queenPassword && password != null) {
+                    setState(() {
+                      isEnabled = false;
+                    });
+                  }
+                } else {
                   setState(() {
                     isEnabled = false;
                   });
                 }
               },
-              child: const Icon(
-                Icons.lock,
+              child: Icon(
+                isEnabled
+                    ? CupertinoIcons.lock_open_fill
+                    : CupertinoIcons.lock_fill,
                 size: 26.0,
               ),
             ),
@@ -115,7 +123,7 @@ class _HomePageState extends State<HomePage> {
         child: Container(
           child: masterToggle
               ? QueenHome(teamNumber: teamNumber, year: year)
-              : workerHome(context),
+              : workerHome(context, isEnabled),
         ),
       ),
     );
@@ -164,7 +172,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-Widget workerHome(BuildContext context) {
+Widget workerHome(BuildContext context, bool isEnabled) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Row(
@@ -193,12 +201,37 @@ Widget workerHome(BuildContext context) {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const EventsPage()),
+                MaterialPageRoute(
+                    builder: (context) => const EventsPage(mode: 'Scouting')),
               );
             },
             child: const Text(
               "View Events",
               style: TextStyle(fontSize: 20),
+            ),
+          ),
+        ),
+        const Padding(
+          padding: EdgeInsets.all(16.0),
+        ),
+        Visibility(
+          visible: isEnabled,
+          child: SizedBox(
+            width: 200.0,
+            height: 200.0,
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          const EventsPage(mode: 'Drive Coach')),
+                );
+              },
+              child: const Text(
+                "Drive Coach",
+                style: TextStyle(fontSize: 20),
+              ),
             ),
           ),
         ),

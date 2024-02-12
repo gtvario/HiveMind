@@ -8,7 +8,8 @@ import 'package:hivemind/pages/match_scout_page.dart';
 import 'package:path_provider/path_provider.dart';
 
 class EventsPage extends StatefulWidget {
-  const EventsPage({super.key});
+  final String? mode;
+  const EventsPage({super.key, this.mode});
 
   @override
   State<EventsPage> createState() => _EventsPageState();
@@ -53,14 +54,25 @@ class _EventsPageState extends State<EventsPage> {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => MatchListPage(
-                    eventKey: events.elementAt(index),
+              if (widget.mode == 'Scouting') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MatchListPage(
+                      eventKey: events.elementAt(index),
+                    ),
                   ),
-                ),
-              );
+                );
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MatchListPage(
+                      eventKey: events.elementAt(index),
+                    ),
+                  ),
+                );
+              }
             },
             child: Card(
               child: Padding(
