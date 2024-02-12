@@ -26,24 +26,37 @@ class _SubmitDataPageState extends State<SubmitDataPage> {
             width: 250,
             height: 50,
             child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.amber,
+              ),
               onPressed: () {
                 showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
-                    title: const Text('Are you sure?'),
-                    content: const Text('Do you want to Submit?'),
+                    title: const Text(
+                      'Are you sure?',
+                      textAlign: TextAlign.center,
+                    ),
+                    content: const Text('Do you want to Submit?',
+                        textAlign: TextAlign.center),
+                    actionsAlignment: MainAxisAlignment.center,
                     actions: <Widget>[
                       TextButton(
                         onPressed: () => Navigator.of(context).pop(true),
-                        child: const Text('No'),
+                        child: Text('No',
+                            style: TextStyle(
+                                fontSize: 24, color: Colors.red[900])),
                       ),
+                      SizedBox(width: 20),
                       TextButton(
                         onPressed: () {
                           Navigator.of(context).pop(true);
                           widget.scoutData.writeFile();
                           Navigator.pop(context);
                         },
-                        child: const Text('Yes'),
+                        child: Text('Yes',
+                            style: TextStyle(
+                                fontSize: 24, color: Colors.green[700])),
                       ),
                     ],
                   ),
