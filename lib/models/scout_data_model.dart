@@ -27,8 +27,9 @@ class ScoutData {
   int onstageParked = 0;
   String condition = "";
   String comments = "";
-  int defenseScore = 3, drivingScore = 3;
+  int defenseScore = 2, defenseAgainstScore = 2, drivingScore = 2;
   bool playedDefense = false;
+  bool defensePlayedAgainst = false;
 
   int? matchNum = 0, teamNum = 0;
   String? eventKey = "";
@@ -183,12 +184,20 @@ class ScoutData {
     return defenseScore;
   }
 
+  int get getDefenseAgainstScore {
+    return defenseAgainstScore;
+  }
+
   int get getDriveScore {
     return drivingScore;
   }
 
   bool get getPlayedDefense {
     return playedDefense;
+  }
+
+  bool get getDefensePlayedAgainst {
+    return defensePlayedAgainst;
   }
 
   String get getStudentName {
@@ -218,12 +227,20 @@ class ScoutData {
     defenseScore = defenseScores;
   }
 
+  set setDefenseAgainstScore(int argIn) {
+    defenseAgainstScore = argIn;
+  }
+
   set setDriveScore(int driveScore) {
     drivingScore = driveScore;
   }
 
   set setPlayedDefense(bool playDefense) {
     playedDefense = playDefense;
+  }
+
+  set setDefensePlayedAgainst(bool argIn) {
+    defensePlayedAgainst = argIn;
   }
 
   set setStudentName(String name) {

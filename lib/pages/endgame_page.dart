@@ -36,7 +36,7 @@ class _EndgamePageState extends State<EndgamePage> {
               fontFamily: 'Schyler',
               decoration: TextDecoration.underline),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 20),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -57,7 +57,7 @@ class _EndgamePageState extends State<EndgamePage> {
                 ),
               ],
             ),
-            const SizedBox(width: 85),
+            const SizedBox(width: 60),
             Column(
               children: [
                 Defense(

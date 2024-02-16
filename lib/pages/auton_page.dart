@@ -302,22 +302,6 @@ class _AutonPageState extends State<AutonPage> {
                                     ),
                                   )
                                 ])),
-                            Expanded(
-                                flex: 1,
-                                child: Column(children: [
-                                  const Text('Missed',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16)),
-                                  const SizedBox(height: 5),
-                                  SizedBox(
-                                    width: 75,
-                                    child: SpeakerPickup(
-                                        scoutData: widget.scoutData,
-                                        scoringStation:
-                                            ScoringStation.speakerMissed),
-                                  )
-                                ])),
                           ])
                         ]))
                   ]),
@@ -345,22 +329,6 @@ class _AutonPageState extends State<AutonPage> {
                                     child: SpeakerPickup(
                                         scoutData: widget.scoutData,
                                         scoringStation: ScoringStation.ampMade),
-                                  )
-                                ])),
-                            Expanded(
-                                flex: 1,
-                                child: Column(children: [
-                                  const Text('Missed',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16)),
-                                  const SizedBox(height: 5),
-                                  SizedBox(
-                                    width: 75,
-                                    child: SpeakerPickup(
-                                        scoutData: widget.scoutData,
-                                        scoringStation:
-                                            ScoringStation.ampMissed),
                                   )
                                 ])),
                           ])

@@ -47,7 +47,7 @@ class _SubmitDataPageState extends State<SubmitDataPage> {
                             style: TextStyle(
                                 fontSize: 24, color: Colors.red[900])),
                       ),
-                      SizedBox(width: 20),
+                      const SizedBox(width: 20),
                       TextButton(
                         onPressed: () {
                           Navigator.of(context).pop(true);
