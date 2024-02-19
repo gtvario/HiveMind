@@ -139,7 +139,7 @@ class ScoutData {
   }
 
   // ***************************
-  // Auto Setters
+  // Teleop Setters
   // ***************************
   set setNotesPassed(int argIn) {
     notesPassed = argIn;

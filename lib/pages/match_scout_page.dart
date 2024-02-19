@@ -103,7 +103,10 @@ class _MatchScoutPageState extends State<MatchScoutPage> {
                   notifyParent: refresh),
             ),
             Center(
-              child: TeleopPage(scoutData: scoutData),
+              child: TeleopPage(
+                scoutData: scoutData,
+                allianceColor: alliance,
+              ),
             ),
             Center(
               child: EndgamePage(scoutData: scoutData),

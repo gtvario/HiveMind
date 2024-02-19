@@ -6,7 +6,8 @@ import 'package:hivemind/widgets/teleop_scoring_widget.dart';
 
 class TeleopPage extends StatefulWidget {
   final ScoutData scoutData;
-  const TeleopPage({super.key, required this.scoutData});
+  final String? allianceColor;
+  const TeleopPage({super.key, required this.scoutData, this.allianceColor});
 
   @override
   State<TeleopPage> createState() => _TeleopPageState();
@@ -15,6 +16,7 @@ class TeleopPage extends StatefulWidget {
 class _TeleopPageState extends State<TeleopPage> {
   OverlayEntry? overlayEntry;
   int currentPageIndex = 0;
+  int passed = 0, speakerMade = 0, speakerMiss = 0, ampMade = 0, ampMiss = 0;
   bool leftTrap = false, centerTrap = false, rightTrap = false;
   bool scoringEnable = false;
   double currTapX = -1, currTapY = -1;
@@ -86,367 +88,356 @@ class _TeleopPageState extends State<TeleopPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    passed = widget.scoutData.getNotesPassed;
+    speakerMade = widget.scoutData.getTeleopSpeakerMade;
+    speakerMiss = widget.scoutData.getTeleopSpeakerMissed;
+    ampMade = widget.scoutData.getTeleopAmpMade;
+    ampMiss = widget.scoutData.getTeleopAmpMissed;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          const SizedBox(height: 5),
-          const Text(
-            "Teleop",
-            style: TextStyle(
-                fontSize: 55,
-                fontFamily: 'Schyler',
-                decoration: TextDecoration.underline),
-          ),
-          Row(
-            children: [
-              const Padding(padding: EdgeInsets.all(20)),
-              Column(
-                children: [
-                  Row(
-                    children: [
-                      Column(
-                        children: [
-                          const Text("Speaker"),
-                          Row(
-                            children: [
-                              Column(
-                                children: [
-                                  const Text("Made"),
-                                  SizedBox(
-                                    width: 50,
-                                    height: 200,
-                                    child: SpinBox(
-                                      min: 0,
-                                      max: 90,
-                                      value: 0,
-                                      direction: Axis.vertical,
-                                      spacing: 1,
-                                      showButtons: true,
-                                      enabled: scoringEnable,
-                                      iconColor: scoringEnable
-                                          ? MaterialStateProperty.all(
-                                              Colors.green)
-                                          : MaterialStateProperty.all(
-                                              Colors.red),
-                                      onChanged: (value) {
-                                        setState(() {
-                                          currEvent?.setSpeakMade =
-                                              value.toInt();
-                                          gameEvents.add(currEvent!);
-                                          currEvent = null;
-                                          removeHighlightOverlay();
-                                          scoringEnable = false;
-                                        });
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Column(
-                                children: [
-                                  const Text("Miss"),
-                                  SizedBox(
-                                    width: 50,
-                                    height: 200,
-                                    child: SpinBox(
-                                      min: 0,
-                                      max: 90,
-                                      value: 0,
-                                      direction: Axis.vertical,
-                                      spacing: 1,
-                                      showButtons: true,
-                                      enabled: scoringEnable,
-                                      iconColor: scoringEnable
-                                          ? MaterialStateProperty.all(
-                                              Colors.green)
-                                          : MaterialStateProperty.all(
-                                              Colors.red),
-                                      onChanged: (value) {
-                                        setState(() {
-                                          currEvent?.setSpeakMiss =
-                                              value.toInt();
-                                          gameEvents.add(currEvent!);
-                                          currEvent = null;
-                                          removeHighlightOverlay();
-                                          scoringEnable = false;
-                                        });
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                      const Padding(padding: EdgeInsets.all(20)),
-                      Column(
-                        children: [
-                          const Text("Amp"),
-                          Row(
-                            children: [
-                              Column(
-                                children: [
-                                  const Text("Made"),
-                                  SizedBox(
-                                    width: 50,
-                                    height: 200,
-                                    child: SpinBox(
-                                      min: 0,
-                                      max: 90,
-                                      value: 0,
-                                      direction: Axis.vertical,
-                                      spacing: 1,
-                                      showButtons: true,
-                                      enabled: scoringEnable,
-                                      iconColor: scoringEnable
-                                          ? MaterialStateProperty.all(
-                                              Colors.green)
-                                          : MaterialStateProperty.all(
-                                              Colors.red),
-                                      onChanged: (value) {
-                                        setState(() {
-                                          currEvent?.setAmpMade = value.toInt();
-                                          gameEvents.add(currEvent!);
-                                          currEvent = null;
-                                          removeHighlightOverlay();
-                                          scoringEnable = false;
-                                        });
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Column(
-                                children: [
-                                  const Text("Miss"),
-                                  SizedBox(
-                                    width: 50,
-                                    height: 200,
-                                    child: SpinBox(
-                                      min: 0,
-                                      max: 90,
-                                      value: 0,
-                                      direction: Axis.vertical,
-                                      spacing: 1,
-                                      showButtons: true,
-                                      enabled: scoringEnable,
-                                      iconColor: scoringEnable
-                                          ? MaterialStateProperty.all(
-                                              Colors.green)
-                                          : MaterialStateProperty.all(
-                                              Colors.red),
-                                      onChanged: (value) {
-                                        setState(() {
-                                          currEvent?.setAmpMiss = value.toInt();
-                                          gameEvents.add(currEvent!);
-                                          currEvent = null;
-                                          removeHighlightOverlay();
-                                          scoringEnable = false;
-                                        });
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Column(
-                        children: [
-                          const Text("Trap"),
-                          Column(
-                            children: [
-                              SizedBox(
-                                height: 50,
-                                width: 150,
-                                child: CheckboxListTile(
-                                    title: const Text("Left"),
-                                    value: leftTrap,
-                                    enabled: scoringEnable,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        leftTrap = !leftTrap;
-                                        currEvent?.setTrapL = leftTrap;
-                                        gameEvents.add(currEvent!);
-                                        currEvent = null;
-                                        removeHighlightOverlay();
-                                        scoringEnable = false;
-                                      });
-                                    }),
-                              ),
-                              SizedBox(
-                                height: 50,
-                                width: 150,
-                                child: CheckboxListTile(
-                                    title: const Text("Center"),
-                                    value: centerTrap,
-                                    enabled: scoringEnable,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        centerTrap = !centerTrap;
-                                        currEvent?.setTrapC = centerTrap;
-                                        gameEvents.add(currEvent!);
-                                        currEvent = null;
-                                        removeHighlightOverlay();
-                                        scoringEnable = false;
-                                      });
-                                    }),
-                              ),
-                              SizedBox(
-                                height: 50,
-                                width: 150,
-                                child: CheckboxListTile(
-                                    title: const Text("Right"),
-                                    value: rightTrap,
-                                    enabled: scoringEnable,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        rightTrap = !rightTrap;
-                                        currEvent?.setTrapR = rightTrap;
-                                        gameEvents.add(currEvent!);
-                                        currEvent = null;
-                                        removeHighlightOverlay();
-                                        scoringEnable = false;
-                                      });
-                                    }),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      const Padding(padding: EdgeInsets.all(20)),
-                      Column(
-                        children: [
-                          Row(
-                            children: [
-                              Column(
-                                children: [
-                                  const Text("Passed"),
-                                  SizedBox(
-                                    width: 50,
-                                    height: 200,
-                                    child: SpinBox(
-                                      min: 0,
-                                      max: 90,
-                                      value: 0,
-                                      direction: Axis.vertical,
-                                      spacing: 1,
-                                      showButtons: true,
-                                      enabled: scoringEnable,
-                                      iconColor: scoringEnable
-                                          ? MaterialStateProperty.all(
-                                              Colors.green)
-                                          : MaterialStateProperty.all(
-                                              Colors.red),
-                                      onChanged: (value) {
-                                        setState(() {
-                                          currEvent?.setPass = value.toInt();
-                                          gameEvents.add(currEvent!);
-                                          currEvent = null;
-                                          scoringEnable = false;
-                                          removeHighlightOverlay();
-                                        });
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              const Padding(padding: EdgeInsets.all(20)),
-              Expanded(
-                child: Column(
+    return Column(
+      children: [
+        const Text(
+          "Teleop",
+          style: TextStyle(
+              fontSize: 40,
+              fontFamily: 'Schyler',
+              decoration: TextDecoration.underline),
+        ),
+        Row(
+          children: [
+            const Padding(padding: EdgeInsets.all(20)),
+            Column(
+              children: [
+                Row(
                   children: [
-                    Row(
+                    Column(
                       children: [
-                        SizedBox(
-                          width: 550,
-                          height: 250,
-                          child: GestureDetector(
-                            //Add onTap
-                            child: Image.asset("assets/images/field24.png"),
-                            onTapDown: (details) {
-                              _handleTapDown(details);
-                              setState(() {
-                                currentPageIndex = 1;
-                                scoringEnable = true;
-                              });
-                              createHighlightOverlay(
-                                alignment: AlignmentDirectional.bottomStart,
-                                borderColor: Colors.red,
-                                xPos: _tapPosition.dx,
-                                yPos: _tapPosition.dy,
-                              );
-                            },
-                          ),
+                        const Text("Amp"),
+                        Row(
+                          children: [
+                            Column(
+                              children: [
+                                const Text("Made"),
+                                SizedBox(
+                                  width: 50,
+                                  height: 200,
+                                  child: SpinBox(
+                                    min: 0,
+                                    max: 90,
+                                    value: ampMade.toDouble(),
+                                    direction: Axis.vertical,
+                                    spacing: 1,
+                                    showButtons: true,
+                                    enabled: true,
+                                    iconColor:
+                                        MaterialStateProperty.all(Colors.green),
+                                    onChanged: (value) {
+                                      setState(() {
+                                        ampMade = value.toInt();
+                                      });
+                                      widget.scoutData.setTeleopAmpMade =
+                                          ampMade;
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                const Text("Miss"),
+                                SizedBox(
+                                  width: 50,
+                                  height: 200,
+                                  child: SpinBox(
+                                    min: 0,
+                                    max: 90,
+                                    value: ampMiss.toDouble(),
+                                    direction: Axis.vertical,
+                                    spacing: 1,
+                                    showButtons: true,
+                                    enabled: true,
+                                    iconColor:
+                                        MaterialStateProperty.all(Colors.green),
+                                    onChanged: (value) {
+                                      setState(() {
+                                        ampMiss = value.toInt();
+                                      });
+                                      widget.scoutData.setTeleopAmpMissed =
+                                          ampMiss;
+                                    },
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                    const Padding(padding: EdgeInsets.all(20)),
+                    Column(
+                      children: [
+                        const Text("Speaker"),
+                        Row(
+                          children: [
+                            Column(
+                              children: [
+                                const Text("Made"),
+                                SizedBox(
+                                  width: 50,
+                                  height: 200,
+                                  child: SpinBox(
+                                    min: 0,
+                                    max: 90,
+                                    value: speakerMade.toDouble(),
+                                    direction: Axis.vertical,
+                                    spacing: 1,
+                                    showButtons: true,
+                                    enabled: scoringEnable,
+                                    iconColor: scoringEnable
+                                        ? MaterialStateProperty.all(
+                                            Colors.green)
+                                        : MaterialStateProperty.all(Colors.red),
+                                    onChanged: (value) {
+                                      setState(() {
+                                        currEvent?.setSpeakMade = value.toInt();
+                                        gameEvents.add(currEvent!);
+                                        currEvent = null;
+                                        removeHighlightOverlay();
+                                        scoringEnable = false;
+                                        speakerMade = value.toInt();
+                                      });
+                                      widget.scoutData.setTeleopSpeakerMade =
+                                          speakerMade;
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                const Text("Miss"),
+                                SizedBox(
+                                  width: 50,
+                                  height: 200,
+                                  child: SpinBox(
+                                    min: 0,
+                                    max: 90,
+                                    value: speakerMiss.toDouble(),
+                                    direction: Axis.vertical,
+                                    spacing: 1,
+                                    showButtons: true,
+                                    enabled: scoringEnable,
+                                    iconColor: scoringEnable
+                                        ? MaterialStateProperty.all(
+                                            Colors.green)
+                                        : MaterialStateProperty.all(Colors.red),
+                                    onChanged: (value) {
+                                      setState(() {
+                                        currEvent?.setSpeakMiss = value.toInt();
+                                        gameEvents.add(currEvent!);
+                                        currEvent = null;
+                                        removeHighlightOverlay();
+                                        scoringEnable = false;
+                                        speakerMiss = value.toInt();
+                                      });
+                                      widget.scoutData.setTeleopSpeakerMissed =
+                                          speakerMiss;
+                                    },
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Column(
+                      children: [
+                        const Text("Trap"),
+                        Column(
+                          children: [
+                            SizedBox(
+                              height: 50,
+                              width: 150,
+                              child: CheckboxListTile(
+                                  title: const Text("Left"),
+                                  value: leftTrap,
+                                  enabled: true,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      leftTrap = !leftTrap;
+                                    });
+                                  }),
+                            ),
+                            SizedBox(
+                              height: 50,
+                              width: 150,
+                              child: CheckboxListTile(
+                                  title: const Text("Center"),
+                                  value: centerTrap,
+                                  enabled: true,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      centerTrap = !centerTrap;
+                                    });
+                                  }),
+                            ),
+                            SizedBox(
+                              height: 50,
+                              width: 150,
+                              child: CheckboxListTile(
+                                  title: const Text("Right"),
+                                  value: rightTrap,
+                                  enabled: true,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      rightTrap = !rightTrap;
+                                    });
+                                  }),
+                            ),
+                          ],
                         ),
                       ],
                     ),
                     const Padding(padding: EdgeInsets.all(20)),
-                    SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          ListView.builder(
-                            scrollDirection: Axis.vertical,
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: gameEvents.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    gameEvents.removeAt(index);
-                                  });
-                                },
-                                child: Card(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Column(
-                                      children: [
-                                        Text(gameEvents[index].toString()),
-                                      ],
-                                    ),
+                    Column(
+                      children: [
+                        Row(
+                          children: [
+                            Column(
+                              children: [
+                                const Text("Passed"),
+                                SizedBox(
+                                  width: 50,
+                                  height: 200,
+                                  child: SpinBox(
+                                    min: 0,
+                                    max: 90,
+                                    value: passed.toDouble(),
+                                    direction: Axis.vertical,
+                                    spacing: 1,
+                                    showButtons: true,
+                                    enabled: true,
+                                    iconColor:
+                                        MaterialStateProperty.all(Colors.green),
+                                    onChanged: (value) {
+                                      setState(() {
+                                        passed = value.toInt();
+                                      });
+                                      widget.scoutData.setNotesPassed = passed;
+                                    },
                                   ),
                                 ),
-                              );
-                            },
-                          ),
-                        ],
-                      ),
+                              ],
+                            ),
+                          ],
+                        )
+                      ],
                     ),
                   ],
                 ),
-              )
-            ],
-          )
-        ],
-      ),
+              ],
+            ),
+            const Padding(padding: EdgeInsets.all(20)),
+            Expanded(
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 550,
+                        height: 250,
+                        child: GestureDetector(
+                          //Add onTap
+                          child: widget.allianceColor == "Red"
+                              ? Image.asset("assets/images/RedField.png")
+                              : Image.asset("assets/images/BlueField.png"),
+                          onTapDown: (details) {
+                            _handleTapDown(details);
+                            setState(() {
+                              currentPageIndex = 1;
+                              scoringEnable = true;
+                            });
+                            createHighlightOverlay(
+                              alignment: AlignmentDirectional.bottomStart,
+                              borderColor: Colors.red,
+                              xPos: _tapPosition.dx,
+                              yPos: _tapPosition.dy,
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Padding(padding: EdgeInsets.all(20)),
+                  SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: gameEvents.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  gameEvents.removeAt(index);
+                                });
+                              },
+                              child: Card(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Column(
+                                    children: [
+                                      Text(gameEvents[index].toString()),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        )
+      ],
     );
   }
 }
 
 class ScoreEvent {
   double xPos = 0, yPos = 0;
-  int speakMade = 0, speakMiss = 0, ampMade = 0, ampMiss = 0, pass = 0;
-  bool trapL = false, trapR = false, trapC = false;
+  int speakMade = 0, speakMiss = 0;
 
   ScoreEvent(this.xPos, this.yPos);
 
   @override
-  String toString() => "X: $xPos, Y:$yPos";
+  String toString() {
+    String output = "X: $xPos, Y:$yPos";
+
+    if (speakMade != 0) {
+      output = "Speaker Made at $output";
+    } else {
+      output = "Speaker Miss at $output";
+    }
+
+    return output;
+  }
 
   set setXPos(double xPosition) {
     xPos = xPosition;
@@ -464,30 +455,6 @@ class ScoreEvent {
     speakMiss = speakerMiss;
   }
 
-  set setAmpMade(int amplifyMade) {
-    ampMade = amplifyMade;
-  }
-
-  set setAmpMiss(int amplifyMiss) {
-    ampMiss = amplifyMiss;
-  }
-
-  set setPass(int passing) {
-    pass = passing;
-  }
-
-  set setTrapL(bool trapLeft) {
-    trapL = trapLeft;
-  }
-
-  set setTrapR(bool trapRight) {
-    trapR = trapRight;
-  }
-
-  set setTrapC(bool trapCenter) {
-    trapC = trapCenter;
-  }
-
   // Getters
   double get getXPos {
     return xPos;
@@ -503,29 +470,5 @@ class ScoreEvent {
 
   int get getSpeakMiss {
     return speakMiss;
-  }
-
-  int get getYAmpMade {
-    return ampMade;
-  }
-
-  int get getAmpMiss {
-    return ampMiss;
-  }
-
-  int get getPass {
-    return pass;
-  }
-
-  bool get getTrapL {
-    return trapL;
-  }
-
-  bool get getTrapR {
-    return trapR;
-  }
-
-  bool get getTrapC {
-    return trapC;
   }
 }
