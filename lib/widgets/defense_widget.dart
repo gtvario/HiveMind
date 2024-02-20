@@ -168,7 +168,8 @@ class _DefenseState extends State<Defense> {
                       _starColorAgainst = Colors.grey;
                     }
                   });
-                  widget.scoutData.setDefensePlayedAgainst = defensePlayedBool;
+                  widget.scoutData.setDefensePlayedAgainst =
+                      defensePlayedAgainstBool;
                 },
               ),
             ),
