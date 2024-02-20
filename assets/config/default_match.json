@@ -36,6 +36,8 @@
 		"on_stage": "Did Not Attempt",
 		"defense_played": "No",
 		"defense_score": 3,
+		"defense_against": "No",
+		"defense_against_score": 3,
 		"driving": 3,
 		"robot_status": "No",
 		"comments": ""

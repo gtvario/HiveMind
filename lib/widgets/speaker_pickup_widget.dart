@@ -21,12 +21,8 @@ class _SpeakerPickupState extends State<SpeakerPickup> {
     super.initState();
     if (widget.scoringStation == ScoringStation.ampMade) {
       _count = widget.scoutData.getAutoAmpMade;
-    } else if (widget.scoringStation == ScoringStation.ampMissed) {
-      _count = widget.scoutData.getAutoAmpMissed;
     } else if (widget.scoringStation == ScoringStation.speakerMade) {
       _count = widget.scoutData.getAutoSpeakerMade;
-    } else if (widget.scoringStation == ScoringStation.speakerMissed) {
-      _count = widget.scoutData.getAutoSpeakerMissed;
     }
     setState(() {});
   }
@@ -42,12 +38,8 @@ class _SpeakerPickupState extends State<SpeakerPickup> {
           });
           if (widget.scoringStation == ScoringStation.ampMade) {
             widget.scoutData.setAutoAmpMade = _count;
-          } else if (widget.scoringStation == ScoringStation.ampMissed) {
-            widget.scoutData.setAutoAmpMissed = _count;
           } else if (widget.scoringStation == ScoringStation.speakerMade) {
             widget.scoutData.setAutoSpeakerMade = _count;
-          } else if (widget.scoringStation == ScoringStation.speakerMissed) {
-            widget.scoutData.setAutoSpeakerMissed = _count;
           }
         },
       ),
@@ -62,12 +54,8 @@ class _SpeakerPickupState extends State<SpeakerPickup> {
           });
           if (widget.scoringStation == ScoringStation.ampMade) {
             widget.scoutData.setAutoAmpMade = _count;
-          } else if (widget.scoringStation == ScoringStation.ampMissed) {
-            widget.scoutData.setAutoAmpMissed = _count;
           } else if (widget.scoringStation == ScoringStation.speakerMade) {
             widget.scoutData.setAutoSpeakerMade = _count;
-          } else if (widget.scoringStation == ScoringStation.speakerMissed) {
-            widget.scoutData.setAutoSpeakerMissed = _count;
           }
         },
       )

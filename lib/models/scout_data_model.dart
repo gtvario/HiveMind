@@ -10,8 +10,6 @@ class ScoutData {
   int leaveZone = 0;
   int autoSpeakerMade = 0;
   int autoAmpMade = 0;
-  int autoSpeakerMissed = 0; // Do we need this??
-  int autoAmpMissed = 0; // Do we need this??
   List<int> fieldPickupAuto = [0, 0, 0, 0, 0, 0, 0, 0];
 
   // Teleop
@@ -24,7 +22,6 @@ class ScoutData {
 
   // Endgame
   String chainHang = "";
-  int onstageParked = 0;
   String condition = "";
   String comments = "";
   int defenseScore = 2, defenseAgainstScore = 2, drivingScore = 2;
@@ -68,14 +65,6 @@ class ScoutData {
     return autoAmpMade;
   }
 
-  int get getAutoSpeakerMissed {
-    return autoSpeakerMissed;
-  }
-
-  int get getAutoAmpMissed {
-    return autoAmpMissed;
-  }
-
   List<int> get getFieldPickupAuto {
     return fieldPickupAuto;
   }
@@ -97,14 +86,6 @@ class ScoutData {
 
   set setAutoAmpMade(int argIn) {
     autoAmpMade = argIn;
-  }
-
-  set setAutoSpeakerMissed(int argIn) {
-    autoSpeakerMissed = argIn;
-  }
-
-  set setAutoAmpMissed(int argIn) {
-    autoAmpMissed = argIn;
   }
 
   set setFieldPickupAuto(List<int> argIn) {
@@ -172,10 +153,6 @@ class ScoutData {
     return chainHang;
   }
 
-  int get getOnstageParked {
-    return onstageParked;
-  }
-
   String get getComments {
     return comments;
   }
@@ -213,10 +190,6 @@ class ScoutData {
   // **************************
   set setChainHang(String argIn) {
     chainHang = argIn;
-  }
-
-  set setOnstageParked(int argIn) {
-    onstageParked = argIn;
   }
 
   set setComments(String comment) {
@@ -259,9 +232,7 @@ class ScoutData {
         "start_position": startingPos,
         "leave_start_zone": leaveZone,
         "auto_speaker_made": autoSpeakerMade,
-        "auto_speaker_missed": autoSpeakerMissed,
         "auto_amp_made": autoAmpMade,
-        "auto_amp_missed": autoAmpMissed,
         "field_pickup_auto": fieldPickupAuto
       },
       "teleop": {
@@ -274,10 +245,11 @@ class ScoutData {
       },
       "endgame": {
         "chain_hang": chainHang,
-        "onstage_parked": onstageParked,
         "robot_condition": condition,
         "defense_played": playedDefense,
         "defense_score": defenseScore,
+        "defense_against": defensePlayedAgainst,
+        "defense_against_score": defenseAgainstScore,
         "driving": drivingScore,
         "comments": comments
       },

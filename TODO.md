@@ -40,3 +40,9 @@ Update the Google Sheet
 Update the import script
 
 Visualization tools for the Google Sheet ?
+
+Map needs to be 2/3 not half
+3 color logo
+Change Teleop shooting mechanic to zones instead of X/Y coordinates
+  Zones should show made and missed ideally
+  
