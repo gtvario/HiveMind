@@ -29,7 +29,8 @@
 		"zone7_miss": 0,
 		"zone8_made": 0,
 		"zone8_miss": 0,
-		"trap": 0
+		"trap_made": 0,
+		"trap_miss": 0
     },
 	"endgame":{
 		"on_stage": "Did Not Attempt",
