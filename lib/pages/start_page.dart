@@ -15,6 +15,10 @@ class StartMatchPage extends StatefulWidget {
 class _StartMatchPageState extends State<StartMatchPage> {
   OverlayEntry? overlayEntry;
   int currentPageIndex = 0;
+  double pixel_to_ft_mult_x = -0.069016;
+  double pixel_to_ft_mult_y = 0.069371;
+  double pixel_to_ft_offset_x = 61.7;
+  double pixel_to_ft_offset_y = -3.35;
   var _tapPosition;
   String dropdownValue = "Select Student Name";
   List<double> robotStartingPos = [0, 0];
@@ -159,8 +163,16 @@ class _StartMatchPageState extends State<StartMatchPage> {
               setState(() {
                 widget.scoutData.setStartingPos = [
                   _tapPosition.dx,
-                  _tapPosition.dy
+                  _tapPosition.dy,
                 ];
+                widget.scoutData.setStartingPosNormalized = [
+                  _tapPosition.dx * pixel_to_ft_mult_x + pixel_to_ft_offset_x,
+                  _tapPosition.dy * pixel_to_ft_mult_y + pixel_to_ft_offset_y,
+                ];
+                print(_tapPosition.dx * pixel_to_ft_mult_x +
+                    pixel_to_ft_offset_x);
+                print(_tapPosition.dy * pixel_to_ft_mult_y +
+                    pixel_to_ft_offset_y);
                 currentPageIndex = 1;
               });
               createHighlightOverlay(

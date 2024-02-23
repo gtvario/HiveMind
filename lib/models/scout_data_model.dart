@@ -7,6 +7,7 @@ import 'package:path_provider/path_provider.dart';
 class ScoutData {
   // Auton
   List<double> startingPos = [0, 0];
+  List<double> startingPosNormalized = [0, 0];
   int leaveZone = 0;
   int autoSpeakerMade = 0;
   int autoAmpMade = 0;
@@ -50,6 +51,10 @@ class ScoutData {
     return startingPos;
   }
 
+  List<double> get getStartingPosNormalized {
+    return startingPosNormalized;
+  }
+
   bool get getLeaveZone {
     if (leaveZone == 0) {
       return false;
@@ -74,6 +79,10 @@ class ScoutData {
 // ***************************
   set setStartingPos(List<double> argIn) {
     startingPos = argIn;
+  }
+
+  set setStartingPosNormalized(List<double> argIn) {
+    startingPosNormalized = argIn;
   }
 
   set setLeaveZone(bool argIn) {
@@ -229,7 +238,7 @@ class ScoutData {
 
     var obj = {
       "auton": {
-        "start_position": startingPos,
+        "start_position": startingPosNormalized,
         "leave_start_zone": leaveZone,
         "auto_speaker_made": autoSpeakerMade,
         "auto_amp_made": autoAmpMade,
