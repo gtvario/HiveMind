@@ -119,6 +119,8 @@ class _StartMatchPageState extends State<StartMatchPage> {
     } else {
       fieldImagePath = 'assets/images/BlueField.png';
       fieldAlignment = Alignment.centerLeft;
+      pixel_to_ft_offset_x = -21.3;
+      pixel_to_ft_mult_x = 0.069016;
     }
 
     return Row(
@@ -169,10 +171,10 @@ class _StartMatchPageState extends State<StartMatchPage> {
                   _tapPosition.dx * pixel_to_ft_mult_x + pixel_to_ft_offset_x,
                   _tapPosition.dy * pixel_to_ft_mult_y + pixel_to_ft_offset_y,
                 ];
-                print(_tapPosition.dx * pixel_to_ft_mult_x +
-                    pixel_to_ft_offset_x);
-                print(_tapPosition.dy * pixel_to_ft_mult_y +
-                    pixel_to_ft_offset_y);
+                print(
+                    "X Position:  ${_tapPosition.dx * pixel_to_ft_mult_x + pixel_to_ft_offset_x}");
+                print(
+                    "Y Position: ${_tapPosition.dy * pixel_to_ft_mult_y + pixel_to_ft_offset_y}");
                 currentPageIndex = 1;
               });
               createHighlightOverlay(
