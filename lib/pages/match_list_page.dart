@@ -164,7 +164,11 @@ class _MatchListPageState extends State<MatchListPage> {
                         actions: <Widget>[
                           TextButton(
                             onPressed: () => Navigator.of(context).pop(true),
-                            child: const Text('No'),
+                            child: const Text('No',
+                                style: TextStyle(
+                                  color: Colors.amber,
+                                  fontSize: 20,
+                                )),
                           ),
                           TextButton(
                             onPressed: () {
@@ -182,7 +186,11 @@ class _MatchListPageState extends State<MatchListPage> {
                                 (value) => _refreshPage(),
                               );
                             },
-                            child: const Text('Yes'),
+                            child: const Text('Yes',
+                                style: TextStyle(
+                                  color: Colors.amber,
+                                  fontSize: 20,
+                                )),
                           ),
                         ],
                       ),

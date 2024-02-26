@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Hivemind',
         theme: ThemeData(
-          primarySwatch: Colors.yellow,
+          primarySwatch: Colors.amber,
         ),
         initialRoute: "/",
         routes: <String, WidgetBuilder>{
