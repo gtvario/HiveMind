@@ -69,6 +69,71 @@ class _TeleopPageState extends State<TeleopPage> {
     _tapped7 = false;
   }
 
+  void setZoneMadeMiss(ScoreEvent? event) {
+    ScoreEvent myEvent = ScoreEvent();
+    if (event != null) {
+      myEvent = event;
+    }
+    int zone = myEvent.getZoneNum;
+
+    switch (zone) {
+      case 1:
+        if (myEvent.getSpeakMade > 0) {
+          widget.scoutData.setZone1Made =
+              widget.scoutData.getZone1Made + myEvent.getSpeakMade;
+        } else if (myEvent.getSpeakMiss > 0) {
+          widget.scoutData.setZone1Miss =
+              widget.scoutData.getZone1Miss + myEvent.getSpeakMiss;
+        }
+        break;
+      case 2:
+        if (myEvent.getSpeakMade > 0) {
+          widget.scoutData.setZone2Made =
+              widget.scoutData.getZone2Made + myEvent.getSpeakMade;
+        } else if (myEvent.getSpeakMiss > 0) {
+          widget.scoutData.setZone2Miss =
+              widget.scoutData.getZone2Miss + myEvent.getSpeakMiss;
+        }
+        break;
+      case 3:
+        if (myEvent.getSpeakMade > 0) {
+          widget.scoutData.setZone3Made =
+              widget.scoutData.getZone3Made + myEvent.getSpeakMade;
+        } else if (myEvent.getSpeakMiss > 0) {
+          widget.scoutData.setZone3Miss =
+              widget.scoutData.getZone3Miss + myEvent.getSpeakMiss;
+        }
+        break;
+      case 5:
+        if (myEvent.getSpeakMade > 0) {
+          widget.scoutData.setZone5Made =
+              widget.scoutData.getZone5Made + myEvent.getSpeakMade;
+        } else if (myEvent.getSpeakMiss > 0) {
+          widget.scoutData.setZone5Miss =
+              widget.scoutData.getZone5Miss + myEvent.getSpeakMiss;
+        }
+        break;
+      case 6:
+        if (myEvent.getSpeakMade > 0) {
+          widget.scoutData.setZone6Made =
+              widget.scoutData.getZone6Made + myEvent.getSpeakMade;
+        } else if (myEvent.getSpeakMiss > 0) {
+          widget.scoutData.setZone6Miss =
+              widget.scoutData.getZone6Miss + myEvent.getSpeakMiss;
+        }
+        break;
+      case 7:
+        if (myEvent.getSpeakMade > 0) {
+          widget.scoutData.setZone7Made =
+              widget.scoutData.getZone7Made + myEvent.getSpeakMade;
+        } else if (myEvent.getSpeakMiss > 0) {
+          widget.scoutData.setZone7Miss =
+              widget.scoutData.getZone7Miss + myEvent.getSpeakMiss;
+        }
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     const listofpoints =
@@ -376,6 +441,7 @@ class _TeleopPageState extends State<TeleopPage> {
                                             currEvent?.setSpeakMade =
                                                 value.toInt();
                                             gameEvents.add(currEvent!);
+                                            setZoneMadeMiss(currEvent);
                                             currEvent = null;
                                             scoringEnable = false;
                                             speakerMade = value.toInt();
@@ -413,6 +479,7 @@ class _TeleopPageState extends State<TeleopPage> {
                                             currEvent?.setSpeakMiss =
                                                 value.toInt();
                                             gameEvents.add(currEvent!);
+                                            setZoneMadeMiss(currEvent);
                                             currEvent = null;
                                             scoringEnable = false;
                                             speakerMiss = value.toInt();

@@ -21,6 +21,13 @@ class ScoutData {
   int teleopAmpMade = 0;
   int teleopSpeakerMissed = 0;
   int teleopAmpMissed = 0;
+  int zone1Made = 0, zone1Miss = 0;
+  int zone2Made = 0, zone2Miss = 0;
+  int zone3Made = 0, zone3Miss = 0;
+  int zone5Made = 0, zone5Miss = 0;
+  int zone6Made = 0, zone6Miss = 0;
+  int zone7Made = 0, zone7Miss = 0;
+  int zone8Made = 0, zone8Miss = 0;
   List<ScoreEvent> teleopEvents = [];
 
   // Endgame
@@ -134,6 +141,62 @@ class ScoutData {
     return teleopEvents;
   }
 
+  int get getZone1Made {
+    return zone1Made;
+  }
+
+  int get getZone2Made {
+    return zone2Made;
+  }
+
+  int get getZone3Made {
+    return zone3Made;
+  }
+
+  int get getZone5Made {
+    return zone5Made;
+  }
+
+  int get getZone6Made {
+    return zone6Made;
+  }
+
+  int get getZone7Made {
+    return zone7Made;
+  }
+
+  int get getZone8Made {
+    return zone8Made;
+  }
+
+  int get getZone1Miss {
+    return zone1Miss;
+  }
+
+  int get getZone2Miss {
+    return zone2Miss;
+  }
+
+  int get getZone3Miss {
+    return zone3Miss;
+  }
+
+  int get getZone5Miss {
+    return zone5Miss;
+  }
+
+  int get getZone6Miss {
+    return zone6Miss;
+  }
+
+  int get getZone7Miss {
+    return zone7Miss;
+  }
+
+  int get getZone8Miss {
+    return zone8Miss;
+  }
+
   // ***************************
   // Teleop Setters
   // ***************************
@@ -163,6 +226,62 @@ class ScoutData {
 
   set setTeleopEvents(List<ScoreEvent> eventList) {
     teleopEvents = eventList;
+  }
+
+  set setZone1Made(int zone_1_made) {
+    zone1Made = zone_1_made;
+  }
+
+  set setZone2Made(int zone_2_made) {
+    zone1Made = zone_2_made;
+  }
+
+  set setZone3Made(int zone_3_made) {
+    zone1Made = zone_3_made;
+  }
+
+  set setZone5Made(int zone_5_made) {
+    zone1Made = zone_5_made;
+  }
+
+  set setZone6Made(int zone_6_made) {
+    zone1Made = zone_6_made;
+  }
+
+  set setZone7Made(int zone_7_made) {
+    zone1Made = zone_7_made;
+  }
+
+  set setZone8Made(int zone_8_made) {
+    zone1Made = zone_8_made;
+  }
+
+  set setZone1Miss(int zone_1_miss) {
+    zone1Miss = zone_1_miss;
+  }
+
+  set setZone2Miss(int zone_2_miss) {
+    zone1Miss = zone_2_miss;
+  }
+
+  set setZone3Miss(int zone_3_miss) {
+    zone1Miss = zone_3_miss;
+  }
+
+  set setZone5Miss(int zone_5_miss) {
+    zone1Miss = zone_5_miss;
+  }
+
+  set setZone6Miss(int zone_6_miss) {
+    zone1Miss = zone_6_miss;
+  }
+
+  set setZone7Miss(int zone_7_miss) {
+    zone1Miss = zone_7_miss;
+  }
+
+  set setZone8Miss(int zone_8_miss) {
+    zone1Miss = zone_8_miss;
   }
 
   // **************************
@@ -260,18 +379,18 @@ class ScoutData {
         "teleop_speaker_missed": teleopSpeakerMissed,
         "teleop_amp_made": teleopAmpMade,
         "teleop_amp_missed": teleopAmpMissed,
-        "zone1_made": 0,
-        "zone1_miss": 0,
-        "zone2_made": 0,
-        "zone2_miss": 0,
-        "zone3_made": 0,
-        "zone3_miss": 0,
-        "zone5_made": 0,
-        "zone5_miss": 0,
-        "zone6_made": 0,
-        "zone6_miss": 0,
-        "zone7_made": 0,
-        "zone7_miss": 0,
+        "zone1_made": zone1Made,
+        "zone1_miss": zone1Miss,
+        "zone2_made": zone2Made,
+        "zone2_miss": zone2Miss,
+        "zone3_made": zone3Made,
+        "zone3_miss": zone3Miss,
+        "zone5_made": zone5Made,
+        "zone5_miss": zone5Miss,
+        "zone6_made": zone6Made,
+        "zone6_miss": zone6Miss,
+        "zone7_made": zone7Made,
+        "zone7_miss": zone7Miss,
       },
       "endgame": {
         "chain_hang": chainHang,
