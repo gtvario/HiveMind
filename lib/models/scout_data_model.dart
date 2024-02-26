@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/services.dart';
+import 'package:hivemind/models/score_event.dart';
 import 'package:path_provider/path_provider.dart';
 
 class ScoutData {
@@ -20,6 +21,7 @@ class ScoutData {
   int teleopAmpMade = 0;
   int teleopSpeakerMissed = 0;
   int teleopAmpMissed = 0;
+  List<ScoreEvent> teleopEvents = [];
 
   // Endgame
   String chainHang = "";
@@ -128,6 +130,10 @@ class ScoutData {
     return teleopAmpMissed;
   }
 
+  List<ScoreEvent> get getTeleopEvents {
+    return teleopEvents;
+  }
+
   // ***************************
   // Teleop Setters
   // ***************************
@@ -136,7 +142,7 @@ class ScoutData {
   }
 
   set setTrapsScored(int argIn) {
-    setTrapsScored = argIn;
+    trapsScored = argIn;
   }
 
   set setTeleopSpeakerMade(int argIn) {
@@ -153,6 +159,10 @@ class ScoutData {
 
   set setTeleopAmpMissed(int argIn) {
     teleopAmpMissed = argIn;
+  }
+
+  set setTeleopEvents(List<ScoreEvent> eventList) {
+    teleopEvents = eventList;
   }
 
   // **************************
@@ -235,7 +245,6 @@ class ScoutData {
 
   writeFile() async {
     File matchFile = await _localFile;
-
     var obj = {
       "auton": {
         "start_position": startingPosNormalized,
@@ -250,7 +259,19 @@ class ScoutData {
         "teleop_speaker_made": teleopSpeakerMade,
         "teleop_speaker_missed": teleopSpeakerMissed,
         "teleop_amp_made": teleopAmpMade,
-        "teleop_amp_missed": teleopAmpMissed
+        "teleop_amp_missed": teleopAmpMissed,
+        "zone1_made": 0,
+        "zone1_miss": 0,
+        "zone2_made": 0,
+        "zone2_miss": 0,
+        "zone3_made": 0,
+        "zone3_miss": 0,
+        "zone5_made": 0,
+        "zone5_miss": 0,
+        "zone6_made": 0,
+        "zone6_miss": 0,
+        "zone7_made": 0,
+        "zone7_miss": 0,
       },
       "endgame": {
         "chain_hang": chainHang,
@@ -297,5 +318,13 @@ class ScoutData {
       );
     }
     return matchFile;
+  }
+
+  parseEvents(List<ScoreEvent> eventList) {
+    var obj = {};
+    eventList.forEach((element) {
+      obj.addEntries(element.getJson());
+    });
+    return obj;
   }
 }
