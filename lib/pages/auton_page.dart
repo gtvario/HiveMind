@@ -151,7 +151,7 @@ class _AutonPageState extends State<AutonPage> {
         child: Row(
           children: [
             Expanded(
-                flex: 75,
+                flex: 70,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -246,10 +246,10 @@ class _AutonPageState extends State<AutonPage> {
                   ],
                 )),
             Expanded(
-              flex: 25,
+              flex: 30,
               child: Column(
                 mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   const Text(
                     "Left Starting Zone?",
