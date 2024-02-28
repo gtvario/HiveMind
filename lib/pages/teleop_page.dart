@@ -78,78 +78,78 @@ class _TeleopPageState extends State<TeleopPage> {
       case 1:
         if (myEvent.getSpeakMade > 0) {
           widget.scoutData.setZone1Made = eventState == 0
-              ? widget.scoutData.getZone1Made + myEvent.getSpeakMade
-              : widget.scoutData.getZone1Made - myEvent.getSpeakMade;
+              ? widget.scoutData.getZone1Made + 1
+              : widget.scoutData.getZone1Made - 1;
         } else if (myEvent.getSpeakMiss > 0) {
           widget.scoutData.setZone1Miss = eventState == 0
-              ? widget.scoutData.getZone1Miss + myEvent.getSpeakMiss
-              : widget.scoutData.getZone1Miss - myEvent.getSpeakMiss;
+              ? widget.scoutData.getZone1Miss + 1
+              : widget.scoutData.getZone1Miss - 1;
         }
         break;
       case 2:
         if (myEvent.getSpeakMade > 0) {
           widget.scoutData.setZone2Made = eventState == 0
-              ? widget.scoutData.getZone2Made + myEvent.getSpeakMade
-              : widget.scoutData.getZone2Made - myEvent.getSpeakMade;
+              ? widget.scoutData.getZone2Made + 1
+              : widget.scoutData.getZone2Made - 1;
         } else if (myEvent.getSpeakMiss > 0) {
           widget.scoutData.setZone2Miss = eventState == 0
-              ? widget.scoutData.getZone2Miss + myEvent.getSpeakMiss
-              : widget.scoutData.getZone2Miss - myEvent.getSpeakMiss;
+              ? widget.scoutData.getZone2Miss + 1
+              : widget.scoutData.getZone2Miss - 1;
         }
         break;
       case 3:
         if (myEvent.getSpeakMade > 0) {
           widget.scoutData.setZone3Made = eventState == 0
-              ? widget.scoutData.getZone3Made + myEvent.getSpeakMade
-              : widget.scoutData.getZone3Made - myEvent.getSpeakMade;
+              ? widget.scoutData.getZone3Made + 1
+              : widget.scoutData.getZone3Made - 1;
         } else if (myEvent.getSpeakMiss > 0) {
           widget.scoutData.setZone3Miss = eventState == 0
-              ? widget.scoutData.getZone3Miss + myEvent.getSpeakMiss
-              : widget.scoutData.getZone3Miss - myEvent.getSpeakMiss;
+              ? widget.scoutData.getZone3Miss + 1
+              : widget.scoutData.getZone3Miss - 1;
         }
         break;
       case 4:
         if (myEvent.getSpeakMade > 0) {
           widget.scoutData.setZone4Made = eventState == 0
-              ? widget.scoutData.getZone4Made + myEvent.getSpeakMade
-              : widget.scoutData.getZone4Made - myEvent.getSpeakMade;
+              ? widget.scoutData.getZone4Made + 1
+              : widget.scoutData.getZone4Made - 1;
         } else if (myEvent.getSpeakMiss > 0) {
           widget.scoutData.setZone4Miss = eventState == 0
-              ? widget.scoutData.getZone4Miss + myEvent.getSpeakMiss
-              : widget.scoutData.getZone4Miss - myEvent.getSpeakMiss;
+              ? widget.scoutData.getZone4Miss + 1
+              : widget.scoutData.getZone4Miss - 1;
         }
         break;
       case 5:
         if (myEvent.getSpeakMade > 0) {
           widget.scoutData.setZone5Made = eventState == 0
-              ? widget.scoutData.getZone5Made + myEvent.getSpeakMade
-              : widget.scoutData.getZone5Made - myEvent.getSpeakMade;
+              ? widget.scoutData.getZone5Made + 1
+              : widget.scoutData.getZone5Made - 1;
         } else if (myEvent.getSpeakMiss > 0) {
           widget.scoutData.setZone5Miss = eventState == 0
-              ? widget.scoutData.getZone5Miss + myEvent.getSpeakMiss
-              : widget.scoutData.getZone5Miss - myEvent.getSpeakMiss;
+              ? widget.scoutData.getZone5Miss + 1
+              : widget.scoutData.getZone5Miss - 1;
         }
         break;
       case 6:
         if (myEvent.getSpeakMade > 0) {
           widget.scoutData.setZone6Made = eventState == 0
-              ? widget.scoutData.getZone6Made + myEvent.getSpeakMade
-              : widget.scoutData.getZone6Made - myEvent.getSpeakMade;
+              ? widget.scoutData.getZone6Made + 1
+              : widget.scoutData.getZone6Made - 1;
         } else if (myEvent.getSpeakMiss > 0) {
           widget.scoutData.setZone6Miss = eventState == 0
-              ? widget.scoutData.getZone6Miss + myEvent.getSpeakMiss
-              : widget.scoutData.getZone6Miss - myEvent.getSpeakMiss;
+              ? widget.scoutData.getZone6Miss + 1
+              : widget.scoutData.getZone6Miss - 1;
         }
         break;
       case 7:
         if (myEvent.getSpeakMade > 0) {
           widget.scoutData.setZone7Made = eventState == 0
-              ? widget.scoutData.getZone7Made + myEvent.getSpeakMade
-              : widget.scoutData.getZone7Made - myEvent.getSpeakMade;
+              ? widget.scoutData.getZone7Made + 1
+              : widget.scoutData.getZone7Made - 1;
         } else if (myEvent.getSpeakMiss > 0) {
           widget.scoutData.setZone7Miss = eventState == 0
-              ? widget.scoutData.getZone7Miss + myEvent.getSpeakMiss
-              : widget.scoutData.getZone7Miss - myEvent.getSpeakMiss;
+              ? widget.scoutData.getZone7Miss + 1
+              : widget.scoutData.getZone7Miss - 1;
         }
         break;
     }

@@ -242,11 +242,11 @@ class ScoutData {
   }
 
   set setZone2Made(int zone_2_made) {
-    zone1Made = zone_2_made;
+    zone2Made = zone_2_made;
   }
 
   set setZone3Made(int zone_3_made) {
-    zone1Made = zone_3_made;
+    zone3Made = zone_3_made;
   }
 
   set setZone4Made(int zone_4_made) {
@@ -254,19 +254,19 @@ class ScoutData {
   }
 
   set setZone5Made(int zone_5_made) {
-    zone1Made = zone_5_made;
+    zone5Made = zone_5_made;
   }
 
   set setZone6Made(int zone_6_made) {
-    zone1Made = zone_6_made;
+    zone6Made = zone_6_made;
   }
 
   set setZone7Made(int zone_7_made) {
-    zone1Made = zone_7_made;
+    zone7Made = zone_7_made;
   }
 
   set setZone8Made(int zone_8_made) {
-    zone1Made = zone_8_made;
+    zone8Made = zone_8_made;
   }
 
   set setZone1Miss(int zone_1_miss) {
@@ -274,11 +274,11 @@ class ScoutData {
   }
 
   set setZone2Miss(int zone_2_miss) {
-    zone1Miss = zone_2_miss;
+    zone2Miss = zone_2_miss;
   }
 
   set setZone3Miss(int zone_3_miss) {
-    zone1Miss = zone_3_miss;
+    zone3Miss = zone_3_miss;
   }
 
   set setZone4Miss(int zone_4_miss) {
@@ -286,19 +286,19 @@ class ScoutData {
   }
 
   set setZone5Miss(int zone_5_miss) {
-    zone1Miss = zone_5_miss;
+    zone5Miss = zone_5_miss;
   }
 
   set setZone6Miss(int zone_6_miss) {
-    zone1Miss = zone_6_miss;
+    zone6Miss = zone_6_miss;
   }
 
   set setZone7Miss(int zone_7_miss) {
-    zone1Miss = zone_7_miss;
+    zone7Miss = zone_7_miss;
   }
 
   set setZone8Miss(int zone_8_miss) {
-    zone1Miss = zone_8_miss;
+    zone8Miss = zone_8_miss;
   }
 
   // **************************
