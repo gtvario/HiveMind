@@ -402,6 +402,8 @@ class ScoutData {
         "zone2_miss": zone2Miss,
         "zone3_made": zone3Made,
         "zone3_miss": zone3Miss,
+        "zone4_made": zone4Made,
+        "zone4_miss": zone4Miss,
         "zone5_made": zone5Made,
         "zone5_miss": zone5Miss,
         "zone6_made": zone6Made,
