@@ -24,6 +24,7 @@ class ScoutData {
   int zone1Made = 0, zone1Miss = 0;
   int zone2Made = 0, zone2Miss = 0;
   int zone3Made = 0, zone3Miss = 0;
+  int zone4Made = 0, zone4Miss = 0;
   int zone5Made = 0, zone5Miss = 0;
   int zone6Made = 0, zone6Miss = 0;
   int zone7Made = 0, zone7Miss = 0;
@@ -153,6 +154,10 @@ class ScoutData {
     return zone3Made;
   }
 
+  int get getZone4Made {
+    return zone4Made;
+  }
+
   int get getZone5Made {
     return zone5Made;
   }
@@ -179,6 +184,10 @@ class ScoutData {
 
   int get getZone3Miss {
     return zone3Miss;
+  }
+
+  int get getZone4Miss {
+    return zone4Miss;
   }
 
   int get getZone5Miss {
@@ -240,6 +249,10 @@ class ScoutData {
     zone1Made = zone_3_made;
   }
 
+  set setZone4Made(int zone_4_made) {
+    zone4Made = zone_4_made;
+  }
+
   set setZone5Made(int zone_5_made) {
     zone1Made = zone_5_made;
   }
@@ -266,6 +279,10 @@ class ScoutData {
 
   set setZone3Miss(int zone_3_miss) {
     zone1Miss = zone_3_miss;
+  }
+
+  set setZone4Miss(int zone_4_miss) {
+    zone4Miss = zone_4_miss;
   }
 
   set setZone5Miss(int zone_5_miss) {
