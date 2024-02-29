@@ -581,7 +581,7 @@ class _TeleopPageState extends State<TeleopPage> {
                                   height: 50,
                                   child: SpinBox(
                                     min: 0,
-                                    max: 90,
+                                    max: 3,
                                     value: trap.toDouble(),
                                     direction: Axis.horizontal,
                                     spacing: 1,
