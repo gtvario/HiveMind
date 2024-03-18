@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:hivemind/models/scout_data_model.dart';
 import 'package:hivemind/models/globals.dart';
@@ -35,24 +37,16 @@ class _StartMatchPageState extends State<StartMatchPage> {
     required double yPos,
   }) {
     // Remove the existing OverlayEntry.
-    double adjustedXPos = ((xPos - 10) - 470) / 470;
-    double adjustedYPos = ((yPos + 35) - 250) / 250;
-    double fieldAdjustedX = 0;
-    double fieldAdjustedY = 0;
+    double adjustedXPos = ((xPos - 10) - 468) / 468;
+    double adjustedYPos = ((yPos + 35) - 245) / 245;
 
     String robot_image = '';
 
     if (widget.allianceColor == 'Red') {
       robot_image = 'assets/images/red_robot.png';
-      fieldAdjustedX = (xPos * -1) + 628;
-      fieldAdjustedY = (yPos) - 172;
     } else {
       robot_image = 'assets/images/blue_robot.png';
-      fieldAdjustedX = xPos - 40;
-      fieldAdjustedY = (yPos) - 172;
     }
-
-    if (fieldAdjustedX < 130) {}
 
     removeHighlightOverlay();
 
@@ -155,9 +149,36 @@ class _StartMatchPageState extends State<StartMatchPage> {
         ),
         const SizedBox(width: 35),
         Container(
+          width: 200, // Set the width to limit the Column's width
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                children: const [
+                  Expanded(
+                    child: Text(
+                      "Click on the field to mark the robot's starting position",
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                      softWrap: true,
+                      maxLines: null,
+                    ),
+                  ),
+                ],
+              ),
+              const Icon(
+                Icons.trending_flat,
+                size: 90.0,
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(width: 15),
+        Container(
           alignment: fieldAlignment,
           decoration: BoxDecoration(border: Border.all(width: 5.0)),
-          width: 600,
+          width: 400,
           height: 400,
           child: GestureDetector(
             onTapDown: (details) {

@@ -91,7 +91,7 @@ class _AutonPageState extends State<AutonPage> {
   void initState() {
     super.initState();
 
-    timer = Timer.periodic(const Duration(seconds: 15), (Timer timer) {
+    timer = Timer.periodic(const Duration(seconds: 20), (Timer timer) {
       changeBackground = true;
       setState(() {});
     });
@@ -110,14 +110,14 @@ class _AutonPageState extends State<AutonPage> {
     int notePosColumn;
     double fieldImageWidth = 600;
     List<List<double>> notepositionsX = [
-      [128, 436.5],
-      [128, 436.5],
-      [128, 436.5],
-      [392, 174],
-      [392, 174],
-      [392, 174],
-      [392, 174],
-      [392, 174]
+      [128, 317],
+      [128, 317],
+      [128, 317],
+      [392, 54.5],
+      [392, 54.5],
+      [392, 54.5],
+      [392, 54.5],
+      [392, 54.5]
     ];
     List<List<double>> notepositionsY = [
       [44, 45],
@@ -132,7 +132,7 @@ class _AutonPageState extends State<AutonPage> {
 
     if (widget.allianceColor == 'Red') {
       fieldImagePath = 'assets/images/RedField.png';
-      leftAlignment = 186;
+      leftAlignment = 67;
       notePosColumn = 1;
     } else {
       fieldImagePath = 'assets/images/BlueField_Auton.png';
@@ -145,13 +145,26 @@ class _AutonPageState extends State<AutonPage> {
         curve: Curves.easeInOut,
         decoration: BoxDecoration(
           color: changeBackground
-              ? const Color.fromARGB(255, 153, 60, 60)
+              ? Color.fromARGB(255, 173, 111, 111)
               : Colors.grey[50],
         ),
         child: Row(
           children: [
+            const Expanded(
+              flex: 20, // Adjust the flex value according to your needs
+              child: Center(
+                child: Text(
+                  "Select the notes that your robot attempted to pick up", // Add your text here
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
             Expanded(
-                flex: 70,
+                flex: 50, // Adjust the flex value according to your needs
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -160,9 +173,10 @@ class _AutonPageState extends State<AutonPage> {
                       "Autonomous",
                       textAlign: TextAlign.left,
                       style: TextStyle(
-                          fontFamily: 'Schyler',
-                          fontSize: 40,
-                          decoration: TextDecoration.underline),
+                        fontFamily: 'Schyler',
+                        fontSize: 40,
+                        decoration: TextDecoration.underline,
+                      ),
                     ),
                     const SizedBox(height: 10),
                     Container(
@@ -172,11 +186,12 @@ class _AutonPageState extends State<AutonPage> {
                       child: Stack(
                         children: [
                           Positioned(
-                              left: leftAlignment,
-                              height: 390,
-                              child: Image.asset(
-                                fieldImagePath,
-                              )),
+                            left: leftAlignment,
+                            height: 390,
+                            child: Image.asset(
+                              fieldImagePath,
+                            ),
+                          ),
                           Positioned(
                             top: notepositionsY[0][notePosColumn],
                             left: notepositionsX[0][notePosColumn],
@@ -249,13 +264,13 @@ class _AutonPageState extends State<AutonPage> {
               flex: 30,
               child: Column(
                 mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
                     "Left Starting Zone?",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 28,
                         fontWeight: FontWeight.bold,
                         decoration: TextDecoration.underline),
                   ),
@@ -265,16 +280,16 @@ class _AutonPageState extends State<AutonPage> {
                     children: [
                       const Text(
                         "No",
-                        style: TextStyle(fontSize: 24),
+                        style: TextStyle(fontSize: 28),
                       ),
                       LeaveZone(scoutData: widget.scoutData),
                       const Text(
                         "Yes",
-                        style: TextStyle(fontSize: 24),
+                        style: TextStyle(fontSize: 28),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 25),
                   Row(children: [
                     Expanded(
                         child: Column(
@@ -303,10 +318,7 @@ class _AutonPageState extends State<AutonPage> {
                                   )
                                 ])),
                           ])
-                        ]))
-                  ]),
-                  const SizedBox(height: 30),
-                  Row(children: [
+                        ])),
                     Expanded(
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
