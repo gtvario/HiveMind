@@ -19,6 +19,7 @@ class _SettingsPageState extends State<SettingsPage> {
   bool masterToggle = false;
   String? studentName = "";
   String? station = "";
+  bool scoreTable = false;
 
   late File settingsContent;
   late Map<String, dynamic> settings;
@@ -54,6 +55,7 @@ class _SettingsPageState extends State<SettingsPage> {
       teamNumber = data["master"]["teamNumber"];
       studentName = data["local"]["studentName"];
       station = data["local"]["station"];
+      scoreTable = data["local"]["onScoreTableSide"];
     });
   }
 
@@ -64,7 +66,12 @@ class _SettingsPageState extends State<SettingsPage> {
         "teamNumber": teamNumber,
         "year": year
       },
-      "local": {"studentName": studentName, "playoffs": "", "station": station}
+      "local": {
+        "studentName": studentName,
+        "playoffs": "",
+        "station": station,
+        "onScoreTableSide": scoreTable
+      }
     };
     settingsContent.writeAsString(json.encode(settings));
   }
@@ -169,6 +176,16 @@ class _SettingsPageState extends State<SettingsPage> {
                     });
                   }),
                 },
+              ),
+              SettingsTile.switchTile(
+                title: const Text("Scoring Table Side?"),
+                onToggle: (bool value) {
+                  setState(() {
+                    scoreTable = value;
+                    writeJson();
+                  });
+                },
+                initialValue: scoreTable,
               ),
             ],
           ),
