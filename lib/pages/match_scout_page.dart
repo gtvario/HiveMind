@@ -13,11 +13,13 @@ import 'package:hivemind/models/scout_data_model.dart';
 
 class MatchScoutPage extends StatefulWidget {
   final String? station, studentName;
+  final bool? onScoreTableSide;
   final FRCMatch? match;
   const MatchScoutPage(
       {super.key,
       required this.station,
       required this.studentName,
+      required this.onScoreTableSide,
       required this.match});
 
   @override
@@ -93,13 +95,16 @@ class _MatchScoutPageState extends State<MatchScoutPage> {
           onPageChanged: (value) => scoutData.writeFile(),
           children: [
             Center(
-              child:
-                  StartMatchPage(scoutData: scoutData, allianceColor: alliance),
+              child: StartMatchPage(
+                  scoutData: scoutData,
+                  allianceColor: alliance,
+                  onScoreTableSide: widget.onScoreTableSide),
             ),
             Center(
               child: AutonPage(
                   scoutData: scoutData,
                   allianceColor: alliance,
+                  onScoreTableSide: widget.onScoreTableSide,
                   notifyParent: refresh),
             ),
             Center(

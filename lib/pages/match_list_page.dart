@@ -25,6 +25,7 @@ class _MatchListPageState extends State<MatchListPage> {
 
   String? studentName = "";
   String? station = "";
+  bool? onScoreTableSide = false;
 
   Future<void> getMatches(eventKey) async {
     List<FRCMatch> qualMatchList = [];
@@ -114,6 +115,7 @@ class _MatchListPageState extends State<MatchListPage> {
     setState(() {
       studentName = data["local"]["studentName"];
       station = data["local"]["station"];
+      onScoreTableSide = data["local"]["onScoreTableSide"];
     });
   }
 
@@ -179,6 +181,7 @@ class _MatchListPageState extends State<MatchListPage> {
                                   builder: (context) => MatchScoutPage(
                                     station: station,
                                     studentName: studentName,
+                                    onScoreTableSide: onScoreTableSide,
                                     match: hiveMatchListTODO.elementAt(index),
                                   ),
                                 ),
@@ -220,6 +223,7 @@ class _MatchListPageState extends State<MatchListPage> {
                         builder: (context) => MatchScoutPage(
                           station: station,
                           studentName: studentName,
+                          onScoreTableSide: onScoreTableSide,
                           match: hiveMatchListComplete.elementAt(index),
                         ),
                       ),

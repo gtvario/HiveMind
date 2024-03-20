@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:hivemind/models/scout_data_model.dart';
 import 'package:hivemind/models/globals.dart';
@@ -7,8 +8,12 @@ import 'package:hivemind/models/globals.dart';
 class StartMatchPage extends StatefulWidget {
   final ScoutData scoutData;
   final String? allianceColor;
+  final bool? onScoreTableSide;
   const StartMatchPage(
-      {super.key, required this.scoutData, required this.allianceColor});
+      {super.key,
+      required this.scoutData,
+      required this.allianceColor,
+      required this.onScoreTableSide});
 
   @override
   State<StartMatchPage> createState() => _StartMatchPageState();
@@ -117,6 +122,11 @@ class _StartMatchPageState extends State<StartMatchPage> {
       pixel_to_ft_mult_x = 0.069016;
     }
 
+    double imageFlipRad = 0;
+    if (widget.onScoreTableSide == true) {
+      imageFlipRad = math.pi;
+    }
+
     return Row(
       children: [
         const SizedBox(width: 35),
@@ -203,8 +213,11 @@ class _StartMatchPageState extends State<StartMatchPage> {
                 yPos: _tapPosition.dy,
               );
             },
-            child: Image.asset(
-              fieldImagePath,
+            child: // Image flipped vertically
+                Transform(
+              alignment: Alignment.center,
+              transform: Matrix4.rotationX(imageFlipRad),
+              child: Image.asset(fieldImagePath),
             ),
           ),
         ),

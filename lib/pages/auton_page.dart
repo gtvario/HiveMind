@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:hivemind/models/scout_data_model.dart';
@@ -11,10 +12,12 @@ class AutonPage extends StatefulWidget {
   final Function() notifyParent;
   final ScoutData scoutData;
   final String? allianceColor;
+  final bool? onScoreTableSide;
   const AutonPage(
       {super.key,
       required this.scoutData,
       required this.allianceColor,
+      required this.onScoreTableSide,
       required this.notifyParent});
 
   @override
@@ -140,6 +143,11 @@ class _AutonPageState extends State<AutonPage> {
       notePosColumn = 0;
     }
 
+    double imageFlipRad = 0;
+    if (widget.onScoreTableSide == true) {
+      imageFlipRad = math.pi;
+    }
+
     return AnimatedContainer(
         duration: const Duration(milliseconds: 3000),
         curve: Curves.easeInOut,
@@ -188,8 +196,10 @@ class _AutonPageState extends State<AutonPage> {
                           Positioned(
                             left: leftAlignment,
                             height: 390,
-                            child: Image.asset(
-                              fieldImagePath,
+                            child: Transform(
+                              alignment: Alignment.center,
+                              transform: Matrix4.rotationX(imageFlipRad),
+                              child: Image.asset(fieldImagePath),
                             ),
                           ),
                           Positioned(
