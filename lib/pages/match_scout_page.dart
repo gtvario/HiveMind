@@ -111,6 +111,7 @@ class _MatchScoutPageState extends State<MatchScoutPage> {
               child: TeleopPage(
                 scoutData: scoutData,
                 allianceColor: alliance,
+                onScoreTableSide: widget.onScoreTableSide,
               ),
             ),
             Center(
