@@ -22,10 +22,17 @@ class StartMatchPage extends StatefulWidget {
 class _StartMatchPageState extends State<StartMatchPage> {
   OverlayEntry? overlayEntry;
   int currentPageIndex = 0;
-  double pixel_to_ft_mult_x = -0.069016;
+
   double pixel_to_ft_mult_y = 0.069371;
-  double pixel_to_ft_offset_x = 61.7;
   double pixel_to_ft_offset_y = -3.35;
+
+  double pixel_to_ft_mult_x = 1;
+  double pixel_to_ft_offset_x = 0;
+  double pixel_to_ft_offset_x_red = 61.7;
+  double pixel_to_ft_mult_x_red = -0.069016;
+  double pixel_to_ft_offset_x_blue = -36.3;
+  double pixel_to_ft_mult_x_blue = 0.069016;
+
   var _tapPosition;
   String dropdownValue = "Select Student Name";
   List<double> robotStartingPos = [0, 0];
@@ -115,14 +122,17 @@ class _StartMatchPageState extends State<StartMatchPage> {
     if (widget.allianceColor == 'Red') {
       fieldImagePath = 'assets/images/RedField.png';
       fieldAlignment = Alignment.centerRight;
+      pixel_to_ft_offset_x = pixel_to_ft_offset_x_red;
+      pixel_to_ft_mult_x = pixel_to_ft_mult_x_red;
     } else {
       fieldImagePath = 'assets/images/BlueField.png';
       fieldAlignment = Alignment.centerLeft;
-      pixel_to_ft_offset_x = -21.3;
-      pixel_to_ft_mult_x = 0.069016;
+      pixel_to_ft_offset_x = pixel_to_ft_offset_x_blue;
+      pixel_to_ft_mult_x = pixel_to_ft_mult_x_blue;
     }
 
     double imageFlipRad = 0;
+
     if (widget.onScoreTableSide == true) {
       imageFlipRad = math.pi;
     }
@@ -198,14 +208,22 @@ class _StartMatchPageState extends State<StartMatchPage> {
                   _tapPosition.dx,
                   _tapPosition.dy,
                 ];
+
+                var pos_y =
+                    _tapPosition.dy * pixel_to_ft_mult_y + pixel_to_ft_offset_y;
+
+                if (widget.onScoreTableSide == true) {
+                  pos_y = (pos_y * -1) + 26;
+                }
+
                 widget.scoutData.setStartingPosNormalized = [
                   _tapPosition.dx * pixel_to_ft_mult_x + pixel_to_ft_offset_x,
-                  _tapPosition.dy * pixel_to_ft_mult_y + pixel_to_ft_offset_y,
+                  pos_y,
                 ];
+
                 print(
                     "X Position:  ${_tapPosition.dx * pixel_to_ft_mult_x + pixel_to_ft_offset_x}");
-                print(
-                    "Y Position: ${_tapPosition.dy * pixel_to_ft_mult_y + pixel_to_ft_offset_y}");
+                print("Y Position: $pos_y");
                 currentPageIndex = 1;
               });
               createHighlightOverlay(
