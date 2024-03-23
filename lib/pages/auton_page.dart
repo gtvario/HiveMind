@@ -58,8 +58,6 @@ class _AutonPageState extends State<AutonPage> {
       fieldAdjustedY = (yPos) - 172;
     }
 
-    if (fieldAdjustedX < 130) {}
-
     removeHighlightOverlay();
 
     assert(overlayEntry == null);
@@ -122,6 +120,16 @@ class _AutonPageState extends State<AutonPage> {
       [392, 54.5],
       [392, 54.5]
     ];
+    List<List<double>> notepositionsX_ScoreTableSide = [
+      [317, 128],
+      [317, 128],
+      [317, 128],
+      [54.5, 392],
+      [54.5, 392],
+      [54.5, 392],
+      [54.5, 392],
+      [54.5, 392]
+    ];
     List<List<double>> notepositionsY_AmpSide = [
       [44, 45],
       [113, 114],
@@ -147,17 +155,31 @@ class _AutonPageState extends State<AutonPage> {
     List<List<double>> notepositionsY;
     if (widget.onScoreTableSide == true) {
       notepositionsY = notepositionsY_ScoreTableSide;
+      notepositionsX = notepositionsX_ScoreTableSide;
     } else {
       notepositionsY = notepositionsY_AmpSide;
     }
 
     if (widget.allianceColor == 'Red') {
       fieldImagePath = 'assets/images/RedField.png';
-      leftAlignment = 67;
+
+      if (widget.onScoreTableSide == true) {
+        leftAlignment = 0;
+      } else {
+        leftAlignment = 67;
+      }
+
       notePosColumn = 1;
     } else {
       fieldImagePath = 'assets/images/BlueField.png';
       leftAlignment = 0;
+
+      if (widget.onScoreTableSide == true) {
+        leftAlignment = 67;
+      } else {
+        leftAlignment = 0;
+      }
+
       notePosColumn = 0;
     }
 
@@ -180,7 +202,7 @@ class _AutonPageState extends State<AutonPage> {
               flex: 20, // Adjust the flex value according to your needs
               child: Center(
                 child: Text(
-                  "Select the notes that your robot attempted to pick up", // Add your text here
+                  "Select the notes that your robot picked up or attempted to pick up", // Add your text here
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 24,
@@ -216,7 +238,8 @@ class _AutonPageState extends State<AutonPage> {
                             height: 390,
                             child: Transform(
                               alignment: Alignment.center,
-                              transform: Matrix4.rotationX(imageFlipRad),
+                              transform: Matrix4.rotationX(imageFlipRad)
+                                ..rotateY(imageFlipRad),
                               child: Image.asset(fieldImagePath),
                             ),
                           ),

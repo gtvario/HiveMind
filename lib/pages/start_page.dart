@@ -234,7 +234,7 @@ class _StartMatchPageState extends State<StartMatchPage> {
             child: // Image flipped vertically
                 Transform(
               alignment: Alignment.center,
-              transform: Matrix4.rotationX(imageFlipRad),
+              transform: Matrix4.rotationX(imageFlipRad)..rotateY(imageFlipRad),
               child: Image.asset(fieldImagePath),
             ),
           ),
