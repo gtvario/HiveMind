@@ -122,7 +122,7 @@ class _AutonPageState extends State<AutonPage> {
       [392, 54.5],
       [392, 54.5]
     ];
-    List<List<double>> notepositionsY = [
+    List<List<double>> notepositionsY_AmpSide = [
       [44, 45],
       [113, 114],
       [182, 183],
@@ -133,12 +133,30 @@ class _AutonPageState extends State<AutonPage> {
       [342, 341]
     ];
 
+    List<List<double>> notepositionsY_ScoreTableSide = [
+      [321, 320.25],
+      [252, 251],
+      [183, 183],
+      [342, 341],
+      [262, 262],
+      [182, 182.5],
+      [102, 103],
+      [22, 23]
+    ];
+
+    List<List<double>> notepositionsY;
+    if (widget.onScoreTableSide == true) {
+      notepositionsY = notepositionsY_ScoreTableSide;
+    } else {
+      notepositionsY = notepositionsY_AmpSide;
+    }
+
     if (widget.allianceColor == 'Red') {
       fieldImagePath = 'assets/images/RedField.png';
       leftAlignment = 67;
       notePosColumn = 1;
     } else {
-      fieldImagePath = 'assets/images/BlueField_Auton.png';
+      fieldImagePath = 'assets/images/BlueField.png';
       leftAlignment = 0;
       notePosColumn = 0;
     }
