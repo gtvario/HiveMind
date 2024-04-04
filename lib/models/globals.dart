@@ -8,7 +8,7 @@ List<String> studentList = [
   'Select Student Name',
   'Alondra Pedroza',
   'Anna Lis',
-  'Bryca Whigham',
+  'Bryce Whigham',
   'Clint Kanda',
   'Damion Osborne',
   'Daniel Kim',
