@@ -50,13 +50,15 @@ class _EndgamePageState extends State<EndgamePage> {
               ],
             ),
             const SizedBox(width: 50),
-            Column(
-              children: [
-                RobotCondition(
-                  scoutData: widget.scoutData,
-                ),
-              ],
-            ),
+            SizedBox(
+                width: 270,
+                child: Column(
+                  children: [
+                    RobotCondition(
+                      scoutData: widget.scoutData,
+                    ),
+                  ],
+                )),
             const SizedBox(width: 60),
             Column(
               children: [

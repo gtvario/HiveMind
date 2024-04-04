@@ -11,225 +11,158 @@ class RobotCondition extends StatefulWidget {
 
 class _RobotConditionState extends State<RobotCondition> {
   String robotConditionState = "";
-
+  List<String> selectedValues = [];
   @override
   void initState() {
     super.initState();
     setState(() {
       if (widget.scoutData.getRobotCondition == "") {
-        robotConditionState = "No";
-        widget.scoutData.setRobotCondition = robotConditionState;
+        selectedValues.add('No');
+        widget.scoutData.setRobotCondition = selectedValues.join(', ');
       } else {
-        robotConditionState = widget.scoutData.getRobotCondition;
+        selectedValues = widget.scoutData.getRobotCondition.split(', ');
       }
+    });
+  }
+
+  // Method to toggle the selection of a value
+  void toggleSelection(String value) {
+    setState(() {
+      if (selectedValues.contains(value)) {
+        selectedValues.remove(value);
+      } else {
+        selectedValues.add(value);
+        if (selectedValues.contains('No')) {
+          selectedValues.remove('No');
+        }
+      }
+
+      // If nothing else is selected, default to 'No'
+      if (selectedValues.isEmpty) {
+        selectedValues.add('No');
+      }
+      widget.scoutData.setRobotCondition = selectedValues.join(', ');
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const Text(
-          'Did the\nRobot Break?',
+          'Did the Robot Break?',
           style: TextStyle(
               fontSize: 35,
               fontFamily: 'Schyler',
               decoration: TextDecoration.underline),
         ),
-        const SizedBox(height: 10),
-        Row(
-          children: [
-            Transform.scale(
-              scale: 1.25,
-              child: Radio(
-                activeColor: Colors.amber,
-                visualDensity: const VisualDensity(
-                    horizontal: VisualDensity.minimumDensity,
-                    vertical: VisualDensity.minimumDensity),
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                value: 'No',
-                groupValue: robotConditionState,
-                onChanged: (value) {
-                  setState(() {
-                    robotConditionState = value.toString();
-                  });
-                  widget.scoutData.setRobotCondition = robotConditionState;
-                },
-              ),
+        CheckboxListTile(
+          dense: true,
+          title: const Text(
+            'No',
+            style: TextStyle(
+              fontSize: 16,
+              fontFamily: 'Tahoma',
+              fontWeight: FontWeight.bold,
             ),
-            const SizedBox(width: 10),
-            const Text(
-              'No',
-              style: TextStyle(
-                fontSize: 20,
-                fontFamily: 'Tahoma',
-                fontWeight: FontWeight.bold,
-              ),
-            )
-          ],
+          ),
+          value: selectedValues.contains('No'),
+          onChanged: (value) {
+            // Do nothing;
+          },
         ),
-        const SizedBox(height: 10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Transform.scale(
-              scale: 1.25,
-              child: Radio(
-                activeColor: Colors.amber,
-                visualDensity: const VisualDensity(
-                    horizontal: VisualDensity.minimumDensity,
-                    vertical: VisualDensity.minimumDensity),
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                value: 'Did not move for the whole match',
-                groupValue: robotConditionState,
-                onChanged: (value) {
-                  setState(() {
-                    robotConditionState = value.toString();
-                  });
-                  widget.scoutData.setRobotCondition = robotConditionState;
-                },
-              ),
+        CheckboxListTile(
+          dense: true,
+          title: const Text(
+            'Did not move for the whole match',
+            style: TextStyle(
+              fontSize: 16,
+              fontFamily: 'Tahoma',
+              fontWeight: FontWeight.bold,
             ),
-            const SizedBox(width: 10),
-            const Text(
-              'Did not move for\nthe whole match',
-              style: TextStyle(
-                fontSize: 20,
-                fontFamily: 'Tahoma',
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
+          ),
+          value: selectedValues.contains('Did not move for the whole match'),
+          onChanged: (value) {
+            toggleSelection('Did not move for the whole match');
+          },
         ),
-        const SizedBox(height: 10),
-        Row(
-          children: [
-            Transform.scale(
-              scale: 1.25,
-              child: Radio(
-                activeColor: Colors.amber,
-                visualDensity: const VisualDensity(
-                    horizontal: VisualDensity.minimumDensity,
-                    vertical: VisualDensity.minimumDensity),
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                value: 'Completely stopped for part of the match',
-                groupValue: robotConditionState,
-                onChanged: (value) {
-                  setState(() {
-                    robotConditionState = value.toString();
-                  });
-                  widget.scoutData.setRobotCondition = robotConditionState;
-                },
-              ),
+        CheckboxListTile(
+          dense: true,
+          title: const Text(
+            'Completely stopped for part of the match',
+            style: TextStyle(
+              fontSize: 16,
+              fontFamily: 'Tahoma',
+              fontWeight: FontWeight.bold,
             ),
-            const SizedBox(width: 10),
-            const Text(
-              'Completely stopped\nfor part of the match',
-              style: TextStyle(
-                fontSize: 20,
-                fontFamily: 'Tahoma',
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
+          ),
+          value: selectedValues
+              .contains('Completely stopped for part of the match'),
+          onChanged: (value) {
+            toggleSelection('Completely stopped for part of the match');
+          },
         ),
-        const SizedBox(height: 10),
-        Row(
-          children: [
-            Transform.scale(
-              scale: 1.25,
-              child: Radio(
-                activeColor: Colors.amber,
-                visualDensity: const VisualDensity(
-                    horizontal: VisualDensity.minimumDensity,
-                    vertical: VisualDensity.minimumDensity),
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                value: 'Partially working',
-                groupValue: robotConditionState,
-                onChanged: (value) {
-                  setState(() {
-                    robotConditionState = value.toString();
-                  });
-                  widget.scoutData.setRobotCondition = robotConditionState;
-                },
-              ),
+        CheckboxListTile(
+          dense: true,
+          title: const Text(
+            'Partially working',
+            style: TextStyle(
+              fontSize: 16,
+              fontFamily: 'Tahoma',
+              fontWeight: FontWeight.bold,
             ),
-            const SizedBox(width: 10),
-            const Text(
-              'Partially working',
-              style: TextStyle(
-                fontSize: 20,
-                fontFamily: 'Tahoma',
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
+          ),
+          value: selectedValues.contains('Partially working'),
+          onChanged: (value) {
+            toggleSelection('Partially working');
+          },
         ),
-        const SizedBox(height: 10),
-        Row(
-          children: [
-            Transform.scale(
-              scale: 1.25,
-              child: Radio(
-                activeColor: Colors.amber,
-                visualDensity: const VisualDensity(
-                    horizontal: VisualDensity.minimumDensity,
-                    vertical: VisualDensity.minimumDensity),
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                value: 'A mechanism broke (elaborate in comments)',
-                groupValue: robotConditionState,
-                onChanged: (value) {
-                  setState(() {
-                    robotConditionState = value.toString();
-                  });
-                  widget.scoutData.setRobotCondition = robotConditionState;
-                },
-              ),
+        CheckboxListTile(
+          dense: true,
+          title: const Text(
+            'A mechanism broke (elaborate in comments)',
+            style: TextStyle(
+              fontSize: 16,
+              fontFamily: 'Tahoma',
+              fontWeight: FontWeight.bold,
             ),
-            const SizedBox(width: 10),
-            const Text(
-              'A mechanism broke\n(elaborate in comments)',
-              style: TextStyle(
-                fontSize: 20,
-                fontFamily: 'Tahoma',
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
+          ),
+          value: selectedValues
+              .contains('A mechanism broke (elaborate in comments)'),
+          onChanged: (value) {
+            toggleSelection('A mechanism broke (elaborate in comments)');
+          },
         ),
-        const SizedBox(height: 10),
-        Row(
-          children: [
-            Transform.scale(
-              scale: 1.25,
-              child: Radio(
-                activeColor: Colors.amber,
-                visualDensity: const VisualDensity(
-                    horizontal: VisualDensity.minimumDensity,
-                    vertical: VisualDensity.minimumDensity),
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                value: 'Fell over :(',
-                groupValue: robotConditionState,
-                onChanged: (value) {
-                  setState(() {
-                    robotConditionState = value.toString();
-                  });
-                  widget.scoutData.setRobotCondition = robotConditionState;
-                },
-              ),
+        CheckboxListTile(
+          dense: true,
+          title: const Text(
+            'Fell over :(',
+            style: TextStyle(
+              fontSize: 16,
+              fontFamily: 'Tahoma',
+              fontWeight: FontWeight.bold,
             ),
-            const SizedBox(width: 10),
-            const Text(
-              'Fell over :(',
-              style: TextStyle(
-                fontSize: 20,
-                fontFamily: 'Tahoma',
-                fontWeight: FontWeight.bold,
-              ),
+          ),
+          value: selectedValues.contains('Fell over :('),
+          onChanged: (value) {
+            toggleSelection('Fell over :(');
+          },
+        ),
+        CheckboxListTile(
+          dense: true,
+          title: const Text(
+            'Note got stuck in the robot',
+            style: TextStyle(
+              fontSize: 16,
+              fontFamily: 'Tahoma',
+              fontWeight: FontWeight.bold,
             ),
-          ],
+          ),
+          value: selectedValues.contains('Note got stuck in the robot'),
+          onChanged: (value) {
+            toggleSelection('Note got stuck in the robot');
+          },
         ),
       ],
     );
