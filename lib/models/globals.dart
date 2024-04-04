@@ -23,5 +23,6 @@ List<String> studentList = [
   'Olivia Guliford',
   'Quinn Thomas',
   'Sean Choi',
-  'Mentor'
+  'Mentor',
+  '7762 Student'
 ];
