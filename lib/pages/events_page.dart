@@ -1,11 +1,9 @@
-import 'dart:convert';
 import 'dart:io' as io;
 
 import 'package:flutter/material.dart';
 import 'package:hivemind/models/match_model.dart';
 import 'package:hivemind/pages/match_list_page.dart';
-import 'package:hivemind/pages/match_scout_page.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:hivemind/models/globals.dart';
 
 class EventsPage extends StatefulWidget {
   final String? mode;
@@ -85,16 +83,4 @@ class _EventsPageState extends State<EventsPage> {
       ),
     );
   }
-}
-
-Future<String?> get _localPath async {
-  final directory = await getExternalStorageDirectory();
-
-  return directory?.path;
-}
-
-Future<io.File> _localFile(eventKey) async {
-  final path = await _localPath;
-
-  return io.File('$path/MatchSchedules/$eventKey.json');
 }

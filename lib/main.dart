@@ -14,9 +14,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Hivemind',
+        title: 'ChickenScratch',
         theme: ThemeData(
-          primarySwatch: Colors.amber,
+          primarySwatch: Colors.lime,
         ),
         initialRoute: "/",
         routes: <String, WidgetBuilder>{

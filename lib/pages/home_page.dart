@@ -3,13 +3,10 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:hivemind/models/globals.dart';
 import 'package:hivemind/pages/events_page.dart';
 import 'package:hivemind/pages/settings_page.dart';
-import 'package:hivemind/models/tba.dart';
 import 'package:hivemind/widgets/queen_home_widget.dart';
-import 'package:path_provider/path_provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -54,7 +51,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Hivemind"),
+        title: const Text("Chicken Scratch"),
         actions: <Widget>[
           Padding(
             padding: const EdgeInsets.only(right: 40.0),
@@ -238,25 +235,6 @@ Widget workerHome(BuildContext context, bool isEnabled) {
       ],
     ),
   );
-}
-
-Future<String?> get _localPath async {
-  final directory = await getExternalStorageDirectory();
-
-  return directory?.path;
-}
-
-Future<File> get _localFile async {
-  final path = await _localPath;
-  var defaults = await rootBundle.load("assets/config/default_settings.json");
-  if (!await File('$path/settings.json').exists()) {
-    await File('$path/settings.json').create(recursive: true);
-    File('$path/settings.json').writeAsBytes(
-      defaults.buffer
-          .asUint8List(defaults.offsetInBytes, defaults.lengthInBytes),
-    );
-  }
-  return File('$path/settings.json');
 }
 
 Future<void> writeMatchJson(String? key, String json) async {

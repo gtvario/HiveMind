@@ -23,16 +23,6 @@ class _StartMatchPageState extends State<StartMatchPage> {
   OverlayEntry? overlayEntry;
   int currentPageIndex = 0;
 
-  double pixel_to_ft_mult_y = 0.069371;
-  double pixel_to_ft_offset_y = -3.35;
-
-  double pixel_to_ft_mult_x = 1;
-  double pixel_to_ft_offset_x = 0;
-  double pixel_to_ft_offset_x_red = 61.7;
-  double pixel_to_ft_mult_x_red = -0.069016;
-  double pixel_to_ft_offset_x_blue = -36.3;
-  double pixel_to_ft_mult_x_blue = 0.069016;
-
   var _tapPosition;
   String dropdownValue = "Select Student Name";
   List<double> robotStartingPos = [0, 0];

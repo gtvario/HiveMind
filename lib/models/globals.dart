@@ -1,5 +1,8 @@
 library hivemind.globals;
 
+import 'package:path_provider/path_provider.dart';
+import 'dart:io' as io;
+
 int queenPassword = 8675309;
 
 enum ScoringStation { speakerMade, speakerMissed, ampMade, ampMissed }
@@ -26,3 +29,15 @@ List<String> studentList = [
   'Mentor',
   '7762 Student'
 ];
+
+Future<String?> get _localPath async {
+  final directory = await getExternalStorageDirectory();
+
+  return directory?.path;
+}
+
+Future<io.File> _localFile(eventKey) async {
+  final path = await _localPath;
+
+  return io.File('$path/MatchSchedules/$eventKey.json');
+}
